@@ -43,4 +43,7 @@ only what this run surveyed, and say it is partial.
    `app-dev run sql "<query>"`, read-only by default, on the agent's own environment, writes behind
    an explicit flag, output paged. Say why, and offer the literal version only if the human still
    wants it after the reason.
-5. **Review** (inline), build after the go, prove with the usage example, keep it alive.
+5. **When the answer is a script** under a primitive the map already has (or proposes), it is not
+   a card: write it as a **row of that primitive's script table**, with its usage and Needs, and
+   say which milestone it joins. The mandatory card lines apply to cards only.
+6. **Review** (inline), build after the go, prove with the usage example, keep it alive.

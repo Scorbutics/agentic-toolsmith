@@ -226,6 +226,57 @@ def short_name(model):
     return re.split(r'\s+@\s+|\s+\(', t)[0].strip() or model['title']
 
 
+def _norm(x):
+    return re.sub(r'[^a-z0-9]+', '', x.lower())
+
+
+def roadmap_panel(model, cards, k):
+    """The proposed handles, compiled: foundations marked, cards placed in the milestone that builds
+    them, scripts each milestone adds, and what no milestone covers. Without a roadmap, a flat list."""
+    rm = model['roadmap']
+    names = [_norm(c['name']) for c in model['cards']]
+    if not rm['milestones']:
+        return (f'<section class="panel"><h3>Proposed handles ({len(cards)})</h3><p class="muted">No roadmap in this map yet — '
+                f'a flat list. Would you build it? Is the usage right?</p><ul class="items">{"".join(cards)}</ul></section>')
+    found = {_norm(re.sub(r'\(.*?\)', '', f[0]).replace('`', '')) for f in rm['foundations']}
+    placed, groups = set(), []
+    for m in rm['milestones']:
+        text = ' '.join(m['body'])
+        builds = next((b for b in m['body'] if b.startswith('**Builds')), text)
+        ticks = [_norm(t) for t in re.findall(r'`([^`]+)`', builds)]
+        mine = [i for i, n in enumerate(names) if i not in placed and n and any(n == t or n in t or t in n for t in ticks if t)]
+        placed.update(mine)
+        script_names = {_norm(sn) for c in model['cards'] for sn, _ in c['scripts']}
+        added = [t for t in re.findall(r'`([^`]+)`', builds) if _norm(t) in script_names and _norm(t) not in names]
+        other = [b for b in m['body'] if not b.startswith('**Builds')]
+        groups.append((m, mine, added, other))
+    rest = [i for i in range(len(cards)) if i not in placed]
+
+    def fmark(i):
+        return '<span class="tag found">foundation</span>' if names[i] in found or any(names[i] and (names[i] in f or f in names[i]) for f in found if f) else ''
+    html_groups = ''
+    for m, mine, added, other in groups:
+        cards_html = ''.join(cards[i].replace('<div class="title">', '<div class="title">' + fmark(i), 1) for i in mine)
+        html_groups += (f'<div class="milestone"><div class="ms-head"><div class="ms-main"><h4>{md(m["title"])}</h4>'
+                        + ''.join(f'<div>{md(b)}</div>' for b in other)
+                        + (f'<div class="muted">Scripts added: {", ".join(f"<code>{esc(a)}</code>" for a in added)}</div>' if added else '')
+                        + f'</div>{verdict(k("milestone:" + m["title"][:40]), m["title"])}</div>'
+                        + (f'<ul class="items">{cards_html}</ul>' if cards_html else '<p class="muted">No new card — scripts on existing foundations.</p>')
+                        + '</div>')
+    rest_html = ''
+    if rest:
+        rest_html = ('<div class="milestone"><div class="ms-head"><div class="ms-main"><h4>Not in a milestone</h4>'
+                     '<div class="muted">Proposed but not placed by the roadmap — move it into one, or drop it.</div></div></div>'
+                     f'<ul class="items">{"".join(cards[i] for i in rest)}</ul></div>')
+    return ('<section class="panel"><h3>Roadmap</h3><p class="muted">The proposed handles, compiled — foundations first, each milestone with '
+            'the cards it builds and the demo that proves it. Accept by milestone ("go for M1"); move or drop a card in its note.</p>'
+            + (f'<details><summary class="muted">Foundations and dependency graph</summary>'
+               f'{table(["Foundation", "Used by", "Unlocks", "Cost"], rm["foundations"]) if rm["foundations"] else ""}'
+               f'{(chr(60) + "pre class=" + chr(34) + "mermaid" + chr(34) + ">" + esc(rm["mermaid"]) + "</pre>") if rm["mermaid"] else ""}</details>')
+            + html_groups + rest_html
+            + (f'<p class="muted"><strong>Deferred:</strong> {md(rm["deferred"])}</p>' if rm['deferred'] else '') + '</section>')
+
+
 def repo_section(model, rid, multi):
     name = short_name(model)
     k = lambda x: f'{rid}|{x}'
@@ -246,16 +297,6 @@ def repo_section(model, rid, multi):
                     for j, q in enumerate(model['grill']))
     parts = [f'<section class="panel"><h3>The app and its handles</h3><p class="muted">The Lab frames the runtime; hover a node for its '
              f'usage, click a proposed one to jump to its card.</p>{picture(model, rid, name)}</section>']
-    rm = model['roadmap']
-    if rm['foundations'] or rm['milestones']:
-        ms = ''.join(f'<li class="item"><div class="main"><div class="title">{md(m["title"])}</div>'
-                     + ''.join(f'<div>{md(b)}</div>' for b in m['body']) + f'</div>{verdict(k("milestone:" + m["title"][:40]), m["title"])}</li>'
-                     for m in rm['milestones'])
-        parts.append('<section class="panel"><h3>Roadmap</h3><p class="muted">Foundations first, then milestones — accept them by milestone ("go for M1").</p>'
-                     + (f'<h4>Foundations</h4>{table(["Foundation", "Used by", "Unlocks", "Cost"], rm["foundations"])}' if rm['foundations'] else '')
-                     + (f'<pre class="mermaid">{esc(rm["mermaid"])}</pre>' if rm['mermaid'] else '')
-                     + (f'<ul class="items">{ms}</ul>' if ms else '')
-                     + (f'<p class="muted"><strong>Deferred:</strong> {md(rm["deferred"])}</p>' if rm['deferred'] else '') + '</section>')
     pa = model['parallel']
     if pa['count'] or pa['rows']:
         parts.append(f'<section class="panel"><h3>Parallel agents</h3><p><strong class="big">{esc(pa["count"] or "?")}</strong> '
@@ -265,8 +306,7 @@ def repo_section(model, rid, multi):
     if model['guards']:
         parts.append(f'<section class="panel"><h3>Rules → guards</h3><p class="muted">Rules the agent files state in prose, and what would enforce each.</p>'
                      f'{table(["Rule", "Guard", "Kind"], model["guards"])}{verdict(k("guards:section"), "Rules to guards")}</section>')
-    parts.append(f'<section class="panel"><h3>Proposed handles ({len(model["cards"])})</h3><p class="muted">Would you build it? Is the usage right? '
-                 f'Is it in the right place?</p><ul class="items">{"".join(cards)}</ul></section>')
+    parts.insert(1, roadmap_panel(model, cards, k))
     if grill:
         parts.append(f'<section class="panel"><h3>Questions for you ({len(model["grill"])})</h3><p class="muted">Type your answer in the note.</p><ul class="items">{grill}</ul></section>')
     if tools:
@@ -349,6 +389,10 @@ ul.items{list-style:none;margin:0;padding:0}
 .st{font-size:12px;border-radius:999px;padding:0 8px;margin-right:4px} .st.exists{background:var(--oks);color:var(--ok)} .st.half{background:var(--halfs);color:var(--half)} .st.missing{background:var(--s2)}
 .tag{font-size:12px;background:var(--s2);border-radius:4px;padding:0 6px;margin-left:4px;font-weight:400} .tag.way{background:var(--accs)}
 .scripts ul{margin:4px 0 0;padding-left:18px}
+.milestone{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;background:var(--bg)}
+.ms-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 18px}.ms-main{display:grid;gap:4px;font-size:14px;color:var(--fg2);min-width:0}.ms-main h4{font-size:15px;color:var(--fg)}
+.tag.found{background:var(--fg);color:var(--bg)}
+.milestone .item:first-child{border-top:1px solid var(--line)}
 .verdict{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:330px;align-content:start}
 .verdict button{font:500 13px system-ui,sans-serif;border:1px solid var(--line);background:var(--s);color:var(--fg2);border-radius:999px;padding:4px 10px;cursor:pointer}
 .verdict button[aria-pressed=true][data-v=right]{background:var(--oks);border-color:var(--ok);color:var(--ok)}
@@ -360,7 +404,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,.node:focus-visi
 .tip pre{background:transparent;color:inherit;padding:0;margin:4px 0 0;white-space:pre-wrap;max-height:200px;overflow:hidden}
 .big{font-size:22px}.tw{overflow-x:auto}table{border-collapse:collapse;min-width:640px;font-size:13.5px;width:100%}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--fg3);font-size:12px;text-transform:uppercase;letter-spacing:.05em} td.gap{color:var(--bad);font-weight:600} th[scope=row] a{color:var(--fg);font-weight:600}
 .copy{font:600 14px system-ui,sans-serif;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
-@media (max-width:760px){.row{grid-template-columns:1fr}.item{grid-template-columns:1fr}.verdict{justify-content:flex-start;max-width:none}}
+@media (max-width:760px){.ms-head{grid-template-columns:1fr}.row{grid-template-columns:1fr}.item{grid-template-columns:1fr}.verdict{justify-content:flex-start;max-width:none}}
 </style></head><body><div class="wrap">
 {{INTRO}}
 {{BODY}}

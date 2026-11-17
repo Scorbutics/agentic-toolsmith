@@ -131,7 +131,9 @@ is possible for an agent is a `human-only` point; say who holds it.
 7. **Compile the roadmap** (SKILL.md, "Roadmap"): foundations shared by several cards, the
    dependency order, keystones, and milestones — M1 the walking skeleton — each ending on a demo
    the agent can run. Re-read the cards after compiling: a card that is a foundation plus a
-   snippet becomes a script, and a capability several cards need becomes a foundation.
+   snippet becomes a script, and a capability several cards need becomes a foundation. Every card
+   must appear, by its exact name in backticks, in one milestone's **Builds:** line or in
+   **Deferred** — the review page places cards by that name.
 
 ## Grill the map
 
