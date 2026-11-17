@@ -74,7 +74,7 @@ git clone https://github.com/Scorbutics/agentic-toolsmith && cd agentic-toolsmit
 ./evals/run.sh --model sonnet --model haiku  # every scenario, two models
 ```
 
-Five public repositories, one per shape — a Rails monolith (lobsters), a Go service (miniflux), a
+Five public repositories, one per shape — a Rails monolith (CodeTriage), a Go service (miniflux), a
 Vue SPA (vue-realworld), a dbt pipeline (jaffle-shop), a Godot game (tps-demo) — pinned to a commit.
 Each runs the Claude Code CLI headless on the same task **with the skill and without it**, read-only,
 and scores both outputs on the scenario's expected behaviours (did it pick the right primitive for

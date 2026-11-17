@@ -1,8 +1,8 @@
 {
- "name": "lobsters",
- "repo": "https://github.com/lobsters/lobsters",
- "commit": "28bc8d6",
- "shape": "Rails monolith with accounts and mail",
+ "name": "codetriage",
+ "repo": "https://github.com/codetriage/CodeTriage",
+ "commit": "d1868f8",
+ "shape": "Rails monolith with OAuth login, Sidekiq jobs and mailers",
  "expected": [
   {
    "behavior": "primitive: a script runner over the app (rails runner)",
@@ -12,35 +12,41 @@
    ]
   },
   {
-   "behavior": "mail caught locally",
+   "behavior": "mail caught or previewed locally",
    "any_of": [
     "letter_opener",
     "mail catcher",
     "mailpit",
+    "mailer preview",
     "inbox"
    ]
   },
   {
-   "behavior": "log in as a persona without a password",
+   "behavior": "log in as a persona without going through GitHub OAuth",
    "any_of": [
     "dev-login",
     "dev login",
-    "login_as",
-    "persona"
+    "persona",
+    "omniauth test",
+    "mock_auth",
+    "sign in as"
    ]
   },
   {
-   "behavior": "screenshot of a named state",
+   "behavior": "background jobs run on demand",
    "any_of": [
-    "playwright",
-    "screenshot"
+    "sidekiq",
+    "perform_now",
+    "inline",
+    "drain"
    ]
   },
   {
    "behavior": "seed or scenario data",
    "any_of": [
     "seed",
-    "fake_data",
+    "factory",
+    "fixture",
     "scenario"
    ]
   },
@@ -61,5 +67,6 @@
     "walking skeleton"
    ]
   }
- ]
+ ],
+ "note": "Replaces lobsters, whose own agent files forbid all LLM contributions (agents rightly declined to map it)."
 }
