@@ -134,6 +134,18 @@ applies. Cross-referenced points: `→ B7`.
 ## Unknowns
 - <point>: <what could not be determined> → asked <who> / owner
 
+## Decisions
+
+What the human decided while reviewing this map (grill answers, remarks), dated — applied below.
+
+## Revisions
+
+One entry per revision: what changed, and which remark caused it.
+
+## Accepted plan
+
+Filled only after an explicit go: the handles to build, in order, with the decisions they rest on.
+
 ## Grill
 
 At most three, each one changing which handle gets built; each with your recommended answer.

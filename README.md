@@ -15,7 +15,10 @@ ecosystem itself. So before fixing or building anything, the agent:
    seconds and the evidence for each;
 3. **asks you only what it could not find out**, one question at a time, each with a
    recommended answer;
-4. **ranks the gaps** and **builds the missing handles first** — a dev login, an eval console,
+4. **shows you the plan as a review page** — the app with its handles around it, every proposed
+   handle with how it would be used — **answers every remark you make**, revises, and waits for
+   your go;
+5. **ranks the gaps** and **builds the accepted handles first** — a dev login, an eval console,
    a warp command, a seed, a state lab, an effect ledger, a screenshot of a named state, a
    virtual clock, a profiler — then proves each rung moved, and leaves a `doctor` script and a
    "How to reach the app" section for the next session.
@@ -114,6 +117,8 @@ skills/toolsmith/
   references/tools.md           fitting an existing tool: evidence, alternative, cost, disclosure
   references/grill.md           question bank
   references/report-template.md the deliverable
+  references/review.md          the review loop: present, answer every remark, revise, accept, implement
+  scripts/review_page.py        map.md → one self-contained HTML review page (stdlib only)
 docs/trials.md                  dry runs on four project shapes, and what each changed
 ```
 

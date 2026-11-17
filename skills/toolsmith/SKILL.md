@@ -30,6 +30,16 @@ budget guessing. One hour spent on a handle pays back on every later task.
   becomes "re-map only the classes whose evidence changed", and the probes target points of the
   map. If none exists, the survey produces the parts of it the task needs.
 
+## The loop — both modes end the same way
+
+**Plan → present → answer every remark → revise → accept → implement.** A map (or a reach report)
+is a plan, not the deliverable. Render it into a review page the human can mark up
+(`scripts/review_page.py map.md`), hand it over, and **wait**. When feedback comes back, answer
+every remark individually — what the card concretely is, why it was proposed, what you now
+recommend, what changes — revise the map and present it again until no remark is open. Build
+only after an explicit go, in the accepted order, proving each handle by running its usage
+example for real. Full procedure: [references/review.md](references/review.md).
+
 ## The rule
 
 **Ask what the ecosystem lacks before doing what the task asks.** Produce a reach report first.
@@ -314,7 +324,11 @@ A `human-only` rung on a frequent path beats any `friction`: an agent that must 
 loses the whole loop, not seconds. Write the report from
 [references/report-template.md](references/report-template.md).
 
-### 5. Propose handles, then build only what the human picks
+### 5. Propose handles, review them with the human, build only the accepted plan
+
+Propose as cards, then run the review loop ([references/review.md](references/review.md)):
+present the page, answer every remark, revise, and build only after an explicit go.
+
 
 From [references/handles.md](references/handles.md) — or, better, by finishing a handle the
 project half-has. When an existing tool would do better, pick it by **fit, with evidence** —
@@ -359,4 +373,6 @@ ready-to-reach; the "How to reach the app" section; the report. Only now start t
 - Scraping coloured, human-formatted output when one flag would give JSON.
 - Restarting a service you did not start. Writing into the human's tree without listing it.
 - Twenty questions at once. Questions the README answers.
+- Building before the human has reviewed the plan, or leaving a remark unanswered.
+- Two layers each proposing their own primitive (an eval socket in the engine *and* in the game).
 - Fixing the task while "probing".

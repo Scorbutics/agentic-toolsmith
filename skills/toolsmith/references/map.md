@@ -97,7 +97,8 @@ is possible for an agent is a `human-only` point; say who holds it.
    should become, a handle**: an always-on debug port is a half-built remote-debug handle, and its
    exposure goes in that card's Fence line, not in passing.
 4. **Grill the map** — see below.
-5. **Write it** with [map-template.md](map-template.md), including the diagram.
+5. **Write it** with [map-template.md](map-template.md), including the diagram, then render the
+   review page (`scripts/review_page.py`) and start the review loop ([review.md](review.md)).
 6. **Propose, don't build.** List candidate handles *on the map* — project code or an existing
    tool chosen by fit ([tools.md](tools.md)). Every candidate is something the agent *calls* (SKILL.md, "What a handle is") and shows **how it would be used**: the
    exact command (or call, or URL) and a few lines of what it prints. A handle you cannot write a
