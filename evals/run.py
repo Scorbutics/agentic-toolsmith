@@ -58,7 +58,8 @@ def run_agent(repo, out, prompt, model, with_skill, timeout):
         if '.claude/' not in excl.read_text():
             excl.write_text(excl.read_text() + '\n.claude/\n')
     out.parent.mkdir(parents=True, exist_ok=True)
-    tools = TOOLS + [f'Write({out.parent}/**)', f'Edit({out.parent}/**)']
+    # absolute paths in permission rules take a double leading slash (`//abs/path`)
+    tools = TOOLS + [f'Write(/{out.parent}/**)', f'Edit(/{out.parent}/**)', f'Bash(mkdir -p {out.parent}:*)']
     cmd = ['claude', '-p', prompt.format(out=out), '--model', model, '--output-format', 'json',
            '--add-dir', str(out.parent), '--allowedTools', *tools]
     t0 = time.time()
@@ -125,6 +126,8 @@ def main():
                 print(f'  {model:8} {arm:8} running…', flush=True)
                 meta = run_agent(repo, out, WITH_SKILL if with_skill else TASK, model, with_skill, a.timeout)
                 text = out.read_text(errors='ignore') if out.exists() else ''
+                if not text and len(meta.get('result') or '') > 2000:  # wrote nothing, but answered in full
+                    text = meta['result']; out.write_text(text)
                 s = score(sc, text, repo) if text else {'expected': '0/%d' % len(sc['expected']), 'expected_ratio': 0,
                                                         'missed': ['no output written'], 'usage_examples': 0,
                                                         'roadmap': False, 'evidence': '0/0', 'chars': 0}
