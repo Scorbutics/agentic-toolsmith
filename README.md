@@ -153,9 +153,11 @@ docs/trials.md                  dry runs on four project shapes, and what each c
 
 ## Status
 
-Draft v1, revised after dry runs on four project shapes (web app with accounts, game engine +
-game, mobile app with an embedded runtime, CLI dev tool): see [docs/trials.md](docs/trials.md).
-Feedback from other shapes is the most useful contribution.
+**v0.1.** Tested with **Claude Code** (Opus, Sonnet, Haiku): evals on five public repositories
+([docs/evals.md](docs/evals.md)), dry runs and real builds on several private projects
+([docs/trials.md](docs/trials.md)). **GitHub Copilot** support (`install.sh --copilot`, `AGENTS.md`)
+follows Copilot's documented conventions but is not tested yet. Feedback from other project shapes
+and other agents is the most useful contribution.
 
 ## License
 
