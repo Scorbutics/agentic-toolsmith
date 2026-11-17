@@ -142,8 +142,11 @@ Every handle, whichever way up, is also judged on:
 | **Loop** — fast · isolated · resettable | hot reload, per-run working dir | renders with no backend | per-run trace, diffable log |
 | **Fence** — dev-only, fails closed | no eval in release | fixtures from the app, never real data | stub never falls back to live |
 
-Any handle in any app gets a coordinate: **boundary × verb × way**, with loop and fence as its
-quality bar. That is the vocabulary of the map, the report and the proposals.
+Any handle in any app gets a coordinate: **category × verb × way** — *where* it lives (one of the
+six places above), *what* it lets the agent do (see, steer, stub, freeze, check), *how* the agent
+stands (reach in, bring out, witness) — with loop and fence as its quality bar. The boundary
+classes of map mode are how you find it. That is the vocabulary of the map, the report and the
+proposals.
 
 ## The reach ladder
 
