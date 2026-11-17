@@ -36,6 +36,14 @@ external tool fits, say so in one line ("no tool fits: considered Storybook, mot
 (categories: launch, ingress, runtime, state, egress, eyes, lab). Group headings without that
 shape (`### Reach in`) are allowed and ignored.
 
+**Scripts under a primitive** go in its card as a table the review page reads:
+
+| Script | Usage → prints | Needs |
+|---|---|---|
+| `press` | `run press Enter 3` → `{"pressed":"Enter","frames":3}` | an input-injection API in the engine |
+
+A card may add a **Variants:** line when it exists only on some of the ways the app runs.
+
 Three lines are mandatory on every card besides the usage block. **Is:** what you would actually
 build and where — a new CLI in `tools/`, a public API in the engine plus its binding, an env flag
 read by the backend, a file in `scripts/agent/`. **Not a script because:** for any card that is not

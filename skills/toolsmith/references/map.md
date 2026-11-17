@@ -87,6 +87,9 @@ is possible for an agent is a `human-only` point; say who holds it.
 
 ## Procedure
 
+-1. **Read the decisions.** Before anything, read `toolsmith/decisions.md` in the project and in
+   its parent folder, and the latest map of any related repo (a lower or upper layer) if there is
+   one. Do not re-open what is decided there; cite it.
 0. **Choose the primitive.** Before any card: find the lowest layer with a per-frame or
    per-request hook every host goes through (it may be a library function the host calls, not a
    loop the layer owns). That is where the generic primitive goes (SKILL.md, "One generic

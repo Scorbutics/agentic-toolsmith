@@ -108,7 +108,11 @@ When the app has no long-lived process of its own (serverless functions, a stack
 all in a database), the primitive is a **script runner** over the local stack (`app-dev run <script>`)
 rather than an eval socket — same rule, scripts as files, one entry point.
 
-**Choose the primitive before anything else, at the lowest layer that can host it.** Hosting does
+**Choose the primitive before anything else, at the lowest layer that can host it** — lowest
+among the layers that are **present in every variant you target** (a socket in a runtime the app
+only sometimes runs on is not a base) and **where running code is safe** (the right thread, the
+interpreter lock held, the graphics context current — if the per-frame hook runs without them,
+drain the requests at the layer's own safe point instead). Hosting does
 not require owning the loop: a library or engine whose host calls one of its functions every
 frame or every request (`update`, `tick`, `render`, a middleware) can drain a request queue there,
 and then **every** host gets the primitive for free. Prefer that over one primitive per consumer.

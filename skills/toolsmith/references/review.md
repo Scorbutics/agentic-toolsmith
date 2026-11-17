@@ -57,6 +57,12 @@ contributes scripts and its own gate.
 The human's answers to the grill questions are **decisions**: record them in the map's
 **Decisions** section with the date, and apply them.
 
+**Decisions outlive the map.** Write each one also to a project-level file the next agent reads
+first — `toolsmith/decisions.md` at the root of the project, or of the parent folder when the
+decision spans several repos (an engine and its game) — one dated line each, with the map it came
+from. A decision recorded only in one map is lost to the next map of a related repo, which will
+re-open it.
+
 ## 4. Revise — and present again
 
 Update the map: change, merge, move or drop cards; add a **Revisions** entry (what changed and
