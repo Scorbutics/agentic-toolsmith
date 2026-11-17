@@ -1,8 +1,16 @@
 # Handles catalog
 
+## Contents
+- Reach
+- Act / Observe at runtime
+- Assert
+- Launch / Reset / Cycle
+- Witness — effects
+- Web stack handle families
+- Third parties
+
 Every entry below is something the agent **calls** and reads back. Hardening, guards and
-hygiene are not handles — they are the Fence or Needs lines of the handle they serve (SKILL.md,
-"What a handle is").
+hygiene are not handles — they are the Fence or Needs lines of the handle they serve (principles.md).
 
 When an existing tool would do a handle's job better than project code, choose it with
 [tools.md](tools.md): fit shown with evidence, alternative and cost stated, no fit no mention.

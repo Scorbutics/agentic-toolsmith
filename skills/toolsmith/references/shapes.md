@@ -1,5 +1,20 @@
 # Project shapes
 
+## Contents
+- Web app with accounts (SPA / SSR / monolith)
+- API / backend service, workers, queues
+- Game / real-time app (engine, emulator, simulation)
+- Embedded runtime / scripting host (a VM or engine inside a host app)
+- Mobile app (native, cross-platform, WebView shell)
+- Desktop app (Electron, Qt, native GUI)
+- CLI tool / library / SDK
+- Developer / agent tooling whose input is another project
+- Data / ML / batch pipeline
+- Infrastructure / IaC / deployment
+- Embedded / hardware / device firmware
+- Legacy / heavyweight stack (JSP, AngularJS, app servers, mainframe-adjacent)
+- Cross-cutting concerns (check on every shape)
+
 Most projects are several shapes at once (a game is also a native library; a SaaS is a web app
 + a worker + a database). Probe each shape's rungs. The table says what each rung *usually
 means* there and where it usually breaks.
@@ -122,7 +137,7 @@ Games, cont.:
 - **Randomness**: seedable?
 - **Third parties**: stubbed, recorded/replayed, or live?
 - **Parallelism**: can two agents (worktrees) run at once — ports, data dirs, caches, displays, build
-  outputs, global rows in a shared store? (SKILL.md, "Parallel agents")
+  outputs, global rows in a shared store? (parallel.md)
 - **Secrets**: can the agent run without production secrets? Which dev secrets exist?
 - **Agent-tool constraints**: things the agent's own harness refuses (typing passwords, some
   domains, GUI-only actions) — a handle has to route around them, not fight them.

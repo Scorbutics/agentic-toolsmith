@@ -1,6 +1,6 @@
 # Scoped runs — through a task, for a capability
 
-Both scopes follow the same process as a whole-app map (SKILL.md, "Three scopes, one process"),
+Both scopes follow the same process as a whole-app map (SKILL.md, "Scopes"),
 on a narrower survey. Both produce **durable** handles only — never tooling for one task.
 
 ## Before anything
@@ -13,7 +13,7 @@ only what this run surveyed, and say it is partial.
 ## Through a task — `/toolsmith task "<fix or feature>"`
 
 1. **Trace the task** to the code that produces the behaviour, the repo that owns it, and how a
-   change reaches the running app (SKILL.md, step 0 of the full process).
+   change reaches the running app (ladder.md, step 0).
 2. **List the loop this task needs**: reach the state it is about, act there, see the result,
    check it, reset, repeat. Each step that today needs a human, a guess or minutes of setup is a
    gap.

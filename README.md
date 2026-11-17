@@ -1,30 +1,23 @@
 # agentic-toolsmith
 
-> Before fixing your app, your agent builds the tools to reach it, see it, and watch what it touches.
+> Satellite tooling for coding agents: command-line access to a running project, from outside it.
 
 `toolsmith` is a skill for coding agents. In Brooks's surgical team, the toolsmith builds the
-instruments the surgeon operates with; this skill makes the agent its own toolsmith **before**
-it operates.
+instruments the surgeon operates with; this skill makes the agent the project's toolsmith.
 
 Agent loops do their best inside the ecosystem they are given. The bigger lever is usually the
-ecosystem itself. So before fixing or building anything, the agent:
+ecosystem itself: can an agent launch the app, log in as a persona, put it in a given state, look
+inside its live process, read what it wrote and sent, screenshot a named state — **from the
+command line, without a human?** Toolsmith maps what exists and what is missing, compiles it into a
+roadmap, reviews it with you remark by remark, then builds and proves the handles you accept.
 
-1. **traces** the task to the code and the repo that owns it;
-2. **measures its own reach** into your running app, for real, on an eight-rung ladder — build,
-   launch, observe, *effects*, reach the state, act, assert, reset, cycle time — with the
-   seconds and the evidence for each;
-3. **asks you only what it could not find out**, one question at a time, each with a
-   recommended answer;
-4. **shows you the plan as a review page** — the app with its handles around it, every proposed
-   handle with how it would be used — **answers every remark you make**, revises, and waits for
-   your go;
-5. **ranks the gaps** and **builds the accepted handles first** — a dev login, an eval console,
-   a warp command, a seed, a state lab, an effect ledger, a screenshot of a named state, a
-   virtual clock, a profiler — then proves each rung moved, and leaves a `doctor` script and a
-   "How to reach the app" section for the next session.
+It changes the codebase only where a handle needs it — a hook, an API to expose, a fence. The heart
+of the work is the tooling around the code, not the code.
 
-These are tools for **your app**, not for the model: not new function-calling tools, but ways
-for the agent to reach the app, see it, and watch what it does.
+**What it is not.** Repo-readiness checkers (Factory's Agent Readiness, AGENTS.md generators and
+audits) score the repository's hygiene — instructions, tests, conventions. Toolsmith builds the
+instruments around a running project. They are complementary; toolsmith writes only its own "How to
+reach the app" section into the agent file and leaves the rest to them.
 
 ## Three scopes
 

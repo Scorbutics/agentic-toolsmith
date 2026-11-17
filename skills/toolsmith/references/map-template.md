@@ -1,5 +1,22 @@
 # Agent map — <project> @ <commit> (<date>)
 
+## Contents
+- Parallel agents
+- Tools already in place
+- Candidate handles (not built)
+- Roadmap
+- Rules → guards
+- Fences to set first
+- Diagram
+- Points
+- Classes with no point
+- Unknowns
+- Decisions
+- Revisions
+- Accepted plan
+- Grill
+- Noticed in passing
+
 **Shape(s):** <…> · **Repos covered:** <…> · **Mapped by:** <agent>, grilled with <who>
 
 **Variants:** <the ways this app runs that support different handles — e.g. the shipped runtime vs
@@ -22,14 +39,14 @@ exist only on one of them. Omit when there is one way to run it.>
 Every handle an agent can already call, with its category (launch · ingress · runtime · state ·
 egress · eyes · lab). A tool that climbs several ways gets one row per verb.
 
-| Tool | Category | Verb | Way up | Point(s) | Usage |
+| Tool | Category | Verb | Way | Point(s) | Usage |
 |---|---|---|---|---|---|
 | <effect ledger> | egress | check | witness | B5, B6 | `bun run assay:check run.log --require <op>` |
 | <stdin console> | runtime | steer, see | reach in | B3 | type a Ruby line in the game's terminal |
 
 ## Candidate handles (not built)
 
-The map's main output. Group by way up; finish what the project half-has before inventing. If no
+The map's main output. Group by way; finish what the project half-has before inventing. If no
 external tool fits, say so in one line ("no tool fits: considered Storybook, motu — Vue 2").
 **Card heading grammar** — the review page reads it, so keep it exact:
 `### \`<name>\` — <category>[ (+ <category>…)] · <B-class> <name> · <verbs> · <way> · cost <S|M|L>`
@@ -51,8 +68,7 @@ place *and* gets a card to finish it — its missing fence is the work.
 Three lines are mandatory on every card besides the usage block. **Is:** what you would actually
 build and where — a new CLI in `tools/`, a public API in the engine plus its binding, an env flag
 read by the backend, a file in `scripts/agent/`. **Not a script because:** for any card that is not
-a script under a primitive, which of the exemptions applies (SKILL.md, "One generic primitive, then
-scripts"); no exemption, no card — it becomes a script line under the primitive. A handle owned by
+a script under a primitive, which of the exemptions applies (principles.md); no exemption, no card — it becomes a script line under the primitive. A handle owned by
 a **lower layer** (the engine under a game, the runtime under an app) is not a card in this map: list
 it as **Uses:** `<handle>` (from `<that layer>`'s map — or "to propose in `<that layer>`" when it has
 no map yet) on the cards that depend on it. And a

@@ -1,5 +1,12 @@
 # Map mode — the boundaries of the app and where tooling can apply
 
+## Contents
+- The boundary classes
+- The five verbs
+- Procedure
+- Grill the map
+- Keeping it alive
+
 A planner pass, independent of any task: **every place the app meets something else**, and at
 each one, **what an agent could do there** — see, steer, stub, freeze — and what exists today.
 The human sees the whole territory before choosing where tooling goes; the ladder later probes
@@ -78,7 +85,7 @@ At each point, ask what an agent could do there:
   (an effect ledger's gate, a lab-vs-page integration check, "a stranger gets nothing" for
   access policies). Seeing is not checking: a check can fail.
 
-Per point, also note the two properties every handle is judged on (SKILL.md, "Three ways up"):
+Per point, also note the two properties every handle is judged on (categories.md):
 **loop** — can it be reset, isolated per run/worktree, repeated fast? — and **fence** — is it
 dev-only, does it fail closed?
 
@@ -94,8 +101,7 @@ is possible for an agent is a `human-only` point; say who holds it.
    (database, cache, queue — most web stacks): the primitive is a script runner over the app's own
    code (`rails runner`, `go run ./cmd/agent`, a `scripts/agent/` entry point). In memory (a game,
    a desktop app, a daemon): a live eval, at the lowest layer with a per-frame or per-request hook
-   every host goes through (it may be a library function the host calls, not a loop the layer owns). That is where the generic primitive goes (SKILL.md, "One generic
-   primitive, then scripts"). Everything after is written against it: scripts under it, the
+   every host goes through (it may be a library function the host calls, not a loop the layer owns). That is where the generic primitive goes (principles.md). Everything after is written against it: scripts under it, the
    capabilities those scripts need as Needs lines, dedicated cards only with an exemption.
 1. **Locate.** For each class, find the points in the code — grep for the crossing itself
    (`fetch(`, `http.`, `smtp`, `Date.now`, `new Date`, `getenv`, `STDIN`, `Thread.new`,
@@ -105,8 +111,8 @@ is possible for an agent is a `human-only` point; say who holds it.
    Aggregate alike crossings into one point; split only where the verbs differ. No evidence, no
    point — put it under "unknown" instead.
 2. **Inventory what exists.** For each point and verb: an existing handle (name it, and score it
-   on the five criteria of SKILL.md step 5), a human-only path, possible-but-missing, or
-   impossible. Note the way up: reach in · bring out · witness. A **tool** often climbs several
+   on the five criteria of principles.md, "What makes a good handle"), a human-only path, possible-but-missing, or
+   impossible. Note the way: reach in · bring out · witness. A **tool** often climbs several
    ways — list it as `tool → verb → way` rows (an effect ledger that also replays calls and
    clones the database is witness + bring out + loop), never one label per tool.
 3. **Mark the fences.** Flag the points an agent's probes or handles could trigger with real
@@ -122,13 +128,12 @@ is possible for an agent is a `human-only` point; say who holds it.
 5. **Write it** with [map-template.md](map-template.md), including the diagram, then render the
    review page (`scripts/review_page.py`) and start the review loop ([review.md](review.md)).
 6. **Propose, don't build.** List candidate handles *on the map* — project code or an existing
-   tool chosen by fit ([tools.md](tools.md)). Every candidate is something the agent *calls* (SKILL.md, "What a handle is") and shows **how it would be used**: the
+   tool chosen by fit ([tools.md](tools.md)). Every candidate is something the agent *calls* (principles.md) and shows **how it would be used**: the
    exact command (or call, or URL) and a few lines of what it prints. A handle you cannot write a
    usage example for is not designed yet. For a runtime-shaped app, the candidates include remote
    debug and remote eval into the live process (handles.md, "Runtime-shaped apps"). Each card
-   names its **category** (launch · ingress · runtime · state · egress · eyes · lab — SKILL.md, "Seven
-   places a handle lives"), its point, verb, way up and rough cost.
-7. **Compile the roadmap** (SKILL.md, "Roadmap"): foundations shared by several cards, the
+   names its **category** (launch · ingress · runtime · state · egress · eyes · lab — categories.md), its point, verb, way and rough cost.
+7. **Compile the roadmap** (roadmap.md): foundations shared by several cards, the
    dependency order, keystones, and milestones — M1 the walking skeleton — each ending on a demo
    the agent can run. Re-read the cards after compiling: a card that is a foundation plus a
    snippet becomes a script, and a capability several cards need becomes a foundation. Every card

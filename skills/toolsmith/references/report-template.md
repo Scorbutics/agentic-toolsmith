@@ -31,7 +31,7 @@ forwards cleaned up.
 
 ## Gaps, ranked
 
-For each proposed handle, say which way up: live · lab · witness.
+For each proposed handle, say which way: live · lab · witness.
 
 | Rank | Rung | Gap | Frequency × cost | Proposed handle (live / lab / witness) | Build cost |
 |------|------|-----|------------------|----------------------------------------|------------|
