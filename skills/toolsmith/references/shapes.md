@@ -103,7 +103,8 @@ Games, cont.:
 - **Ownership**: which repo owns the code to change, and may the agent change it?
 - **Randomness**: seedable?
 - **Third parties**: stubbed, recorded/replayed, or live?
-- **Parallelism**: can two agents (worktrees) run at once — ports, data dirs, caches?
+- **Parallelism**: can two agents (worktrees) run at once — ports, data dirs, caches, displays, build
+  outputs, global rows in a shared store? (SKILL.md, "Parallel agents")
 - **Secrets**: can the agent run without production secrets? Which dev secrets exist?
 - **Agent-tool constraints**: things the agent's own harness refuses (typing passwords, some
   domains, GUI-only actions) — a handle has to route around them, not fight them.

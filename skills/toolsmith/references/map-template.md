@@ -8,6 +8,15 @@ exist only on one of them. Omit when there is one way to run it.>
 
 **In one paragraph:** how well an agent can reach this app today, and the two or three handles that would change that most.
 
+## Parallel agents
+
+**Agents that can safely work at once today: <n>** — <one line: what stops the next one>.
+
+| Shared resource | Shared by | What collides | Isolation today | Proposal (level 1 · 2 · 3) |
+|---|---|---|---|---|
+| Postgres `app_dev` | every worktree | seed rows; the `app_settings` clock row (global) | none | level 1: schema per env; the clock row becomes per-env |
+| port 3000 | every dev server | the second server fails to start | none | level 2: port derived from `--env` |
+
 ## Tools already in place
 
 Every handle an agent can already call, with its category (launch · ingress · runtime · state ·
@@ -28,7 +37,8 @@ read by the backend, a file in `scripts/agent/`. **Not a script because:** for a
 a script under a primitive, which of the exemptions applies (SKILL.md, "One generic primitive, then
 scripts"); no exemption, no card — it becomes a script line under the primitive. A handle owned by
 a **lower layer** (the engine under a game, the runtime under an app) is not a card in this map: list
-it as **Uses:** `<handle>` (from `<that layer>`'s map) on the cards that depend on it.
+it as **Uses:** `<handle>` (from `<that layer>`'s map) on the cards that depend on it. And a
+**Parallel:** line: how the handle isolates two agents running it at once, or why it cannot.
 
 One card per handle — the usage block is mandatory, and it is what makes it a handle: if the
 agent never calls it (an untracked file, a default, a lint rule, a CI step), it is not a card —
@@ -47,6 +57,7 @@ $ bin/dev-login --as stranger
 **Not a script because:** it must work before any eval primitive exists in the process (it mints the session the browser starts with).
 **Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`. (A Needs line may name another card: `Needs: dev-up`.)
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
+**Parallel:** `--env` (default: the worktree's) selects the server; sessions are per env.
 
 ### `remote eval` — runtime (+ ingress) · B3 Runtime · steer, see · reach in · cost M
 **Finishes:** **New** (remote debug already possible: `debug` gem in the Gemfile)

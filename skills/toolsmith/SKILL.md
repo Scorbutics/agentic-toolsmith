@@ -133,7 +133,7 @@ where they are missing.
 | **State** — data and time | put the app in a state, read it back | seeds and scenarios, queries and dumps, snapshots, save states, virtual clock, RNG seed |
 | **Egress** — what leaves | replace or record the outside world | mail catcher, HTTP stub or recorder, effect ledger, queue inspection |
 | **Eyes & logs** | see what happened | screenshots of a named state, logs, traces, crash reports |
-| **Lab** — the environment around the runtime | a place where the app, or a piece of it, runs outside the human's setup | a virtual display (Xvfb), a container or VM image, an emulator or simulator, a local stack (compose), a harness hosting a piece of the app outside the live process (component lab, state renderer such as motu's lagoon, scene or battle harness) |
+| **Lab** — the environment around the runtime | a place where the app, or a piece of it, runs outside the human's setup | a virtual display (Xvfb), a container or VM image, an emulator or simulator, a local stack (compose), a harness hosting a piece of the app outside the live process (component lab, state renderer such as motu's lagoon, scene or battle harness), the environment registry (`envs up <name>`) |
 
 **One card per handle, one main category, optional secondary ones.** Some handles are two sides
 of the same coin — a live eval is runtime *and* ingress; a remote debugger is runtime and part of
@@ -155,6 +155,33 @@ the only way to verify — and the source depends on the shape: a headless brows
 the game's own framebuffer readback (`glReadPixels`, the engine's snapshot call, a viewport
 texture), the emulator (`adb exec-out screencap`, `simctl io screenshot`), the desktop app's
 debugging protocol (CDP). A screenshot handle returns the image *and* the state it shows.
+
+## Parallel agents
+
+Several agents — or an agent and its human — will work on the project at once, each in its own
+worktree. That is not a category: it is a question the whole map answers and a property every
+handle has.
+
+**The map answers: how many agents can safely work at once today, and what do they collide on?**
+List every **shared resource** — a database, a port, a display, a build output path, a working
+folder, a cache, a queue, a cron schedule, an external test account, a device — with who shares
+it, what collides, and how it is isolated today. The hidden ones are **global rows inside a shared
+store** (a settings row, a virtual-clock row, a sequence, a schedule): namespacing the rest does
+not fix them.
+
+**Three isolation levels** — propose the cheapest that removes the collisions:
+1. **Shared infrastructure, namespaced data** — one database, N app servers; every write carries
+   the environment (schema, tenant, key prefix). Cheap; fails on global rows.
+2. **Per-environment processes on shared infrastructure** — a database per environment inside
+   one server, a port range per environment, a display per environment.
+3. **Fully separate** — a container or VM per environment. Costly; nothing leaks.
+
+**The environment registry** is the Lab handle that makes it usable: named environments
+(`envs list`, `envs up <name>`, `envs down <name>`), and **every other handle takes `--env`**,
+defaulting to the worktree's own — so a run never lands on the human's environment by accident.
+
+Every card carries a **Parallel:** line — how it isolates (`--env`, a run id, a port derived from
+the worktree), or "single-agent only" and why.
 
 ## Three ways up
 
@@ -187,8 +214,9 @@ several ways; list each.
 
 Every handle, whichever way up, is also judged on:
 
-- **Loop** — is it fast, isolated per run/worktree, resettable? Access you cannot repeat cheaply
-  or run twice in parallel is access for one attempt. (Ladder rungs 7 and 8.)
+- **Loop** — is it fast, **parallel-safe**, resettable? Parallel-safe has a test: *two agents can
+  run it at the same time without seeing each other's effects.* Access you cannot repeat cheaply
+  or run twice at once is access for one attempt. (Ladder rungs 7 and 8; see "Parallel agents".)
 - **Fence** — is it dev-only by construction, does it fail closed? A handle that can reach
   production, or a stub that falls back to the live service, removes safety instead of adding
   access.
@@ -196,7 +224,7 @@ Every handle, whichever way up, is also judged on:
 | | Reach in | Bring out | Witness |
 |---|---|---|---|
 | **Access** — see · steer · stub · freeze · check | console, warp, dev login | lab, scenario, mock | ledger, catcher, traces |
-| **Loop** — fast · isolated · resettable | hot reload, per-run working dir | renders with no backend | per-run trace, diffable log |
+| **Loop** — fast · parallel-safe · resettable | hot reload, per-run working dir | renders with no backend | per-run trace, diffable log |
 | **Fence** — dev-only, fails closed | no eval in release | fixtures from the app, never real data | stub never falls back to live |
 
 Any handle in any app gets a coordinate: **category × verb × way** — *where* it lives (one of the
