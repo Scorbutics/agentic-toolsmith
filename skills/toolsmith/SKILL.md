@@ -61,7 +61,10 @@ caller. `bin/dev-login --as stranger` is a handle. `game --seed 42 --scene battl
 
 These are **not handles**, however useful:
 - hardening and hygiene — untrack a file, default a flag to off, bind to loopback, rotate a key;
-- guards — a lint rule, a CI step, a type check, a pre-commit hook;
+- guards *as a change to make* — add a lint rule, a CI step, a type check, a pre-commit hook.
+  (A guard that already exists and that the agent can run and read back — `rake lint`,
+  `bun run typecheck` — passes the usage test: list it under tools in place, usually Launch &
+  loop.)
 - documentation, refactors, renames.
 
 Where they go instead:

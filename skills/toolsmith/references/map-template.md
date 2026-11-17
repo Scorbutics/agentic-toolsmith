@@ -2,6 +2,10 @@
 
 **Shape(s):** <…> · **Repos covered:** <…> · **Mapped by:** <agent>, grilled with <who>
 
+**Variants:** <the ways this app runs that support different handles — e.g. the shipped runtime vs
+a local build of it, two render backends, debug vs release; one line each, and which handles
+exist only on one of them. Omit when there is one way to run it.>
+
 **In one paragraph:** how well an agent can reach this app today, and the two or three handles that would change that most.
 
 ## Tools already in place

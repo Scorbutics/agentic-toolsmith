@@ -153,6 +153,9 @@ in-app one is blind exactly when it is needed most:
    - the display server: run under Xvfb and grab the window (`xwd`, ImageMagick `import -window`);
      on Android `screencap` already reads the composited surface.
 
+Their ways differ, and the card says so: level 1 is **reach in** (the app snapshots itself, on
+request); level 2 is **witness** (the frame as it left the app, captured without its cooperation).
+
 Propose level 2 whenever the renderer is native, there is more than one backend or scaling path,
 or a freeze or crash is a plausible bug class. The two captures of the same frame, side by side,
 also tell you *which layer* a visual bug is in.
