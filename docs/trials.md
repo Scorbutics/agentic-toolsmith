@@ -13,3 +13,22 @@ reasoning. What each changed in v1:
 
 Common to all four: the question bank covered only 1–2 of each agent's 6 real questions. v1
 adds the task, permission, ownership and "which output is correct?" questions that were missing.
+
+## Map mode (2026-11-17)
+
+One fresh agent ran map mode, read-only, on the web-app project above: 45 points across all
+twelve classes, ~15 existing handles of which ~8 failed a criterion, 6 unknowns. Changes:
+
+- **Classes**: points may belong to two classes (primary + cross-reference); **B13
+  Configuration** added (env-selected drivers, flags, gates fit neither Process nor Identity).
+- **Verbs**: **check** added — comparing against a declaration, including denial, had no verb
+  ("see" understated an effect ledger's gate). Reset/isolation became the **loop** property,
+  not a verb.
+- **Evidence**: aggregate alike crossings into one point with a counting command (otherwise
+  ingress alone exceeded 200 points); env files as classes, never values; SELECT-only queries on
+  an already-running local stack count as read-only, so the grill stops asking what one query answers.
+- **Diagram**: one node per class (worst colour, counts) — per-point nodes broke past ~20.
+- **Tools climb several ways**: one "way up" label per tool misclassified both in-house tools
+  (a ledger that also replays and clones; a lab that also records fixtures and reports
+  coverage) → `tool → verb → way` rows.
+- **Safety findings first**: the most valuable output, previously buried in a column.

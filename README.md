@@ -23,6 +23,14 @@ ecosystem itself. So before fixing or building anything, the agent:
 These are tools for **your app**, not for the model: not new function-calling tools, but ways
 for the agent to reach the app, see it, and watch what it does.
 
+## Map first, if you want
+
+`/toolsmith map` is a planner pass with no task: the agent charts **every boundary of the app** —
+UI, process, runtime, internal seams, state stores, egress, ingress, time, identity, platform,
+delivery, telemetry, configuration — and at each inspection point, what an agent could **see,
+steer, stub, freeze or check** there today. Safety findings come first. You get a diagram and a table of where tooling could apply, grilled with
+you, before any tool is proposed. Later runs read the map instead of rediscovering it.
+
 ## Three ways up
 
 | | How | Best for |
@@ -33,6 +41,10 @@ for the agent to reach the app, see it, and watch what it does.
 
 Most agents verify what the screen shows and never what the code touched. The skill makes the
 third column a rung of its own.
+
+Every handle is also judged on two properties, whichever way up: **loop** (fast, isolated,
+resettable) and **fence** (dev-only, fails closed). Together that is a classifier for any app's
+agent harness: each handle gets a coordinate — **boundary × verb × way** — and a quality bar.
 
 ## Install
 
@@ -91,6 +103,8 @@ Two tools by the same author, each the strong form of one "way up" — the skill
 ```
 skills/toolsmith/
   SKILL.md                      the process: trace → survey → verify boundary → probe → grill → rank → build → prove
+  references/map.md             map mode: 13 boundary classes × 5 verbs (see, steer, stub, freeze, check)
+  references/map-template.md    the map, with its diagram
   references/shapes.md          what each rung means per project shape
   references/handles.md         handles by rung: reach in, lab, witness, assert, launch/reset
   references/grill.md           question bank

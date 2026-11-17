@@ -1,6 +1,6 @@
 ---
 name: toolsmith
-description: Before fixing or building anything in a project, measure how well YOU (the agent) can reach the running app — build, launch, observe it and its effects, get to the right state, act, assert, reset — then grill the human only on what probing could not answer, rank the gaps, and build the missing handles (dev login, eval console, warp, seed, state lab, effect ledger, screenshot, virtual clock, profiler…) before the feature work. Use at the start of work on an unfamiliar project, when asked to "audit the agent setup", "what's stopping you from seeing it", "improve the dev ecosystem for agents", or when a fix loop stalls (two attempts without a way to verify, "I can't reproduce", "I can't see the screen", "I need you to log in").
+description: Before fixing or building anything in a project, measure how well YOU (the agent) can reach the running app — build, launch, observe it and its effects, get to the right state, act, assert, reset — then grill the human only on what probing could not answer, rank the gaps, and build the missing handles (dev login, eval console, warp, seed, state lab, effect ledger, screenshot, virtual clock, profiler…) before the feature work. Use at the start of work on an unfamiliar project, when asked to "audit the agent setup", "what's stopping you from seeing it", "improve the dev ecosystem for agents", or when a fix loop stalls (two attempts without a way to verify, "I can't reproduce", "I can't see the screen", "I need you to log in"). Also a planner MAP mode, with no task: list every boundary of the app (UI, process, runtime, internal seams, state stores, egress, ingress, time, identity, platform, delivery, telemetry, configuration) and the inspection points on each, showing where tooling could apply — use when asked to "map the app's boundaries", "where could tooling help", "plan the agent tooling", or `/toolsmith map`.
 ---
 
 # toolsmith
@@ -17,6 +17,18 @@ The premise, measured repeatedly (SWE-agent, OpenAI's harness engineering, Anthr
 long-running harnesses): **the interface moves results more than the effort spent inside it.**
 An agent that cannot see the screen, reach the page behind login, or reset the data spends its
 budget guessing. One hour spent on a handle pays back on every later task.
+
+## Two modes
+
+- **Map** (planner, no task, read-only) — chart every boundary of the app and the inspection
+  points on each: what an agent could **see, steer, stub, freeze or check** there, and what exists
+  today. Output: a map with a diagram and unranked candidate handles, so the human sees *where*
+  tooling can apply before choosing any. Procedure: [references/map.md](references/map.md).
+  Use it on `/toolsmith map`, on "where could tooling help", or before the first full run on a
+  large project.
+- **Full** (a task, or an audit) — the process below. If a map exists, read it first: step 1
+  becomes "re-map only the classes whose evidence changed", and the probes target points of the
+  map. If none exists, the survey produces the parts of it the task needs.
 
 ## The rule
 
@@ -50,6 +62,30 @@ often not the one the shape suggests.
 Rule of thumb: composition and many-state UI → **lab**; runtime, timing, integration, "only on
 device X" → **live**; anything that writes, sends or calls → **witness**, whichever of the other
 two you use.
+
+Classify a handle by **where the agent stands**: inside the running app (reach in), in a replica
+of the app or of its surroundings (bring out — a mock server returning canned answers is a
+replica of the outside world), or at the edges watching what leaves (witness). A tool may climb
+several ways; list each.
+
+### …and two properties
+
+Every handle, whichever way up, is also judged on:
+
+- **Loop** — is it fast, isolated per run/worktree, resettable? Access you cannot repeat cheaply
+  or run twice in parallel is access for one attempt. (Ladder rungs 7 and 8.)
+- **Fence** — is it dev-only by construction, does it fail closed? A handle that can reach
+  production, or a stub that falls back to the live service, removes safety instead of adding
+  access.
+
+| | Reach in | Bring out | Witness |
+|---|---|---|---|
+| **Access** — see · steer · stub · freeze · check | console, warp, dev login | lab, scenario, mock | ledger, catcher, traces |
+| **Loop** — fast · isolated · resettable | hot reload, per-run working dir | renders with no backend | per-run trace, diffable log |
+| **Fence** — dev-only, fails closed | no eval in release | fixtures from the app, never real data | stub never falls back to live |
+
+Any handle in any app gets a coordinate: **boundary × verb × way**, with loop and fence as its
+quality bar. That is the vocabulary of the map, the report and the proposals.
 
 ## The reach ladder
 
@@ -109,6 +145,9 @@ safety boundary usually lives in the consumer.
 - Audit each existing handle against the five criteria of step 5 — a dev clock gated only by an
   env flag, a mail stub that falls back to live sending, an eval console on a side thread are
   findings, not handles.
+
+Locate the task's **points on the map** (or, with no map, the boundaries the task crosses —
+[references/map.md](references/map.md) lists the boundary classes and how to find their points).
 
 Classify the **shape(s)** — usually two or three ([references/shapes.md](references/shapes.md)).
 A tool whose input is another project has **two loops** (the tool on fixtures; the tool against
