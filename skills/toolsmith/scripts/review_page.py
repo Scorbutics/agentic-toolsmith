@@ -131,7 +131,7 @@ def parse(md):
             'point': bits[0] if bits else '', 'way': way, 'cost': next((b for b in bits if b.lower().startswith('cost')), ''),
             'status': 'half' if fin and not re.match(r'\**new', fin, re.I) else 'missing',
             'usage': usage.group(1).rstrip() if usage else '', 'scripts': scripts,
-            'lines': [(k, field(body, k)) for k in ('Is', 'Finishes', 'Gives the agent', 'Needs', 'Uses', 'Not a script because', 'Fence') if field(body, k)],
+            'lines': [(k, field(body, k)) for k in ('Is', 'Finishes', 'Gives the agent', 'Needs', 'Uses', 'Not a script because', 'Fence', 'Parallel') if field(body, k)],
         })
     tools = []
     for rows in tables(find(secs, 'tools already')):
@@ -142,7 +142,15 @@ def parse(md):
             c = (col(r, 'category') or '').lower()
             cat = next((x for x in CATS if c.startswith(x)), 'launch')
             tools.append({'name': nm, 'cat': cat, 'way': col(r, 'way'), 'usage': col(r, 'usage'), 'status': 'exists'})
-    return {'title': title, 'summary': summary, 'cards': out_cards, 'tools': tools,
+    par = find(secs, 'parallel agents')
+    m = re.search(r'at once today:\s*\**\s*(\d+|[^*\n—]+)', par)
+    parallel = {'count': m.group(1).strip() if m else '', 'line': '', 'rows': []}
+    lm = re.search(r'at once today:[^\n]*?—\s*(.*)', par)
+    parallel['line'] = lm.group(1).strip() if lm else ''
+    for rows in tables(par):
+        for r in rows:
+            parallel['rows'].append([col(r, 'shared'), col(r, 'shared by'), col(r, 'what collides'), col(r, 'isolation'), col(r, 'proposal')])
+    return {'title': title, 'summary': summary, 'parallel': parallel, 'cards': out_cards, 'tools': tools,
             'grill': bullets(find(secs, 'grill')), 'unknowns': bullets(find(secs, 'unknowns'))}
 
 
@@ -211,9 +219,18 @@ def render(model):
                     f'{verdict(f"tool:{t["name"]}", t["name"])}</li>' for t in model['tools'])
     grill = ''.join(f'<li class="item"><div class="main"><div class="title">{md(q)}</div></div>{verdict(f"grill:{j + 1}", q)}</li>'
                     for j, q in enumerate(model['grill']))
+    pa = model['parallel']
+    par_html = ''
+    if pa['count'] or pa['rows']:
+        trs = ''.join('<tr>' + ''.join(f'<td>{md(x)}</td>' for x in r) + '</tr>' for r in pa['rows'])
+        par_html = (f'<section class="panel"><h2>Parallel agents</h2><p><strong class="big">{esc(pa["count"] or "?")}</strong> '
+                    f'agent(s) can safely work at once today. {md(pa["line"])}</p>'
+                    + (f'<div class="tw"><table><thead><tr><th>Shared resource</th><th>Shared by</th><th>What collides</th>'
+                       f'<th>Isolation today</th><th>Proposal</th></tr></thead><tbody>{trs}</tbody></table></div>' if trs else '')
+                    + f'{verdict("parallel:section", "Parallel agents analysis")}</section>')
     store_key = 'toolsmith-review:' + re.sub(r'\W+', '-', model['title'])[:80]
     return TEMPLATE.replace('{{TITLE}}', esc(model['title'])).replace('{{SUMMARY}}', md(model['summary'])) \
-        .replace('{{PICTURE}}', picture(model)).replace('{{CARDS}}', ''.join(cards)) \
+        .replace('{{PICTURE}}', picture(model)).replace('{{PARALLEL}}', par_html).replace('{{CARDS}}', ''.join(cards)) \
         .replace('{{NCARDS}}', str(len(model['cards']))).replace('{{TOOLS}}', tools) \
         .replace('{{NTOOLS}}', str(len(model['tools']))).replace('{{GRILL}}', grill) \
         .replace('{{NGRILL}}', str(len(model['grill']))).replace('{{STORE}}', json.dumps(store_key))
@@ -261,11 +278,13 @@ ul.items{list-style:none;margin:0;padding:0}
 button:focus-visible,input:focus-visible,textarea:focus-visible,.node:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .tip{position:fixed;z-index:9;pointer-events:none;background:var(--fg);color:var(--bg);font-size:12.5px;padding:6px 9px;border-radius:6px;max-width:min(460px,calc(100vw - 32px))}
 .tip pre{background:transparent;color:inherit;padding:0;margin:4px 0 0;white-space:pre-wrap;max-height:200px;overflow:hidden}
+.big{font-size:22px}.tw{overflow-x:auto}table{border-collapse:collapse;min-width:640px;font-size:13.5px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--fg3);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
 .copy{font:600 14px system-ui,sans-serif;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
 @media (max-width:760px){.row{grid-template-columns:1fr}.item{grid-template-columns:1fr}.verdict{justify-content:flex-start;max-width:none}}
 </style></head><body><div class="wrap">
 <header><h1>{{TITLE}}</h1><p class="muted">Review this plan: mark each item, add a note, question or answer, then copy the feedback back to the agent.</p><p>{{SUMMARY}}</p></header>
 <section class="panel"><h2>The app and its handles</h2><p class="muted">The Lab frames the runtime; hover a node for its usage, click a proposed one to jump to its card.</p>{{PICTURE}}</section>
+{{PARALLEL}}
 <section class="panel"><h2>Proposed handles ({{NCARDS}})</h2><p class="muted">Would you build it? Is the usage right? Is it in the right place?</p><ul class="items">{{CARDS}}</ul></section>
 <section class="panel"><h2>Questions for you ({{NGRILL}})</h2><p class="muted">Type your answer in the note.</p><ul class="items">{{GRILL}}</ul></section>
 <section class="panel"><details><summary><h2 style="display:inline">Already in place ({{NTOOLS}})</h2></summary><ul class="items">{{TOOLS}}</ul></details></section>
@@ -282,8 +301,8 @@ const boxes=[...document.querySelectorAll('.verdict')],missed=document.getElemen
 function paint(){boxes.forEach(b=>{const c=st[b.dataset.key]||{};b.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(c.v===x.dataset.v)));
  const i=b.querySelector('input');if(document.activeElement!==i)i.value=c.note||''});if(document.activeElement!==missed)missed.value=st._missed||'';out.value=feedback()}
 function feedback(){const L=['# Toolsmith review feedback','',`Plan: ${document.querySelector('h1').textContent}`,''];
- const grp={card:'Proposed handles',grill:'Answers to the questions',tool:'Already in place'};
- for(const g of ['card','grill','tool']){const rows=boxes.filter(b=>b.dataset.key.startsWith(g+':')).map(b=>[b,st[b.dataset.key]||{}]).filter(([b,c])=>c.v||c.note);
+ const grp={card:'Proposed handles',grill:'Answers to the questions',parallel:'Parallel agents',tool:'Already in place'};
+ for(const g of ['card','grill','parallel','tool']){const rows=boxes.filter(b=>b.dataset.key.startsWith(g+':')).map(b=>[b,st[b.dataset.key]||{}]).filter(([b,c])=>c.v||c.note);
   if(!rows.length)continue;L.push('## '+grp[g]);rows.forEach(([b,c])=>L.push(`- [${c.v||'note'}] ${b.dataset.label}${c.note?' — '+c.note:''}`));L.push('')}
  if(st._missed)L.push('## Missed',st._missed,'');return L.join('\n')}
 document.addEventListener('click',e=>{const x=e.target.closest('.verdict button');if(!x)return;const k=x.closest('.verdict').dataset.key;
