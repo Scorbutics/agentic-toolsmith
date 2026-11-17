@@ -13,12 +13,33 @@
 
 ## Candidate handles (not built)
 
-The map's main output. Group by way up; finish what the project half-has before inventing.
-If no external tool fits, say so in one line ("no tool fits: considered Storybook, motu — Vue 2").
+The map's main output. Group by way up; finish what the project half-has before inventing. If no
+external tool fits, say so in one line ("no tool fits: considered Storybook, motu — Vue 2").
+One card per handle — the usage block is mandatory:
 
-| Boundary · point | Verb | Way up | Handle | Loop / fence notes | Rough cost |
-|---|---|---|---|---|---|
-| B6 · mail provider | stub, check | witness | catcher with API; refuse to start with a live key | per-run inbox; fails closed | S |
+### `dev-login` — B9 Identity · steer · reach in · cost S
+**Finishes:** the seeded personas in `db/seeds.rb` (or **New**)
+
+```sh
+$ bin/dev-login --as stranger
+{"user":"stranger","cookie":"_app_session=…","expires":"2026-11-18T10:00:00Z"}
+```
+
+**Gives the agent:** any persona's session in one command, no password typed.
+**Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
+
+### `remote eval` — B3 Runtime · steer, see · reach in · cost M
+**Finishes:** **New** (remote debug already possible: `debug` gem in the Gemfile)
+
+```sh
+$ printf 'dev-token\nUser.count\n' | nc 127.0.0.1 7778
+rubyvm-eval/1 token?
+OK
+=> 1342
+```
+
+**Gives the agent:** live state of the running server without pausing it.
+**Fence:** development only, loopback, token required.
 
 Unranked unless a task or the human's priorities were given: <priorities, if any>.
 

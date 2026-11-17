@@ -63,7 +63,42 @@ in separate build trees and working dirs.
 
 ## Act / Observe at runtime
 
+### Runtime-shaped apps: remote debug AND remote eval
+
+When the app runs on a VM or an interpreter (Ruby, Python, Node, JVM, BEAM, Lua, GDScript, an
+embedded VM), the agent's strongest reach-in is into the **live process**, and there are two
+distinct handles — propose both, they coexist:
+
+- **Remote debug** — pause, step, inspect, through the runtime's own protocol. Usually one flag
+  away; the gap is that nobody turned it on or wrote down how to attach.
+- **Remote eval** — run a line in the live process *without pausing it*, and get the result back.
+  Rarely built in; this is the one to build.
+
+| Runtime | Remote debug (built in) | Remote eval into the live process |
+|---|---|---|
+| Ruby / Rails | `debug` gem: `RUBY_DEBUG_OPEN=true RUBY_DEBUG_PORT=… bin/rails s`, then `rdbg --attach` (or a DAP client) | Not built in — `rails console` / `rails runner` are a *separate* process (same code and DB, not the server's memory). Build the socket console below |
+| Python | `debugpy --listen 127.0.0.1:5678` (DAP) | `manhole` (socket REPL into the running process), or the socket console below |
+| Node / Electron | `--inspect=127.0.0.1:9229` (CDP) | Built in: CDP `Runtime.evaluate` on the same port |
+| JVM | JDWP `-agentlib:jdwp=transport=dt_socket,address=127.0.0.1:5005,server=y,suspend=n` | JShell over JDI, or an app-level console (Spring Boot: an actuator endpoint, dev profile only) |
+| Erlang / Elixir | — | Built in: `iex --remsh` / `erl -remsh` |
+| Go (no VM) | Delve: `dlv attach <pid>` / `dlv debug --headless --listen=127.0.0.1:2345` | None; expose a dev-only command endpoint instead |
+| Godot | Built in: `--remote-debug tcp://127.0.0.1:6007` (the editor's debugger, remote scene tree) | Not built in — a dev-only console autoload evaluating `Expression`, gated by `OS.is_debug_build()` |
+| Embedded VM in a host app | Whatever the VM's debugger offers (e.g. the `debug` gem's DAP for an embedded Ruby) | The socket console below, opened by the host |
+
 ### Live console (eval / command socket)
+
+Reference implementation for an embedded Ruby VM, by the skill's author: `remote_eval.rb` in
+[embedded-ruby-vm](https://github.com/Scorbutics/embedded-ruby-vm) — the pattern transfers to
+any runtime:
+- loopback by default, and a **shared token** sent first (`S: rubyvm-eval/1 token?` → `C: <token>`);
+- `nc`-friendly line protocol with a prompt; multi-line input until the parser accepts it;
+- **scopes**: the app registers bindings (`expose(:scene, binding)`) and the client `attach`es to
+  one, so a line runs against the object that matters, not only the top level;
+- coexists with the remote debugger, each on its own port, both dev-only and opened by the host.
+
+Add what an agent needs on top of a human's console: **framed replies** (one JSON line per
+request with value / stdout / error / ms) and a **main-loop mode** for anything that touches
+state — see below.
 The app opens a local socket (Unix socket `0600` in the user runtime dir; loopback TCP + token
 where Unix sockets are not available) and accepts commands. Requests are queued and executed
 **on the app's main loop** (between frames / on the event loop), never on the socket thread.

@@ -226,7 +226,7 @@ handle must be:
 
 1. **Dev-only by construction** — absent from release builds, refuses non-loopback, fails closed;
    a stub never falls back to the live service. A login bypass that can ship is a vulnerability.
-2. **Scriptable** — one command, machine-readable output, exit codes (0 holds, non-zero says
+2. **Scriptable** — one command, shown with a usage example (the command and what it prints), machine-readable output, exit codes (0 holds, non-zero says
    why), no prompts, no TTY.
 3. **Fast and deterministic** — seeded, time-controllable, isolated per run / worktree.
 4. **Discoverable** — documented where the next agent looks first ("How to reach the app"

@@ -88,9 +88,12 @@ is possible for an agent is a `human-only` point; say who holds it.
 4. **Grill the map** — see below.
 5. **Write it** with [map-template.md](map-template.md), including the diagram.
 6. **Propose, don't build.** List candidate handles *on the map* — project code or an existing
-   tool chosen by fit ([tools.md](tools.md)) (which point, which verb, which
-   way up, rough cost), grouped by boundary. Ranking needs a task or the human's priorities; ask
-   for them, or leave the list unranked.
+   tool chosen by fit ([tools.md](tools.md)). Every candidate shows **how it would be used**: the
+   exact command (or call, or URL) and a few lines of what it prints. A handle you cannot write a
+   usage example for is not designed yet. For a runtime-shaped app, the candidates include remote
+   debug and remote eval into the live process (handles.md, "Runtime-shaped apps"). Each card
+   names its point, verb, way up and rough cost. Ranking needs a task or the human's priorities;
+   ask for them, or leave the list unranked.
 
 ## Grill the map
 
