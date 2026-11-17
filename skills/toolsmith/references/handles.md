@@ -132,6 +132,31 @@ Each reply is framed: `{id, ok, value, stdout, error, backtrace, ms}`.
 - A comparison handle (A/B between variants, before/after an edit) is the usual next step once
   one screenshot is attributable.
 
+#### Two levels of eyes for a native renderer
+
+A game, an engine or any app with its own renderer needs **two** capture handles, because the
+in-app one is blind exactly when it is needed most:
+
+1. **In-app, named state** — the app's own snapshot call (`Graphics.snap_to_bitmap`, a viewport
+   texture read). Cheap, knows which state it shows. But it is triggered by the app's own code on
+   its own loop: useless when that loop is frozen, when the bug is in the code path that produces
+   the image, or when the question is "what did the player actually see".
+2. **Out-of-band, the presented frame** — what reached the window, captured without asking the
+   app's scripting layer:
+   - an engine-level hook driven from outside: an env var or signal that makes the renderer dump
+     the frame it presents (after scaling, shaders, post-processing), every N frames or on demand —
+     `glReadPixels` / the backend's screen read right before the buffer swap;
+   - a GPU-level tool: RenderDoc (frame capture, every draw call and texture), apitrace (record
+     and replay the GL stream, dump any frame), Mesa's `GALLIUM_HUD` for counters;
+   - an `LD_PRELOAD` shim on the swap call (`glXSwapBuffers`, `eglSwapBuffers`) that reads the
+     back buffer — works on a binary you cannot change;
+   - the display server: run under Xvfb and grab the window (`xwd`, ImageMagick `import -window`);
+     on Android `screencap` already reads the composited surface.
+
+Propose level 2 whenever the renderer is native, there is more than one backend or scaling path,
+or a freeze or crash is a plausible bug class. The two captures of the same frame, side by side,
+also tell you *which layer* a visual bug is in.
+
 ### Logs, structured
 - One flag for JSON logs; one known file path per run (`.run/<id>/app.log`), not a terminal.
 - A per-run (per-worktree) local observability stack when the system is distributed.
