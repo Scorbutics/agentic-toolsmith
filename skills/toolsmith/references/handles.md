@@ -121,8 +121,16 @@ Each reply is framed: `{id, ok, value, stdout, error, backtrace, ms}`.
 - **Screenshot of a named state**: the handle returns the image path *and* the state it shows
   (route, scene, frame number). A screenshot you cannot attribute is noise. Capture at the
   scale and resolution the human sees.
-- Web: headless browser screenshot. Game: frame capture from the render target. Mobile:
-  `adb exec-out screencap` / `simctl io screenshot`. Desktop: CDP / OS capture.
+- Sources by shape:
+  - **web**: headless browser — Playwright `page.screenshot()`, after the state is queryable;
+  - **game / native renderer**: read the framebuffer the game draws into — the engine's
+    snapshot call (`Graphics.snap_to_bitmap`, `get_viewport().get_texture().get_image()`),
+    `glReadPixels` on the GL surface, a GPU readback of the render target — offscreen or hidden
+    window when there is no display; capture both the native frame and the scaled one;
+  - **mobile**: `adb exec-out screencap -p`, `xcrun simctl io booted screenshot`;
+  - **desktop / Electron**: CDP `Page.captureScreenshot`, or the OS capture as a last resort.
+- A comparison handle (A/B between variants, before/after an edit) is the usual next step once
+  one screenshot is attributable.
 
 ### Logs, structured
 - One flag for JSON logs; one known file path per run (`.run/<id>/app.log`), not a terminal.

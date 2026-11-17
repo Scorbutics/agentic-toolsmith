@@ -74,6 +74,31 @@ Where they go instead:
 
 `fence` is a property of a handle, never a verb: the verbs are see, steer, stub, freeze, check.
 
+## Six places a handle lives
+
+Every handle — existing or proposed — sits in one of six categories. They are what the human
+sees first: one picture of the app with its handles around it, solid where they exist, dashed
+where they are missing.
+
+| Category | What it gives the agent | Typical handles |
+|---|---|---|
+| **Launch & loop** | start it, know it is ready, isolate it, reset it, turn the loop fast | run/up scripts with readiness, per-run dirs and ports, `doctor`, reset, hot reload |
+| **Ingress** — drive it | push input in, as someone | routes and API calls, CLI commands, input injection, deep links, dev login and personas |
+| **Runtime** — inside the live process | look and act inside the running app | remote eval, remote debug, profiler |
+| **State** — data and time | put the app in a state, read it back | seeds and scenarios, queries and dumps, snapshots, save states, virtual clock, RNG seed |
+| **Egress** — what leaves | replace or record the outside world | mail catcher, HTTP stub or recorder, effect ledger, queue inspection |
+| **Eyes & logs** | see what happened | screenshots of a named state, logs, traces, crash reports |
+
+Identity lives in Ingress (who is driving); time and randomness live in State (they make a state
+reachable). The boundary classes of map mode are how you *find* handles; the six categories are
+how you *show* them.
+
+**Eyes are not optional.** For anything with a screen, a screenshot of a named state is often
+the only way to verify — and the source depends on the shape: a headless browser (Playwright),
+the game's own framebuffer readback (`glReadPixels`, the engine's snapshot call, a viewport
+texture), the emulator (`adb exec-out screencap`, `simctl io screenshot`), the desktop app's
+debugging protocol (CDP). A screenshot handle returns the image *and* the state it shows.
+
 ## Three ways up
 
 A rung can be climbed three ways. Know all three before proposing anything — the best handle is

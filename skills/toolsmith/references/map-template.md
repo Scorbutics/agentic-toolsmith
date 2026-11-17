@@ -6,10 +6,13 @@
 
 ## Tools already in place
 
-| Tool | Verb | Way up | Point(s) |
-|---|---|---|---|
-| <effect ledger> | check | witness | B5, B6 |
-| <effect ledger> | stub (replay) | bring out | B6 |
+Every handle an agent can already call, with its category (launch · ingress · runtime · state ·
+egress · eyes). A tool that climbs several ways gets one row per verb.
+
+| Tool | Category | Verb | Way up | Point(s) | Usage |
+|---|---|---|---|---|---|
+| <effect ledger> | egress | check | witness | B5, B6 | `bun run assay:check run.log --require <op>` |
+| <stdin console> | runtime | steer, see | reach in | B3 | type a Ruby line in the game's terminal |
 
 ## Candidate handles (not built)
 
@@ -19,7 +22,7 @@ One card per handle — the usage block is mandatory, and it is what makes it a 
 agent never calls it (an untracked file, a default, a lint rule, a CI step), it is not a card —
 it is a Fence or Needs line of the handle it serves, or one of the Fences to set first.
 
-### `dev-login` — B9 Identity · steer · reach in · cost S
+### `dev-login` — ingress · B9 Identity · steer · reach in · cost S
 **Finishes:** the seeded personas in `db/seeds.rb` (or **New**)
 
 ```sh
@@ -31,7 +34,7 @@ $ bin/dev-login --as stranger
 **Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`.
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
 
-### `remote eval` — B3 Runtime · steer, see · reach in · cost M
+### `remote eval` — runtime · B3 Runtime · steer, see · reach in · cost M
 **Finishes:** **New** (remote debug already possible: `debug` gem in the Gemfile)
 
 ```sh
@@ -57,28 +60,45 @@ consequences, and the fence that makes the handles above safe to use.
 
 ## Diagram
 
-**One node per boundary class**, coloured by its *worst* point, labelled with its point count
-and ⚠ count. Per-point detail lives in the table. Draw per-point nodes only for classes with
-≤ 4 points; past ~20 nodes a diagram stops being read.
+The app in the middle, the six categories around it, one node per handle: **solid** = exists,
+**amber** = half-built (a card that *Finishes* something), **dashed** = missing (a card marked
+New). This is the picture the human reads first — keep node labels to the handle's name.
 
 ```mermaid
 flowchart LR
   app((app))
-  classDef ok fill:#cfe8cf,stroke:#3a7a3a;
-  classDef partial fill:#fbeec8,stroke:#a07a10;
-  classDef human fill:#f6d0d0,stroke:#a33;
-  classDef missing fill:#e6e6e6,stroke:#777,stroke-dasharray:4 3;
-
-  egress["B6 Egress · 7 pts · ⚠2"]:::human
-  time["B8 Time · 4 pts"]:::partial
-  identity["B9 Identity · 3 pts"]:::ok
-  app --> egress
-  app --> time
-  app --> identity
+  classDef exists fill:#cfe8cf,stroke:#3a7a3a;
+  classDef half fill:#fbeec8,stroke:#a07a10;
+  classDef missing fill:#ffffff,stroke:#777,stroke-dasharray:4 3;
+  subgraph launch[Launch & loop]
+    run[psdk-run]:::missing
+  end
+  subgraph ingress[Ingress]
+    login[dev-login]:::half
+  end
+  subgraph runtime[Runtime]
+    console[stdin console]:::exists
+    eval[remote eval]:::missing
+  end
+  subgraph state[State]
+    clock[clock]:::missing
+  end
+  subgraph egress[Egress]
+    inbox[mail last]:::missing
+  end
+  subgraph eyes[Eyes & logs]
+    logs[Logger]:::exists
+    shot[shot]:::missing
+  end
+  launch --- app
+  ingress --- app
+  runtime --- app
+  app --- state
+  app --- egress
+  app --- eyes
 ```
 
-Colour by what an agent can do today (not by safety). Legend: green = every point has agent handles meeting the criteria · amber = friction or a
-failed criterion · red = some point is human-only · grey dashed = some point has no handle.
+A category with no handle at all is still drawn, empty — that gap is the finding.
 
 ## Points
 

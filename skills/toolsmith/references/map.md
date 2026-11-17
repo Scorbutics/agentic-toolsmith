@@ -92,7 +92,8 @@ is possible for an agent is a `human-only` point; say who holds it.
    exact command (or call, or URL) and a few lines of what it prints. A handle you cannot write a
    usage example for is not designed yet. For a runtime-shaped app, the candidates include remote
    debug and remote eval into the live process (handles.md, "Runtime-shaped apps"). Each card
-   names its point, verb, way up and rough cost. Ranking needs a task or the human's priorities;
+   names its **category** (launch · ingress · runtime · state · egress · eyes — SKILL.md, "Six
+   places a handle lives"), its point, verb, way up and rough cost. Ranking needs a task or the human's priorities;
    ask for them, or leave the list unranked.
 
 ## Grill the map
