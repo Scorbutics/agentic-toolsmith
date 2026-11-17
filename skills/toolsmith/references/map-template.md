@@ -39,7 +39,9 @@ scripts"); no exemption, no card — it becomes a script line under the primitiv
 a **lower layer** (the engine under a game, the runtime under an app) is not a card in this map: list
 it as **Uses:** `<handle>` (from `<that layer>`'s map — or "to propose in `<that layer>`" when it has
 no map yet) on the cards that depend on it. And a
-**Parallel:** line: how the handle isolates two agents running it at once, or why it cannot.
+**Parallel:** line: how the handle isolates two agents running it at once, or why it cannot; a
+**Permission:** line: allow · ask · deny in the agent's harness. Size the usage output for an
+agent: what the command prints by default, short.
 
 One card per handle — the usage block is mandatory, and it is what makes it a handle: if the
 agent never calls it (an untracked file, a default, a lint rule, a CI step), it is not a card —
@@ -59,6 +61,7 @@ $ bin/dev-login --as stranger
 **Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`. (A Needs line may name another card: `Needs: dev-up`.)
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
 **Parallel:** `--env` (default: the worktree's) selects the server; sessions are per env.
+**Permission:** allow (read-only against the agent's own env).
 
 ### `remote eval` — runtime (+ ingress) · B3 Runtime · steer, see · reach in · cost M
 **Finishes:** **New** (remote debug already possible: `debug` gem in the Gemfile)
@@ -74,6 +77,15 @@ OK
 **Fence:** development only, loopback, token required.
 
 Unranked unless a task or the human's priorities were given: <priorities, if any>.
+
+## Rules → guards
+
+Rules the agent files state in prose, and the guard each could become.
+
+| Rule (where) | Guard | Kind |
+|---|---|---|
+| "NEVER run `supabase db reset`" (`CLAUDE.md:7`) | pre-tool hook blocking the command, with the reason | hook |
+| "use the service layer for DB access" (`CLAUDE.md:9`) | lint rule on imports of the client outside `services/` | lint |
 
 ## Fences to set first
 

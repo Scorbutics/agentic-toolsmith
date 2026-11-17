@@ -61,6 +61,17 @@ A flag that loads an arbitrary script at startup without editing the app (`--uti
 `-r`, `--require`, an init hook) turns any scenario into a scratch file. Crash-replay files (a
 saved battle, a request dump) are free save states — find them in the survey.
 
+### Repro bundle — the bug report as a state
+Most tasks start as "it broke when I did X". The handle that changes the most turns that into one
+replayable artifact, captured where the bug happens, replayed where the agent works:
+- web: the user's session recording (rrweb) or a HAR, plus the data state (a scoped DB dump);
+- game: the recorded inputs, the save, the RNG seed, the build;
+- backend: the request(s) plus a snapshot of the rows they touched;
+- any app: version, config, flags, clock — whatever makes the replay deterministic.
+`repro capture` on the human's side, `repro play <bundle>` on the agent's; the replay ends on a
+state the agent can query and screenshot. Look for half-built ones: crash dumps, saved battle
+states, error reports with request ids. Category: state (+ ingress).
+
 ### Variant launcher
 One command that runs the same scenario on each variant (backend, platform, scale) side by side
 in separate build trees and working dirs.
@@ -190,6 +201,12 @@ also tell you *which layer* a visual bug is in.
 - **Profile**: a measurement handle for performance tasks — profiler zone or in-app monotonic
   timer around the operation, cold/warm switch, repeat N, prints median and spread as JSON,
   names the device class it ran on.
+- **Oracle — compare against a reference**: many outcomes have no absolute "correct" (is this
+  pixel right? is this ranking right?), only "same as the reference". Name the reference and make
+  the comparison a command: a previous release, a parity target (the old runtime a new one must
+  match), a production response recorded once, golden files with an update command, a slower but
+  obviously-correct implementation. `oracle diff <case>` prints what differs and exits non-zero.
+  The map asks: *what is the reference here?*
 - **Explain**: for tools that decide (linters, gates, rule engines), `explain <case>` prints
   which input produced the verdict.
 
@@ -197,6 +214,10 @@ also tell you *which layer* a visual bug is in.
 - **Doctor / init script**: one command that verifies the toolchain, starts the stack, waits
   for a real readiness signal, and prints the URLs/sockets. The next agent runs it first.
 - **Isolation**: ports and data dirs derived from the worktree/run id; no shared mutable state.
+- **Process registry**: every process a run starts is recorded under its run id — `envs ps`,
+  `envs stop <run>` through the app's clean exit; nothing left running, no crash files from signals.
+- **Leases** for what cannot be duplicated (a device, a GPU, a sandbox account):
+  `envs claim <resource> --ttl 10m`, renewed while used, released on stop.
 - **Per-run working directory**: logs, crash files, saves written by a run land in
   `.run/<id>/`, never in the human's tree; user data is copied in, never used in place.
 - **Safe serve wrapper**: starts the backend with stub drivers forced (mail, payments, push) and
@@ -231,6 +252,17 @@ change affects. Know its limits and say them: a ledger checks categories of effe
 - **Files**: per-run working directory plus a before/after listing; a file watcher for the run.
 - **Messages / jobs**: the queue's own inspection command; a dead-letter view.
 - **Traces**: OpenTelemetry to a local collector, one trace per agent action.
+
+### Paid and non-deterministic dependencies
+When the app itself calls an LLM, a payment provider, an SMS gateway or any metered API, agent
+runs cost money and give a different answer each time. Give each one:
+- **record / replay** — recorded responses keyed by request (a cassette per scenario), live only
+  when explicitly re-recording;
+- **a budget cap per run** and a counter the agent can read (`envs cost <run>`);
+- a **fence**: never live in agent runs unless the run says so; a missing cassette fails loudly
+  rather than calling out.
+For LLM calls specifically, also pin model, temperature and seed where the API allows it, and log
+prompt + response per call — they are the app's least deterministic boundary.
 
 ## Third parties
 - Stub or record/replay (payments, email, push, OAuth providers). Expose the stub's inbox

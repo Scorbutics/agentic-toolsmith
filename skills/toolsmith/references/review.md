@@ -75,9 +75,13 @@ before the handle that needs it) with the decisions it rests on, and record it i
 For each accepted handle, in order:
 1. build it, small, out of feature code, with its fence;
 2. **run its usage example for real** and show the output — the card's usage block is the test;
-3. move its status in the map (missing → exists), update the "How to reach the app" section of
-   the agent file and the `doctor` script;
-4. re-render the page so the human sees the picture fill in.
+3. **keep it alive**: add that usage example to the `doctor` script and to a CI job, so the handle
+   fails loudly the day the app changes under it;
+4. **configure the harness**: its permission (allow · ask · deny) and any guard its fence relies
+   on (a hook, a wrapper) — so an agent can use it unattended;
+5. move its status in the map (missing → exists), update the "How to reach the app" section of
+   the agent file;
+6. re-render the page so the human sees the picture fill in.
 
 If building shows the plan was wrong (a handle needs something the map missed, a primitive is
 cheaper than three scripts promised), stop and bring it back to step 3 — do not quietly redesign.

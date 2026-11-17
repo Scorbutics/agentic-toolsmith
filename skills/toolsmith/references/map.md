@@ -32,6 +32,9 @@ spans several (an engine and its game, an app and its runtime), so every referen
 `scripts/4 Systems/106 Save Load/3 GamePlay/400 Save.rb:7`, never `Save.rb:7`. A bare file name
 is ambiguous in any repo with repeated names, and the next agent cannot open it. No abbreviations either (`L/…` for a repo root): write the path out.
 
+**Agent files' rules.** Collect every rule written in prose in the agent files (`CLAUDE.md`,
+`AGENTS.md`, …) — "never", "always", "do not" — for the "Rules → guards" section.
+
 **Shared resources.** While locating points, note every resource two agents would share
 (database, ports, display, build outputs, working folders, caches, queues, schedules, external
 test accounts, devices) and every **global row inside a shared store**. They fill the map's

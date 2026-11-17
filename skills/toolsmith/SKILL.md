@@ -317,7 +317,9 @@ safety boundary usually lives in the consumer.
   `process.env`), ports and tokens in the README, `debug`, `console`, `eval`, `repl`, `seed`,
   `fixture`, `mock`, `stub`, `preview`, `profiler`, `--headless`, `hidden`, `storybook`,
   `scenario`, `lagoon`, `audit`, `ledger`, `trace`, `otel`, `mailpit`, `record`; run the app's own
-  `help`; look for crash-replay files and boot-time script hooks. If the repo *is* developer or
+  `help`; look for crash-replay files and boot-time script hooks; look for **paid or
+  non-deterministic dependencies** (LLM SDKs, payment, SMS, paid APIs) and for **references** the
+  output could be compared against (a previous version, a parity target, golden files). If the repo *is* developer or
   agent tooling, its own commands are your candidate handles.
 - Audit each existing handle against the five criteria of step 5 — a dev clock gated only by an
   env flag, a mail stub that falls back to live sending, an eval console on a side thread are
