@@ -75,7 +75,8 @@ is possible for an agent is a `human-only` point; say who holds it.
    "Safety findings". They are usually the most valuable output of a map.
 4. **Grill the map** — see below.
 5. **Write it** with [map-template.md](map-template.md), including the diagram.
-6. **Propose, don't build.** List candidate handles *on the map* (which point, which verb, which
+6. **Propose, don't build.** List candidate handles *on the map* — project code or an existing
+   tool chosen by fit ([tools.md](tools.md)) (which point, which verb, which
    way up, rough cost), grouped by boundary. Ranking needs a task or the human's priorities; ask
    for them, or leave the list unranked.
 

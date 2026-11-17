@@ -89,7 +89,10 @@ Research and practice:
   question at a time, look in the codebase before asking.
 - **The Mythical Man-Month** — Fred Brooks (1975): the surgical team and its toolsmith.
 
-Two tools by the same author, each the strong form of one "way up" — the skill does not require them:
+Two tools by the same author, each the strong form of one "way up". The skill does not require
+them: it recommends a tool — these, Storybook, Mailpit, OpenTelemetry or a few lines of project
+code — only when the app's map shows it fits, with the alternative and the cost, and it always
+discloses these two as the author's ([tools.md](skills/toolsmith/references/tools.md)):
 
 - **[motu](https://github.com/Scorbutics/motu)** — *the lab.* Declare a screen region's state and
   owners; the lagoon renders every declared state at its own URL, with no backend and no login,
@@ -107,6 +110,7 @@ skills/toolsmith/
   references/map-template.md    the map, with its diagram
   references/shapes.md          what each rung means per project shape
   references/handles.md         handles by rung: reach in, lab, witness, assert, launch/reset
+  references/tools.md           fitting an existing tool: evidence, alternative, cost, disclosure
   references/grill.md           question bank
   references/report-template.md the deliverable
 docs/trials.md                  dry runs on four project shapes, and what each changed

@@ -1,5 +1,8 @@
 # Handles catalog
 
+When an existing tool would do a handle's job better than project code, choose it with
+[tools.md](tools.md): fit shown with evidence, alternative and cost stated, no fit no mention.
+
 A handle is the smallest dev-only piece of tooling that turns a `human-only` / `missing` /
 `friction` rung into `ok`. Prefer what the project half-has: a debug menu, a seed script, a
 test helper, an admin route — extend it before adding a new mechanism.

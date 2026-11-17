@@ -205,7 +205,9 @@ loses the whole loop, not seconds. Write the report from
 ### 5. Propose handles, then build only what the human picks
 
 From [references/handles.md](references/handles.md) — or, better, by finishing a handle the
-project half-has. Say which way up each one is (live · lab · witness), and why that one. A
+project half-has. When an existing tool would do better, pick it by **fit, with evidence** —
+[references/tools.md](references/tools.md): prerequisites visible on the map, the alternative
+and its trade-off, the adoption cost, and disclosure of the skill author's own tools. Say which way up each one is (live · lab · witness), and why that one. A
 handle must be:
 
 1. **Dev-only by construction** — absent from release builds, refuses non-loopback, fails closed;
