@@ -18,14 +18,15 @@ files, committed credentials): name the file and the class, never the value.
 when a read-only command showed it, and `(docs)` when it comes from the tool's or engine's own
 documentation rather than this repo (a Godot CLI flag, a `debug` gem env var); everything else is
 read. Version checks are not always read-only: `pnpm`/`yarn` through corepack, asdf/mise shims and
-some wrappers download on first call — prefer reading the version pin in the repo.
+some wrappers download on first call — prefer reading the version pin in the repo. A missing
+toolchain (no `node_modules`, wrong language version, no engine binary) is a finding for the
+Launch and Build rungs, not a reason to stop: map from the code and say what could not be
+confirmed.
 
 **Evidence is a full path** — repo-relative when the map covers one repo, **absolute** when it
-spans several (an engine and its game, an app and its runtime), so every reference opens as is. `scripts/4 Systems/106 Save Load/3 GamePlay/400 Save.rb:7`, never
-`Save.rb:7` — a bare file name is ambiguous in any repo with repeated names, and the next agent
-cannot open it. A missing toolchain (no `node_modules`,
-wrong language version, no engine binary) is a finding for the Launch and Build rungs, not a
-reason to stop: map from the code and say what could not be confirmed.
+spans several (an engine and its game, an app and its runtime), so every reference opens as is:
+`scripts/4 Systems/106 Save Load/3 GamePlay/400 Save.rb:7`, never `Save.rb:7`. A bare file name
+is ambiguous in any repo with repeated names, and the next agent cannot open it.
 
 **Size.** Aim for 25–45 points. Past that, aggregate alike crossings; a map nobody finishes
 reading has no effect.
