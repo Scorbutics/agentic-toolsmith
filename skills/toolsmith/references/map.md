@@ -11,7 +11,16 @@ ask the human what one read-only query answers. No launches, nothing that writes
 where things run.
 
 Env files are evidence by **class, never by value**: `KEY → local | remote | live | test | unset`
-(read the prefix or host, print nothing else).
+(read the prefix or host, print nothing else). The same for secrets found anywhere else (config
+files, committed credentials): name the file and the class, never the value.
+
+**Read vs seen.** In map mode most cells come from reading code. Mark a cell `(seen)` only when a
+read-only command showed it; everything else is read. A missing toolchain (no `node_modules`,
+wrong language version, no engine binary) is a finding for the Launch and Build rungs, not a
+reason to stop: map from the code and say what could not be confirmed.
+
+**Size.** Aim for 25–45 points. Past that, aggregate alike crossings; a map nobody finishes
+reading has no effect.
 
 ## The boundary classes
 
@@ -69,10 +78,13 @@ is possible for an agent is a `human-only` point; say who holds it.
    impossible. Note the way up: reach in · bring out · witness. A **tool** often climbs several
    ways — list it as `tool → verb → way` rows (an effect ledger that also replays calls and
    clones the database is witness + bring out + loop), never one label per tool.
-3. **Mark the boundary.** Points that cross the safety boundary (live keys, prod URLs, real user
-   data, irreversible actions, listeners on all interfaces, dev tools that ship to production,
-   scripts that contradict the agent file) are flagged — and go **first** in the map, under
-   "Safety findings". They are usually the most valuable output of a map.
+3. **Mark the fences.** Flag the points an agent's probes or handles could trigger with real
+   consequences: live keys or production URLs a local launch would use, a production default
+   target, a prod-copy database, user data a run would write, scripts that contradict the agent
+   file. They become **"Fences to set first"** — at most five one-liners, placed *after* the
+   candidate handles, because they are preconditions for using them. Security bugs in the app
+   itself (a debug route that ships, a listener on all interfaces) are not the map's job: list
+   them in one "Noticed in passing" line at the end, or leave them out.
 4. **Grill the map** — see below.
 5. **Write it** with [map-template.md](map-template.md), including the diagram.
 6. **Propose, don't build.** List candidate handles *on the map* — project code or an existing

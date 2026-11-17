@@ -41,6 +41,16 @@ Then:
 If the human says "skip, just do the task", record the gaps and do the task — the report is
 still the deliverable that outlives this session.
 
+**The deliverable is tooling, not a security audit.** Safety matters here only where it touches
+the agent's loop: what the agent's own probes or handles could trigger (a live mail key on a
+local serve, a production default target, a prod-copy database), and the fence every proposed
+handle needs. Security bugs in the app itself are noted in one line in passing, never the
+headline — on a well-tooled project, a page of security findings buries the tooling.
+
+**If the agent file refuses agent work** (an `AGENTS.md` / `CLAUDE.md` that forbids AI-written
+code or tooling), stop at the map: write it outside the repo, mark in-repo handles `blocked
+(policy: <file>)`, and make "may an agent build anything here, and where?" grill question 1.
+
 ## Three ways up
 
 A rung can be climbed three ways. Know all three before proposing anything — the best handle is
@@ -154,6 +164,10 @@ A tool whose input is another project has **two loops** (the tool on fixtures; t
 its real consumer): climb the ladder for both.
 
 ### 1b. Verify the safety boundary — then ask once
+
+Scope: what the agent's own probing and handles could trigger. This is a precondition for the
+ladder, not an audit of the app.
+
 
 Do not infer the boundary; check it with read-only probes:
 - which env file would a launch load, and does it hold **live** third-party keys or production

@@ -28,7 +28,7 @@ for the agent to reach the app, see it, and watch what it does.
 `/toolsmith map` is a planner pass with no task: the agent charts **every boundary of the app** —
 UI, process, runtime, internal seams, state stores, egress, ingress, time, identity, platform,
 delivery, telemetry, configuration — and at each inspection point, what an agent could **see,
-steer, stub, freeze or check** there today. Safety findings come first. You get a diagram and a table of where tooling could apply, grilled with
+steer, stub, freeze or check** there today. Candidate handles come first; safety only as the few fences those handles need. You get a diagram and a table of where tooling could apply, grilled with
 you, before any tool is proposed. Later runs read the map instead of rediscovering it.
 
 ## Three ways up

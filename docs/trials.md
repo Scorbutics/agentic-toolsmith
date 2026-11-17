@@ -32,3 +32,22 @@ twelve classes, ~15 existing handles of which ~8 failed a criterion, 6 unknowns.
   (a ledger that also replays and clones; a lab that also records fixtures and reports
   coverage) → `tool → verb → way` rows.
 - **Safety findings first**: the most valuable output, previously buried in a column.
+
+## Batch 1 — map mode on six open-source repos (2026-11-17)
+
+Eight fresh agents, map mode, read-only, no network, on six shapes (Rails, Go service, Electron,
+Godot game, dbt pipeline, Vue SPA), two repos mapped twice. 13 hazards planted beforehand.
+
+- Planted hazards found: 13/13 (all in the safety section; one run's score contaminated by a
+  leftover upstream ref, fixed for the rest). Evidence references resolving: 95–100%.
+- Stability between two fresh runs on the same repo: 52–60% of cited files in common, same
+  hazards found.
+- The fit rule held: no run proposed motu or assay outside their documented support; Histoire was
+  proposed for the Vue app.
+- **The main lesson came from the project owner, not the scores**: on a well-tooled project the
+  map led with nineteen safety findings and buried the tooling. v2 puts tools in place and
+  candidate handles first, narrows safety to the ≤5 fences an agent's own loop needs, and moves
+  app-security issues to one line in passing. The benchmark itself over-weighted security too:
+  batch 2 plants tooling ground truth (half-built handles, reach gaps with an obvious fix).
+- Also from the agents: agent files that refuse AI work (stop at the map), "read" vs "seen"
+  cells, missing toolchains, secrets outside env files, map size.
