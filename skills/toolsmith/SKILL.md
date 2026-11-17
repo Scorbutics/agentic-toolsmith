@@ -66,7 +66,9 @@ code or tooling), stop at the map: write it outside the repo, mark in-repo handl
 A **handle is something the agent calls**: a command, a URL, a socket, a launch flag, a query, a
 console verb — and it answers with something the agent can read. The test is the usage example:
 you can write `$ <what the agent types>` and the lines it prints back, with the agent as the
-caller. `bin/dev-login --as stranger` is a handle. `game --seed 42 --scene battle` is a handle.
+caller. `bin/dev-login --as stranger` is a handle. `bin/rails runner scripts/agent/state.rb --tenant acme` is a
+handle. `curl -s localhost:3000/api/dev/state?order=42 | jq .status` is a handle. `game --seed 42 --scene battle`
+is a handle.
 `nc 127.0.0.1 7778` into a live console is a handle.
 
 These are **not handles**, however useful:
@@ -90,13 +92,23 @@ Where they go instead:
 ### One generic primitive, then scripts
 
 Do not turn every need into its own command. Once the app has — or you propose — **one generic
-way to run code inside it** (an eval socket, a console, a REPL into the live process), most
-handles are **scripts run through it**, kept in the repo and named:
+way to run the app's own code on demand**, most handles are **scripts run through it**, kept in
+the repo and named.
+
+**Where the state lives decides the primitive:**
+- **State outside the process** — in a database, a cache, a queue; the app runs as N workers or
+  serverless functions (most web stacks): the primitive is a **script runner** over the app's own
+  code and the local stack — `rails runner`, `go run ./cmd/agent`, `bun scripts/agent/x.ts`,
+  `python manage.py shell -c` — wrapped in one entry point. An eval socket would reach one
+  arbitrary worker and miss the state anyway.
+- **State in memory** — a game loop, a desktop app, a long-lived daemon with in-memory caches or
+  websocket hubs: the primitive is a **live eval** into the running process (a socket console).
 
 ```sh
-$ app-eval run clock +47h          # scripts/agent/clock.rb
-$ app-eval run warp battle 12      # scripts/agent/warp.rb
-$ app-eval run save-dump > s.json  # scripts/agent/save_dump.rb
+$ app-dev run clock +47h              # scripts/agent/clock.ts — moves the dev clock, prints it
+$ app-dev run state order 42          # scripts/agent/state.ts — {"status":"paid","items":3}
+$ app-dev run sweep reminders --now   # scripts/agent/sweep.ts — runs the job synchronously
+$ app-eval run warp battle 12         # a game's live eval: scripts/agent/warp.rb
 ```
 
 One primitive to build and fence, then a growing folder of scripts anyone can read and add to —
@@ -104,11 +116,8 @@ not a dozen bespoke flags (`--replay`, `--seed`, `--clock`) each with its own co
 proposed handle that is just "run this snippet in the app" is a **script card** under the
 primitive, not a new handle.
 
-When the app has no long-lived process of its own (serverless functions, a stack whose state is
-all in a database), the primitive is a **script runner** over the local stack (`app-dev run <script>`)
-rather than an eval socket — same rule, scripts as files, one entry point.
-
-**Choose the primitive before anything else, at the lowest layer that can host it** — lowest
+**Choose the primitive before anything else, at the lowest layer that can host it** — for a
+script runner, that is usually the app itself (its framework's runner); for a live eval, lowest
 among the layers that are **present in every variant you target** (a socket in a runtime the app
 only sometimes runs on is not a base) and **where running code is safe** (the right thread, the
 interpreter lock held, the graphics context current — if the per-frame hook runs without them,
@@ -129,8 +138,12 @@ A **dedicated** handle is justified only where the generic primitive cannot reac
 - before the primitive exists in the process (boot flags, launch, a per-run directory);
 - out-of-band by nature (an effect ledger, a mail catcher, a GPU capture);
 - it must not run inside the app (a profiler sampling it from outside);
-- it runs the app's code *outside* the live app, in a lab (a battle harness, a component lab, a
-  headless scene runner).
+- it runs the app's code *outside* the live app, in a lab (a component lab, a scenario harness, a
+  headless scene runner);
+- it must cross the **real auth boundary** to be faithful — driving the app as a persona through
+  HTTP, sessions and access policies, not as a superuser script that bypasses them;
+- it runs **in the browser**, which a server-side primitive cannot reach (client state, storage,
+  service workers, what was rendered).
 
 ### Handles belong to the layer they live in
 
@@ -205,7 +218,8 @@ the worktree), or "single-agent only" and why.
 
 **The process registry** sits next to it: everything a run starts (servers, emulators, displays,
 watchers, port forwards) is recorded under its run id, so `envs ps` shows what is alive and
-`envs stop <run>` ends it through the app's own clean exit — never a signal that trips a crash
+`envs stop <run>` ends it through the app's own clean exit (its quit command; SIGTERM for servers
+and workers that handle it) — never a signal that trips a crash
 handler, never a process or a temp folder left behind.
 
 **Leases, when sharing cannot be avoided.** One physical device, one GPU, one vendor sandbox
@@ -387,7 +401,9 @@ Then ask **one batched permission question** for the classes beyond read-only, b
 
 ### 2. Probe — climb the ladder for real
 
-Before the first probe: record `git status` of every repo involved and checksums of user data.
+Before the first probe: record `git status` of every repo involved and checksums of user data —
+for a database, row counts or a schema dump of the tables in play, or run the probes against a
+disposable database or branch.
 After the last: compare, and list every file a run wrote. Point build caches and outputs at
 scratch, and check that the build system really honours that (presets with fixed output paths
 don't).
@@ -406,7 +422,8 @@ don't).
   first check the console's thread model (a console on a side thread is Observe-only until
   proven safe), and **stop after one crash**.
 - Probe each rung once per variant the task names. A rung is `ok` only if ok for all of them.
-- Stop apps through their own quit path, not signals (signals can trigger crash handlers that
+- Stop apps through their own quit path — SIGTERM for servers and workers that handle it, the
+  app's quit command otherwise; never a kill that trips a crash handler (crash handlers can
   write files). Clean up processes, port forwards, and temp dirs — yours and the app's.
 
 ### 3. Grill — only what probing could not answer

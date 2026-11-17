@@ -152,6 +152,17 @@ Each reply is framed: `{id, ok, value, stdout, error, backtrace, ms}`.
 - A comparison handle (A/B between variants, before/after an edit) is the usual next step once
   one screenshot is attributable.
 
+#### Two levels of eyes for a web page
+
+1. **The server's answer** — `curl` the server-rendered HTML, the RSC/JSON payload, the API
+   response: what the server decided, readable and diffable.
+2. **The hydrated page** — Playwright on the same URL, as a persona, with the browser console and
+   the network log captured per run, and a screenshot of a named state at the viewports that
+   matter (phone, desktop).
+
+Hydration mismatches, client-only bugs and "works on the server, blank in the browser" live
+between the two; capturing both for the same URL tells you which side a bug is on.
+
 #### Two levels of eyes for a native renderer
 
 A game, an engine or any app with its own renderer needs **two** capture handles, because the
@@ -263,6 +274,33 @@ runs cost money and give a different answer each time. Give each one:
   rather than calling out.
 For LLM calls specifically, also pin model, temperature and seed where the API allows it, and log
 prompt + response per call — they are the app's least deterministic boundary.
+
+## Web stack handle families
+
+The ones the survey must ask about on any web app or service:
+
+- **Migrations** — apply locally, dry-run, regenerate the types the code reads (`supabase gen
+  types`, `prisma generate`, `rails db:migrate` + schema dump); "schema drifted from migrations" is
+  a Build-rung failure. Category: launch & loop.
+- **Database snapshot and branching** — a template-database clone, a Supabase/Neon branch, a
+  scoped `pg_dump` of one tenant: the cheapest Reset and isolation level 2. Category: lab (+ state).
+- **Session and token minting** — a JWT or session for a role or persona, so access policies (RLS,
+  authorization) are exercised as that role. Category: ingress.
+- **Inbound webhooks** — replay saved payloads with valid signatures (`stripe trigger`, a
+  `webhooks replay <name>`); a tunnel (ngrok, cloudflared) is an external crossing — fence it.
+  Category: ingress.
+- **Background jobs** — enqueue, run now, drain synchronously (`perform_now`,
+  `Sidekiq::Testing.inline!`, the queue's CLI), list failed jobs. Category: runtime (+ state).
+- **Request-level tracing** — one request id from the browser through the server to the SQL it
+  ran, one trace per agent action; `EXPLAIN` on the slow query. Category: eyes.
+- **API contract and mocks** — the OpenAPI / GraphQL schema as the oracle; a mock server generated
+  from it (Prism, MSW); contract drift as the lab-vs-live check. For an SPA against a remote API, the
+  whole backend is the stub boundary. Category: egress (+ lab).
+- **Cache and CDN** — bust or bypass on demand (ISR `revalidate`, cache headers, a purge command):
+  stale data is a classic "I fixed it but nothing changed". Category: state.
+- **Feature flags** — a provider stub and a per-request override. Category: state.
+- **Tenants** — a tenant switch as a parameter of every handle, and "a stranger in another tenant
+  gets nothing" as a standard check. Category: ingress (+ eyes).
 
 ## Third parties
 - Stub or record/replay (payments, email, push, OAuth providers). Expose the stub's inbox

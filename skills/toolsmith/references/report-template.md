@@ -2,7 +2,7 @@
 
 **Task:** <the fix/feature, or "audit"> → **maps to:** <feature, file, owning repo>
 **Shape(s):** <e.g. web app with accounts + worker + Postgres>
-**Variants probed:** <e.g. raylib, sfml> · **Loops:** <inner / outer, if a tool>
+**Variants probed:** <e.g. phone + desktop viewport, or raylib + sfml> · **Loops:** <inner / outer, if a tool>
 **Safety boundary (verified):** <live keys, prod-copy data, user data; strictest policy layer>
 **Permissions granted:** read-only · rolled-back · local write · inject · external
 

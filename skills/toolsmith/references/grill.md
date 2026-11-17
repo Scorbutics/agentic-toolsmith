@@ -29,6 +29,10 @@ every other answer is for.
 - "What must I never touch, even locally — prod data, payments, emails to real people, pushes, saves, a destructive reset?"
 - "Is there a release gate I can hang dev-only tooling on (env, build flag, config)?"
 
+## Environments, webhooks, schedules (web stacks)
+- "Which preview / staging environments exist, and which may an agent use — read-only, or not at all?"
+- "Which inbound webhooks and scheduled jobs exist, and which may fire during an agent run?"
+
 ## Launch / Observe
 - "How do *you* start it day to day — IDE button, script, a recipe you never wrote down?"
 - "Is anything visible only on screen, never in a log? At which window scale / device?"

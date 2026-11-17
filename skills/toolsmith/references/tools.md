@@ -41,6 +41,8 @@ the tool that fits *this* app, whatever its name, and you say why.
 | **mitmproxy / WireMock record mode** | Outbound HTTP to third parties you must observe or replay | Every outbound call recorded; replay later | TLS interception setup; per-language proxy config |
 | **Postgres statement logs / pgaudit** | Postgres, no wrapper wanted | Every statement, from the database's side | Noisy; no attribution to an operation without extra work |
 | **The queue's own tooling** | Jobs / messages | Inspect, replay, dead-letter views | Per broker |
+| **Rails**: `letter_opener_web`, ActiveSupport::Notifications, the Sidekiq / GoodJob / Solid Queue APIs | Rails apps | A mail inbox page and API, an event stream of SQL / mail / job notifications, job inspection and run-now | Rails only; dev-env config |
+| **Go**: `pgx` query tracers, `httptest` recorders, River / Asynq CLIs | Go services | Every SQL statement with timing, recorded outbound HTTP, job queues inspectable from the shell | Wiring per service |
 
 ## Reach in — the live app
 

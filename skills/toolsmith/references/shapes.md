@@ -12,12 +12,24 @@ means* there and where it usually breaks.
 - **Assert**: API/DB query, DOM query, visual snapshot.
 - **Reset**: per-run schema or seed script; never the shared dev DB.
 - **Breaks on**: agent tools refuse to type passwords; magic links/OTP/SSO; real clock (trials, expiries).
+- **Primitive**: a script runner over the app's own code and the local stack (state lives in the DB).
+- **Also survey**: migrations and generated types; DB snapshot/branching; session/JWT minting for
+  roles; inbound webhooks; background jobs; request tracing; API contract; SSR vs client (which
+  code runs where, server-only env leaking to the client); cache/CDN; feature flags; tenants.
+- **Variants**: viewport (phone/desktop), browser, locale, tenant, render mode (SSR/CSR/static),
+  runtime (Node vs Edge).
+- **Parallel**: a port per worktree breaks OAuth redirect allowlists and cookie host scoping —
+  derive hostnames (`a1.localhost`) or register the callback range; say so on the login handle.
 
 ## API / backend service, workers, queues
 - **Reach**: a job in a given state; a webhook from a third party; a specific tenant.
 - **Act**: HTTP call, enqueue a message, trigger a cron by hand.
 - **Observe**: structured logs and traces; queue depth; dead-letter queue.
 - **Breaks on**: third-party dependencies with no stub; cron that only runs on schedule.
+- **Primitive**: a script runner (`go run ./cmd/agent`, `rails runner`, a manage command) — the
+  service runs as N workers; its state is in the DB and the queue.
+- **Also survey**: migrations; job enqueue / run-now / drain; inbound webhooks; request tracing to
+  SQL; the API contract as oracle.
 
 ## Game / real-time app (engine, emulator, simulation)
 - **Launch**: windowed binary; needs a GPU/display (headless/offscreen/virtual display?).
@@ -77,6 +89,12 @@ Games, cont.:
 - **Reach**: a *small* representative input (sampled dataset, tiny config) — the full one takes hours.
 - **Assert**: schema checks, row counts, metric thresholds on the sample.
 - **Breaks on**: cloud-only data, GPU-only steps, runs measured in hours.
+- **dbt specifically**: `dbt build --select state:modified+ --defer` (only what changed, the rest
+  read from a reference); `dbt compile` / `dbt show` to see SQL and rows without writing;
+  `dbt run-operation` for macros; a per-agent dev schema or target as the isolation unit; seeds as
+  fixtures; data tests and row-count oracles (an oracle against production data is a fence);
+  lineage (`dbt ls --select +model+`) as the blast radius; warehouse cost per run as the paid
+  dependency; a local engine (DuckDB) as the lab.
 
 ## Infrastructure / IaC / deployment
 - **Act** is usually forbidden beyond `plan` / `diff` / dry-run — the safety boundary *is* the shape.
