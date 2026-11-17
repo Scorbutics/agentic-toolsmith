@@ -31,7 +31,7 @@ $ bin/dev-login --as stranger
 ```
 
 **Gives the agent:** any persona's session in one command, no password typed.
-**Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`.
+**Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`. (A Needs line may name another card: `Needs: dev-up`.)
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
 
 ### `remote eval` — runtime · B3 Runtime · steer, see · reach in · cost M
@@ -102,12 +102,13 @@ A category with no handle at all is still drawn, empty — that gap is the findi
 
 ## Points
 
-| Class | Point | Evidence | See | Steer | Stub | Freeze | Check | Loop | Existing handle | Fails criterion | ⚠ |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| B6 Egress | mail provider | `lib/mail.ts:42` | ✓ preview table | – | ~ falls back to live | – | ✗ | ✓ per-run table | preview driver | 1 (fails closed) | ⚠1 |
+The survey behind the picture: one line per point, grouped by boundary class. Keep it compact —
+the cards above carry the detail.
 
-Cell values: `✓ <how>` · `~ <friction>` · `human` · `✗` missing · `n/a`. Cross-referenced points:
-`→ B7` in the Point cell.
+- **B6 Egress** — mail provider · `lib/mail.ts:42` · see ✓ preview table · stub ~ falls back to live · existing: preview driver (fails closed ✗)
+
+Verb values: `✓ <how>` · `~ <friction>` · `human` · `✗` missing; add `(seen)` or `(docs)` where it
+applies. Cross-referenced points: `→ B7`.
 
 ## Classes with no point
 - B10 Platform — none found (looked at: …)

@@ -14,8 +14,15 @@ Env files are evidence by **class, never by value**: `KEY → local | remote | l
 (read the prefix or host, print nothing else). The same for secrets found anywhere else (config
 files, committed credentials): name the file and the class, never the value.
 
-**Read vs seen.** In map mode most cells come from reading code. Mark a cell `(seen)` only when a
-read-only command showed it; everything else is read. A missing toolchain (no `node_modules`,
+**Read, docs, seen.** In map mode most cells come from reading code. Mark a cell `(seen)` only
+when a read-only command showed it, and `(docs)` when it comes from the tool's or engine's own
+documentation rather than this repo (a Godot CLI flag, a `debug` gem env var); everything else is
+read. Version checks are not always read-only: `pnpm`/`yarn` through corepack, asdf/mise shims and
+some wrappers download on first call — prefer reading the version pin in the repo.
+
+**Evidence is a full path.** `scripts/4 Systems/106 Save Load/3 GamePlay/400 Save.rb:7`, never
+`Save.rb:7` — a bare file name is ambiguous in any repo with repeated names, and the next agent
+cannot open it. A missing toolchain (no `node_modules`,
 wrong language version, no engine binary) is a finding for the Launch and Build rungs, not a
 reason to stop: map from the code and say what could not be confirmed.
 
@@ -84,7 +91,9 @@ is possible for an agent is a `human-only` point; say who holds it.
    file. They become **"Fences to set first"** — at most five one-liners, placed *after* the
    candidate handles, because they are preconditions for using them. Security bugs in the app
    itself (a debug route that ships, a listener on all interfaces) are not the map's job: list
-   them in one "Noticed in passing" line at the end, or leave them out.
+   them in one "Noticed in passing" line at the end, or leave them out — **unless the point is, or
+   should become, a handle**: an always-on debug port is a half-built remote-debug handle, and its
+   exposure goes in that card's Fence line, not in passing.
 4. **Grill the map** — see below.
 5. **Write it** with [map-template.md](map-template.md), including the diagram.
 6. **Propose, don't build.** List candidate handles *on the map* — project code or an existing
