@@ -88,7 +88,7 @@ is possible for an agent is a `human-only` point; say who holds it.
 ## Procedure
 
 -1. **Read the decisions.** Before anything, read `toolsmith/decisions.md` in the project and in
-   its parent folder, and the latest map of any related repo (a lower or upper layer) if there is
+   its parent folder (reading those is part of the job, even when told to stay in the project), and the latest map of any related repo (a lower or upper layer) if there is
    one. Do not re-open what is decided there; cite it.
 0. **Choose the primitive.** Before any card, decide where the state lives. Outside the process
    (database, cache, queue — most web stacks): the primitive is a script runner over the app's own

@@ -42,7 +42,11 @@ shape (`### Reach in`) are allowed and ignored.
 |---|---|---|
 | `press` | `run press Enter 3` → `{"pressed":"Enter","frames":3}` | an input-injection API in the engine |
 
-A card may add a **Variants:** line when it exists only on some of the ways the app runs.
+A card may add a **Variants:** line when it exists only on some of the ways the app runs. A
+handle that is pure configuration (env vars, a flag on an existing command) is still a card: its
+**Is:** says so ("an env preset for the existing auth-proxy"), and its usage block shows it in use.
+An **existing** handle that is itself a hazard (a debug port open in release) is listed in Tools in
+place *and* gets a card to finish it — its missing fence is the work.
 
 Three lines are mandatory on every card besides the usage block. **Is:** what you would actually
 build and where — a new CLI in `tools/`, a public API in the engine plus its binding, an env flag
@@ -71,6 +75,7 @@ $ bin/dev-login --as stranger
 **Is:** a new CLI, `bin/dev-login`, over the auth provider's local admin API — not app code.
 **Gives the agent:** any persona's session in one command, no password typed.
 **Not a script because:** it must work before any eval primitive exists in the process (it mints the session the browser starts with).
+**Origin:** map (or `task "<…>"`, `want "<…>"` — and `Seen in:` the tasks that needed it).
 **Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`. (A Needs line may name another card: `Needs: dev-up`.)
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
 **Parallel:** `--env` (default: the worktree's) selects the server; sessions are per env.

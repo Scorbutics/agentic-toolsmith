@@ -1,6 +1,6 @@
 ---
 name: toolsmith
-description: Before fixing or building anything in a project, measure how well YOU (the agent) can reach the running app — build, launch, observe it and its effects, get to the right state, act, assert, reset — then grill the human only on what probing could not answer, rank the gaps, and build the missing handles (dev login, eval console, warp, seed, state lab, effect ledger, screenshot, virtual clock, profiler…) before the feature work. Use at the start of work on an unfamiliar project, when asked to "audit the agent setup", "what's stopping you from seeing it", "improve the dev ecosystem for agents", or when a fix loop stalls (two attempts without a way to verify, "I can't reproduce", "I can't see the screen", "I need you to log in"). Also a planner MAP mode, with no task: list every boundary of the app (UI, process, runtime, internal seams, state stores, egress, ingress, time, identity, platform, delivery, telemetry, configuration) and the inspection points on each, showing where tooling could apply — use when asked to "map the app's boundaries", "where could tooling help", "plan the agent tooling", or `/toolsmith map`.
+description: Before fixing or building anything in a project, measure how well YOU (the agent) can reach the running app — build, launch, observe it and its effects, get to the right state, act, assert, reset — then grill the human only on what probing could not answer, rank the gaps, and build the missing handles (dev login, eval console, warp, seed, state lab, effect ledger, screenshot, virtual clock, profiler…) before the feature work. Use at the start of work on an unfamiliar project, when asked to "audit the agent setup", "what's stopping you from seeing it", "improve the dev ecosystem for agents", or when a fix loop stalls (two attempts without a way to verify, "I can't reproduce", "I can't see the screen", "I need you to log in"). Three scopes: the whole app (`/toolsmith map`), through a task as a use case (`/toolsmith task "<fix or feature>"` — durable tooling that makes tasks like it reachable, never one-off helpers), or for a capability the human names (`/toolsmith want "direct DB access from the CLI"`). The whole-app MAP, with no task: list every boundary of the app (UI, process, runtime, internal seams, state stores, egress, ingress, time, identity, platform, delivery, telemetry, configuration) and the inspection points on each, showing where tooling could apply — use when asked to "map the app's boundaries", "where could tooling help", "plan the agent tooling", or `/toolsmith map`; use the task scope on "find the right tooling for this fix / feature", and the capability scope on "I want direct access to X / give me a way to Y".
 ---
 
 # toolsmith
@@ -18,19 +18,34 @@ long-running harnesses): **the interface moves results more than the effort spen
 An agent that cannot see the screen, reach the page behind login, or reset the data spends its
 budget guessing. One hour spent on a handle pays back on every later task.
 
-## Two modes
+## Three scopes, one process
 
-- **Map** (planner, no task, read-only) — chart every boundary of the app and the inspection
-  points on each: what an agent could **see, steer, stub, freeze or check** there, and what exists
-  today. Output: a map with a diagram and unranked candidate handles, so the human sees *where*
-  tooling can apply before choosing any. Procedure: [references/map.md](references/map.md).
-  Use it on `/toolsmith map`, on "where could tooling help", or before the first full run on a
-  large project.
-- **Full** (a task, or an audit) — the process below. If a map exists, read it first: step 1
-  becomes "re-map only the classes whose evidence changed", and the probes target points of the
-  map. If none exists, the survey produces the parts of it the task needs.
+Toolsmith builds **durable tooling** — handles the next agent, on the next task, will call again.
+A one-off script to poke at today's bug is the coding agent's inline work and dies with the task;
+it is never a card. The test: *would another agent, on another task of this project, call it? Would
+you put it in `doctor` and CI?* No → not Toolsmith's.
 
-## The loop — both modes end the same way
+The process is the same at every scope — read the decisions and the existing map, survey,
+choose the primitive, cards, roadmap, review loop, build only after a go, prove, keep alive.
+**Every scope writes into the same project map and roadmap**, so scoped runs accumulate.
+
+- **Whole app** — `/toolsmith map`. Every boundary; 5–10 cards, a roadmap, milestones; the full
+  review page. Procedure: [references/map.md](references/map.md).
+- **Through a task** — `/toolsmith task "<a fix or feature>"`. The task is a **use case**, not the
+  job: trace it to the code, survey only the boundaries it crosses, and ask *which durable handles
+  would make this task — and every task like it — reachable and verifiable?* Toolsmith does not do
+  the task and builds nothing for this task alone; its cards join the roadmap with
+  `Origin: task "<…>"`, ranked by how often tasks like it come back. The coding agent then does
+  the task, with whatever the human chose to build first.
+- **For a capability** — `/toolsmith want "<capability>"` ("direct DB access from the CLI"). Survey
+  only the points that capability touches, find what the project half-has, and design the durable
+  handle properly — or **challenge the request** when a safer, more useful shape exists, and say
+  why. Cards carry `Origin: want "<…>"`.
+
+Scoped runs: [references/scopes.md](references/scopes.md). For one to three cards the review can
+happen in the conversation — still one answer per remark; render the page for a map or a roadmap.
+
+## The loop — every scope ends the same way
 
 **Plan → present → answer every remark → revise → accept → implement.** A map (or a reach report)
 is a plan, not the deliverable. Render it into a review page the human can mark up
@@ -103,6 +118,9 @@ the repo and named.
   arbitrary worker and miss the state anyway.
 - **State in memory** — a game loop, a desktop app, a long-lived daemon with in-memory caches or
   websocket hubs: the primitive is a **live eval** into the running process (a socket console).
+- **State in the browser** — a single-page app whose backend is not in the repo: the primitive is
+  a **browser runner** (Playwright driving the app, with scripts) plus a local mock of the API it
+  calls.
 
 ```sh
 $ app-dev run clock +47h              # scripts/agent/clock.ts — moves the dev clock, prints it

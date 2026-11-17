@@ -26,6 +26,17 @@ ecosystem itself. So before fixing or building anything, the agent:
 These are tools for **your app**, not for the model: not new function-calling tools, but ways
 for the agent to reach the app, see it, and watch what it does.
 
+## Three scopes
+
+- `/toolsmith map` — the whole app: every boundary, a roadmap, milestones.
+- `/toolsmith task "<fix or feature>"` — the task as a use case: which **durable** handles would
+  make tasks like it reachable and verifiable. It does not do the task, and builds nothing
+  ephemeral — one-off helpers are the coding agent's inline work.
+- `/toolsmith want "<capability>"` — "direct DB access from the CLI": the handle designed properly,
+  or the request challenged when a safer, more useful shape exists.
+
+Every scope writes into the same project map and roadmap.
+
 ## Map first, if you want
 
 `/toolsmith map` is a planner pass with no task: the agent charts **every boundary of the app** —
@@ -117,6 +128,7 @@ skills/toolsmith/
   references/tools.md           fitting an existing tool: evidence, alternative, cost, disclosure
   references/grill.md           question bank
   references/report-template.md the deliverable
+  references/scopes.md          task and capability scopes
   references/review.md          the review loop: present, answer every remark, revise, accept, implement
   scripts/review_page.py        map.md → one self-contained HTML review page (stdlib only)
 docs/trials.md                  dry runs on four project shapes, and what each changed
