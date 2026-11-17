@@ -108,6 +108,18 @@ When the app has no long-lived process of its own (serverless functions, a stack
 all in a database), the primitive is a **script runner** over the local stack (`app-dev run <script>`)
 rather than an eval socket — same rule, scripts as files, one entry point.
 
+**Choose the primitive before anything else, at the lowest layer that can host it.** Hosting does
+not require owning the loop: a library or engine whose host calls one of its functions every
+frame or every request (`update`, `tick`, `render`, a middleware) can drain a request queue there,
+and then **every** host gets the primitive for free. Prefer that over one primitive per consumer.
+Upper layers contribute scripts and their own gate, not a second socket.
+
+**A capability is not a handle.** When a script needs something the primitive cannot do alone —
+injecting input into a private event queue, reading a GPU buffer, resetting an internal cache —
+that is an API to add underneath, written as the script's **Needs:** line (`press` — Needs: an
+input-injection API in the engine, bound for scripts). It becomes a card of its own only if the
+agent calls it directly, outside the primitive.
+
 A **dedicated** handle is justified only where the generic primitive cannot reach:
 - the app's loop is frozen or crashed (level-2 eyes, a watchdog, a core dump);
 - before the primitive exists in the process (boot flags, launch, a per-run directory);
@@ -356,6 +368,9 @@ scratch, and check that the build system really honours that (presets with fixed
 don't).
 
 - Use the project's own entry points (its script, preset, make target).
+- Build handles **on** the project's own build and task system — a CMake target, a rake or npm
+  task, a make rule, a Gradle task — not as standalone scripts that re-implement how the project
+  builds or launches: two ways to build drift apart, and the handle is the one that rots.
 - Readiness is **the state you need being queryable** (`$scene.class == X`, a health URL
   returning the tenant), not a log line and never a fixed sleep.
 - **Reach** the task's own state — and for a bug, report separately *state reachable* and *bug

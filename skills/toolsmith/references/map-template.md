@@ -31,6 +31,11 @@ egress · eyes · lab). A tool that climbs several ways gets one row per verb.
 
 The map's main output. Group by way up; finish what the project half-has before inventing. If no
 external tool fits, say so in one line ("no tool fits: considered Storybook, motu — Vue 2").
+**Card heading grammar** — the review page reads it, so keep it exact:
+`### \`<name>\` — <category>[ (+ <category>…)] · <B-class> <name> · <verbs> · <way> · cost <S|M|L>`
+(categories: launch, ingress, runtime, state, egress, eyes, lab). Group headings without that
+shape (`### Reach in`) are allowed and ignored.
+
 Three lines are mandatory on every card besides the usage block. **Is:** what you would actually
 build and where — a new CLI in `tools/`, a public API in the engine plus its binding, an env flag
 read by the backend, a file in `scripts/agent/`. **Not a script because:** for any card that is not

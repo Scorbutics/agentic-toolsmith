@@ -87,6 +87,11 @@ is possible for an agent is a `human-only` point; say who holds it.
 
 ## Procedure
 
+0. **Choose the primitive.** Before any card: find the lowest layer with a per-frame or
+   per-request hook every host goes through (it may be a library function the host calls, not a
+   loop the layer owns). That is where the generic primitive goes (SKILL.md, "One generic
+   primitive, then scripts"). Everything after is written against it: scripts under it, the
+   capabilities those scripts need as Needs lines, dedicated cards only with an exemption.
 1. **Locate.** For each class, find the points in the code — grep for the crossing itself
    (`fetch(`, `http.`, `smtp`, `Date.now`, `new Date`, `getenv`, `STDIN`, `Thread.new`,
    `rand`, `cron`, `listen(`, route registrations, FFI declarations…), plus configs and agent
