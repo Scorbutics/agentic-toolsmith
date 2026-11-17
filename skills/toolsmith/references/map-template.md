@@ -15,7 +15,9 @@
 
 The map's main output. Group by way up; finish what the project half-has before inventing. If no
 external tool fits, say so in one line ("no tool fits: considered Storybook, motu — Vue 2").
-One card per handle — the usage block is mandatory:
+One card per handle — the usage block is mandatory, and it is what makes it a handle: if the
+agent never calls it (an untracked file, a default, a lint rule, a CI step), it is not a card —
+it is a Fence or Needs line of the handle it serves, or one of the Fences to set first.
 
 ### `dev-login` — B9 Identity · steer · reach in · cost S
 **Finishes:** the seeded personas in `db/seeds.rb` (or **New**)
@@ -26,6 +28,7 @@ $ bin/dev-login --as stranger
 ```
 
 **Gives the agent:** any persona's session in one command, no password typed.
+**Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`.
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
 
 ### `remote eval` — B3 Runtime · steer, see · reach in · cost M

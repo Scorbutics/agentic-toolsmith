@@ -51,6 +51,29 @@ headline — on a well-tooled project, a page of security findings buries the to
 code or tooling), stop at the map: write it outside the repo, mark in-repo handles `blocked
 (policy: <file>)`, and make "may an agent build anything here, and where?" grill question 1.
 
+## What a handle is — and is not
+
+A **handle is something the agent calls**: a command, a URL, a socket, a launch flag, a query, a
+console verb — and it answers with something the agent can read. The test is the usage example:
+you can write `$ <what the agent types>` and the lines it prints back, with the agent as the
+caller. `bin/dev-login --as stranger` is a handle. `game --seed 42 --scene battle` is a handle.
+`nc 127.0.0.1 7778` into a live console is a handle.
+
+These are **not handles**, however useful:
+- hardening and hygiene — untrack a file, default a flag to off, bind to loopback, rotate a key;
+- guards — a lint rule, a CI step, a type check, a pre-commit hook;
+- documentation, refactors, renames.
+
+Where they go instead:
+- needed to make a handle safe → that handle's **Fence** line ("gate the existing `/dev/login_as`
+  on development + loopback" is the fence of the `dev-login` handle, not a candidate of its own);
+- needed before an agent can safely run anything at all → **Fences to set first** (≤ 5);
+- needed to make a handle *possible* (replace four `randomize()` calls so `--seed` works) → that
+  handle's **Needs** line;
+- none of these → not the skill's output. Mention it in passing or leave it out.
+
+`fence` is a property of a handle, never a verb: the verbs are see, steer, stub, freeze, check.
+
 ## Three ways up
 
 A rung can be climbed three ways. Know all three before proposing anything — the best handle is
