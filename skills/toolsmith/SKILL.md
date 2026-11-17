@@ -187,6 +187,33 @@ defaulting to the worktree's own — so a run never lands on the human's environ
 Every card carries a **Parallel:** line — how it isolates (`--env`, a run id, a port derived from
 the worktree), or "single-agent only" and why.
 
+**The process registry** sits next to it: everything a run starts (servers, emulators, displays,
+watchers, port forwards) is recorded under its run id, so `envs ps` shows what is alive and
+`envs stop <run>` ends it through the app's own clean exit — never a signal that trips a crash
+handler, never a process or a temp folder left behind.
+
+**Leases, when sharing cannot be avoided.** One physical device, one GPU, one vendor sandbox
+account cannot be duplicated per environment. Give each a lease (`envs claim device --ttl 10m`,
+renewed while in use, released on stop) so agents queue instead of colliding — and say in the map
+which resources need one.
+
+## Rules as guards
+
+Agent files are full of rules in prose — "NEVER run `db reset`", "do not push to main", "always
+use the service layer". Prose is a request; an agent under pressure can miss it. Where the
+harness allows it, turn each rule into something **enforced**:
+
+- a **pre-tool hook** or command wrapper that blocks the forbidden call and says why;
+- a **permission list** for the harness: the read-only and fenced handles allowed without a
+  prompt (so the agent never stalls on approval for `state` or `shot`), destructive commands
+  gated or denied;
+- a **lint rule or CI check** for rules about code (the project's own linter usually has a way).
+
+In map mode, list the prose rules found in agent files with the guard each could become (map
+section "Rules → guards"). Every card carries a **Permission:** line — allow · ask · deny — so
+the accepted plan comes with the harness configuration that lets an agent use it unattended.
+The guards are not handles (the agent does not call them); they are how the fences hold.
+
 ## Three ways up
 
 A rung can be climbed three ways. Know all three before proposing anything — the best handle is
@@ -372,10 +399,19 @@ handle must be:
    a stub never falls back to the live service. A login bypass that can ship is a vulnerability.
 2. **Scriptable** — one command, shown with a usage example (the command and what it prints), machine-readable output, exit codes (0 holds, non-zero says
    why), no prompts, no TTY.
-3. **Fast and deterministic** — seeded, time-controllable, isolated per run / worktree.
-4. **Discoverable** — documented where the next agent looks first ("How to reach the app"
+3. **Sized for an agent** — the agent reads every byte it prints. Summary first; `--json` with
+   only the fields that matter; `--tail N` / `--grep` / `--since` on anything log-like; pages, not
+   dumps; a diff rather than the whole state; a path to the big artifact (screenshot, trace,
+   dump) rather than its bytes. A default output over a few hundred lines is a bug.
+4. **Fast and deterministic** — seeded, time-controllable, parallel-safe (see "Parallel agents").
+5. **Discoverable** — documented where the next agent looks first ("How to reach the app"
    in the agent file), with the exact command.
-5. **Honest** — a handle that looked at nothing does not report success.
+6. **Honest** — a handle that looked at nothing does not report success.
+7. **Alive** — its usage example runs in the `doctor` script and in CI, so it fails loudly the day
+   the app changes under it. A handle nobody runs rots silently (a `--test` flag that parses to
+   nothing, a seed script whose table was renamed) and the next agent finds out mid-task.
+8. **Permissioned** — the agent's harness knows what it may run without asking: read-only and
+   fenced handles pre-approved, destructive ones gated or denied (see "Rules as guards").
 
 Keep each handle small and out of feature code.
 
