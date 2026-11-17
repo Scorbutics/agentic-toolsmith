@@ -87,9 +87,13 @@ For each accepted handle, in order:
 4. **configure the harness**: its permission (allow · ask · deny) and any guard its fence relies
    on (a hook, a wrapper) — so an agent can use it unattended;
 5. move its status in the map (missing → exists), update the "How to reach the app" section of
-   the agent file — the file every session loads (`CLAUDE.md`, `AGENTS.md`): the command, one line
-   on what it does and refuses, and "use it before writing an ad-hoc script"; make the entry point
-   list itself (`<tool>` with no argument prints every script and its usage);
+   the agent files every harness loads at startup — keep **one source**: the section in `AGENTS.md`
+   (read by GitHub Copilot, Codex, Cursor), imported from `CLAUDE.md` with `@AGENTS.md` (plus a
+   one-line pointer at its top), and referenced from `.github/copilot-instructions.md`. The section
+   says the command, what it does and refuses, and "use it before writing an ad-hoc script"; make the
+   entry point list itself (`<tool>` with no argument prints every script and its usage); allow it
+   in the harness's permissions; where an agent reaches for the raw path mid-task (`psql`), a
+   pre-tool hook can point it to the handle;
 6. **prove a future session finds it**: start a fresh, headless agent session in the project with
    an ordinary request the handle serves, and **no hint about the tooling** ("what time does the app
    think it is?", "how many members can a member see?"). It passes when the session reaches for the
