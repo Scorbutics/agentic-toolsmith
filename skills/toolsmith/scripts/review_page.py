@@ -131,7 +131,7 @@ def parse(md):
             'point': bits[0] if bits else '', 'way': way, 'cost': next((b for b in bits if b.lower().startswith('cost')), ''),
             'status': 'half' if fin and not re.match(r'\**new', fin, re.I) else 'missing',
             'usage': usage.group(1).rstrip() if usage else '', 'scripts': scripts,
-            'lines': [(k, field(body, k)) for k in ('Is', 'Finishes', 'Gives the agent', 'Needs', 'Uses', 'Not a script because', 'Fence', 'Parallel') if field(body, k)],
+            'lines': [(k, field(body, k)) for k in ('Is', 'Finishes', 'Gives the agent', 'Needs', 'Uses', 'Not a script because', 'Fence', 'Parallel', 'Permission') if field(body, k)],
         })
     tools = []
     for rows in tables(find(secs, 'tools already')):
@@ -150,7 +150,8 @@ def parse(md):
     for rows in tables(par):
         for r in rows:
             parallel['rows'].append([col(r, 'shared'), col(r, 'shared by'), col(r, 'what collides'), col(r, 'isolation'), col(r, 'proposal')])
-    return {'title': title, 'summary': summary, 'parallel': parallel, 'cards': out_cards, 'tools': tools,
+    guards = [[col(r, 'rule'), col(r, 'guard'), col(r, 'kind')] for rows in tables(find(secs, 'rules')) for r in rows]
+    return {'title': title, 'summary': summary, 'parallel': parallel, 'guards': guards, 'cards': out_cards, 'tools': tools,
             'grill': bullets(find(secs, 'grill')), 'unknowns': bullets(find(secs, 'unknowns'))}
 
 
@@ -228,6 +229,11 @@ def render(model):
                     + (f'<div class="tw"><table><thead><tr><th>Shared resource</th><th>Shared by</th><th>What collides</th>'
                        f'<th>Isolation today</th><th>Proposal</th></tr></thead><tbody>{trs}</tbody></table></div>' if trs else '')
                     + f'{verdict("parallel:section", "Parallel agents analysis")}</section>')
+    if model['guards']:
+        trs = ''.join(f'<tr><td>{md(a)}</td><td>{md(b)}</td><td>{md(c)}</td></tr>' for a, b, c in model['guards'])
+        par_html += (f'<section class="panel"><h2>Rules → guards</h2><p class="muted">Rules your agent files state in prose, '
+                     f'and what would enforce each.</p><div class="tw"><table><thead><tr><th>Rule</th><th>Guard</th><th>Kind</th></tr></thead>'
+                     f'<tbody>{trs}</tbody></table></div>{verdict("guards:section", "Rules to guards")}</section>')
     store_key = 'toolsmith-review:' + re.sub(r'\W+', '-', model['title'])[:80]
     return TEMPLATE.replace('{{TITLE}}', esc(model['title'])).replace('{{SUMMARY}}', md(model['summary'])) \
         .replace('{{PICTURE}}', picture(model)).replace('{{PARALLEL}}', par_html).replace('{{CARDS}}', ''.join(cards)) \
@@ -301,8 +307,8 @@ const boxes=[...document.querySelectorAll('.verdict')],missed=document.getElemen
 function paint(){boxes.forEach(b=>{const c=st[b.dataset.key]||{};b.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(c.v===x.dataset.v)));
  const i=b.querySelector('input');if(document.activeElement!==i)i.value=c.note||''});if(document.activeElement!==missed)missed.value=st._missed||'';out.value=feedback()}
 function feedback(){const L=['# Toolsmith review feedback','',`Plan: ${document.querySelector('h1').textContent}`,''];
- const grp={card:'Proposed handles',grill:'Answers to the questions',parallel:'Parallel agents',tool:'Already in place'};
- for(const g of ['card','grill','parallel','tool']){const rows=boxes.filter(b=>b.dataset.key.startsWith(g+':')).map(b=>[b,st[b.dataset.key]||{}]).filter(([b,c])=>c.v||c.note);
+ const grp={card:'Proposed handles',grill:'Answers to the questions',parallel:'Parallel agents',guards:'Rules to guards',tool:'Already in place'};
+ for(const g of ['card','grill','parallel','guards','tool']){const rows=boxes.filter(b=>b.dataset.key.startsWith(g+':')).map(b=>[b,st[b.dataset.key]||{}]).filter(([b,c])=>c.v||c.note);
   if(!rows.length)continue;L.push('## '+grp[g]);rows.forEach(([b,c])=>L.push(`- [${c.v||'note'}] ${b.dataset.label}${c.note?' — '+c.note:''}`));L.push('')}
  if(st._missed)L.push('## Missed',st._missed,'');return L.join('\n')}
 document.addEventListener('click',e=>{const x=e.target.closest('.verdict button');if(!x)return;const k=x.closest('.verdict').dataset.key;
