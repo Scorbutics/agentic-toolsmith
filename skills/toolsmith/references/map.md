@@ -26,7 +26,7 @@ confirmed.
 **Evidence is a full path** — repo-relative when the map covers one repo, **absolute** when it
 spans several (an engine and its game, an app and its runtime), so every reference opens as is:
 `scripts/4 Systems/106 Save Load/3 GamePlay/400 Save.rb:7`, never `Save.rb:7`. A bare file name
-is ambiguous in any repo with repeated names, and the next agent cannot open it.
+is ambiguous in any repo with repeated names, and the next agent cannot open it. No abbreviations either (`L/…` for a repo root): write the path out.
 
 **Size.** Aim for 25–45 points. Past that, aggregate alike crossings; a map nobody finishes
 reading has no effect.
