@@ -121,6 +121,14 @@ engine's name (`litergss-shot`, not `psdk-shot`). A handle specific to one consu
 its saves, its scripts — belongs in **that consumer's** map, even when you found it while mapping
 the engine. When mapping a library, the consumer is where you probe; it is not what you equip.
 
+## Data the human owns
+
+A local copy of production data is common and legitimate. Whether an agent may read or change it is
+the owner's call — ask once, record it where the handle reads it (a config file cited in
+`toolsmith/decisions.md`), show it in every output header ("production copy"), and keep the fences
+on what leaves the machine: mail, notifications, production URLs, payments, schedulers. Refusing the
+data by default protects nothing the owner asked for; firing a side effect at real users does harm.
+
 ## What makes a good handle
 
 A handle must be:

@@ -39,7 +39,10 @@ only what this run surveyed, and say it is partial.
    that half does it, a service layer the project requires for data access.
 4. **Design the durable handle** with every card line — Is, usage sized for an agent, Fence,
    Parallel, Permission — and **challenge the request** when the literal ask is the unsafe or
-   less useful shape: raw `psql` on a production-copy database with policies bypassed is worse than
+   less useful shape. A local production copy is **the owner's decision, not a blocker** — ask once,
+   record it (a project config the handle reads, cited in `toolsmith/decisions.md`), and fence what
+   actually leaves the machine (live mail, production URLs, schedulers) rather than the data. Raw
+   `psql` with policies bypassed and unbounded output is still worse than
    `app-dev run sql "<query>"`, read-only by default, on the agent's own environment, writes behind
    an explicit flag, output paged. Say why, and offer the literal version only if the human still
    wants it after the reason.
