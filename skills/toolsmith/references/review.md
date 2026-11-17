@@ -94,7 +94,10 @@ For each accepted handle, in order:
    an ordinary request the handle serves, and **no hint about the tooling** ("what time does the app
    think it is?", "how many members can a member see?"). It passes when the session reaches for the
    handle on its own, respects its fences, and does not fall back to the raw path. A handle the next
-   session cannot find does not exist;
+   session cannot find does not exist. Then run it **from a fresh git worktree** of the branch — no
+   `node_modules`, no submodules, the shared stack still running — because parallel agents work
+   there: discovery that only works in the main checkout (a CLI run inside a submodule, a path to
+   the human's folder) is a handle half the agents cannot reach;
 7. re-render the page so the human sees the picture fill in.
 
 If building shows the plan was wrong (a handle needs something the map missed, a primitive is
