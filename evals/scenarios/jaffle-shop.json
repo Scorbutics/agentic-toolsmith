@@ -1,0 +1,48 @@
+{
+ "name": "jaffle-shop",
+ "repo": "https://github.com/dbt-labs/jaffle-shop",
+ "commit": "5beb145",
+ "shape": "dbt data pipeline",
+ "expected": [
+  {
+   "behavior": "primitive: the dbt CLI as a script runner",
+   "any_of": [
+    "dbt build",
+    "dbt run",
+    "dbt show",
+    "dbt compile"
+   ]
+  },
+  {
+   "behavior": "a local warehouse as the lab",
+   "any_of": [
+    "duckdb"
+   ]
+  },
+  {
+   "behavior": "a schema or target per agent",
+   "any_of": [
+    "generate_schema_name",
+    "per-agent",
+    "per env",
+    "--env",
+    "dev schema"
+   ]
+  },
+  {
+   "behavior": "only what changed, deferred to a reference",
+   "any_of": [
+    "--defer",
+    "state:modified"
+   ]
+  },
+  {
+   "behavior": "a roadmap with a first milestone",
+   "any_of": [
+    "m1",
+    "milestone",
+    "walking skeleton"
+   ]
+  }
+ ]
+}

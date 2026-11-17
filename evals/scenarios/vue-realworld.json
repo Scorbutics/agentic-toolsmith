@@ -1,0 +1,56 @@
+{
+ "name": "vue-realworld",
+ "repo": "https://github.com/mutoe/vue3-realworld-example-app",
+ "commit": "741c215",
+ "shape": "Vue 3 SPA against a remote API",
+ "expected": [
+  {
+   "behavior": "primitive: a browser runner",
+   "any_of": [
+    "playwright"
+   ]
+  },
+  {
+   "behavior": "a local mock of the remote API",
+   "any_of": [
+    "msw",
+    "mock api",
+    "mock server",
+    "mock-api",
+    "mock service worker"
+   ]
+  },
+  {
+   "behavior": "notices there is no backend in the repo",
+   "any_of": [
+    "no backend",
+    "remote api",
+    "api.realworld"
+   ]
+  },
+  {
+   "behavior": "a session or persona without typing a password",
+   "any_of": [
+    "localstorage",
+    "dev-login",
+    "persona",
+    "session"
+   ]
+  },
+  {
+   "behavior": "screenshots at real viewports",
+   "any_of": [
+    "viewport",
+    "screenshot"
+   ]
+  },
+  {
+   "behavior": "a roadmap with a first milestone",
+   "any_of": [
+    "m1",
+    "milestone",
+    "walking skeleton"
+   ]
+  }
+ ]
+}

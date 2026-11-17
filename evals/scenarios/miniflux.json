@@ -1,0 +1,59 @@
+{
+ "name": "miniflux",
+ "repo": "https://github.com/miniflux/v2",
+ "commit": "fb04322",
+ "shape": "Go service with workers and Postgres",
+ "expected": [
+  {
+   "behavior": "primitive: a Go script runner, not a live eval",
+   "any_of": [
+    "go run",
+    "cmd/agent",
+    "agent run"
+   ]
+  },
+  {
+   "behavior": "log in without a password",
+   "any_of": [
+    "auth proxy",
+    "auth_proxy",
+    "dev-login",
+    "persona"
+   ]
+  },
+  {
+   "behavior": "a database per environment",
+   "any_of": [
+    "--env",
+    "per env",
+    "database per",
+    "worktree"
+   ]
+  },
+  {
+   "behavior": "profiling or debugging",
+   "any_of": [
+    "pprof",
+    "delve",
+    "dlv"
+   ]
+  },
+  {
+   "behavior": "outbound HTTP stubbed or recorded",
+   "any_of": [
+    "stub",
+    "record",
+    "egress",
+    "fixture"
+   ]
+  },
+  {
+   "behavior": "a roadmap with a first milestone",
+   "any_of": [
+    "m1",
+    "milestone",
+    "walking skeleton"
+   ]
+  }
+ ]
+}

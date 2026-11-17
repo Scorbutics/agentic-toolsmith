@@ -1,0 +1,60 @@
+{
+ "name": "tps-demo",
+ "repo": "https://github.com/godotengine/tps-demo",
+ "commit": "a82f154",
+ "shape": "Godot 4 game",
+ "lfs": false,
+ "expected": [
+  {
+   "behavior": "primitive: a live eval / console into the running game",
+   "any_of": [
+    "eval",
+    "console",
+    "expression"
+   ]
+  },
+  {
+   "behavior": "Godot's remote debugger",
+   "any_of": [
+    "--remote-debug",
+    "remote debug",
+    "6007"
+   ]
+  },
+  {
+   "behavior": "frame capture of a named state",
+   "any_of": [
+    "screenshot",
+    "get_image",
+    "viewport texture",
+    "frame dump",
+    "capture"
+   ]
+  },
+  {
+   "behavior": "headless or hidden display",
+   "any_of": [
+    "headless",
+    "xvfb",
+    "display"
+   ]
+  },
+  {
+   "behavior": "determinism: seed and fixed timestep",
+   "any_of": [
+    "seed",
+    "fixed-fps",
+    "fixed fps",
+    "fixed timestep"
+   ]
+  },
+  {
+   "behavior": "a roadmap with a first milestone",
+   "any_of": [
+    "m1",
+    "milestone",
+    "walking skeleton"
+   ]
+  }
+ ]
+}

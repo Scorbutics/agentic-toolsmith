@@ -54,15 +54,34 @@ one picture of the app with what exists and what is missing. Every handle is als
 resettable) and **fence** (dev-only, fails closed). Together that is a classifier for any app's
 agent harness: each handle gets a coordinate — **boundary × verb × way** — and a quality bar.
 
-## Install
+## Install — one command
 
 ```sh
-npx skills add Scorbutics/agentic-toolsmith
+curl -fsSL https://raw.githubusercontent.com/Scorbutics/agentic-toolsmith/main/install.sh | bash
 ```
 
-or copy `skills/toolsmith/` into `.claude/skills/` (or your agent's skills directory), then ask
-your agent to run `/toolsmith`, or just start a task — the skill triggers when an agent cannot
-reproduce, cannot see, or would need you to log in.
+Installs into `~/.claude/skills/toolsmith`. Options: `--project` (this project's `.claude/skills/`
+only), `--dir DIR`, `--ref REF`, `--uninstall`. From a clone: `./install.sh`. With the skills CLI:
+`npx skills add Scorbutics/agentic-toolsmith`.
+
+Then, in any project, start your agent and type `/toolsmith map`.
+
+## Test it — one command
+
+```sh
+git clone https://github.com/Scorbutics/agentic-toolsmith && cd agentic-toolsmith
+./evals/run.sh --only vue-realworld          # one scenario, sonnet, with the skill and without
+./evals/run.sh --model sonnet --model haiku  # every scenario, two models
+```
+
+Five public repositories, one per shape — a Rails monolith (lobsters), a Go service (miniflux), a
+Vue SPA (vue-realworld), a dbt pipeline (jaffle-shop), a Godot game (tps-demo) — pinned to a commit.
+Each runs the Claude Code CLI headless on the same task **with the skill and without it**, read-only,
+and scores both outputs on the scenario's expected behaviours (did it pick the right primitive for
+where the state lives? a mock API for the SPA? DuckDB as the lab for dbt?), the runnable usage
+examples, the roadmap, and whether cited `file:line` references resolve. Results land in
+`eval-runs/<timestamp>/results.md`. Needs `git`, `python3` and a logged-in `claude` CLI; each run is a
+real agent session of several minutes.
 
 ## What it is not
 

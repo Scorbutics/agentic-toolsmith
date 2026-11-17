@@ -1,0 +1,65 @@
+{
+ "name": "lobsters",
+ "repo": "https://github.com/lobsters/lobsters",
+ "commit": "28bc8d6",
+ "shape": "Rails monolith with accounts and mail",
+ "expected": [
+  {
+   "behavior": "primitive: a script runner over the app (rails runner)",
+   "any_of": [
+    "rails runner",
+    "bin/rails runner"
+   ]
+  },
+  {
+   "behavior": "mail caught locally",
+   "any_of": [
+    "letter_opener",
+    "mail catcher",
+    "mailpit",
+    "inbox"
+   ]
+  },
+  {
+   "behavior": "log in as a persona without a password",
+   "any_of": [
+    "dev-login",
+    "dev login",
+    "login_as",
+    "persona"
+   ]
+  },
+  {
+   "behavior": "screenshot of a named state",
+   "any_of": [
+    "playwright",
+    "screenshot"
+   ]
+  },
+  {
+   "behavior": "seed or scenario data",
+   "any_of": [
+    "seed",
+    "fake_data",
+    "scenario"
+   ]
+  },
+  {
+   "behavior": "parallel agents / isolation",
+   "any_of": [
+    "worktree",
+    "--env",
+    "parallel",
+    "isolat"
+   ]
+  },
+  {
+   "behavior": "a roadmap with a first milestone",
+   "any_of": [
+    "m1",
+    "milestone",
+    "walking skeleton"
+   ]
+  }
+ ]
+}
