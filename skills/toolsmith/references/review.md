@@ -87,8 +87,15 @@ For each accepted handle, in order:
 4. **configure the harness**: its permission (allow · ask · deny) and any guard its fence relies
    on (a hook, a wrapper) — so an agent can use it unattended;
 5. move its status in the map (missing → exists), update the "How to reach the app" section of
-   the agent file;
-6. re-render the page so the human sees the picture fill in.
+   the agent file — the file every session loads (`CLAUDE.md`, `AGENTS.md`): the command, one line
+   on what it does and refuses, and "use it before writing an ad-hoc script"; make the entry point
+   list itself (`<tool>` with no argument prints every script and its usage);
+6. **prove a future session finds it**: start a fresh, headless agent session in the project with
+   an ordinary request the handle serves, and **no hint about the tooling** ("what time does the app
+   think it is?", "how many members can a member see?"). It passes when the session reaches for the
+   handle on its own, respects its fences, and does not fall back to the raw path. A handle the next
+   session cannot find does not exist;
+7. re-render the page so the human sees the picture fill in.
 
 If building shows the plan was wrong (a handle needs something the map missed, a primitive is
 cheaper than three scripts promised), stop and bring it back to step 3 — do not quietly redesign.

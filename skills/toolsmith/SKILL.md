@@ -45,7 +45,8 @@ Toolsmith progress:
 - [ ] 7. Answer every remark — revise; record decisions
 - [ ] 8. Explicit go — "go for M1"; record the accepted plan
 - [ ] 9. Build — one handle at a time, on the project's build system
-- [ ] 10. Prove — run each usage example for real; add it to doctor and CI; configure permissions
+- [ ] 10. Prove — run each usage example for real; add it to doctor and CI; configure permissions;
+      document it in the agent file; check a fresh session with no hint finds and uses it
 ```
 
 Steps 1–5 are the map ([map.md](references/map.md), written with
