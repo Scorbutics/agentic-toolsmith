@@ -65,7 +65,8 @@ cosmetic. Repeat 3–4 until the human has no open remark.
 
 ## 5. Accept — the explicit go
 
-Acceptance is an explicit statement from the human — "go", "build these" — naming what to build.
+Acceptance is an explicit statement from the human — "go for M1", "build these" — naming what to
+build; milestones from the map's Roadmap are the natural unit.
 Restate it as an ordered list (dependencies first: the primitive before its scripts, the fence
 before the handle that needs it) with the decisions it rests on, and record it in the map under
 **Accepted plan**. Silence, or approval of part of the map, is not acceptance of the rest.

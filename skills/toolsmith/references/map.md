@@ -122,8 +122,11 @@ is possible for an agent is a `human-only` point; say who holds it.
    usage example for is not designed yet. For a runtime-shaped app, the candidates include remote
    debug and remote eval into the live process (handles.md, "Runtime-shaped apps"). Each card
    names its **category** (launch · ingress · runtime · state · egress · eyes · lab — SKILL.md, "Seven
-   places a handle lives"), its point, verb, way up and rough cost. Ranking needs a task or the human's priorities;
-   ask for them, or leave the list unranked.
+   places a handle lives"), its point, verb, way up and rough cost.
+7. **Compile the roadmap** (SKILL.md, "Roadmap"): foundations shared by several cards, the
+   dependency order, keystones, and milestones — M1 the walking skeleton — each ending on a demo
+   the agent can run. Re-read the cards after compiling: a card that is a foundation plus a
+   snippet becomes a script, and a capability several cards need becomes a foundation.
 
 ## Grill the map
 

@@ -83,6 +83,32 @@ OK
 
 Unranked unless a task or the human's priorities were given: <priorities, if any>.
 
+## Roadmap
+
+**Foundations** — bases several cards build on; built once, first.
+
+| Foundation | Used by | Unlocks | Cost |
+|---|---|---|---|
+| `remote eval` (the primitive) | scripts `clock`, `state`, `shot`, `press` | runtime + ingress, and every script after | M |
+| per-run environment (`envs up`) | `dev-login`, `remote eval`, `shot` | parallel agents; no writes in the human's tree | S |
+
+```mermaid
+flowchart LR
+  envs[envs up] --> eval[remote eval]
+  envs --> login[dev-login]
+  eval --> clock[[clock]] & state[[state]] & shot[[shot]]
+```
+
+### M1 — walking skeleton · keystone
+**Builds:** per-run environment, `remote eval`, scripts `state`, `shot`.
+**Demo:** `envs up a1 && app-eval --env a1 run state && app-eval --env a1 run shot home` — launch, reach, see, unattended.
+**Why first:** every later card is a script on these two foundations.
+
+### M2 — reach any state
+**Builds:** `dev-login`, scripts `clock`, `press`. **Demo:** log in as a stranger, move the clock 47 h, screenshot the reminder.
+
+**Deferred:** `<card>` — <why not now>.
+
 ## Rules → guards
 
 Rules the agent files state in prose, and the guard each could become.

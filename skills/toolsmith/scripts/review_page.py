@@ -151,7 +151,19 @@ def parse(md):
         for r in rows:
             parallel['rows'].append([col(r, 'shared'), col(r, 'shared by'), col(r, 'what collides'), col(r, 'isolation'), col(r, 'proposal')])
     guards = [[col(r, 'rule'), col(r, 'guard'), col(r, 'kind')] for rows in tables(find(secs, 'rules')) for r in rows]
-    return {'title': title, 'summary': summary, 'parallel': parallel, 'guards': guards, 'cards': out_cards, 'tools': tools,
+    road = find(secs, 'roadmap')
+    foundations = [[col(r, 'foundation'), col(r, 'used by'), col(r, 'unlocks'), col(r, 'cost')] for rows in tables(road) for r in rows if col(r, 'foundation')]
+    milestones, cur = [], None
+    for line in road.splitlines():
+        mh = re.match(r'^#{3,4}\s+(.*)$', line)
+        if mh:
+            cur = {'title': mh.group(1).strip(), 'body': []}; milestones.append(cur)
+        elif cur is not None and line.strip() and not line.startswith('**Deferred'):
+            cur['body'].append(line.strip())
+    deferred = field(road, 'Deferred')
+    roadmap = {'foundations': foundations, 'milestones': milestones, 'deferred': deferred,
+               'mermaid': (re.search(r'```mermaid\n(.*?)```', road, re.S) or [None, ''])[1] if '```mermaid' in road else ''}
+    return {'title': title, 'summary': summary, 'parallel': parallel, 'guards': guards, 'roadmap': roadmap, 'cards': out_cards, 'tools': tools,
             'grill': bullets(find(secs, 'grill')), 'unknowns': bullets(find(secs, 'unknowns'))}
 
 
@@ -229,6 +241,18 @@ def render(model):
                     + (f'<div class="tw"><table><thead><tr><th>Shared resource</th><th>Shared by</th><th>What collides</th>'
                        f'<th>Isolation today</th><th>Proposal</th></tr></thead><tbody>{trs}</tbody></table></div>' if trs else '')
                     + f'{verdict("parallel:section", "Parallel agents analysis")}</section>')
+    rm = model['roadmap']
+    road_html = ''
+    if rm['foundations'] or rm['milestones']:
+        ftr = ''.join('<tr>' + ''.join(f'<td>{md(x)}</td>' for x in r) + '</tr>' for r in rm['foundations'])
+        ms = ''.join(f'<li class="item"><div class="main"><div class="title">{md(m["title"])}</div>'
+                     + ''.join(f'<div>{md(b)}</div>' for b in m['body']) + f'</div>{verdict("milestone:" + m["title"][:40], m["title"])}</li>'
+                     for m in rm['milestones'])
+        road_html = ('<section class="panel"><h2>Roadmap</h2><p class="muted">Foundations first, then milestones — accept them by milestone ("go for M1").</p>'
+                     + (f'<h4>Foundations</h4><div class="tw"><table><thead><tr><th>Foundation</th><th>Used by</th><th>Unlocks</th><th>Cost</th></tr></thead><tbody>{ftr}</tbody></table></div>' if ftr else '')
+                     + (f'<pre class="mermaid">{esc(rm["mermaid"])}</pre>' if rm['mermaid'] else '')
+                     + (f'<ul class="items">{ms}</ul>' if ms else '')
+                     + (f'<p class="muted"><strong>Deferred:</strong> {md(rm["deferred"])}</p>' if rm['deferred'] else '') + '</section>')
     if model['guards']:
         trs = ''.join(f'<tr><td>{md(a)}</td><td>{md(b)}</td><td>{md(c)}</td></tr>' for a, b, c in model['guards'])
         par_html += (f'<section class="panel"><h2>Rules → guards</h2><p class="muted">Rules your agent files state in prose, '
@@ -236,7 +260,7 @@ def render(model):
                      f'<tbody>{trs}</tbody></table></div>{verdict("guards:section", "Rules to guards")}</section>')
     store_key = 'toolsmith-review:' + re.sub(r'\W+', '-', model['title'])[:80]
     return TEMPLATE.replace('{{TITLE}}', esc(model['title'])).replace('{{SUMMARY}}', md(model['summary'])) \
-        .replace('{{PICTURE}}', picture(model)).replace('{{PARALLEL}}', par_html).replace('{{CARDS}}', ''.join(cards)) \
+        .replace('{{PICTURE}}', picture(model)).replace('{{PARALLEL}}', par_html).replace('{{ROADMAP}}', road_html).replace('{{CARDS}}', ''.join(cards)) \
         .replace('{{NCARDS}}', str(len(model['cards']))).replace('{{TOOLS}}', tools) \
         .replace('{{NTOOLS}}', str(len(model['tools']))).replace('{{GRILL}}', grill) \
         .replace('{{NGRILL}}', str(len(model['grill']))).replace('{{STORE}}', json.dumps(store_key))
@@ -290,6 +314,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,.node:focus-visi
 </style></head><body><div class="wrap">
 <header><h1>{{TITLE}}</h1><p class="muted">Review this plan: mark each item, add a note, question or answer, then copy the feedback back to the agent.</p><p>{{SUMMARY}}</p></header>
 <section class="panel"><h2>The app and its handles</h2><p class="muted">The Lab frames the runtime; hover a node for its usage, click a proposed one to jump to its card.</p>{{PICTURE}}</section>
+{{ROADMAP}}
 {{PARALLEL}}
 <section class="panel"><h2>Proposed handles ({{NCARDS}})</h2><p class="muted">Would you build it? Is the usage right? Is it in the right place?</p><ul class="items">{{CARDS}}</ul></section>
 <section class="panel"><h2>Questions for you ({{NGRILL}})</h2><p class="muted">Type your answer in the note.</p><ul class="items">{{GRILL}}</ul></section>
@@ -307,8 +332,8 @@ const boxes=[...document.querySelectorAll('.verdict')],missed=document.getElemen
 function paint(){boxes.forEach(b=>{const c=st[b.dataset.key]||{};b.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(c.v===x.dataset.v)));
  const i=b.querySelector('input');if(document.activeElement!==i)i.value=c.note||''});if(document.activeElement!==missed)missed.value=st._missed||'';out.value=feedback()}
 function feedback(){const L=['# Toolsmith review feedback','',`Plan: ${document.querySelector('h1').textContent}`,''];
- const grp={card:'Proposed handles',grill:'Answers to the questions',parallel:'Parallel agents',guards:'Rules to guards',tool:'Already in place'};
- for(const g of ['card','grill','parallel','guards','tool']){const rows=boxes.filter(b=>b.dataset.key.startsWith(g+':')).map(b=>[b,st[b.dataset.key]||{}]).filter(([b,c])=>c.v||c.note);
+ const grp={card:'Proposed handles',grill:'Answers to the questions',milestone:'Roadmap milestones',parallel:'Parallel agents',guards:'Rules to guards',tool:'Already in place'};
+ for(const g of ['milestone','card','grill','parallel','guards','tool']){const rows=boxes.filter(b=>b.dataset.key.startsWith(g+':')).map(b=>[b,st[b.dataset.key]||{}]).filter(([b,c])=>c.v||c.note);
   if(!rows.length)continue;L.push('## '+grp[g]);rows.forEach(([b,c])=>L.push(`- [${c.v||'note'}] ${b.dataset.label}${c.note?' — '+c.note:''}`));L.push('')}
  if(st._missed)L.push('## Missed',st._missed,'');return L.join('\n')}
 document.addEventListener('click',e=>{const x=e.target.closest('.verdict button');if(!x)return;const k=x.closest('.verdict').dataset.key;
