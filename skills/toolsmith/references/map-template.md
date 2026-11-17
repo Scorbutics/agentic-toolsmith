@@ -38,7 +38,7 @@ $ bin/dev-login --as stranger
 **Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`. (A Needs line may name another card: `Needs: dev-up`.)
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
 
-### `remote eval` — runtime · B3 Runtime · steer, see · reach in · cost M
+### `remote eval` — runtime (+ ingress) · B3 Runtime · steer, see · reach in · cost M
 **Finishes:** **New** (remote debug already possible: `debug` gem in the Gemfile)
 
 ```sh
@@ -122,7 +122,7 @@ applies. Cross-referenced points: `→ B7`.
 
 ## Grill
 
-Questions in order, each with your recommended answer (asked one at a time when a human is there).
+At most three, each one changing which handle gets built; each with your recommended answer.
 
 ## Noticed in passing
 

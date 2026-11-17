@@ -89,6 +89,15 @@ distinct handles — propose both, they coexist:
 | Godot | Built in: `--remote-debug tcp://127.0.0.1:6007` (the editor's debugger, remote scene tree) | Not built in — a dev-only console autoload evaluating `Expression`, gated by `OS.is_debug_build()` |
 | Embedded VM in a host app | Whatever the VM's debugger offers (e.g. the `debug` gem's DAP for an embedded Ruby) | The socket console below, opened by the host |
 
+**Profilers over a socket** belong next to them — the third live-process handle, and one that
+must run from *outside* the app's loop:
+- Tracy (a native client in the app, `tracy-capture -a 127.0.0.1 -p <port>` to record headless);
+- Go pprof over HTTP (`go tool pprof http://127.0.0.1:6060/debug/pprof/profile?seconds=10`);
+- CDP's `Profiler` domain for Node / Electron; JFR / async-profiler for the JVM;
+- sampling profilers that attach by process id: `rbspy`, `py-spy`, `perf`.
+A profiler handle prints a file the agent can read (a trace, a flamegraph's folded stacks, a
+top-N table) — not only a GUI.
+
 ### Live console (eval / command socket)
 
 Reference implementation for an embedded Ruby VM, by the skill's author: `remote_eval.rb` in

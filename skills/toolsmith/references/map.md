@@ -110,7 +110,9 @@ is possible for an agent is a `human-only` point; say who holds it.
 ## Grill the map
 
 Same rules as [grill.md](grill.md): one question at a time, a recommended answer, never what the
-code answers. The map changes the questions — you now ask about **crossings**, showing what you
+code answers. **In map mode, at most three questions, and only those whose answer changes which
+handle gets built** (or where it lives). Questions about safety, priorities or ownership wait for
+task mode, where a human is there to answer them. The map changes the questions — you now ask about **crossings**, showing what you
 found:
 
 - "I found these egress points: [list with evidence]. Is anything missing — a call made from

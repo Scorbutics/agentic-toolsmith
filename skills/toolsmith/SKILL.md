@@ -77,6 +77,36 @@ Where they go instead:
 
 `fence` is a property of a handle, never a verb: the verbs are see, steer, stub, freeze, check.
 
+### One generic primitive, then scripts
+
+Do not turn every need into its own command. Once the app has — or you propose — **one generic
+way to run code inside it** (an eval socket, a console, a REPL into the live process), most
+handles are **scripts run through it**, kept in the repo and named:
+
+```sh
+$ app-eval run clock +47h          # scripts/agent/clock.rb
+$ app-eval run warp battle 12      # scripts/agent/warp.rb
+$ app-eval run save-dump > s.json  # scripts/agent/save_dump.rb
+```
+
+One primitive to build and fence, then a growing folder of scripts anyone can read and add to —
+not a dozen bespoke flags (`--replay`, `--seed`, `--clock`) each with its own code path. A
+proposed handle that is just "run this snippet in the app" is a **script card** under the
+primitive, not a new handle.
+
+A **dedicated** handle is justified only where the generic primitive cannot reach:
+- the app's loop is frozen or crashed (level-2 eyes, a watchdog, a core dump);
+- before the primitive exists in the process (boot flags, launch, a per-run directory);
+- out-of-band by nature (an effect ledger, a mail catcher, a GPU capture);
+- it must not run inside the app (a profiler sampling it from outside).
+
+### Handles belong to the layer they live in
+
+An engine's, a runtime's or a library's handles must work for **any** consumer and carry the
+engine's name (`litergss-shot`, not `psdk-shot`). A handle specific to one consumer — its scenes,
+its saves, its scripts — belongs in **that consumer's** map, even when you found it while mapping
+the engine. When mapping a library, the consumer is where you probe; it is not what you equip.
+
 ## Six places a handle lives
 
 Every handle — existing or proposed — sits in one of six categories. They are what the human
@@ -91,6 +121,12 @@ where they are missing.
 | **State** — data and time | put the app in a state, read it back | seeds and scenarios, queries and dumps, snapshots, save states, virtual clock, RNG seed |
 | **Egress** — what leaves | replace or record the outside world | mail catcher, HTTP stub or recorder, effect ledger, queue inspection |
 | **Eyes & logs** | see what happened | screenshots of a named state, logs, traces, crash reports |
+
+**One card per handle, one main category, optional secondary ones.** Some handles are two sides
+of the same coin — a live eval is runtime *and* ingress; a remote debugger is runtime and part of
+the launch. Give such a handle one card, its main category first and the others in parentheses
+(`runtime (+ ingress)`), and merge cards that turn out to be the same handle seen from two
+categories (a "scenario" card that is really `run` with a scene argument is one card).
 
 Identity lives in Ingress (who is driving); time and randomness live in State (they make a state
 reachable). The boundary classes of map mode are how you *find* handles; the six categories are
