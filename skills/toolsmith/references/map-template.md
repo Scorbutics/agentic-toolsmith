@@ -11,7 +11,7 @@ exist only on one of them. Omit when there is one way to run it.>
 ## Tools already in place
 
 Every handle an agent can already call, with its category (launch · ingress · runtime · state ·
-egress · eyes). A tool that climbs several ways gets one row per verb.
+egress · eyes · lab). A tool that climbs several ways gets one row per verb.
 
 | Tool | Category | Verb | Way up | Point(s) | Usage |
 |---|---|---|---|---|---|
@@ -22,6 +22,14 @@ egress · eyes). A tool that climbs several ways gets one row per verb.
 
 The map's main output. Group by way up; finish what the project half-has before inventing. If no
 external tool fits, say so in one line ("no tool fits: considered Storybook, motu — Vue 2").
+Three lines are mandatory on every card besides the usage block. **Is:** what you would actually
+build and where — a new CLI in `tools/`, a public API in the engine plus its binding, an env flag
+read by the backend, a file in `scripts/agent/`. **Not a script because:** for any card that is not
+a script under a primitive, which of the exemptions applies (SKILL.md, "One generic primitive, then
+scripts"); no exemption, no card — it becomes a script line under the primitive. A handle owned by
+a **lower layer** (the engine under a game, the runtime under an app) is not a card in this map: list
+it as **Uses:** `<handle>` (from `<that layer>`'s map) on the cards that depend on it.
+
 One card per handle — the usage block is mandatory, and it is what makes it a handle: if the
 agent never calls it (an untracked file, a default, a lint rule, a CI step), it is not a card —
 it is a Fence or Needs line of the handle it serves, or one of the Fences to set first.
@@ -34,7 +42,9 @@ $ bin/dev-login --as stranger
 {"user":"stranger","cookie":"_app_session=…","expires":"2026-11-18T10:00:00Z"}
 ```
 
+**Is:** a new CLI, `bin/dev-login`, over the auth provider's local admin API — not app code.
 **Gives the agent:** any persona's session in one command, no password typed.
+**Not a script because:** it must work before any eval primitive exists in the process (it mints the session the browser starts with).
 **Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`. (A Needs line may name another card: `Needs: dev-up`.)
 **Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
 
@@ -94,12 +104,16 @@ flowchart LR
     logs[Logger]:::exists
     shot[shot]:::missing
   end
+  subgraph lab[Lab — around the runtime]
+    xvfb[Xvfb display]:::missing
+  end
   launch --- app
   ingress --- app
   runtime --- app
   app --- state
   app --- egress
   app --- eyes
+  lab -.- app
 ```
 
 A category with no handle at all is still drawn, empty — that gap is the finding.

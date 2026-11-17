@@ -42,7 +42,7 @@ you, before any tool is proposed. Later runs read the map instead of rediscoveri
 Most agents verify what the screen shows and never what the code touched. The skill makes the
 third column a rung of its own.
 
-Handles are shown in six categories — launch & loop, ingress, runtime, state, egress, eyes & logs —
+Handles are shown in seven categories — launch & loop, ingress, runtime, state, egress, eyes & logs, and the lab around the runtime —
 one picture of the app with what exists and what is missing. Every handle is also judged on two properties, whichever way up: **loop** (fast, isolated,
 resettable) and **fence** (dev-only, fails closed). Together that is a classifier for any app's
 agent harness: each handle gets a coordinate — **boundary × verb × way** — and a quality bar.

@@ -98,7 +98,9 @@ A **dedicated** handle is justified only where the generic primitive cannot reac
 - the app's loop is frozen or crashed (level-2 eyes, a watchdog, a core dump);
 - before the primitive exists in the process (boot flags, launch, a per-run directory);
 - out-of-band by nature (an effect ledger, a mail catcher, a GPU capture);
-- it must not run inside the app (a profiler sampling it from outside).
+- it must not run inside the app (a profiler sampling it from outside);
+- it runs the app's code *outside* the live app, in a lab (a battle harness, a component lab, a
+  headless scene runner).
 
 ### Handles belong to the layer they live in
 
@@ -107,9 +109,9 @@ engine's name (`litergss-shot`, not `psdk-shot`). A handle specific to one consu
 its saves, its scripts — belongs in **that consumer's** map, even when you found it while mapping
 the engine. When mapping a library, the consumer is where you probe; it is not what you equip.
 
-## Six places a handle lives
+## Seven places a handle lives
 
-Every handle — existing or proposed — sits in one of six categories. They are what the human
+Every handle — existing or proposed — sits in one of seven categories. They are what the human
 sees first: one picture of the app with its handles around it, solid where they exist, dashed
 where they are missing.
 
@@ -121,12 +123,18 @@ where they are missing.
 | **State** — data and time | put the app in a state, read it back | seeds and scenarios, queries and dumps, snapshots, save states, virtual clock, RNG seed |
 | **Egress** — what leaves | replace or record the outside world | mail catcher, HTTP stub or recorder, effect ledger, queue inspection |
 | **Eyes & logs** | see what happened | screenshots of a named state, logs, traces, crash reports |
+| **Lab** — the environment around the runtime | a place where the app, or a piece of it, runs outside the human's setup | a virtual display (Xvfb), a container or VM image, an emulator or simulator, a local stack (compose), a harness hosting a piece of the app outside the live process (component lab, state renderer such as motu's lagoon, scene or battle harness) |
 
 **One card per handle, one main category, optional secondary ones.** Some handles are two sides
 of the same coin — a live eval is runtime *and* ingress; a remote debugger is runtime and part of
 the launch. Give such a handle one card, its main category first and the others in parentheses
 (`runtime (+ ingress)`), and merge cards that turn out to be the same handle seen from two
 categories (a "scenario" card that is really `run` with a scene argument is one card).
+
+The Lab is drawn *around* the other six: it is what contains the runtime. It is also where the
+*bring out* way happens — running a piece of the app in a lab rather than reaching into the live one.
+Look for it explicitly; it is the category agents forget, because its pieces sit outside the
+code (a Dockerfile, an AVD, a display server) or look like tests.
 
 Identity lives in Ingress (who is driving); time and randomness live in State (they make a state
 reachable). The boundary classes of map mode are how you *find* handles; the six categories are
@@ -145,7 +153,7 @@ often not the one the shape suggests.
 
 - **Reach in — the live app.** Handles into the running app: a dev login, an eval console, a
   warp command, a deep link. Full fidelity; each state costs steps to reach.
-- **Bring out — the lab.** Rebuild a piece of the app in isolation so that every state it can be
+- **Bring out — into a lab.** Run a piece of the app in isolation, in a lab, so that every state it can be
   in is *declared* and has its own address — no backend, no session, no login (a region/state
   renderer such as motu's lagoon; component labs; a scene harness for a game; a transaction
   scenario for SQL). Every state is one URL away; but the lab only shows what was declared, so
