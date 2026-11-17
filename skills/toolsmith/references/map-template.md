@@ -37,7 +37,8 @@ read by the backend, a file in `scripts/agent/`. **Not a script because:** for a
 a script under a primitive, which of the exemptions applies (SKILL.md, "One generic primitive, then
 scripts"); no exemption, no card — it becomes a script line under the primitive. A handle owned by
 a **lower layer** (the engine under a game, the runtime under an app) is not a card in this map: list
-it as **Uses:** `<handle>` (from `<that layer>`'s map) on the cards that depend on it. And a
+it as **Uses:** `<handle>` (from `<that layer>`'s map — or "to propose in `<that layer>`" when it has
+no map yet) on the cards that depend on it. And a
 **Parallel:** line: how the handle isolates two agents running it at once, or why it cannot.
 
 One card per handle — the usage block is mandatory, and it is what makes it a handle: if the

@@ -98,7 +98,7 @@ def parse(md):
         if line.startswith('```'):
             in_code = not in_code
         m = None if in_code else re.match(r'^#{3,4}\s+(.*)$', line)
-        if m and '·' in m.group(1) and re.search(r'(?: — |: )', m.group(1)):
+        if m and '·' in m.group(1) and re.search(r'(?: — |: )\s*(?:(?:' + CAT_RX + r')[^·]*·\s*)?B\d', m.group(1)):
             cur = {'head': m.group(1), 'body': []}; cards.append(cur)
         elif m:
             cur = None

@@ -23,6 +23,10 @@ toolchain (no `node_modules`, wrong language version, no engine binary) is a fin
 Launch and Build rungs, not a reason to stop: map from the code and say what could not be
 confirmed.
 
+**Check every citation before you write it.** Open the file at the line you cite and confirm it
+says what you claim; a line number from memory is a guess. (One map found about thirty of its
+first citations wrong this way.)
+
 **Evidence is a full path** — repo-relative when the map covers one repo, **absolute** when it
 spans several (an engine and its game, an app and its runtime), so every reference opens as is:
 `scripts/4 Systems/106 Save Load/3 GamePlay/400 Save.rb:7`, never `Save.rb:7`. A bare file name

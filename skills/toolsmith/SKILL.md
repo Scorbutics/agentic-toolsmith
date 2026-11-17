@@ -104,6 +104,10 @@ not a dozen bespoke flags (`--replay`, `--seed`, `--clock`) each with its own co
 proposed handle that is just "run this snippet in the app" is a **script card** under the
 primitive, not a new handle.
 
+When the app has no long-lived process of its own (serverless functions, a stack whose state is
+all in a database), the primitive is a **script runner** over the local stack (`app-dev run <script>`)
+rather than an eval socket — same rule, scripts as files, one entry point.
+
 A **dedicated** handle is justified only where the generic primitive cannot reach:
 - the app's loop is frozen or crashed (level-2 eyes, a watchdog, a core dump);
 - before the primitive exists in the process (boot flags, launch, a per-run directory);
