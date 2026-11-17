@@ -80,7 +80,11 @@ Each runs the Claude Code CLI headless on the same task **with the skill and wit
 and scores both outputs on the scenario's expected behaviours (did it pick the right primitive for
 where the state lives? a mock API for the SPA? DuckDB as the lab for dbt?), the runnable usage
 examples, the roadmap, and whether cited `file:line` references resolve. Results land in
-`eval-runs/<timestamp>/results.md`. Needs `git`, `python3` and a logged-in `claude` CLI; each run is a
+`eval-runs/<timestamp>/results.md`.
+
+**Latest results** ([docs/evals.md](docs/evals.md)): with the skill, **57/60** expected behaviours versus
+**40/60** without, a roadmap in 10/10 runs versus 0/10, about 9 runnable usage examples per map versus
+none, and 94 % of cited `file:line` resolving — on Sonnet and on Haiku. Needs `git`, `python3` and a logged-in `claude` CLI; each run is a
 real agent session of several minutes.
 
 ## What it is not
