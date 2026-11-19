@@ -4,10 +4,15 @@
 #   curl -fsSL https://raw.githubusercontent.com/Scorbutics/agentic-toolsmith/main/install.sh | bash
 #   ./install.sh                 # from a clone of this repository
 #
+# By default the agents are detected: Claude Code (the `claude` command or ~/.claude) and
+# GitHub Copilot (the `copilot` CLI, ~/.copilot, the VS Code / JetBrains Copilot extension).
+# The skill is installed for each one found; if none is found, for Claude Code.
+#
 # Options:
-#   --project        install into this project (./.claude/skills/, or ./.github/skills/ with --copilot)
+#   --claude         install for Claude Code: ~/.claude/skills/ (or ./.claude/skills/ with --project)
 #   --copilot        install for GitHub Copilot: ~/.copilot/skills/ (or ./.github/skills/ with --project)
-#   --all            install for both Claude Code and GitHub Copilot
+#   --all            install for both Claude Code and GitHub Copilot (same as --claude --copilot)
+#   --project        install into this project instead of your home directory
 #   --dir DIR        install into DIR/toolsmith
 #   --ref REF        git ref to install from GitHub (default: main); ignored when run from a clone
 #   --uninstall      remove the installed skill
@@ -17,7 +22,7 @@ set -euo pipefail
 REPO="Scorbutics/agentic-toolsmith"
 REF="main"
 PROJECT=0
-TARGETS="claude"
+TARGETS=""   # empty: detect
 DIR_OVERRIDE=""
 UNINSTALL=0
 
@@ -26,8 +31,9 @@ usage() { sed -n '2,/^set -e/{s/^# \{0,1\}//;/^set -e/d;p}' "${BASH_SOURCE[0]:-$
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --project)   PROJECT=1; shift ;;
-    --copilot)   TARGETS="copilot"; shift ;;
-    --all)       TARGETS="claude copilot"; shift ;;
+    --claude)    TARGETS="$TARGETS claude"; shift ;;
+    --copilot)   TARGETS="$TARGETS copilot"; shift ;;
+    --all|--both) TARGETS="claude copilot"; shift ;;
     --dir)       DIR_OVERRIDE="$2"; shift 2 ;;
     --ref)       REF="$2"; shift 2 ;;
     --uninstall) UNINSTALL=1; shift ;;
@@ -35,6 +41,16 @@ while [[ $# -gt 0 ]]; do
     *) echo "install.sh: unknown option $1" >&2; exit 2 ;;
   esac
 done
+
+has_claude() {
+  command -v claude >/dev/null 2>&1 || [[ -d "${HOME}/.claude" ]]
+}
+has_copilot() {
+  command -v copilot >/dev/null 2>&1 && return 0                                # Copilot CLI
+  [[ -d "${HOME}/.copilot" ]] && return 0
+  [[ -d "${XDG_CONFIG_HOME:-${HOME}/.config}/github-copilot" ]] && return 0   # VS Code, JetBrains, Neovim
+  compgen -G "${HOME}/.vscode*/extensions/github.copilot*" >/dev/null 2>&1
+}
 
 dest_root() {  # where skills live for a harness: Claude Code or GitHub Copilot, personal or project
   if [[ -n "$DIR_OVERRIDE" ]]; then echo "$DIR_OVERRIDE"; return; fi
@@ -46,8 +62,33 @@ dest_root() {  # where skills live for a harness: Claude Code or GitHub Copilot,
   esac
 }
 
+# Normalise the targets: dedupe, and detect when none was asked for.
+DETECTED=0
+if [[ -z "${TARGETS// /}" ]]; then
+  DETECTED=1
+  if [[ $UNINSTALL -eq 1 ]]; then
+    TARGETS="claude copilot"   # remove wherever it is installed
+  else
+    has_claude  && TARGETS="$TARGETS claude"
+    has_copilot && TARGETS="$TARGETS copilot"
+    if [[ -z "${TARGETS// /}" ]]; then
+      TARGETS="claude"; DETECTED=0
+      echo "toolsmith: no agent detected — installing for Claude Code (use --copilot or --all to choose)"
+    fi
+  fi
+fi
+T=""; for t in claude copilot; do [[ " $TARGETS " == *" $t "* ]] && T="$T $t"; done
+TARGETS="${T# }"
+# With --dir every target lands in the same place: install once.
+[[ -n "$DIR_OVERRIDE" ]] && TARGETS="${TARGETS%% *}"
+[[ $DETECTED -eq 1 && $UNINSTALL -eq 0 ]] && echo "toolsmith: detected ${TARGETS// / and } (force with --claude, --copilot or --all)"
+
 if [[ $UNINSTALL -eq 1 ]]; then
-  for t in $TARGETS; do d="$(dest_root "$t")/toolsmith"; rm -rf "$d" && echo "toolsmith: removed ${d}"; done
+  for t in $TARGETS; do
+    d="$(dest_root "$t")/toolsmith"
+    [[ -e "$d" ]] || continue
+    rm -rf "$d" && echo "toolsmith: removed ${d}"
+  done
   exit 0
 fi
 

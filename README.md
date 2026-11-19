@@ -60,9 +60,11 @@ agent harness: each handle gets a coordinate — **boundary × verb × way** —
 curl -fsSL https://raw.githubusercontent.com/Scorbutics/agentic-toolsmith/main/install.sh | bash
 ```
 
-Installs into `~/.claude/skills/toolsmith` for Claude Code; `--copilot` installs for GitHub Copilot
-(`~/.copilot/skills/`), `--all` for both. `--project` installs into this project instead
-(`.claude/skills/`, or `.github/skills/` with `--copilot`); also `--dir DIR`, `--ref REF`, `--uninstall`. From a clone: `./install.sh`. With the skills CLI:
+Detects your agents and installs for each one found: Claude Code (`~/.claude/skills/toolsmith`) and
+GitHub Copilot — CLI, VS Code or JetBrains (`~/.copilot/skills/toolsmith`); Claude Code if none is found.
+Force the choice with `--claude`, `--copilot` or `--all` (pass options with `| bash -s -- --copilot`).
+`--project` installs into this project instead (`.claude/skills/`, `.github/skills/`); also `--dir DIR`,
+`--ref REF`, `--uninstall`. From a clone: `./install.sh`. With the skills CLI:
 `npx skills add Scorbutics/agentic-toolsmith`.
 
 Then, in any project, start your agent and type `/toolsmith map`.
