@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/icon.svg" width="128" height="128" alt="agentic-toolsmith icon"></p>
+
 # agentic-toolsmith
 
 > Satellite tooling for coding agents: command-line access to a running project, from outside it.
