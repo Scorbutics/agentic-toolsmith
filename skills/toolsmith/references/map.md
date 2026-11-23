@@ -138,7 +138,11 @@ is possible for an agent is a `human-only` point; say who holds it.
    the agent can run. Re-read the cards after compiling: a card that is a foundation plus a
    snippet becomes a script, and a capability several cards need becomes a foundation. Every card
    must appear, by its exact name in backticks, in one milestone's **Builds:** line or in
-   **Deferred** — the review page places cards by that name.
+   **Deferred** — the review page places cards by that name. Every card has a **Status:** line
+   (`proposed` on a fresh map), and every milestone its **Depends on**, **Demo** and **Expect**.
+8. **Patterns, if any.** When the project does something another project could reuse, add it to
+   Transferable patterns — the capability, the evidence, where it fits and where it does not
+   ([tools.md](tools.md), "Patterns, not products"). Optional; at most three.
 
 ## Grill the map
 

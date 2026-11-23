@@ -19,6 +19,15 @@ the tool that fits *this* app, whatever its name, and you say why.
    time they are proposed. No preference follows from it.
 6. **No fit, no mention.** A table of every tool in the category is not a recommendation.
 
+## Patterns, not products
+
+When a project shows an idea worth reusing elsewhere, the map's Transferable patterns names the
+**capability** — what it does, the evidence it matters here, what a project needs before it fits,
+where it does not — not the tool that implements it here. The project's framework, file names and
+team conventions are evidence, not the recommendation. A pattern already embodied by a handle
+names that handle; it does not become a second card (test-impact selection already offered by a
+`test --changed` subcommand is that subcommand, not a new `test-impact` handle).
+
 ## Bring out — labs
 
 | Tool | Fits when (evidence to look for) | Gives you | Costs / limits |

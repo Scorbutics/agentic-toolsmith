@@ -152,6 +152,7 @@ skills/toolsmith/
   references/scopes.md          task and capability scopes
   references/review.md          the review loop: present, answer every remark, revise, accept, implement
   scripts/review_page.py        map.md → one self-contained HTML review page (stdlib only)
+tests/test_review_page.py       regression tests for the review page: python3 -m unittest discover -s tests
 docs/trials.md                  dry runs on four project shapes, and what each changed
 ```
 

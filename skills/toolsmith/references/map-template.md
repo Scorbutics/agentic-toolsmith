@@ -3,8 +3,11 @@
 ## Contents
 - Parallel agents
 - Tools already in place
+- Delivered handles
 - Candidate handles (not built)
+- Deferred handles
 - Roadmap
+- Transferable patterns
 - Rules → guards
 - Fences to set first
 - Diagram
@@ -36,13 +39,21 @@ exist only on one of them. Omit when there is one way to run it.>
 
 ## Tools already in place
 
-Every handle an agent can already call, with its category (launch · ingress · runtime · state ·
-egress · eyes · lab). A tool that climbs several ways gets one row per verb.
+Every handle an agent could already call **before toolsmith built anything**, with its category
+(launch · ingress · runtime · state · egress · eyes · lab). A tool that climbs several ways gets one
+row per verb. A handle toolsmith builds is not added here: its card moves to Delivered handles.
 
 | Tool | Category | Verb | Way | Point(s) | Usage |
 |---|---|---|---|---|---|
 | <effect ledger> | egress | check | witness | B5, B6 | `bun run assay:check run.log --require <op>` |
 | <stdin console> | runtime | steer, see | reach in | B3 | type a Ruby line in the game's terminal |
+
+## Delivered handles
+
+Cards toolsmith built, moved here from Candidate handles when they were delivered — never left
+under the candidates, where they would read as proposed work. Same card grammar, with
+**Status:** `delivered` and a mandatory **Verified:** line (see "Status and evidence" below). Empty
+until the first build.
 
 ## Candidate handles (not built)
 
@@ -65,6 +76,22 @@ handle that is pure configuration (env vars, a flag on an existing command) is s
 An **existing** handle that is itself a hazard (a debug port open in release) is listed in Tools in
 place *and* gets a card to finish it — its missing fence is the work.
 
+**Status and evidence.** Every card carries a **Status:** line, and the section matches it:
+
+| Status | Section | Means |
+|---|---|---|
+| `proposed` | Candidate handles | on the map, not yet accepted |
+| `accepted` | Candidate handles | in the accepted plan (dated), not started |
+| `in progress` | Candidate handles | being built; say what is done |
+| `delivered` | Delivered handles | built and merged; **Verified:** required |
+| `deferred` | Deferred handles | not now; **Deferred because:** required |
+
+**Verified:** `<level> — <evidence>` — keep the three levels apart, never round one up:
+`implemented` (the code exists, nothing was run) · `tested` (focused tests or the usage example
+ran: which, and what it printed) · `demoed` (it ran end to end against the live app: the command
+and the date). A caveat follows a `;`: `tested — 4 unit tests pass; live demo deferred: no display
+on the CI box`.
+
 Three lines are mandatory on every card besides the usage block. **Is:** what you would actually
 build and where — a new CLI in `tools/`, a public API in the engine plus its binding, an env flag
 read by the backend, a file in `scripts/agent/`. **Not a script because:** for any card that is not
@@ -81,6 +108,7 @@ agent never calls it (an untracked file, a default, a lint rule, a CI step), it 
 it is a Fence or Needs line of the handle it serves, or one of the Fences to set first.
 
 ### `dev-login` — ingress · B9 Identity · steer · reach in · cost S
+**Status:** proposed
 **Finishes:** the seeded personas in `db/seeds.rb` (or **New**)
 
 ```sh
@@ -98,6 +126,7 @@ $ bin/dev-login --as stranger
 **Permission:** allow (read-only against the agent's own env).
 
 ### `remote eval` — runtime (+ ingress) · B3 Runtime · steer, see · reach in · cost M
+**Status:** accepted (2026-11-18, M1)
 **Finishes:** **New** (remote debug already possible: `debug` gem in the Gemfile)
 
 ```sh
@@ -111,6 +140,21 @@ OK
 **Fence:** development only, loopback, token required.
 
 Unranked unless a task or the human's priorities were given: <priorities, if any>.
+
+## Deferred handles
+
+Cards kept but not planned, out of the candidates so they never look like open work. Same card
+grammar, with **Status:** `deferred` and two more lines:
+
+### `mail last` — egress · B6 Egress · see · witness · cost S
+**Status:** deferred
+**Deferred because:** the mail driver still falls back to live (Fences to set first, ⚠ 1).
+**Revisit when:** the preview driver fails closed.
+
+```sh
+$ app-dev run mail last --to stranger@example.test
+{"subject":"Your magic link","link":"http://127.0.0.1:3000/auth/…"}
+```
 
 ## Roadmap
 
@@ -128,15 +172,54 @@ flowchart LR
   eval --> clock[[clock]] & state[[state]] & shot[[shot]]
 ```
 
+Every milestone has the same lines, one per line; the review page reads them:
+
+- **Status:** `proposed` · `accepted` · `in progress` · `delivered`.
+- **Builds:** the cards, by their exact names in backticks, and the scripts it adds.
+- **Depends on:** the milestones it really needs, each with what it needs from it — or `none`.
+  Numbering is the suggested order, **not** a dependency: two tracks that do not need each other
+  both say `none` (or name only what they share), and the page shows them as independent.
+- **Demo:** the command the agent runs once the milestone is built. **Expect:** what it observes
+  when the demo works — the output, the screenshot, the row — concrete enough to fail.
+- **Verified:** once anything is built, with the levels of the cards (`implemented` · `tested` ·
+  `demoed`) and the caveats. A milestone is `delivered` and demoed only when its **Demo** ran end
+  to end; if it did not, say so — `tested — focused tests pass; live demo deferred: <why>` — and the
+  page shows it as not demoed.
+
 ### M1 — walking skeleton · keystone
+**Status:** accepted (2026-11-18)
 **Builds:** per-run environment, `remote eval`, scripts `state`, `shot`.
-**Demo:** `envs up a1 && app-eval --env a1 run state && app-eval --env a1 run shot home` — launch, reach, see, unattended.
+**Depends on:** none.
+**Demo:** `envs up a1 && app-eval --env a1 run state && app-eval --env a1 run shot home`
+**Expect:** `state` prints the seeded counts as JSON; `shot` writes `shots/home.png` showing the dashboard — no human step.
 **Why first:** every later card is a script on these two foundations.
 
 ### M2 — reach any state
-**Builds:** `dev-login`, scripts `clock`, `press`. **Demo:** log in as a stranger, move the clock 47 h, screenshot the reminder.
+**Status:** proposed
+**Builds:** `dev-login`, scripts `clock`, `press`.
+**Depends on:** M1 — `remote eval` runs the `clock` script.
+**Demo:** `bin/dev-login --as stranger && app-eval run clock +47h && app-eval run shot reminders`
+**Expect:** `shots/reminders.png` shows the 48-hour reminder banner for the stranger.
 
-**Deferred:** `<card>` — <why not now>.
+### Deferred
+
+One line per deferred card or milestone, by name, with why; the cards themselves are under
+Deferred handles.
+
+- `mail last` — waits for the mail fence.
+
+## Transferable patterns
+
+Optional, at most three: an idea from this project that another project could reuse. Describe the
+**capability**, not the tool: what it does, the evidence it matters here, what a project needs
+before it fits, and where it does not. Write it in terms another stack could implement — this
+project's framework, file names and team conventions stay in the Evidence column. A pattern that
+an existing or proposed handle already embodies names that handle in **Here as**; it is never a
+second card.
+
+| Pattern | Does | Evidence here | Fits when | Does not fit when | Here as |
+|---|---|---|---|---|---|
+| test-impact selection | runs only the tests a change can reach | `bin/test --changed` cut the suite from 9 min to 40 s (`bin/test:12`) | a dependency graph from code to tests is cheap to compute | tests share global fixtures, or the graph is dynamic (plugins, reflection) | `test` handle, `--changed` |
 
 ## Rules → guards
 
@@ -158,9 +241,9 @@ consequences, and the fence that makes the handles above safe to use.
 
 ## Diagram
 
-The app in the middle, the six categories around it, one node per handle: **solid** = exists,
-**amber** = half-built (a card that *Finishes* something), **dashed** = missing (a card marked
-New). This is the picture the human reads first — keep node labels to the handle's name.
+The app in the middle, the six categories around it, one node per handle: **solid** = exists
+(in place before, or delivered), **amber** = half-built (a card that *Finishes* something),
+**dashed** = missing (a card marked New). Deferred cards are left out of the diagram. This is the picture the human reads first — keep node labels to the handle's name.
 
 ```mermaid
 flowchart LR
@@ -229,6 +312,7 @@ One entry per revision: what changed, and which remark caused it.
 ## Accepted plan
 
 Filled only after an explicit go: the handles to build, in order, with the decisions they rest on.
+Set **Status:** `accepted` on those cards and milestones at the same time.
 
 ## Grill
 

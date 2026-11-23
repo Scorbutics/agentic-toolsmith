@@ -75,7 +75,7 @@ Acceptance is an explicit statement from the human — "go for M1", "build these
 build; milestones from the map's Roadmap are the natural unit.
 Restate it as an ordered list (dependencies first: the primitive before its scripts, the fence
 before the handle that needs it) with the decisions it rests on, and record it in the map under
-**Accepted plan**. Silence, or approval of part of the map, is not acceptance of the rest.
+**Accepted plan**; set **Status:** `accepted` (dated) on those cards and milestones. Silence, or approval of part of the map, is not acceptance of the rest.
 
 ## 6. Implement — one handle at a time, proven
 
@@ -86,7 +86,10 @@ For each accepted handle, in order:
    fails loudly the day the app changes under it;
 4. **configure the harness**: its permission (allow · ask · deny) and any guard its fence relies
    on (a hook, a wrapper) — so an agent can use it unattended;
-5. move its status in the map (missing → exists), update the "How to reach the app" section of
+5. move its card to **Delivered handles** with **Status:** `delivered` and a **Verified:** line at
+   the level actually reached — `implemented`, `tested` or `demoed`, with the evidence and any
+   caveat ("live demo deferred: <why>"); set the milestone's Status and Verified the same way, and
+   never mark it demoed unless its Demo ran end to end and showed its Expect. Update the "How to reach the app" section of
    the agent files every harness loads at startup — keep **one source**: the section in `AGENTS.md`
    (read by GitHub Copilot, Codex, Cursor), imported from `CLAUDE.md` with `@AGENTS.md` (plus a
    one-line pointer at its top), and referenced from `.github/copilot-instructions.md`. The section

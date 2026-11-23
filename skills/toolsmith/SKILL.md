@@ -39,14 +39,16 @@ Toolsmith progress:
 - [ ] 1. Read decisions — toolsmith/decisions.md (project and parent folder), the existing map, agent files
 - [ ] 2. Survey — the boundaries in scope; existing handles; agent-file rules; shared resources
 - [ ] 3. Choose the primitive — where the state lives decides it (principles.md)
-- [ ] 4. Cards — each with usage, Is, Not a script because, Origin, Fence, Parallel, Permission
-- [ ] 5. Roadmap — foundations, dependency order, keystones, milestones (M1 = walking skeleton)
+- [ ] 4. Cards — each with Status, usage, Is, Not a script because, Origin, Fence, Parallel, Permission
+- [ ] 5. Roadmap — foundations, real dependencies, keystones, milestones (M1 = walking skeleton),
+      each with Depends on, Demo and Expect; deferred cards in their own section
 - [ ] 6. Present — render the review page; wait
 - [ ] 7. Answer every remark — revise; record decisions
 - [ ] 8. Explicit go — "go for M1"; record the accepted plan
 - [ ] 9. Build — one handle at a time, on the project's build system
 - [ ] 10. Prove — run each usage example for real; add it to doctor and CI; configure permissions;
-      document it in the agent file; check a fresh session with no hint finds and uses it
+      document it in the agent file; check a fresh session with no hint finds and uses it; move the
+      card to Delivered with its Verified level (implemented · tested · demoed) — never rounded up
 ```
 
 Steps 1–5 are the map ([map.md](references/map.md), written with

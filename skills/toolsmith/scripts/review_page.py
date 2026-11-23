@@ -4,7 +4,10 @@
     python3 review_page.py map.md [more-maps.md …] [-o review.html] [--title "…"]
 
 Standard library only. The page shows the app with its handles by category (the Lab drawn around
-the six others), every proposed card with its usage, the tools already in place and the grill.
+the six others), the roadmap of open cards (proposed · accepted · in progress) with each milestone's
+dependencies, demo, expected result and verification level, then delivered and deferred handles in
+their own panels — never as proposals — the tools already in place and the grill. Warnings on
+stderr name what the map leaves ambiguous (no Status, no Depends on, delivered but not demoed).
 The reviewer marks each item right / wrong / unsure with a note — kept in the browser — and copies
 a Markdown feedback block back to the agent. No server, no network: the file works opened locally
 or published as a static page.
@@ -88,13 +91,30 @@ def field(text, name):
     return m.group(1).strip() if m else ''
 
 
-def parse(md):
-    secs = sections(md)
-    title = (md.splitlines() or [''])[0].lstrip('# ').strip()
-    pre = secs.get('_pre', '')
-    summary = field(pre, 'In one paragraph')
+LIFE = ('proposed', 'accepted', 'in progress', 'delivered', 'deferred')
+ALIAS = {'built': 'delivered', 'done': 'delivered', 'shipped': 'delivered', 'in-progress': 'in progress',
+         'building': 'in progress', 'wip': 'in progress', 'candidate': 'proposed', 'new': 'proposed'}
+LEVELS = ('implemented', 'tested', 'demoed')
+
+
+def lifecycle(text):
+    """The status word a **Status:** line starts with, normalised; '' when absent or unknown."""
+    t = re.sub(r'[`*]', '', text or '').strip().lower()
+    for w in sorted(list(LIFE) + list(ALIAS), key=len, reverse=True):
+        if t.startswith(w):
+            return ALIAS.get(w, w)
+    return ''
+
+
+def level(text):
+    """The verification level a **Verified:** line starts with: implemented · tested · demoed, or ''."""
+    m = re.match(r'\s*[`*]*(implemented|tested|demoed)\b', (text or '').lower())
+    return m.group(1) if m else ''
+
+
+def parse_cards(text, default):
     cards, cur, in_code = [], None, False
-    for line in find(secs, 'candidate').splitlines():
+    for line in text.splitlines():
         if line.startswith('```'):
             in_code = not in_code
         m = None if in_code else re.match(r'^#{3,4}\s+(.*)$', line)
@@ -126,18 +146,87 @@ def parse(md):
             if ms:
                 scripts.append((ms.group(1).split(' ')[0], ms.group(2)))
         way = next((b for b in bits if re.search(r'reach|bring|witness|lab|live', b.lower())), '')
+        status_line = field(body, 'Status')
+        life = lifecycle(status_line)
+        verified = field(body, 'Verified')
         out_cards.append({
             'name': re.sub(r'[`*]', '', name).strip(), 'cat': cat, 'also': also,
             'point': bits[0] if bits else '', 'way': way, 'cost': next((b for b in bits if b.lower().startswith('cost')), ''),
             'status': 'half' if fin and not re.match(r'\**new', fin, re.I) else 'missing',
+            'life': life or default, 'life_stated': bool(life), 'status_line': status_line,
+            'verified': verified, 'level': level(verified),
             'usage': usage.group(1).rstrip() if usage else '', 'scripts': scripts,
-            'lines': [(k, field(body, k)) for k in ('Is', 'Finishes', 'Gives the agent', 'Needs', 'Uses', 'Not a script because', 'Fence', 'Parallel', 'Permission') if field(body, k)],
+            'lines': [(k, field(body, k)) for k in ('Is', 'Finishes', 'Gives the agent', 'Needs', 'Uses', 'Not a script because', 'Fence',
+                                                    'Parallel', 'Permission', 'Deferred because', 'Revisit when') if field(body, k)],
         })
+    return out_cards
+
+
+def subsections(text):
+    """Split a section body on its ### / #### headings: [(title or None, body)]."""
+    out, cur = [], [None, []]
+    for line in text.splitlines():
+        mh = re.match(r'^#{3,4}\s+(.*)$', line)
+        if mh:
+            out.append(cur); cur = [mh.group(1).strip(), []]
+        else:
+            cur[1].append(line)
+    out.append(cur)
+    return [(t, '\n'.join(b)) for t, b in out]
+
+
+def parse_roadmap(road):
+    foundations = [[col(r, 'foundation'), col(r, 'used by'), col(r, 'unlocks'), col(r, 'cost')] for rows in tables(road) for r in rows if col(r, 'foundation')]
+    milestones, deferred = [], []
+    for title, body in subsections(road):
+        if title is None or re.match(r'^deferred\b', title, re.I):
+            # the roadmap's Deferred: a `### Deferred` list, or `**Deferred:**` lines anywhere
+            src = body if title else '\n'.join(l for l in body.splitlines() if l.startswith('**Deferred'))
+            deferred += [b for b in bullets(src) if b] if title else []
+            deferred += [field(l, 'Deferred') for l in src.splitlines() if field(l, 'Deferred')]
+            continue
+        lines = [l.strip() for l in body.splitlines() if l.strip()]
+        deferred += [field(l, 'Deferred') for l in lines if l.startswith('**Deferred') and field(l, 'Deferred')]
+        lines = [l for l in lines if not l.startswith('**Deferred')]
+        # several **Field:** on one line are allowed: split them so each is read
+        flat = [p for l in lines for p in re.split(r'(?<=\S)\s+(?=\*\*[A-Z][^*]{0,30}:\*\*)', l)]
+        f = {k: field('\n'.join(flat), k) for k in ('Status', 'Builds', 'Depends on', 'Demo', 'Expect', 'Verified')}
+        milestones.append({'title': title, 'body': flat, 'status': lifecycle(f['Status']), 'status_line': f['Status'],
+                           'builds': f['Builds'], 'depends': f['Depends on'], 'demo': f['Demo'], 'expect': f['Expect'],
+                           'verified': f['Verified'], 'level': level(f['Verified'])})
+    deferred = [d for d in deferred if not re.match(r'^\W*(none|nothing)\b', d, re.I)]
+    # a name is deferred only if no milestone builds it: "Deferred: none — `x` is in M2" must not defer `x`
+    built = {_norm(t) for m in milestones for t in re.findall(r'`([^`]+)`', m['builds'])}
+    deferred_names = {_norm(n) for d in deferred for n in re.findall(r'`([^`]+)`', d.split(' — ')[0])} - built
+    return {'foundations': foundations, 'milestones': milestones, 'deferred': deferred, 'deferred_names': deferred_names,
+            'mermaid': (re.search(r'```mermaid\n(.*?)```', road, re.S) or [None, ''])[1] if '```mermaid' in road else ''}
+
+
+def _norm(x):
+    return re.sub(r'[^a-z0-9]+', '', x.lower())
+
+
+def parse(md):
+    secs = sections(md)
+    title = (md.splitlines() or [''])[0].lstrip('# ').strip()
+    pre = secs.get('_pre', '')
+    summary = field(pre, 'In one paragraph')
+    roadmap = parse_roadmap(find(secs, 'roadmap'))
+    # each section gives its cards a default status; a card's own **Status:** line wins
+    cards = (parse_cards(find(secs, 'delivered'), 'delivered') + parse_cards(find(secs, 'candidate'), 'proposed')
+             + parse_cards(find(secs, 'deferred'), 'deferred'))
+    for c in cards:
+        if not c['life_stated'] and c['life'] == 'proposed' and _norm(c['name']) in roadmap['deferred_names']:
+            c['life'] = 'deferred'
+        if c['life'] == 'delivered':
+            c['status'] = 'exists'
+    cards = [c for c in cards if c['life'] != 'deferred'] + [c for c in cards if c['life'] == 'deferred']
+    built = {_norm(c['name']) for c in cards if c['life'] == 'delivered'}
     tools = []
     for rows in tables(find(secs, 'tools already')):
         for r in rows:
             nm = re.sub(r'[`*]', '', col(r, 'tool')).strip()
-            if not nm:
+            if not nm or _norm(nm) in built:  # a delivered card listed here too is shown once, as its card
                 continue
             c = (col(r, 'category') or '').lower()
             cat = next((x for x in CATS if c.startswith(x)), 'launch')
@@ -151,20 +240,34 @@ def parse(md):
         for r in rows:
             parallel['rows'].append([col(r, 'shared'), col(r, 'shared by'), col(r, 'what collides'), col(r, 'isolation'), col(r, 'proposal')])
     guards = [[col(r, 'rule'), col(r, 'guard'), col(r, 'kind')] for rows in tables(find(secs, 'rules')) for r in rows]
-    road = find(secs, 'roadmap')
-    foundations = [[col(r, 'foundation'), col(r, 'used by'), col(r, 'unlocks'), col(r, 'cost')] for rows in tables(road) for r in rows if col(r, 'foundation')]
-    milestones, cur = [], None
-    for line in road.splitlines():
-        mh = re.match(r'^#{3,4}\s+(.*)$', line)
-        if mh:
-            cur = {'title': mh.group(1).strip(), 'body': []}; milestones.append(cur)
-        elif cur is not None and line.strip() and not line.startswith('**Deferred'):
-            cur['body'].append(line.strip())
-    deferred = field(road, 'Deferred')
-    roadmap = {'foundations': foundations, 'milestones': milestones, 'deferred': deferred,
-               'mermaid': (re.search(r'```mermaid\n(.*?)```', road, re.S) or [None, ''])[1] if '```mermaid' in road else ''}
-    return {'title': title, 'summary': summary, 'parallel': parallel, 'guards': guards, 'roadmap': roadmap, 'cards': out_cards, 'tools': tools,
-            'grill': bullets(find(secs, 'grill')), 'unknowns': bullets(find(secs, 'unknowns'))}
+    patterns = [[col(r, 'pattern'), col(r, 'does'), col(r, 'evidence'), col(r, 'fits'), col(r, 'does not', 'not when', "doesn't"), col(r, 'here as', 'here')]
+                for rows in tables(find(secs, 'transferable')) for r in rows if col(r, 'pattern')]
+    return {'title': title, 'summary': summary, 'parallel': parallel, 'guards': guards, 'roadmap': roadmap, 'cards': cards, 'tools': tools,
+            'patterns': patterns, 'grill': bullets(find(secs, 'grill')), 'unknowns': bullets(find(secs, 'unknowns'))}
+
+
+def lint(model):
+    """What the map leaves ambiguous about status, dependencies and proof — printed by the CLI."""
+    w, rm = [], model['roadmap']
+    unstated = [c['name'] for c in model['cards'] if not c['life_stated'] and c['life'] == 'proposed']
+    if unstated:
+        w.append(f'{len(unstated)} card(s) without a **Status:** line, read as proposed: {", ".join(unstated[:6])}')
+    for c in model['cards']:
+        if c['life'] == 'delivered' and not c['level']:
+            w.append(f'delivered card `{c["name"]}` has no **Verified:** level (implemented · tested · demoed)')
+        if c['life_stated'] and c['life'] != 'deferred' and _norm(c['name']) in rm['deferred_names']:
+            w.append(f'card `{c["name"]}` is listed as deferred in the roadmap but its Status is {c["life"]}')
+    ms = [(m['title'].split(' — ')[0], m) for m in rm['milestones']]
+    for test, what in ((lambda m: not m['depends'], 'no **Depends on:** — the numbers will be read as dependencies'),
+                       (lambda m: not m['demo'], 'no **Demo:**'),
+                       (lambda m: m['demo'] and not m['expect'], 'no **Expect:** — the demo has no observable result to check')):
+        hit = [t for t, m in ms if test(m)]
+        if hit:
+            w.append(f'{", ".join(hit)}: {what}')
+    for t, m in ms:
+        if m['status'] == 'delivered' and m['level'] != 'demoed':
+            w.append(f'{t}: delivered but not demoed ({m["level"] or "no Verified line"}) — shown as such')
+    return w
 
 
 # ---------------------------------------------------------------- rendering
@@ -184,7 +287,10 @@ WORD = {'exists': 'exists', 'half': 'to finish', 'missing': 'missing'}
 
 
 def node(h, anchor):
-    tip = f'{h["name"]} — {WORD[h["status"]]}' + (f' · {h["way"]}' if h.get('way') else '')
+    life = h.get('life', '')
+    state = (f'delivered · {h.get("level") or "no evidence"}' if life == 'delivered'
+             else WORD[h['status']] + (f' · {life}' if life and life != 'proposed' else ''))
+    tip = f'{h["name"]} — {state}' + (f' · {h["way"]}' if h.get('way') else '')
     also = ''.join(f'<span class="also">+{LABELS[a]}</span>' for a in h.get('also', []))
     sc = f'<span class="sc">{len(h["scripts"])} scripts</span>' if h.get('scripts') else ''
     inner = f'<span class="sym">{SYM[h["status"]]}</span><span class="nm">{esc(h["name"])}</span>{also}{sc}'
@@ -193,7 +299,7 @@ def node(h, anchor):
 
 
 def picture(model, rid, name):
-    hs = [(t, None) for t in model['tools']] + [(c, f'{rid}-card-{i}') for i, c in enumerate(model['cards'])]
+    hs = [(t, None) for t in model['tools']] + [(c, f'{rid}-card-{i}') for i, c in enumerate(model['cards']) if c['life'] != 'deferred']
     order = {'exists': 0, 'half': 1, 'missing': 2}
 
     def box(cat, cls='cat'):
@@ -204,7 +310,7 @@ def picture(model, rid, name):
                 f'<span class="hint">{HINT[cat]}</span><span class="sum">{summ}</span></div>'
                 f'<div class="nodes">{"".join(node(h, a) for h, a in items)}</div></div>')
     rows = (f'<div class="row">{"".join(box(c) for c in ("launch", "ingress", "runtime"))}</div>'
-            f'<div class="hub"><strong>{esc(name)}</strong><span class="legend">● exists · ◐ to finish · ◌ missing</span></div>'
+            f'<div class="hub"><strong>{esc(name)}</strong><span class="legend">● exists or delivered · ◐ to finish · ◌ missing · deferred cards not drawn</span></div>'
             f'<div class="row">{"".join(box(c) for c in ("eyes", "egress", "state"))}</div>')
     return f'<div class="labframe">{box("lab", "labhead")}{rows}</div>'
 
@@ -226,55 +332,121 @@ def short_name(model):
     return re.split(r'\s+@\s+|\s+\(', t)[0].strip() or model['title']
 
 
-def _norm(x):
-    return re.sub(r'[^a-z0-9]+', '', x.lower())
+ACTIVE = ('proposed', 'accepted', 'in progress')
+
+
+def life_badge(life):
+    return f'<span class="life {life.replace(" ", "-")}">{esc(life)}</span>' if life else ''
+
+
+def proof_badge(status, lvl, verified):
+    """How far a delivered card or milestone was proven. Never rounds tested up to demoed."""
+    if lvl == 'demoed':
+        return '<span class="proof ok">✓ demoed end to end</span>'
+    if status == 'delivered':
+        return f'<span class="proof gap">{"⚠ " + esc(lvl) + " — not demoed" if lvl else "⚠ delivered without evidence"}</span>'
+    if lvl:
+        return f'<span class="proof part">{esc(lvl)} — not demoed yet</span>'
+    return ''
+
+
+def deps_tag(depends):
+    d = re.sub(r'[`*.]', '', depends or '').strip().lower()
+    if not d:
+        return '<span class="deps unknown" title="No Depends on line: the number is an order, not a dependency">dependencies not stated</span>'
+    if d.startswith('none') or d.startswith('nothing') or d.startswith('independent'):
+        return '<span class="deps indep">independent</span>'
+    return f'<span class="deps">depends on {md(depends.split(" — ")[0])}</span>'
 
 
 def roadmap_panel(model, cards, k):
-    """The proposed handles, compiled: foundations marked, cards placed in the milestone that builds
-    them, scripts each milestone adds, and what no milestone covers. Without a roadmap, a flat list."""
+    """The proposed handles, compiled: foundations marked, open cards placed in the milestone that builds
+    them, each milestone with its status, real dependencies, demo, expected result and how far it was
+    proven. Delivered and deferred cards are not drawn as proposals here — they have their own panels."""
     rm = model['roadmap']
-    names = [_norm(c['name']) for c in model['cards']]
+    mc = model['cards']
+    names = [_norm(c['name']) for c in mc]
+    active = [i for i, c in enumerate(mc) if c['life'] in ACTIVE]
     if not rm['milestones']:
-        return (f'<section class="panel"><h3>Proposed handles ({len(cards)})</h3><p class="muted">No roadmap in this map yet — '
-                f'a flat list. Would you build it? Is the usage right?</p><ul class="items">{"".join(cards)}</ul></section>')
+        return (f'<section class="panel"><h3>Proposed handles ({len(active)})</h3><p class="muted">No roadmap in this map yet — '
+                f'a flat list. Would you build it? Is the usage right?</p><ul class="items">{"".join(cards[i] for i in active)}</ul></section>')
     found = {_norm(re.sub(r'\(.*?\)', '', f[0]).replace('`', '')) for f in rm['foundations']}
+    script_names = {_norm(sn) for c in mc for sn, _ in c['scripts']}
     placed, groups = set(), []
     for m in rm['milestones']:
-        text = ' '.join(m['body'])
-        builds = next((b for b in m['body'] if b.startswith('**Builds')), text)
+        builds = m['builds'] or ' '.join(m['body'])
         ticks = [_norm(t) for t in re.findall(r'`([^`]+)`', builds)]
-        mine = [i for i, n in enumerate(names) if i not in placed and n and any(n == t or n in t or t in n for t in ticks if t)]
+        hit = lambda n: n and any(n == t or n in t or t in n for t in ticks if t)
+        mine = [i for i in active if i not in placed and hit(names[i])]
+        done = [i for i, c in enumerate(mc) if c['life'] == 'delivered' and hit(names[i])]
         placed.update(mine)
-        script_names = {_norm(sn) for c in model['cards'] for sn, _ in c['scripts']}
         added = [t for t in re.findall(r'`([^`]+)`', builds) if _norm(t) in script_names and _norm(t) not in names]
-        other = [b for b in m['body'] if not b.startswith('**Builds')]
-        groups.append((m, mine, added, other))
-    rest = [i for i in range(len(cards)) if i not in placed]
+        groups.append((m, mine, done, added))
+    rest = [i for i in active if i not in placed]
 
     def fmark(i):
         return '<span class="tag found">foundation</span>' if names[i] in found or any(names[i] and (names[i] in f or f in names[i]) for f in found if f) else ''
+    known = re.compile(r'^\*\*(Status|Builds|Depends on|Demo|Expect|Verified):\*\*')
     html_groups = ''
-    for m, mine, added, other in groups:
+    for m, mine, done, added in groups:
         cards_html = ''.join(cards[i].replace('<div class="title">', '<div class="title">' + fmark(i), 1) for i in mine)
-        html_groups += (f'<div class="milestone"><div class="ms-head"><div class="ms-main"><h4>{md(m["title"])}</h4>'
-                        + ''.join(f'<div>{md(b)}</div>' for b in other)
+        done_html = ('<div class="muted">Already delivered: ' + ', '.join(
+            f'<a href="#{k("").rstrip("|")}-card-{i}"><code>{esc(mc[i]["name"])}</code></a> ({esc(mc[i]["level"] or "no evidence")})' for i in done) + '</div>') if done else ''
+        demo = (f'<div><strong>Demo:</strong> {md(m["demo"])}</div>' if m['demo'] else '<div class="warn">No demo — nothing shows this milestone works.</div>')
+        expect = (f'<div><strong>Expect:</strong> {md(m["expect"])}</div>' if m['expect'] else
+                  ('<div class="warn">No expected result — the demo has nothing to check against.</div>' if m['demo'] else ''))
+        verified = f'<div><strong>Verified:</strong> {md(m["verified"])}</div>' if m['verified'] else ''
+        other = ''.join(f'<div>{md(b)}</div>' for b in m['body'] if not known.match(b))
+        badges = life_badge(m['status'] or 'proposed') + deps_tag(m['depends']) + proof_badge(m['status'], m['level'], m['verified'])
+        html_groups += (f'<div class="milestone ms-{(m["status"] or "proposed").replace(" ", "-")}"><div class="ms-head"><div class="ms-main">'
+                        f'<h4>{md(m["title"])}</h4><div class="badges">{badges}</div>'
+                        + (f'<div><strong>Builds:</strong> {md(m["builds"])}</div>' if m['builds'] else '')
+                        + (f'<div><strong>Depends on:</strong> {md(m["depends"])}</div>' if m['depends'] else '')
+                        + demo + expect + verified + other
                         + (f'<div class="muted">Scripts added: {", ".join(f"<code>{esc(a)}</code>" for a in added)}</div>' if added else '')
+                        + done_html
                         + f'</div>{verdict(k("milestone:" + m["title"][:40]), m["title"])}</div>'
-                        + (f'<ul class="items">{cards_html}</ul>' if cards_html else '<p class="muted">No new card — scripts on existing foundations.</p>')
+                        + (f'<ul class="items">{cards_html}</ul>' if cards_html else
+                           ('' if done else '<p class="muted">No new card — scripts on existing foundations.</p>'))
                         + '</div>')
     rest_html = ''
     if rest:
         rest_html = ('<div class="milestone"><div class="ms-head"><div class="ms-main"><h4>Not in a milestone</h4>'
-                     '<div class="muted">Proposed but not placed by the roadmap — move it into one, or drop it.</div></div></div>'
+                     '<div class="muted">Proposed but not placed by the roadmap — move it into one, defer it, or drop it.</div></div></div>'
                      f'<ul class="items">{"".join(cards[i] for i in rest)}</ul></div>')
-    return ('<section class="panel"><h3>Roadmap</h3><p class="muted">The proposed handles, compiled — foundations first, each milestone with '
-            'the cards it builds and the demo that proves it. Accept by milestone ("go for M1"); move or drop a card in its note.</p>'
+    return ('<section class="panel"><h3>Roadmap</h3><p class="muted">The open work, compiled — foundations first, each milestone with '
+            'the cards it builds, what it really depends on, and the demo that proves it. Numbers are an order, not a dependency. '
+            'Accept by milestone ("go for M1"); move or drop a card in its note.</p>'
             + (f'<details><summary class="muted">Foundations and dependency graph</summary>'
                f'{table(["Foundation", "Used by", "Unlocks", "Cost"], rm["foundations"]) if rm["foundations"] else ""}'
                f'{(chr(60) + "pre class=" + chr(34) + "mermaid" + chr(34) + ">" + esc(rm["mermaid"]) + "</pre>") if rm["mermaid"] else ""}</details>')
-            + html_groups + rest_html
-            + (f'<p class="muted"><strong>Deferred:</strong> {md(rm["deferred"])}</p>' if rm['deferred'] else '') + '</section>')
+            + html_groups + rest_html + '</section>')
+
+
+def deferred_panel(model, cards, k):
+    mc = model['cards']
+    idx = [i for i, c in enumerate(mc) if c['life'] == 'deferred']
+    have = {_norm(mc[i]['name']) for i in idx}
+    loose = [d for d in model['roadmap']['deferred']
+             if not any(_norm(n) in have for n in re.findall(r'`([^`]+)`', d.split(' — ')[0]))]
+    if not idx and not loose:
+        return ''
+    return (f'<section class="panel deferred"><details><summary><h3 style="display:inline">Deferred ({len(idx) + len(loose)})</h3></summary>'
+            '<p class="muted">Not planned this round, and not proposed: kept so the next map does not rediscover them. '
+            'Say in a note if one should come back.</p>'
+            + (f'<ul class="items">{"".join(cards[i] for i in idx)}</ul>' if idx else '')
+            + (f'<ul class="plain">{"".join(f"<li>{md(d)}</li>" for d in loose)}</ul>' if loose else '')
+            + '</details></section>')
+
+
+def delivered_panel(model, cards):
+    idx = [i for i, c in enumerate(model['cards']) if c['life'] == 'delivered']
+    if not idx:
+        return ''
+    demoed = sum(model['cards'][i]['level'] == 'demoed' for i in idx)
+    return (f'<section class="panel"><h3>Delivered ({len(idx)})</h3><p class="muted">Built since the map was made — available now, not '
+            f'proposals. {demoed} of {len(idx)} demoed end to end; the rest say how far they were proven.</p>'
+            f'<ul class="items">{"".join(cards[i] for i in idx)}</ul></section>')
 
 
 def repo_section(model, rid, multi):
@@ -286,10 +458,22 @@ def repo_section(model, rid, multi):
         scripts = ('<div class="scripts"><strong>Scripts run through it</strong><ul>'
                    + ''.join(f'<li><code>{esc(n)}</code> — {md(u)}</li>' for n, u in c['scripts']) + '</ul></div>') if c['scripts'] else ''
         usage = f'<pre>{esc(c["usage"])}</pre>' if c['usage'] else '<p class="warn">No usage example.</p>'
-        cards.append(f'<li class="item" id="{rid}-card-{i}"><div class="main"><div class="title"><span class="st {c["status"]}">{SYM[c["status"]]} {WORD[c["status"]]}</span> '
+        life = c['life']
+        if life == 'delivered':
+            st = '<span class="st exists">● delivered</span>' + proof_badge('delivered', c['level'], c['verified'])
+            lines = (f'<div><strong>Verified:</strong> {md(c["verified"])}</div>' if c['verified'] else '') + lines
+            group = 'delivered'
+        elif life == 'deferred':
+            st = '<span class="st deferred">deferred</span>'
+            group = 'deferred'
+        else:
+            st = f'<span class="st {c["status"]}">{SYM[c["status"]]} {WORD[c["status"]]}</span>' + life_badge(life)
+            lines += f'<div><strong>Verified:</strong> {md(c["verified"])}</div>' if c['verified'] else ''
+            group = 'card'
+        cards.append(f'<li class="item life-{life.replace(" ", "-")}" id="{rid}-card-{i}"><div class="main"><div class="title">{st} '
                      f'{esc(c["name"])} <span class="tag">{LABELS[c["cat"]]}</span>{"".join(f"<span class=tag>+{LABELS[a]}</span>" for a in c["also"])}'
                      f' <span class="tag way">{esc(c["way"])}</span> <span class="muted">{esc(c["cost"])}</span></div>'
-                     f'{usage}{lines}{scripts}</div>{verdict(k("card:" + c["name"]), c["name"])}</li>')
+                     f'{usage}{lines}{scripts}</div>{verdict(k(group + ":" + c["name"]), c["name"])}</li>')
     tools = ''.join(f'<li class="item"><div class="main"><div class="title"><span class="st exists">● exists</span> {md(t["name"])} '
                     f'<span class="tag">{LABELS[t["cat"]]}</span></div>{f"<div class=muted>{md(t["usage"])}</div>" if t["usage"] else ""}</div>'
                     f'{verdict(k("tool:" + t["name"]), t["name"])}</li>' for t in model['tools'])
@@ -306,7 +490,12 @@ def repo_section(model, rid, multi):
     if model['guards']:
         parts.append(f'<section class="panel"><h3>Rules → guards</h3><p class="muted">Rules the agent files state in prose, and what would enforce each.</p>'
                      f'{table(["Rule", "Guard", "Kind"], model["guards"])}{verdict(k("guards:section"), "Rules to guards")}</section>')
-    parts.insert(1, roadmap_panel(model, cards, k))
+    if model['patterns']:
+        parts.append(f'<section class="panel"><h3>Transferable patterns</h3><p class="muted">Ideas another project could reuse — '
+                     f'where each fits, and where it does not.</p>'
+                     f'{table(["Pattern", "Does", "Evidence here", "Fits when", "Does not fit when", "Here as"], model["patterns"])}'
+                     f'{verdict(k("patterns:section"), "Transferable patterns")}</section>')
+    parts[1:1] = [x for x in (roadmap_panel(model, cards, k), delivered_panel(model, cards), deferred_panel(model, cards, k)) if x]
     if grill:
         parts.append(f'<section class="panel"><h3>Questions for you ({len(model["grill"])})</h3><p class="muted">Type your answer in the note.</p><ul class="items">{grill}</ul></section>')
     if tools:
@@ -321,7 +510,7 @@ def repo_section(model, rid, multi):
 def overview(models, rids):
     rows = []
     for m, rid in zip(models, rids):
-        hs = m['tools'] + m['cards']
+        hs = m['tools'] + [c for c in m['cards'] if c['life'] != 'deferred']
         cells = ''
         for c in CATS:
             x = [h for h in hs if h['cat'] == c]
@@ -392,6 +581,11 @@ ul.items{list-style:none;margin:0;padding:0}
 .milestone{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;background:var(--bg)}
 .ms-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 18px}.ms-main{display:grid;gap:4px;font-size:14px;color:var(--fg2);min-width:0}.ms-main h4{font-size:15px;color:var(--fg)}
 .tag.found{background:var(--fg);color:var(--bg)}
+.badges{display:flex;flex-wrap:wrap;gap:6px}.life,.proof,.deps{font-size:12px;border-radius:999px;padding:0 8px;font-weight:500;border:1px solid var(--line);margin-right:4px}
+.life.accepted,.life.in-progress{background:var(--accs);border-color:var(--acc)} .life.delivered{background:var(--oks);color:var(--ok);border-color:var(--ok)}
+.proof.ok{background:var(--oks);color:var(--ok);border-color:var(--ok)} .proof.part{background:var(--halfs);color:var(--half);border-color:var(--half)}
+.proof.gap{background:var(--bads);color:var(--bad);border-color:var(--bad)} .deps.indep{background:var(--s2)} .deps.unknown{color:var(--half);border-style:dashed}
+.st.deferred{background:var(--s2);color:var(--fg3);text-decoration:line-through} .life-deferred .main{opacity:.75} ul.plain{margin:6px 0 0;padding-left:18px;color:var(--fg2)}
 .milestone .item:first-child{border-top:1px solid var(--line)}
 .verdict{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:330px;align-content:start}
 .verdict button{font:500 13px system-ui,sans-serif;border:1px solid var(--line);background:var(--s);color:var(--fg2);border-radius:999px;padding:4px 10px;cursor:pointer}
@@ -423,7 +617,7 @@ const boxes=[...document.querySelectorAll('.verdict')],missed=[...document.query
 function paint(){boxes.forEach(b=>{const c=st[b.dataset.key]||{};b.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(c.v===x.dataset.v)));
  const i=b.querySelector('input');if(document.activeElement!==i)i.value=c.note||''});
  missed.forEach(t=>{if(document.activeElement!==t)t.value=(st[t.dataset.repo+'|_missed']||{}).note||''});out.value=feedback()}
-function feedback(){const L=['# Toolsmith review feedback',''];const grp={milestone:'Roadmap milestones',card:'Proposed handles',grill:'Answers to the questions',parallel:'Parallel agents',guards:'Rules to guards',tool:'Already in place'};
+function feedback(){const L=['# Toolsmith review feedback',''];const grp={milestone:'Roadmap milestones',card:'Proposed handles',delivered:'Delivered handles',deferred:'Deferred handles',grill:'Answers to the questions',parallel:'Parallel agents',guards:'Rules to guards',patterns:'Transferable patterns',tool:'Already in place'};
  document.querySelectorAll('article.repo').forEach(a=>{const rid=a.dataset.repo,mine=boxes.filter(b=>b.dataset.key.startsWith(rid+'|'));const sec=[];
   for(const g of Object.keys(grp)){const rows=mine.filter(b=>b.dataset.key.startsWith(rid+'|'+g+':')).map(b=>[b,st[b.dataset.key]||{}]).filter(([b,c])=>c.v||c.note);
    if(rows.length){sec.push('### '+grp[g]);rows.forEach(([b,c])=>sec.push(`- [${c.v||'note'}] ${b.dataset.label}${c.note?' — '+c.note:''}`))}}
@@ -457,10 +651,14 @@ def main():
     out = Path(a.out or Path(a.maps[0]).with_name('review.html'))
     out.write_text(render(models, a.title), encoding='utf-8')
     for m, path in zip(models, a.maps):
-        print(f'{path}: {len(m["cards"])} cards, {len(m["tools"])} tools in place, {len(m["grill"])} questions,'
+        by = {l: sum(c['life'] == l for c in m['cards']) for l in LIFE}
+        life = ', '.join(f'{n} {l}' for l, n in by.items() if n)
+        print(f'{path}: {len(m["cards"])} cards ({life or "none"}), {len(m["tools"])} tools in place, {len(m["grill"])} questions,'
               f' {len(m["roadmap"]["milestones"])} milestones')
         if not m['cards']:
             print(f'warning: no candidate cards in {path} — check the card headings follow the template', file=sys.stderr)
+        for w in lint(m):
+            print(f'warning: {path}: {w}', file=sys.stderr)
     print(f'-> {out}')
 
 
