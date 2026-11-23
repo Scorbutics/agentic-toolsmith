@@ -16,10 +16,14 @@ def card(name, status=None, extra=''):
             f'**Finishes:** **New**\n\n```sh\n$ {name}\nok\n```\n\n**Is:** a CLI.\n{extra}\n')
 
 
-def mapdoc(delivered='', candidates='', deferred='', roadmap='', tools='', patterns=''):
+def mapdoc(delivered='', candidates='', deferred='', roadmap='', tools='', patterns='', capabilities=''):
     return f"""# Agent map — demo @ abc123 (2026-11-01)
 
 **In one paragraph:** test map.
+
+## Capabilities
+
+{capabilities}
 
 ## Tools already in place
 
@@ -181,7 +185,7 @@ class Milestones(unittest.TestCase):
 """))
         self.assertEqual(m['cards'][0]['life'], 'proposed')
         self.assertEqual(m['roadmap']['deferred'], [])
-        self.assertEqual(rp.lint(m), [])
+        self.assertEqual([x for x in rp.lint(m) if 'Capabilities' not in x], [])
 
 
 class AfterTheSnapshot(unittest.TestCase):
@@ -228,6 +232,170 @@ class Template(unittest.TestCase):
                          {'dev-login': 'proposed', 'remote eval': 'accepted', 'mail last': 'deferred'})
         self.assertEqual(rp.lint(m), [])
         self.assertEqual(len(m['patterns']), 1)
+        self.assertEqual({c['id']: c['state'] for c in m['capabilities']}, {'C1': 'accepted', 'C2': 'planned', 'C3': 'deferred'})
+
+
+def nodes(page):
+    pic = section(page, 'The app and its handles')
+    return re.findall(r'data-tip="([^"—]+?) —', pic)
+
+
+class NoDuplicateNodes(unittest.TestCase):
+    def test_one_row_per_verb_is_one_node(self):
+        m = rp.parse(mapdoc(tools='| `effect ledger` | egress | check | witness | B6 | `ledger check` |\n'
+                                  '| `effect ledger` (replay) | state | steer | bring out | B5 | `ledger replay` |\n'))
+        self.assertEqual(nodes(rp.render(m)).count('effect ledger'), 1)
+        t = next(t for t in m['tools'] if t['name'] == 'effect ledger')
+        self.assertEqual((t['cat'], t['also']), ('egress', ['state']))
+        self.assertIn('ledger replay', t['usage'])
+
+    def test_delivered_card_under_another_spelling(self):
+        m = rp.parse(mapdoc(delivered=card('bin/agent shot', 'delivered', '**Verified:** demoed — ok\n'),
+                            tools='| `bin/agent shot` (scripts/agent/shot.rb) | eyes | see | witness | B1 | `bin/agent shot home` |\n'))
+        self.assertEqual(nodes(rp.render(m)).count('bin/agent shot'), 1)
+
+    def test_card_finishing_a_tool_replaces_its_node(self):
+        c = card('dev-up', 'proposed').replace('**Finishes:** **New**', '**Finishes:** `make run` (no reset, fixed port)')
+        m = rp.parse(mapdoc(candidates=c, tools='| `make run` | launch | steer | reach in | B2 | `make run` |\n'))
+        page = rp.render(m)
+        self.assertEqual(sorted(nodes(page)), ['dev-up', 'logs'])
+        self.assertIn('make run', section(page, 'Already in place'))
+
+
+ROAD = """### M1 — skeleton
+**Status:** {a}
+**Builds:** `a`.
+**Depends on:** none.
+**Demo:** `a`
+**Expect:** ok.
+
+### M2 — reach
+**Status:** {b}
+**Builds:** `b`.
+**Depends on:** none.
+**Demo:** `b`
+**Expect:** ok.
+"""
+
+
+class RoadmapIntro(unittest.TestCase):
+    def intro(self, a, b):
+        la = 'delivered' if a == 'delivered' else 'proposed'
+        lb = 'delivered' if b == 'delivered' else 'proposed'
+        v = '**Verified:** demoed — ok\n'
+        m = rp.parse(mapdoc(candidates=card('a', la, v if la == 'delivered' else '') + card('b', lb, v if lb == 'delivered' else ''),
+                            roadmap=ROAD.format(a=a, b=b)))
+        return section(rp.render(m), 'Roadmap')[:1200]
+
+    def test_all_delivered_asks_for_nothing(self):
+        t = self.intro('delivered', 'delivered')
+        self.assertNotIn('go for', t)
+        self.assertIn('Every milestone on this roadmap is delivered', t)
+
+    def test_asks_for_the_next_waiting_milestone(self):
+        t = self.intro('delivered', 'proposed')
+        self.assertIn('go for M2', t)
+        self.assertNotIn('go for M1', t)
+        self.assertIn('Delivered: M1', t)
+
+    def test_accepted_is_not_asked_again(self):
+        t = self.intro('delivered', 'accepted')
+        self.assertNotIn('go for', t)
+        self.assertIn('Accepted, being built: M2', t)
+
+    def test_fresh_map_asks_for_m1(self):
+        self.assertIn('go for M1', self.intro('proposed', 'proposed'))
+
+
+CAPS = """| # | Capability — the agent can… | Today | Evidence |
+|---|---|---|---|
+| C1 | run the loop unattended | a human starts it | `README.md:3` |
+| C2 | reach any state as any persona | typed login | B9 |
+| C3 | check what left the app | live mail | B6 |
+| C4 | replay a production incident | nothing | task "refund bug" |
+"""
+
+CAP_ROAD = """### M1 — skeleton
+**Capability:** C1 — run the loop unattended.
+**Status:** delivered
+**Builds:** `a`.
+**Depends on:** none.
+**Demo:** `a`
+**Expect:** ok.
+**Verified:** demoed — ran, 2026-11-20
+
+### M2 — reach
+**Capability:** reach any state as any persona
+**Status:** proposed
+**Builds:** `b`.
+**Depends on:** none.
+**Demo:** `b`
+**Expect:** ok.
+
+### M3 — depth
+**Capability:** C2 — deeper: time travel.
+**Status:** accepted
+**Builds:** `c`.
+**Depends on:** M2 — `b`.
+**Demo:** `c`
+**Expect:** ok.
+
+### M4 — stray
+**Status:** proposed
+**Builds:** `d`.
+**Depends on:** none.
+**Demo:** `d`
+**Expect:** ok.
+
+### Deferred
+
+- C3 — check what left the app: waits for the mail fence.
+"""
+
+
+class Capabilities(unittest.TestCase):
+    def setUp(self):
+        self.model = rp.parse(mapdoc(
+            candidates=card('b', 'proposed') + card('c', 'accepted') + card('d', 'proposed'),
+            delivered=card('a', 'delivered', '**Verified:** demoed — ok\n'),
+            capabilities=CAPS, roadmap=CAP_ROAD))
+        self.page = rp.render(self.model)
+        self.caps = {c['id']: c for c in self.model['capabilities']}
+
+    def test_milestones_linked_by_id_or_words(self):
+        self.assertEqual({k: [rp.ms_id(m) for m in c['milestones']] for k, c in self.caps.items()},
+                         {'C1': ['M1'], 'C2': ['M2', 'M3'], 'C3': [], 'C4': []})
+
+    def test_state_derived_from_milestones(self):
+        self.assertEqual({k: c['state'] for k, c in self.caps.items()},
+                         {'C1': 'delivered', 'C2': 'accepted', 'C3': 'deferred', 'C4': 'no milestone'})
+
+    def test_roadmap_grouped_by_capability(self):
+        road = section(self.page, 'Roadmap')
+        self.assertIn('Roadmap — by capability', self.page)
+        i = {x: road.index(x) for x in ('>C1<', '>C2<', '>C3<', '>C4<', 'No capability named', 'M4 — stray')}
+        self.assertTrue(i['>C1<'] < i['>C2<'] < i['>C3<'] < i['>C4<'] < i['No capability named'] < i['M4 — stray'])
+        c2 = road[i['>C2<']:i['>C3<']]
+        self.assertIn('M2 — reach', c2)
+        self.assertIn('M3 — depth', c2)
+        self.assertIn('waits for the mail fence', road[i['>C3<']:i['>C4<']])
+        self.assertIn('No milestone delivers this capability', road[i['>C4<']:i['No capability named']])
+        self.assertIn('data-key="r0|capability:C1"', road)
+
+    def test_lint(self):
+        w = rp.lint(self.model)
+        self.assertIn('M4: no **Capability:** — which capability does it deliver?', w)
+        self.assertIn('C4: no milestone delivers it and it is not under Deferred', w)
+        self.assertFalse([x for x in w if 'names none of' in x])
+
+    def test_unknown_capability_id(self):
+        m = rp.parse(mapdoc(capabilities=CAPS, candidates=card('a', 'proposed'),
+                            roadmap='### M1 — x\n**Capability:** C9\n**Builds:** `a`.\n**Depends on:** none.\n**Demo:** `a`\n**Expect:** ok.\n'))
+        self.assertIn('M1: **Capability:** names none of C1, C2, C3, C4', rp.lint(m))
+
+    def test_overview_counts_capabilities(self):
+        page = rp.render([self.model, self.model])
+        self.assertIn('<td>1/4 delivered</td>', page)
 
 
 if __name__ == '__main__':

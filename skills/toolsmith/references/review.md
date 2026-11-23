@@ -105,7 +105,9 @@ For each accepted handle, in order:
    `node_modules`, no submodules, the shared stack still running — because parallel agents work
    there: discovery that only works in the main checkout (a CLI run inside a submodule, a path to
    the human's folder) is a handle half the agents cannot reach;
-7. re-render the page so the human sees the picture fill in.
+7. re-render the page so the human sees the picture fill in. When you hand it over after a build,
+   say what was delivered and how far each piece was proven; ask for a go only on a milestone
+   still `proposed` — never on one already accepted or delivered.
 
 If building shows the plan was wrong (a handle needs something the map missed, a primitive is
 cheaper than three scripts promised), stop and bring it back to step 3 — do not quietly redesign.

@@ -124,23 +124,32 @@ is possible for an agent is a `human-only` point; say who holds it.
    them in one "Noticed in passing" line at the end, or leave them out — **unless the point is, or
    should become, a handle**: an always-on debug port is a half-built remote-debug handle, and its
    exposure goes in that card's Fence line, not in passing.
-4. **Grill the map** — see below.
-5. **Write it** with [map-template.md](map-template.md), including the diagram, then render the
+4. **Name the capabilities** — before any card. From the inventory, the two to five things the
+   agent cannot do today on this project and most needs: "run the loop unattended", "reach any
+   state as any persona", "check what left the app". Phrase each as what the agent can do, never
+   as a tool; give each its evidence (points, tasks, human steps in the agent files) and what
+   happens today instead. They are the map's direction: the cards are proposed to deliver them,
+   and the roadmap is cut along them.
+5. **Grill the map** — see below.
+6. **Write it** with [map-template.md](map-template.md), including the diagram, then render the
    review page (`scripts/review_page.py`) and start the review loop ([review.md](review.md)).
-6. **Propose, don't build.** List candidate handles *on the map* — project code or an existing
+7. **Propose, don't build.** For each capability, the handles that deliver it — fewest first,
+   scripts under the primitive before dedicated cards. List candidate handles *on the map* — project code or an existing
    tool chosen by fit ([tools.md](tools.md)). Every candidate is something the agent *calls* (principles.md) and shows **how it would be used**: the
    exact command (or call, or URL) and a few lines of what it prints. A handle you cannot write a
    usage example for is not designed yet. For a runtime-shaped app, the candidates include remote
    debug and remote eval into the live process (handles.md, "Runtime-shaped apps"). Each card
    names its **category** (launch · ingress · runtime · state · egress · eyes · lab — categories.md), its point, verb, way and rough cost.
-7. **Compile the roadmap** (roadmap.md): foundations shared by several cards, the
-   dependency order, keystones, and milestones — M1 the walking skeleton — each ending on a demo
-   the agent can run. Re-read the cards after compiling: a card that is a foundation plus a
-   snippet becomes a script, and a capability several cards need becomes a foundation. Every card
+8. **Compile the roadmap** (roadmap.md): foundations shared by several cards, the
+   dependency order, keystones, and milestones cut by capability — M1 the walking skeleton — each
+   naming the capability it delivers and ending on a demo that proves it. Re-read the cards after
+   compiling: a card that is a foundation plus a snippet becomes a script, a base several cards
+   need becomes a foundation, and a card no capability needs is dropped or deferred. Every card
    must appear, by its exact name in backticks, in one milestone's **Builds:** line or in
    **Deferred** — the review page places cards by that name. Every card has a **Status:** line
-   (`proposed` on a fresh map), and every milestone its **Depends on**, **Demo** and **Expect**.
-8. **Patterns, if any.** When the project does something another project could reuse, add it to
+   (`proposed` on a fresh map), and every milestone its **Capability**, **Depends on**, **Demo**
+   and **Expect**. Every capability is delivered by a milestone or listed under **Deferred**.
+9. **Patterns, if any.** When the project does something another project could reuse, add it to
    Transferable patterns — the capability, the evidence, where it fits and where it does not
    ([tools.md](tools.md), "Patterns, not products"). Optional; at most three.
 

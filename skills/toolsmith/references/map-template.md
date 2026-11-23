@@ -3,6 +3,7 @@
 ## Contents
 - Parallel agents
 - Tools already in place
+- Capabilities
 - Delivered handles
 - Candidate handles (not built)
 - Deferred handles
@@ -26,7 +27,7 @@
 a local build of it, two render backends, debug vs release; one line each, and which handles
 exist only on one of them. Omit when there is one way to run it.>
 
-**In one paragraph:** how well an agent can reach this app today, and the two or three handles that would change that most.
+**In one paragraph:** how well an agent can reach this app today, and the two or three capabilities that would change that most.
 
 ## Parallel agents
 
@@ -47,6 +48,24 @@ row per verb. A handle toolsmith builds is not added here: its card moves to Del
 |---|---|---|---|---|---|
 | <effect ledger> | egress | check | witness | B5, B6 | `bun run assay:check run.log --require <op>` |
 | <stdin console> | runtime | steer, see | reach in | B3 | type a Ruby line in the game's terminal |
+
+## Capabilities
+
+The backbone of the roadmap: what the agent **cannot do today** on this project, named before any
+card. Two to five, each a thing the agent can do once it is delivered — "reach any screen as any
+persona, unattended" — never a tool or a handle name ("Playwright", "`dev-login`"). Each rests on
+evidence from the survey: a point, a task that needed it, a human step in an agent file. Handles
+are the means; every card serves a capability through the milestone that builds it, and a card no
+capability needs is not proposed.
+
+| # | Capability — the agent can… | Today | Evidence |
+|---|---|---|---|
+| C1 | run the loop unattended: launch an isolated copy, reach a state, see it, check it | a human starts the server and reads the screen | no launch script; `README.md:14` "open localhost:3000" |
+| C2 | reach any state as any persona, at any time | ad-hoc seeds; login typed by the human | B9 `db/seeds.rb` personas, no session mint; 35 `Time.now` reads (B8) |
+| C3 | check what left the app | mail goes through the live provider | B6 `lib/mail.ts:26` |
+
+**Today** says what happens instead: a human step, an ad-hoc script, or nothing. Each capability
+is delivered by one or more milestones, or listed under the roadmap's Deferred with why.
 
 ## Delivered handles
 
@@ -172,8 +191,13 @@ flowchart LR
   eval --> clock[[clock]] & state[[state]] & shot[[shot]]
 ```
 
+**Milestones are cut by capability.** Each milestone delivers one capability (or a deeper step
+of one), named first; its demo proves the capability, not just that the handles run. The cards
+it builds are the means.
+
 Every milestone has the same lines, one per line; the review page reads them:
 
+- **Capability:** `C<n>` — the capability it delivers, from the table above.
 - **Status:** `proposed` · `accepted` · `in progress` · `delivered`.
 - **Builds:** the cards, by their exact names in backticks, and the scripts it adds.
 - **Depends on:** the milestones it really needs, each with what it needs from it — or `none`.
@@ -187,6 +211,7 @@ Every milestone has the same lines, one per line; the review page reads them:
   page shows it as not demoed.
 
 ### M1 — walking skeleton · keystone
+**Capability:** C1 — run the loop unattended.
 **Status:** accepted (2026-11-18)
 **Builds:** per-run environment, `remote eval`, scripts `state`, `shot`.
 **Depends on:** none.
@@ -195,6 +220,7 @@ Every milestone has the same lines, one per line; the review page reads them:
 **Why first:** every later card is a script on these two foundations.
 
 ### M2 — reach any state
+**Capability:** C2 — reach any state as any persona, at any time.
 **Status:** proposed
 **Builds:** `dev-login`, scripts `clock`, `press`.
 **Depends on:** M1 — `remote eval` runs the `clock` script.
@@ -203,9 +229,10 @@ Every milestone has the same lines, one per line; the review page reads them:
 
 ### Deferred
 
-One line per deferred card or milestone, by name, with why; the cards themselves are under
-Deferred handles.
+One line per deferred capability, milestone or card, by name, with why; the cards themselves are
+under Deferred handles.
 
+- C3 — check what left the app: waits for the mail fence (`mail last`).
 - `mail last` — waits for the mail fence.
 
 ## Transferable patterns
@@ -214,8 +241,9 @@ Optional, at most three: an idea from this project that another project could re
 **capability**, not the tool: what it does, the evidence it matters here, what a project needs
 before it fits, and where it does not. Write it in terms another stack could implement — this
 project's framework, file names and team conventions stay in the Evidence column. A pattern that
-an existing or proposed handle already embodies names that handle in **Here as**; it is never a
-second card.
+an existing or proposed handle already embodies names that handle or capability in **Here as**;
+it is never a second card. These patterns look outward; they do not set this project's roadmap —
+the Capabilities do.
 
 | Pattern | Does | Evidence here | Fits when | Does not fit when | Here as |
 |---|---|---|---|---|---|
@@ -243,7 +271,9 @@ consequences, and the fence that makes the handles above safe to use.
 
 The app in the middle, the six categories around it, one node per handle: **solid** = exists
 (in place before, or delivered), **amber** = half-built (a card that *Finishes* something),
-**dashed** = missing (a card marked New). Deferred cards are left out of the diagram. This is the picture the human reads first — keep node labels to the handle's name.
+**dashed** = missing (a card marked New). Deferred cards are left out of the diagram. One node per
+handle, not per row: a tool listed once per verb is one node, and a tool a card *Finishes* is
+drawn only as that card. This is the picture the human reads first — keep node labels to the handle's name.
 
 ```mermaid
 flowchart LR

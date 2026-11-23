@@ -39,9 +39,11 @@ Toolsmith progress:
 - [ ] 1. Read decisions — toolsmith/decisions.md (project and parent folder), the existing map, agent files
 - [ ] 2. Survey — the boundaries in scope; existing handles; agent-file rules; shared resources
 - [ ] 3. Choose the primitive — where the state lives decides it (principles.md)
+- [ ] 3b. Name the capabilities — 2–5 things the agent cannot do today, with evidence; the roadmap's backbone
 - [ ] 4. Cards — each with Status, usage, Is, Not a script because, Origin, Fence, Parallel, Permission
-- [ ] 5. Roadmap — foundations, real dependencies, keystones, milestones (M1 = walking skeleton),
-      each with Depends on, Demo and Expect; deferred cards in their own section
+- [ ] 5. Roadmap — milestones cut by capability (M1 = walking skeleton), foundations, real
+      dependencies, keystones; each milestone with Capability, Depends on, Demo and Expect;
+      deferred cards in their own section
 - [ ] 6. Present — render the review page; wait
 - [ ] 7. Answer every remark — revise; record decisions
 - [ ] 8. Explicit go — "go for M1"; record the accepted plan
@@ -81,8 +83,9 @@ python3 <skill>/scripts/review_page.py a/map.md b/map.md -o review.html # severa
   [parallel.md](references/parallel.md)
 - **Rules as guards.** Prose rules in agent files become hooks, permission lists, lint rules.
   [guards.md](references/guards.md)
-- **Roadmap, not a list.** Compile cards into foundations and milestones, each ending on a demo
-  the agent can run. [roadmap.md](references/roadmap.md)
+- **Capabilities first, then handles.** Name what the agent cannot do today; cut the roadmap
+  into milestones that each deliver one capability, proven by a demo the agent can run. Handles
+  are the means. [roadmap.md](references/roadmap.md)
 - **Review before building.** Answer every remark individually; build only after an explicit go;
   record decisions in `toolsmith/decisions.md` so the next map does not re-open them.
   [review.md](references/review.md)
