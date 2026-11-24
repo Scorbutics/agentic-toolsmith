@@ -14,9 +14,11 @@ whether the skill author's tools (motu, assay) were proposed. The judge is told 
 never which answer is wanted.
 
 Reported per run label, arm and model (all repeats pooled):
-  - cards by way and level (scripts under a primitive counted apart, so one runner with eight
-    scripts does not outweigh one lab);
-  - cells reached and the busiest cell's share (1.0 = every card in one cell);
+  - the cells each map REACHES — a cell counts once however many proposals land in it, scripts
+    under a primitive included — and those cells by way and level. Counting proposals instead lets
+    one runner with eight scripts outweigh one lab; counting cards only hides a map whose substance
+    is scripts under one primitive, which is the design the skill asks for;
+  - the busiest cell's share of all proposals (1.0 = everything in one cell);
   - M1's cell, and how often it is loop-only (environments, launch);
   - author tools proposed where the scenario says they do not fit — must be 0;
   - against the answer keys (evals/answer-keys/<scenario>.md), when filled: the expected cells a map
@@ -133,19 +135,20 @@ def against_key(reached, m1, key):
 def metrics(j, sc, key):
     props = j.get('proposals') or []
     cards = [p for p in props if (p.get('kind') or 'card').lower() != 'script']
-    cells = [cell(p) for p in cards]
+    cells = [cell(p) for p in props]
     in_cells = [c for c in cells if c and c != 'loop']
     cc = Counter(in_cells)
+    distinct = sorted(cc)
     fit = set(sc.get('author_tools_fit', [])) | set(sc.get('author_tools_borderline', []))
     at = j.get('author_tools') or {}
     m1 = cell(j.get('m1') or {}) if j.get('m1') else None
     reached = set(in_cells) | ({'loop'} if 'loop' in cells else set())
     return {
-        'cards': len(cards), 'scripts': len(props) - len(cards), 'loop_only': cells.count('loop'), 'in_cells': len(in_cells),
-        'ways': {w: sum(c.endswith(w) for c in in_cells) for w in WAYS},
-        'levels': {lv: sum(c.startswith(lv) for c in in_cells) for lv in LEVELS},
+        'cards': len(cards), 'scripts': len(props) - len(cards), 'loop_only': cells.count('loop'), 'in_cells': len(distinct),
+        'ways': {w: sum(c.endswith(w) for c in distinct) for w in WAYS},
+        'levels': {lv: sum(c.startswith(lv) for c in distinct) for lv in LEVELS},
         'cells': sorted(reached), 'cells_reached': len(cc),
-        'busiest_cell': (max(cc.values()) / len(in_cells)) if in_cells else None,
+        'busiest_cell': (max(cc.values()) / len(in_cells)) if in_cells else None,  # share of all proposals in cells
         'busiest': cc.most_common(1)[0][0] if cc else '',
         'm1': m1 or '—',
         'author_misfit': [t for t in ('motu', 'assay') if (at.get(t) or '').startswith('proposed') and t not in fit],
@@ -276,15 +279,15 @@ def table(rows):
     groups = defaultdict(list)
     for r in rows:
         groups[(r['label'], r['arm'], r['model'])].append(r)
-    out = ['| Run | Arm | Model | Maps | Cards in cells / loop · scripts | Bring out · Witness · Reach in | Unit · Piece · Operation · Journey '
-           '| Cells reached | Busiest cell share (mean ± sd) | M1 loop-only | M1 cells | Author misfit |',
+    out = ['| Run | Arm | Model | Maps | Cards · scripts · loop-only | Cells reached, by way: Bring out · Witness · Reach in | by level: Unit · Piece · Operation · Journey '
+           '| Cells reached per map (of 12) | Busiest cell share (mean ± sd) | M1 loop-only | M1 cells | Author misfit |',
            '|---|---|---|---|---|---|---|---|---|---|---|---|']
     for (label, arm, mdl), rs in sorted(groups.items()):
         n = sum(r['in_cells'] for r in rs)
         bc = [r['busiest_cell'] for r in rs if r['busiest_cell'] is not None]
         sd = f' ± {statistics.stdev(bc):.2f}' if len(bc) > 1 else ''
         m1 = Counter(r['m1'] for r in rs).most_common()
-        out.append(f'| {label} | {arm} | {mdl} | {len(rs)} | {n} / {sum(r["loop_only"] for r in rs)} · {sum(r["scripts"] for r in rs)} | '
+        out.append(f'| {label} | {arm} | {mdl} | {len(rs)} | {sum(r["cards"] for r in rs)} · {sum(r["scripts"] for r in rs)} · {sum(r["loop_only"] for r in rs)} | '
                    f'{" · ".join(pct(sum(r["ways"][w] for r in rs), n) for w in WAYS)} | '
                    f'{" · ".join(pct(sum(r["levels"][lv] for r in rs), n) for lv in LEVELS)} | '
                    f'{sum(r["cells_reached"] for r in rs) / len(rs):.1f} | {(sum(bc) / len(bc)) if bc else 0:.2f}{sd} | '
@@ -371,7 +374,7 @@ def main():
     rows = collect(roots, a.model, a.jobs, a.agreement)
     if not rows:
         sys.exit('judge: no map.md judged')
-    parts = ['## Distribution (cards; scripts under a primitive counted apart)', table(rows),
+    parts = ['## Distribution (cells reached; each cell counted once per map)', table(rows),
              '## Against the answer keys', key_table(rows)]
     st = stability_table(rows)
     if st:

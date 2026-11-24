@@ -1,5 +1,53 @@
 # Eval results
 
+## Neutral prompt, three runs per cell, judge checked (2026-11-25)
+
+The 2026-11-24 runs left two doubts: the task prompt listed the reach-in steps ("launch it, log in,
+reach a state, act, see the result") for every arm, and the judge counted every proposal, so one
+script runner with eight scripts outweighed one lab. This pass removes both and repeats each run
+three times: six scenarios × Sonnet and Haiku × 3 runs, for the skill before the grid (`0fecb1d`), the
+grid (v2, `c5caeea`), and no skill — 108 maps. Shares are over the **cells each map reaches**, each
+cell counted once per map, scripts included.
+
+| Arm | Model | Maps | Cells by way: Bring out · Witness · Reach in | by level: Unit · Piece · Operation · Journey | Cells per map | M1 loop-only |
+|---|---|---|---|---|---|---|
+| no skill | sonnet | 18 | 74% · 3% · 22% | 26% · 38% · 15% · 19% | 3.5 | 10/18 |
+| no skill | haiku | 18 | 61% · 11% · 26% | 23% · 23% · 32% · 19% | 4.2 | 10/18 |
+| before | sonnet | 18 | 35% · 19% · 44% | 14% · 25% · 40% · 18% | 4.5 | 14/18 |
+| before | haiku | 18 | 28% · 23% · 48% | 19% · 23% · 43% · 13% | 4.6 | 9/18 |
+| **grid (v2)** | sonnet | 18 | 34% · 23% · 41% | 12% · 30% · 40% · 16% | 4.5 | **1/18** |
+| **grid (v2)** | haiku | 18 | 25% · 29% · 44% | 6% · 27% · 46% · 18% | 3.2 | **0/18** |
+
+Expected behaviours (keywords): grid 211/216, before 204/216, no skill 112/216. Author tools
+proposed where they do not fit: 0 in all 108 maps.
+
+**How far to trust the judge**: every map judged twice — M1's cell the same in 90/108 (83 %), cells
+reached overlapping 0.82 (Jaccard), way shares differing by 0.10 at most on average. **Differences
+under ~10 points in a share are judge noise**, before any run-to-run noise.
+
+What this pass changes in the 2026-11-24 reading:
+- **"Reach in dominates" was mostly the measurement.** With the neutral prompt and cells counted once,
+  the grid's Sonnet maps are 41 % reach in, not 66 %. Both skill versions sit around 41–48 % — the
+  difference between them is within judge noise. Without the skill, maps are ~75 % bring out: they
+  propose test suites and little else. Whether ~45 % reach in is right for these repositories is a
+  question for the answer keys, not for a target ratio.
+- **The first milestone is the robust result**: loop-only (environments, launch) in 23/36 maps before,
+  1/36 with the grid, 20/36 without the skill.
+- **Witness**: 19–23 % of cells before, 23–29 % with the grid, 3–11 % without the skill. The grid's gain
+  over the old skill is at the edge of judge noise; the skill's gain over no skill is not.
+- **The level shift seen on 2026-11-24 does not hold**: journey was 42 % → 21 % under the old prompt;
+  under the neutral prompt it is 13–18 % for both versions. That drop was the prompt's, not the grid's.
+- **Breadth**: Haiku with the grid reaches fewer cells per map (3.2 against 4.6); Sonnet does not (4.5).
+- **New problem — M1 is unstable run to run.** For the same repository and model, the three grid runs
+  often put M1 in three different cells (CodeTriage on Haiku: unit × witness, journey × bring out,
+  operation × witness). The judge agrees with itself on M1 83 % of the time, so most of that spread
+  is the maps, not the judge. Reading the task mix is not yet reproducible.
+
+Cost: grid $13.15 and old skill $11.11 for 36 runs each, no skill $3.66, judging 108 maps twice ~$4.
+
+Next: the answer keys (evals/answer-keys/) and two human-labelled maps (evals/labels/) — then the
+same judge outputs are re-scored against them at no cost.
+
 ## The evidence grid (2026-11-24)
 
 The question: does the skill keep proposing the same thing — launch the app, log in, set up

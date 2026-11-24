@@ -114,12 +114,12 @@ old wording, which listed the reach-in steps for every arm). Scores against **an
 what a person who read each repository says a good map should and should not propose
 ([evals/answer-keys/](evals/answer-keys/README.md)) — appear once the keys are filled.
 
-**Latest results** ([docs/evals.md](docs/evals.md)): on six repositories, Sonnet and Haiku, the evidence
-grid moved the first milestone off "set up environments and launch" in every map (7 of 12 before, 0
-after) onto the level the project's commits actually change, halved the share of whole-app
-proposals (42 % → 21 %) and doubled the piece level's (13 % → 27 %), with 70/72 expected behaviours
-(66/72 before, 46/72 without the skill). Reach in is still half or more of the proposals — the
-grid did not fix that. The earlier keyword run, on five repositories: with the skill, **57/60** expected behaviours versus
+**Latest results** ([docs/evals.md](docs/evals.md)): six repositories, Sonnet and Haiku, three runs
+each, a prompt that names no way of working, every map judged twice. With the evidence grid, the
+first milestone is "set up environments and launch" in **1 of 36** maps (23/36 with the skill before
+the grid, 20/36 without any skill); witness reaches 23–29 % of the cells a map covers (3–11 % without
+the skill); expected behaviours 211/216 (112/216 without). Not yet fixed: the first milestone lands
+in a different cell from one run to the next on the same repository. The earlier keyword run, on five repositories: with the skill, **57/60** expected behaviours versus
 **40/60** without, a roadmap in 10/10 runs versus 0/10, about 9 runnable usage examples per map versus
 none, and 94 % of cited `file:line` resolving — on Sonnet and on Haiku. Needs `git`, `python3` and a logged-in `claude` CLI; each run is a
 real agent session of several minutes.

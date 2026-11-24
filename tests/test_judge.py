@@ -36,9 +36,17 @@ KEY = """# Answer key — x
 class Metrics(unittest.TestCase):
     def test_scripts_counted_apart_from_cards(self):
         m = judge.metrics(J, {}, None)
+        # three reach-in proposals (one card, two scripts) land in ONE cell: counted once
         self.assertEqual((m['cards'], m['scripts'], m['loop_only'], m['in_cells']), (4, 2, 1, 3))
         self.assertEqual(m['ways'], {'bring out': 1, 'witness': 1, 'reach in': 1})
+        self.assertAlmostEqual(m['busiest_cell'], 3 / 5)
         self.assertEqual(m['m1'], 'piece × bring out')
+
+    def test_a_map_of_scripts_under_one_primitive_still_reaches_cells(self):
+        j = {'proposals': [{'name': 'agent', 'kind': 'card', 'way': 'loop', 'level': 'none'},
+                           {'name': 'build', 'kind': 'script', 'way': 'bring out', 'level': 'operation'},
+                           {'name': 'diff', 'kind': 'script', 'way': 'witness', 'level': 'operation'}]}
+        self.assertEqual(judge.metrics(j, {}, None)['cells'], ['loop', 'operation × bring out', 'operation × witness'])
 
     def test_author_tool_misfit_only_outside_the_fit_list(self):
         self.assertEqual(judge.metrics(J, {}, None)['author_misfit'], ['assay'])
