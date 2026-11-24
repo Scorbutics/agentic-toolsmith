@@ -95,6 +95,8 @@ git clone https://github.com/Scorbutics/agentic-toolsmith && cd agentic-toolsmit
 ./evals/run.sh --only vue-realworld          # one scenario, sonnet, with the skill and without
 ./evals/run.sh --model sonnet --model haiku  # every scenario, two models
 ./evals/run.sh --judge                       # and where the proposals fall on the evidence grid
+./evals/run.sh --runs 3 --skill <dir> --judge   # three runs per cell, any version of the skill
+python3 evals/judge.py runs/a --agreement    # judge every map twice: how far to trust the judge
 ```
 
 Six public repositories, one per shape — a Rails monolith (CodeTriage), a Go service (miniflux), a
@@ -107,7 +109,10 @@ examples, the roadmap, and whether cited `file:line` references resolve. Results
 `eval-runs/<timestamp>/results.md`. With `--judge`, a judge model then classifies every proposal by
 level and way (`distribution.md`): how many grid cells the proposals reach, the share of the busiest
 cell, M1's cell, and any of the author's tools proposed where the scenario says they do not fit —
-what keyword scores cannot see.
+what keyword scores cannot see. The task prompt names no way of working (`--prompt ladder` keeps the
+old wording, which listed the reach-in steps for every arm). Scores against **answer keys** —
+what a person who read each repository says a good map should and should not propose
+([evals/answer-keys/](evals/answer-keys/README.md)) — appear once the keys are filled.
 
 **Latest results** ([docs/evals.md](docs/evals.md)): on six repositories, Sonnet and Haiku, the evidence
 grid moved the first milestone off "set up environments and launch" in every map (7 of 12 before, 0
