@@ -1,0 +1,11 @@
+{
+ "name": "motu",
+ "repo": "https://github.com/Scorbutics/motu",
+ "commit": "6050e2faaf14dcdc6ecbafe06d1f801337d1a206",
+ "shape": "TypeScript architecture framework and CLI for React screen regions (declarations, the lagoon renderer, checks) — developer tooling whose input is another project",
+ "author_tools_fit": [],
+ "author_tools_borderline": [
+  "motu"
+ ],
+ "expected": []
+}

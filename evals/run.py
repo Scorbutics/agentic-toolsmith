@@ -6,6 +6,7 @@
     ./evals/run.sh --no-baseline --model sonnet --model haiku
     ./evals/run.sh --judge                           # also: where the proposals fall on the evidence grid
     ./evals/run.sh --runs 3 --skill /tmp/old/skills/toolsmith   # three runs per cell, another version of the skill
+    ./evals/run.sh --private ../my-app/toolsmith/eval            # a private scenario kept in its own repository
 
 For each scenario: clone the repository at a pinned commit (cached), then run the Claude Code CLI
 headless twice on the same prompt — once with the skill installed in the project, once without —
@@ -62,15 +63,17 @@ def checkout(sc):
 
 
 def run_agent(repo, out, prompt, model, with_skill, timeout, skill=SKILL):
-    skills_dir = repo / '.claude' / 'skills'
-    if skills_dir.exists():
-        shutil.rmtree(repo / '.claude')
+    # only the skill under test is added and removed: a repository's own .claude/ (its skills, its
+    # settings) is part of the scenario and stays as committed
+    mine = repo / '.claude' / 'skills' / 'toolsmith'
+    if mine.exists():
+        shutil.rmtree(mine)
     if with_skill:
-        skills_dir.mkdir(parents=True)
-        shutil.copytree(skill, skills_dir / 'toolsmith', ignore=shutil.ignore_patterns('__pycache__'))
+        mine.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(skill, mine, ignore=shutil.ignore_patterns('__pycache__'))
         excl = repo / '.git' / 'info' / 'exclude'
-        if '.claude/' not in excl.read_text():
-            excl.write_text(excl.read_text() + '\n.claude/\n')
+        if '.claude/skills/toolsmith/' not in excl.read_text():
+            excl.write_text(excl.read_text() + '\n.claude/skills/toolsmith/\n')
     out.parent.mkdir(parents=True, exist_ok=True)
     # absolute paths in permission rules take a double leading slash (`//abs/path`)
     tools = TOOLS + [f'Write(/{out.parent}/**)', f'Edit(/{out.parent}/**)', f'Bash(mkdir -p {out.parent}:*)']
@@ -83,8 +86,8 @@ def run_agent(repo, out, prompt, model, with_skill, timeout, skill=SKILL):
     except subprocess.TimeoutExpired:
         meta = {'error': f'timeout after {timeout}s'}
     finally:
-        if (repo / '.claude').exists():
-            shutil.rmtree(repo / '.claude')
+        if mine.exists():
+            shutil.rmtree(mine)
     meta['seconds'] = round(time.time() - t0)
     (out.parent / 'session.json').write_text(json.dumps(meta, indent=1))
     return meta
@@ -95,7 +98,7 @@ REF = re.compile(r'`?((?:[\w.\-]+/)*[\w.\-]+\.[A-Za-z0-9]+):(\d+)')
 
 def score(sc, text, repo):
     low = text.lower()
-    found = [any(k.lower() in low for k in e['any_of']) for e in sc['expected']]
+    found = [any(k.lower() in low for k in e['any_of']) for e in sc.get('expected', [])]
     usages = len(re.findall(r'^\s*\$ \S', text, re.M))
     refs = REF.findall(text)
     ok = 0
@@ -106,8 +109,8 @@ def score(sc, text, repo):
             n = sum(1 for _ in hits[0].open(errors='ignore'))
             ok += int(line) <= max(n, 1)
     return {
-        'expected': f'{sum(found)}/{len(found)}', 'expected_ratio': round(sum(found) / len(found), 2),
-        'missed': [e['behavior'] for e, f in zip(sc['expected'], found) if not f],
+        'expected': f'{sum(found)}/{len(found)}', 'expected_ratio': round(sum(found) / len(found), 2) if found else None,
+        'missed': [e['behavior'] for e, f in zip(sc.get('expected', []), found) if not f],
         'usage_examples': usages,
         'roadmap': bool(re.search(r'\bM1\b|milestone', text, re.I)),
         'evidence': f'{ok}/{len(refs)}', 'chars': len(text),
@@ -126,13 +129,17 @@ def main():
                     help='task wording (default neutral; ladder reproduces the runs before 2026-11-25)')
     ap.add_argument('--runs', type=int, default=1, help='runs per scenario × model × arm (default 1); >1 writes r1, r2…')
     ap.add_argument('--skill', type=Path, default=SKILL, help='the skill directory to test (default: this checkout\'s)')
+    ap.add_argument('--private', action='append', type=Path, metavar='DIR',
+                    help='a private scenario: DIR holds scenario.json (and answer-key.md), kept in the scenario\'s own '
+                         'repository rather than here; repeatable; when given, only these scenarios run')
     a = ap.parse_args()
     if not (a.skill / 'SKILL.md').is_file():
         sys.exit(f'evals: no SKILL.md in {a.skill}')
     task = PROMPTS[a.prompt]
     if not shutil.which('claude'):
         sys.exit('evals: the `claude` CLI is required (and logged in)')
-    scenarios = [json.loads(p.read_text()) for p in sorted((HERE / 'scenarios').glob('*.json'))]
+    scenarios = ([json.loads((d / 'scenario.json').read_text()) for d in a.private] if a.private
+                 else [json.loads(p.read_text()) for p in sorted((HERE / 'scenarios').glob('*.json'))])
     if a.only:
         scenarios = [s for s in scenarios if s['name'] in a.only]
     models = a.model or ['sonnet']
@@ -155,7 +162,7 @@ def main():
                     text = out.read_text(errors='ignore') if out.exists() else ''
                     if not text and len(meta.get('result') or '') > 2000:  # wrote nothing, but answered in full
                         text = meta['result']; out.write_text(text)
-                    s = score(sc, text, repo) if text else {'expected': '0/%d' % len(sc['expected']), 'expected_ratio': 0,
+                    s = score(sc, text, repo) if text else {'expected': '0/%d' % len(sc.get('expected', [])), 'expected_ratio': 0,
                                                             'missed': ['no output written'], 'usage_examples': 0,
                                                             'roadmap': False, 'evidence': '0/0', 'chars': 0}
                     s.update({'scenario': sc['name'], 'model': model, 'arm': arm, 'run': i, 'prompt': a.prompt,

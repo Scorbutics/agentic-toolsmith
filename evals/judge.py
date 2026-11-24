@@ -37,6 +37,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 KEYS = HERE / 'answer-keys'
+PRIVATE = []  # directories holding a private scenario.json and its answer-key.md (--private)
 WAYS = ['bring out', 'witness', 'reach in']
 LEVELS = ['unit', 'piece', 'operation', 'journey']
 VERSION = 2  # bump when PROMPT changes: older judge.json files are judged again
@@ -105,6 +106,9 @@ def read_key(name):
     """evals/answer-keys/<name>.md → {'cells': {cell: propose|leave|either}, 'm1': [cells] or ['any'], 'by': str}
     — None while nobody has filled it in. Blank rows are not scored."""
     p = KEYS / f'{name}.md'
+    for d in PRIVATE:
+        if json.loads((d / 'scenario.json').read_text())['name'] == name:
+            p = d / 'answer-key.md'
     if not p.exists():
         return None
     text = p.read_text()
@@ -174,7 +178,8 @@ def where(mp):
 
 
 def collect(roots, model, jobs, twice):
-    scen = {json.loads(p.read_text())['name']: json.loads(p.read_text()) for p in (HERE / 'scenarios').glob('*.json')}
+    scen = {json.loads(p.read_text())['name']: json.loads(p.read_text())
+            for p in [*(HERE / 'scenarios').glob('*.json'), *(d / 'scenario.json' for d in PRIVATE)]}
     # a run directory holds map.md files; a committed result set may hold only their judge.json
     todo = [(label, jp.with_name('map.md')) for label, root in roots
             for jp in sorted({*Path(root).glob('**/map.md'), *Path(root).glob('**/judge.json')}, key=str)
@@ -369,7 +374,10 @@ def main():
     ap.add_argument('--jobs', type=int, default=6)
     ap.add_argument('--agreement', action='store_true', help='judge every map a second time and report agreement')
     ap.add_argument('--label-sheet', type=Path, metavar='MAP', help='write labels.md beside MAP for a human to fill, and stop')
+    ap.add_argument('--private', action='append', type=Path, default=[], metavar='DIR',
+                    help='a private scenario directory (scenario.json + answer-key.md), as given to run.py')
     a = ap.parse_args()
+    PRIVATE[:] = a.private
     if a.label_sheet:
         print(label_sheet(a.label_sheet, a.model))
         return

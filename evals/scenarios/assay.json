@@ -1,0 +1,11 @@
+{
+ "name": "assay",
+ "repo": "https://github.com/Scorbutics/assay",
+ "commit": "0ac3b0f8fb810dfe93494e4e4847ddf989e5b824",
+ "shape": "TypeScript effect-ledger CLI for Supabase backends (declarations, drive, gate) — developer tooling whose input is another project",
+ "author_tools_fit": [],
+ "author_tools_borderline": [
+  "assay"
+ ],
+ "expected": []
+}

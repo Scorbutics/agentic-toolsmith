@@ -78,6 +78,18 @@ class Keys(unittest.TestCase):
         k = judge.metrics(J, {}, key)['key']
         self.assertEqual((k['hit'], k['want'], k['false'], k['avoid'], k['m1_ok']), (1, 2, 1, 1, True))
 
+    def test_private_key_found_through_its_scenario_dir(self):
+        d = Path(self.tmp.name) / 'private'
+        d.mkdir()
+        (d / 'scenario.json').write_text('{"name": "secret-app", "repo": "x", "commit": "y", "shape": "z", "expected": []}')
+        (d / 'answer-key.md').write_text(KEY)
+        judge.PRIVATE[:] = [d]
+        try:
+            self.assertEqual(judge.read_key('secret-app')['m1'], ['piece × bring out', 'operation × witness'])
+            self.assertIsNone(judge.read_key('another-app'))
+        finally:
+            judge.PRIVATE[:] = []
+
     def test_every_template_lists_the_twelve_cells_and_loop(self):
         for p in (ROOT / 'evals/answer-keys').glob('*.md'):
             if p.name == 'README.md':
