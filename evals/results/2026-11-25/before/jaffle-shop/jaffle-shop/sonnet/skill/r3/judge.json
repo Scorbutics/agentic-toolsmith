@@ -1,0 +1,98 @@
+{
+ "proposals": [
+  {
+   "name": "agent-env",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "dbt-agent",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "build",
+   "kind": "script",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "unit",
+   "kind": "script",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "compile",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "show",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "counts",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "lineage",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "diff",
+   "kind": "script",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "lint",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "ci",
+   "kind": "script",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "semantic-query",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "walking skeleton: agent-env, dbt-agent, build, unit, compile",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

@@ -1,0 +1,105 @@
+{
+ "proposals": [
+  {
+   "name": "AGENTS.md / CLAUDE.md",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Reproducible local environment (docker-compose/devcontainer + bin/dev-bootstrap)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "bin/ci",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Fast scoped test runs (bin/rails test path:line, :network tag)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Browser test driver (Cuprite/Selenium, test:system)",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "Demo seed profile (db:seed:demo)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "Mail capture (letter_opener_web)",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "Local GitHub API stub",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "Guard for schedule:* tasks (DRY_RUN=1)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Security scanning in CI (Brakeman, bundler-audit)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Fix or delete bin/setup",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Performance harness (rake perf:run)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Local observability (Sentry/Skylight/Scout)",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "AGENTS.md / CLAUDE.md",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

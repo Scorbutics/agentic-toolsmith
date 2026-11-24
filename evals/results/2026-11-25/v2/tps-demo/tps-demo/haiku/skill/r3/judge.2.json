@@ -1,0 +1,91 @@
+{
+ "proposals": [
+  {
+   "name": "agent-console",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "launch",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "ledger",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "open-level",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "warp",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "press",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "join",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": false
+  },
+  {
+   "name": "scene-lab",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "unit-check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "M1 \u2014 see the game's screens as images (launch + agent-console with open-level and shot)",
+  "way": "reach in",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

@@ -1,0 +1,105 @@
+{
+ "proposals": [
+  {
+   "name": "envs up",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "agent-run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "reach in",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "seed",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "persona",
+   "kind": "script",
+   "way": "reach in",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "refresh",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "clock",
+   "kind": "script",
+   "way": "reach in",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "egress",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "doctor",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "integration-test",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "config-dump",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "loopback fixture feed server",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "walking skeleton (isolated instance: envs up, doctor, config-dump, agent-run with state)",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

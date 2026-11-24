@@ -1,0 +1,98 @@
+{
+ "proposals": [
+  {
+   "name": "AGENTS.md",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "file_format.sh fail-fast and patch.patch fix",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "scripts/check_refs.py",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "scripts/check_uids.py",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "Pinned Godot 4.7.x in CI/devcontainer",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Headless import step",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Godot parse and type-check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Headless smoke run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "gdtoolkit (gdlint, gdformat)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "Test addon (GUT or gdUnit4)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "Visual check (screenshot under virtual display)",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Export presets and release-build job",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "AGENTS.md",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

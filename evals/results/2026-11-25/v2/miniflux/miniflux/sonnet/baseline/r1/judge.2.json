@@ -1,0 +1,77 @@
+{
+ "proposals": [
+  {
+   "name": "AGENTS.md",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "scripts/check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "scripts/it",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Migration checker",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "i18n lint",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "Template and UI smoke test",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Repo-local JS lint",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "API spec and drift check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "Config introspection",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "AGENTS.md",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

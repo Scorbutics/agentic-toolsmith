@@ -1,0 +1,77 @@
+{
+ "proposals": [
+  {
+   "name": "verify",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "mock-api",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "app-dev run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "login",
+   "kind": "script",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "dom",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "calls",
+   "kind": "script",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "--env",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "verify",
+  "way": "bring out",
+  "level": "journey"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

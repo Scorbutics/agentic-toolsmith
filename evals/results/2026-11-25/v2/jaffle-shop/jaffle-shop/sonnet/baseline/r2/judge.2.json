@@ -1,0 +1,84 @@
+{
+ "proposals": [
+  {
+   "name": "Offline dbt profile and seed loop (DuckDB) / task build-local",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Single verify entrypoint (task check / scripts/verify.sh)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Pin the toolchain",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Offline SQL linting (sqlfluff lint models)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "Unit tests for mart logic (dbt unit_tests)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Project-introspection script",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Semantic layer check (mf validate-configs)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Local CI parity (task ci)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "AGENTS.md",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Adapter macro tests (cents_to_dollars)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "Offline dbt profile and seed loop (DuckDB)",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

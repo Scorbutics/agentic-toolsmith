@@ -1,0 +1,63 @@
+{
+ "proposals": [
+  {
+   "name": "dbt-lab",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "env",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "reset",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "rows",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "check",
+   "kind": "script",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "ci-run",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "audit-diff",
+   "kind": "card",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "dbt-lab",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

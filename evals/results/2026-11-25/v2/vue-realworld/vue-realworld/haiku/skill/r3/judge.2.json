@@ -1,0 +1,28 @@
+{
+ "proposals": [
+  {
+   "name": "browser",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "persona",
+   "kind": "script",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "browser",
+  "way": "reach in",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

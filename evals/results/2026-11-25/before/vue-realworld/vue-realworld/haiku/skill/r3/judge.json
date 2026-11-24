@@ -1,0 +1,91 @@
+{
+ "proposals": [
+  {
+   "name": "app-up",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "browser runner",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "goto",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "net",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "clock",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "session",
+   "kind": "script",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "stub",
+   "kind": "script",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "check",
+   "kind": "card",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "api.ts pre-commit guard",
+   "kind": "card",
+   "way": "witness",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "vue/custom-event-name-casing lint rule",
+   "kind": "card",
+   "way": "witness",
+   "level": "unit",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "walking skeleton",
+  "way": "reach in",
+  "level": "journey"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

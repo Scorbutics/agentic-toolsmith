@@ -1,0 +1,112 @@
+{
+ "proposals": [
+  {
+   "name": "Local DuckDB profile and task dev:* tasks",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "task verify",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Sampled/small seed set",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Lineage and manifest query tool",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Semantic layer validator",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Offline SQL lint (task lint / task fix)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "dbt unit tests",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Singular tests in data-tests/",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Contracts and docs checks (dbt-checkpoint / dbt-project-evaluator)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Diff and audit helper wrapper (task compare)",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "AGENTS.md / CLAUDE.md",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Local CI parity",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Pin dbt-audit-helper",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Devcontainer or Docker image",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "Local DuckDB profile and task dev:* tasks",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

@@ -1,0 +1,77 @@
+{
+ "proposals": [
+  {
+   "name": "AGENTS.md / CLAUDE.md",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "scripts/check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "scripts/it",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "miniflux-feedcheck",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "scripts/i18n-check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "scripts/migration-check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "Template/UI render harness",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "OpenAPI spec for /v1 plus contract test",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Housekeeping (lint-js, test-short, pinned dev-container)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "AGENTS.md / CLAUDE.md",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

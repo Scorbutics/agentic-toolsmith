@@ -1,0 +1,108 @@
+[
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 5,
+  "roadmap": true,
+  "evidence": "34/34",
+  "chars": 24883,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 105,
+  "cost_usd": 0.4138471
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 8,
+  "roadmap": true,
+  "evidence": "53/54",
+  "chars": 25313,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 101,
+  "cost_usd": 0.39655989999999997
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 7,
+  "roadmap": true,
+  "evidence": "68/68",
+  "chars": 23565,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "prompt": "neutral",
+  "seconds": 119,
+  "cost_usd": 0.46336730000000004
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 3,
+  "roadmap": true,
+  "evidence": "79/79",
+  "chars": 25978,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 225,
+  "cost_usd": 0.2096788
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 6,
+  "roadmap": true,
+  "evidence": "104/104",
+  "chars": 34524,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 241,
+  "cost_usd": 0.09688828
+ },
+ {
+  "expected": "5/5",
+  "expected_ratio": 1.0,
+  "missed": [],
+  "usage_examples": 3,
+  "roadmap": true,
+  "evidence": "68/68",
+  "chars": 28726,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "prompt": "neutral",
+  "seconds": 166,
+  "cost_usd": 0.08139211
+ }
+]

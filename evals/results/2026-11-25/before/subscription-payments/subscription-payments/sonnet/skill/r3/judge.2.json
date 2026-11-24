@@ -1,0 +1,84 @@
+{
+ "proposals": [
+  {
+   "name": "agent-run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "reach in",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "sql",
+   "kind": "script",
+   "way": "reach in",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "seed-personas",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "dev-up",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "stripe-stub",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "mail last",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "check",
+   "kind": "card",
+   "way": "witness",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "dev-up + agent-run (state, sql)",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

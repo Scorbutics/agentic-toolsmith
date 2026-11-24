@@ -1,0 +1,126 @@
+{
+ "proposals": [
+  {
+   "name": "AGENTS.md",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "make check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "make jslint",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "make fmt",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Pin golangci-lint version",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Align Postgres versions",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Local fixture feed server",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "Go test harness (TestMain)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "make db-up / db-down",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "make api-smoke (Bruno runner)",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Browser smoke test",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": false
+  },
+  {
+   "name": "Migration test",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "Config-doc sync check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "make install-hooks",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "make seed",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Structured test output (go test -json)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "AGENTS.md",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

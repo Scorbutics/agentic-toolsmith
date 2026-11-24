@@ -1,0 +1,77 @@
+{
+ "proposals": [
+  {
+   "name": "P0 Headless project-load check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "P1 Scene smoke test (headless)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": false
+  },
+  {
+   "name": "P2 Unit-level test harness (gdUnit4/GUT)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "P3 GDScript lint and format (gdtoolkit)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "P4 Non-mutating wrapper for file_format.sh",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "P5 Agent instructions file (AGENTS.md/CLAUDE.md)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "P6 Visual check (screenshots)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "P7 Reproducible export",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "P8 Engine-version pin in one place",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "P0 Headless project-load check",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

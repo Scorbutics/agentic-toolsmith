@@ -1,0 +1,126 @@
+{
+ "proposals": [
+  {
+   "name": "AGENTS.md (G1)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Reproducible local environment: docker-compose/devcontainer + bin/dev-bootstrap (G2)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "bin/ci (G3)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Fast scoped test runs (G4)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "Browser test driver / test:system (G5)",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "Demo seed profile db:seed:demo (G6)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "Mail capture with letter_opener_web (G7)",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "Local GitHub API stub (G8)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "Guard schedule:* tasks with DRY_RUN (G9)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Security scanning in CI: Brakeman, bundler-audit (G10)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Fix stray and vestigial files (G11)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Fix or delete bin/setup (G12)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Align .standard.yml Ruby version (G13)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Update CONTRIBUTING.md (G14)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "rake perf:run (G15)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Local observability (G16)",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "AGENTS.md (G1)",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

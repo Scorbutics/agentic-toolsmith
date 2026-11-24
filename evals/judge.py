@@ -175,7 +175,10 @@ def where(mp):
 
 def collect(roots, model, jobs, twice):
     scen = {json.loads(p.read_text())['name']: json.loads(p.read_text()) for p in (HERE / 'scenarios').glob('*.json')}
-    todo = [(label, mp) for label, root in roots for mp in sorted(Path(root).glob('**/map.md'))]
+    # a run directory holds map.md files; a committed result set may hold only their judge.json
+    todo = [(label, jp.with_name('map.md')) for label, root in roots
+            for jp in sorted({*Path(root).glob('**/map.md'), *Path(root).glob('**/judge.json')}, key=str)
+            if jp.name == 'map.md' or not jp.with_name('map.md').exists()]
 
     def judged(mp, name):
         jp = mp.with_name(name)
@@ -183,6 +186,8 @@ def collect(roots, model, jobs, twice):
             j = json.loads(jp.read_text())
             if j.get('v') == VERSION:
                 return j
+        if not mp.exists():  # judge outputs without the map: nothing to judge again
+            return None
         text = mp.read_text(errors='ignore')
         if not text.strip():
             return None

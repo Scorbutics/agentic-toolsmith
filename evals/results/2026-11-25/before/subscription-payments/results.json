@@ -1,0 +1,108 @@
+[
+ {
+  "expected": "5/6",
+  "expected_ratio": 0.83,
+  "missed": [
+   "a lab for the pricing / account states"
+  ],
+  "usage_examples": 6,
+  "roadmap": true,
+  "evidence": "55/60",
+  "chars": 25365,
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 104,
+  "cost_usd": 0.38964309999999996
+ },
+ {
+  "expected": "5/6",
+  "expected_ratio": 0.83,
+  "missed": [
+   "a lab for the pricing / account states"
+  ],
+  "usage_examples": 17,
+  "roadmap": true,
+  "evidence": "88/96",
+  "chars": 30361,
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 113,
+  "cost_usd": 0.4263622
+ },
+ {
+  "expected": "5/6",
+  "expected_ratio": 0.83,
+  "missed": [
+   "a lab for the pricing / account states"
+  ],
+  "usage_examples": 9,
+  "roadmap": true,
+  "evidence": "66/69",
+  "chars": 25095,
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "prompt": "neutral",
+  "seconds": 100,
+  "cost_usd": 0.3825593
+ },
+ {
+  "expected": "5/6",
+  "expected_ratio": 0.83,
+  "missed": [
+   "a lab for the pricing / account states"
+  ],
+  "usage_examples": 12,
+  "roadmap": true,
+  "evidence": "85/95",
+  "chars": 38585,
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 226,
+  "cost_usd": 0.15307101
+ },
+ {
+  "expected": "6/6",
+  "expected_ratio": 1.0,
+  "missed": [],
+  "usage_examples": 6,
+  "roadmap": true,
+  "evidence": "103/111",
+  "chars": 34234,
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 177,
+  "cost_usd": 0.116934
+ },
+ {
+  "expected": "5/6",
+  "expected_ratio": 0.83,
+  "missed": [
+   "a lab for the pricing / account states"
+  ],
+  "usage_examples": 7,
+  "roadmap": true,
+  "evidence": "112/114",
+  "chars": 32639,
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "prompt": "neutral",
+  "seconds": 223,
+  "cost_usd": 0.1629592
+ }
+]

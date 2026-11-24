@@ -1,0 +1,84 @@
+{
+ "proposals": [
+  {
+   "name": "stack-up",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "doctor",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "check",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "agent-run",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "witness",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "sub-event",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "sql",
+   "kind": "script",
+   "way": "witness",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "pricing",
+   "kind": "script",
+   "way": "witness",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "mail-last",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "run the stack unattended (doctor, stack-up, agent-run)",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

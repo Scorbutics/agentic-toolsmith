@@ -1,0 +1,119 @@
+{
+ "proposals": [
+  {
+   "name": "pnpm lint:check",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "pnpm verify",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Machine-readable reports",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Gate page.pause() on E2E_PAUSE_ON_FAILURE",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Fix docs and scripts (README, ANALYZE, size-limit)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "generate:api:offline",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": ".nvmrc",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "pnpm mock:api (local mock API)",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "Hermetic E2E",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": false
+  },
+  {
+   "name": "Browser provisioning (system Chrome)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Screenshot command",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Project MCP configuration (.mcp.json Playwright MCP)",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": ".claude/settings.json allowlist",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Coverage thresholds and missing specs",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": false
+  },
+  {
+   "name": "Hooks install and pre-commit via pnpm exec",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "pnpm lint:check",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}
