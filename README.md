@@ -109,7 +109,12 @@ level and way (`distribution.md`): how many grid cells the proposals reach, the 
 cell, M1's cell, and any of the author's tools proposed where the scenario says they do not fit —
 what keyword scores cannot see.
 
-**Latest results** ([docs/evals.md](docs/evals.md)): with the skill, **57/60** expected behaviours versus
+**Latest results** ([docs/evals.md](docs/evals.md)): on six repositories, Sonnet and Haiku, the evidence
+grid moved the first milestone off "set up environments and launch" in every map (7 of 12 before, 0
+after) onto the level the project's commits actually change, halved the share of whole-app
+proposals (42 % → 21 %) and doubled the piece level's (13 % → 27 %), with 70/72 expected behaviours
+(66/72 before, 46/72 without the skill). Reach in is still half or more of the proposals — the
+grid did not fix that. The earlier keyword run, on five repositories: with the skill, **57/60** expected behaviours versus
 **40/60** without, a roadmap in 10/10 runs versus 0/10, about 9 runnable usage examples per map versus
 none, and 94 % of cited `file:line` resolving — on Sonnet and on Haiku. Needs `git`, `python3` and a logged-in `claude` CLI; each run is a
 real agent session of several minutes.
