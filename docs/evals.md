@@ -1,5 +1,55 @@
 # Eval results
 
+## Against bug-grounded answer keys (2026-11-25)
+
+The same 108 judged maps, scored against six answer keys drafted from each repository's fixed bugs
+(evals/answer-keys/; 145 bugs across six repositories, every citation checked by
+`evals/check_keys.py`, the classifications still to be checked by a person). A cell is expected
+when ≥ 2 past bugs would have been caught there first.
+
+| Arm | Model | Expected cells reached | M1 in an accepted cell |
+|---|---|---|---|
+| no skill | sonnet | 56/99 | 0/18 |
+| no skill | haiku | 60/99 | 5/18 |
+| before the grid | sonnet | 62/99 | 1/18 |
+| before the grid | haiku | 57/99 | 2/18 |
+| grid (v2) | sonnet | 60/99 | 4/18 |
+| grid (v2) | haiku | 48/99 | 2/18 |
+
+By expected cell, all models pooled (maps that reach it / maps whose key expects it):
+
+| Expected cell | Before the grid | Grid | No skill |
+|---|---|---|---|
+| `piece × bring out` | 15/36 | 16/36 | **29/36** |
+| `unit × bring out` | 6/24 | 6/24 | **19/24** |
+| `operation × bring out` | 18/24 | 10/24 | 13/24 |
+| `operation × reach in` | 20/24 | 16/24 | 8/24 |
+| `operation × witness` | 10/18 | **12/18** | 1/18 |
+| `journey × reach in` | 8/12 | 9/12 | 5/12 |
+| `piece × reach in` | 7/12 | 6/12 | 5/12 |
+| `piece × witness` | 0/12 | 0/12 | 0/12 |
+| `loop` | 35/36 | 33/36 | 36/36 |
+
+What it says:
+- **Against where bugs were caught, the skill — either version — does no better than no skill**, and
+  Haiku with the grid does worse. The grid did not move the skill toward the bugs.
+- **The skill misses the cheapest cells — unit and piece tests.** Most past bugs in these
+  repositories would have been caught by a test at the unit or piece level; maps without the skill
+  propose those, maps with it mostly do not. The likely cause is the skill's own rule that a test or
+  CI step "is not a handle" (principles.md) — so it proposes no harness that would make a piece
+  testable either (miniflux's handlers have no fake store; tps-demo has no tests at all).
+- **Where the skill aims, it delivers**: `operation × witness` 12/18 against 1/18 without it, and more
+  reach in at operation and journey level.
+- **Nobody proposes `piece × witness`** (what a scene, page or handler group did), in any arm.
+- **M1 rarely lands where the most bugs were** (≤ 5/18 in every arm) — the task mix reads commit
+  volume, not where things broke.
+
+What it does not say: the keys measure **bug-catching**, not the friction an agent hits while
+working (a login it cannot pass, a state it cannot reach), which leaves no commit behind and is
+the skill's first purpose. "Cheapest cell" also leans toward bring out by construction. Read this as
+one half of the picture; the owner-filled keys (motu, assay, the two private projects) are the
+other.
+
 ## Neutral prompt, three runs per cell, judge checked (2026-11-25)
 
 The 2026-11-24 runs left two doubts: the task prompt listed the reach-in steps ("launch it, log in,

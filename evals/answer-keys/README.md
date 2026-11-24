@@ -1,5 +1,19 @@
 # Answer keys
 
+Two kinds, and each key says which in its **Filled by** line:
+
+- **Bug-grounded** (codetriage, jaffle-shop, miniflux, subscription-payments, tps-demo, vue-realworld):
+  drafted by an agent that never saw the skill or any map, from the repository's fixed bugs — for
+  each bug, the cheapest cell that would have caught it before it shipped; a cell is `propose` with
+  ≥ 2 such bugs (or 1 severe), `leave` only when it cannot exist in the project. Every row cites
+  commits. `python3 evals/check_keys.py` checks the bookkeeping (each cited commit exists and
+  predates the pin; counts agree with the rule) — **a person checks the bugs**: is each one a real
+  behaviour bug, and is its cell right? That needs no knowledge of the code beyond the diff.
+  What these keys measure: **where past bugs would have been caught**. Not friction an agent hits
+  while working, which leaves no commit behind.
+- **Owner-filled** (motu, assay, and private scenarios kept in their own repository): filled by the
+  person who knows the project, from the bugs and the friction they remember.
+
 What a good map *should* propose for each eval repository, written by a person who read the
 repository, so that `evals/judge.py` can score maps against it instead of against a global ratio.
 Without a key, "66 % of the proposals are reach in" cannot be called right or wrong: it depends on

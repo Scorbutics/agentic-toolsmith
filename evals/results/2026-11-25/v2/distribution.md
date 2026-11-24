@@ -11,7 +11,16 @@
 
 ## Against the answer keys
 
-No answer key filled yet (evals/answer-keys/) — nothing scored against one. Each map is scored once a key exists; judge outputs are cached, so filling a key later costs nothing to score.
+| Run | Arm | Model | Maps scored | Expected cells reached | Cells to leave, proposed anyway | M1 in an accepted cell |
+|---|---|---|---|---|---|---|
+| before | skill | haiku | 18 | 57/99 | 0/3 | 2/18 |
+| before | skill | sonnet | 18 | 62/99 | 1/3 | 1/18 |
+| v2 | baseline | haiku | 18 | 60/99 | 0/3 | 5/18 |
+| v2 | baseline | sonnet | 18 | 56/99 | 0/3 | 0/18 |
+| v2 | skill | haiku | 18 | 48/99 | 0/3 | 2/18 |
+| v2 | skill | sonnet | 18 | 60/99 | 0/3 | 4/18 |
+
+Keys used: codetriage, jaffle-shop, miniflux, subscription-payments, tps-demo, vue-realworld.
 
 ## Run to run
 
