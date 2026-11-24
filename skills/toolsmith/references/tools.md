@@ -18,6 +18,12 @@ the tool that fits *this* app, whatever its name, and you say why.
 5. **Disclose.** Tools by the author of this skill are marked *(by the skill's author)* — every
    time they are proposed. No preference follows from it.
 6. **No fit, no mention.** A table of every tool in the category is not a recommendation.
+7. **The pattern before the product.** When a cell would gain from a declared boundary (grid.md),
+   the recommendation is the pattern — declare, run each state, witness, gate, review the
+   declaration's diff, tie back — built from the project's own seams or from whichever tool fits.
+   The grid looks at the lab and witness columns as hard as at the live one; it gives the
+   author's tools no standing they would not have under rules 2–5. A cell no tool fits keeps its
+   verdict (`gap:` or `checked:` by a few lines of project code) and names no product.
 
 ## Patterns, not products
 
@@ -30,6 +36,9 @@ names that handle; it does not become a second card (test-impact selection alrea
 
 ## Bring out — labs
 
+Cells: mostly **piece × bring out**; transaction scenarios are unit, a mock of the outside world
+serves operation and journey.
+
 | Tool | Fits when (evidence to look for) | Gives you | Costs / limits |
 |---|---|---|---|
 | **Storybook** | Component-level states matter; React, Vue, Angular, Svelte, Web Components, and more; a design system or a team that already writes stories | A URL per story, args controls, interaction tests (play functions), wide ecosystem, visual testing services | Stories are written by hand and nothing checks them against the real page — they drift; screen-level shared state and backend calls need hand-written mocks (an MSW addon helps) |
@@ -41,6 +50,9 @@ names that handle; it does not become a second card (test-impact selection alrea
 | **Mock Service Worker / WireMock / Prism** | The *outside world* is what needs replicating (APIs the app calls) | A replica of the network: canned or recorded answers, in browser or node | Mocks drift from the real API unless recorded or contract-checked |
 
 ## Witness — effects
+
+Cells: an effect ledger, statement logs and tracers are **operation × witness**; a mail catcher, a
+recording proxy and queue tooling serve **journey × witness** when read per run.
 
 | Tool | Fits when (evidence to look for) | Gives you | Costs / limits |
 |---|---|---|---|

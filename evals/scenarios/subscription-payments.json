@@ -1,0 +1,74 @@
+{
+ "name": "subscription-payments",
+ "repo": "https://github.com/vercel/nextjs-subscription-payments",
+ "commit": "bdd0813206e47e6b218d42f15a7976c8a0d3c3eb",
+ "shape": "Next.js 14 + Supabase + Stripe SaaS starter (webhooks write through a service-role client)",
+ "author_tools_fit": [
+  "assay"
+ ],
+ "author_tools_borderline": [
+  "motu"
+ ],
+ "expected": [
+  {
+   "behavior": "a local Supabase stack as the backend",
+   "any_of": [
+    "supabase start",
+    "local stack",
+    "local supabase"
+   ]
+  },
+  {
+   "behavior": "Stripe events replayed or stubbed locally",
+   "any_of": [
+    "stripe trigger",
+    "stripe fixtures",
+    "stripe-mock",
+    "stripe listen",
+    "replay",
+    "cassette"
+   ]
+  },
+  {
+   "behavior": "a persona session without a password or a real inbox",
+   "any_of": [
+    "dev-login",
+    "persona",
+    "inbucket",
+    "mailpit",
+    "generatelink",
+    "generate_link",
+    "admin api"
+   ]
+  },
+  {
+   "behavior": "what the webhook writes, witnessed (it bypasses RLS)",
+   "any_of": [
+    "effect ledger",
+    "assay",
+    "log_statement",
+    "pgaudit",
+    "statement log",
+    "witness"
+   ]
+  },
+  {
+   "behavior": "a lab for the pricing / account states",
+   "any_of": [
+    "storybook",
+    "ladle",
+    "lagoon",
+    "motu",
+    "component lab"
+   ]
+  },
+  {
+   "behavior": "a roadmap with a first milestone",
+   "any_of": [
+    "m1",
+    "milestone",
+    "walking skeleton"
+   ]
+  }
+ ]
+}

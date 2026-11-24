@@ -4,12 +4,15 @@
     ./evals/run.sh                                   # all scenarios, sonnet, with skill + baseline
     ./evals/run.sh --only lobsters --model opus      # one scenario, one model
     ./evals/run.sh --no-baseline --model sonnet --model haiku
+    ./evals/run.sh --judge                           # also: where the proposals fall on the evidence grid
 
 For each scenario: clone the repository at a pinned commit (cached), then run the Claude Code CLI
 headless twice on the same prompt — once with the skill installed in the project, once without —
 and score both outputs on the scenario's expected behaviours (format-agnostic keyword groups), the
 number of runnable usage examples, whether a roadmap exists, and whether cited file:line
 references resolve. Runs are read-only on the repository; outputs land in eval-runs/<timestamp>/.
+With --judge, evals/judge.py then classifies every proposal by level and way (distribution.md):
+keyword scores cannot tell a map that covers the grid from one that repeats the same cell.
 
 Needs: git, python3, and the `claude` CLI logged in. Each run is one agent session (several
 minutes, real usage).
@@ -107,6 +110,7 @@ def main():
     ap.add_argument('--no-baseline', action='store_true', help='skip the run without the skill')
     ap.add_argument('--timeout', type=int, default=1500, help='seconds per agent run (default 1500)')
     ap.add_argument('--out', help='output directory (default: eval-runs/<timestamp>)')
+    ap.add_argument('--judge', action='store_true', help='then judge the grid distribution (evals/judge.py)')
     a = ap.parse_args()
     if not shutil.which('claude'):
         sys.exit('evals: the `claude` CLI is required (and logged in)')
@@ -143,6 +147,8 @@ def main():
               f'{"yes" if r["roadmap"] else "no"} | {r["evidence"]} | {r["seconds"]}s |' for r in results]
     (out_root / 'results.md').write_text('\n'.join(lines) + '\n')
     print('\n' + '\n'.join(lines) + f'\n\nresults: {out_root}')
+    if a.judge:
+        subprocess.run([sys.executable, str(HERE / 'judge.py'), str(out_root)], check=False)
 
 
 if __name__ == '__main__':

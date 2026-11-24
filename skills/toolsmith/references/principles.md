@@ -162,6 +162,10 @@ Keep each handle small and out of feature code.
 - A screenshot without the state it shows, or at a scale the human never sees.
 - Verifying what the screen shows and never what the code wrote, sent or called.
 - A lab nobody checks against the live app: it drifts, and then it lies.
+- Counting the unit suite and the e2e suite as "the lab" and proposing nothing between them — the
+  piece level (grid.md) is where screens, scenes and models live.
+- Capabilities that all sit in one cell of the grid — usually journey × reach in — without saying
+  why the others do not matter here: the shape's habit, not this project.
 - Scraping coloured, human-formatted output when one flag would give JSON.
 - Restarting a service you did not start. Writing into the human's tree without listing it.
 - Twenty questions at once. Questions the README answers.

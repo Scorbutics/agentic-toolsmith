@@ -1,6 +1,7 @@
 # Agent map — <project> @ <commit> (<date>)
 
 ## Contents
+- Evidence grid
 - Parallel agents
 - Tools already in place
 - Capabilities
@@ -23,11 +24,31 @@
 
 **Shape(s):** <…> · **Repos covered:** <…> · **Mapped by:** <agent>, grilled with <who>
 
+**Task mix:** 50 commits — 24 piece (screens), 14 operation (routes, SQL functions), 8 unit, 4 journey; 15 change what an operation writes.
+
+<One line: the last ~50 non-merge commits by the level they change (map.md, step 0b), and how many
+change what an operation writes or sends. It decides what comes first.>
+
 **Variants:** <the ways this app runs that support different handles — e.g. the shipped runtime vs
 a local build of it, two render backends, debug vs release; one line each, and which handles
 exist only on one of them. Omit when there is one way to run it.>
 
 **In one paragraph:** how well an agent can reach this app today, and the two or three capabilities that would change that most.
+
+## Evidence grid
+
+What an agent can prove at each level, by each way (grid.md). Rows in the shape's words
+(shapes.md, "Levels by shape"); every cell starts with its verdict — `declared:` · `checked:` ·
+`seen:` (filled, with the command) · `gap:` (what a task loses) · `n/a:` (why). A lab with no tie
+to the live app is `seen` at most. The review page draws this table with each proposed card in its
+cell. A gap is not a proposal: it gets a card only when a capability needs it.
+
+| Level | Bring out — lab | Witness — effects | Reach in — live |
+|---|---|---|---|
+| unit — functions, SQL functions | checked: `bun test` (412 tests, 38 s, in CI); `supabase test db` (rolled-back SQL tests) | checked: the SQL tests select the rows they inserted | n/a: nothing to reach below a piece |
+| piece — screens and regions | seen: 12 Storybook stories, nothing ties them to the page (`.storybook/main.ts:3`) | gap: no record of the calls a screen makes | gap: a screenshot needs a human login |
+| operation — routes, server actions, SQL functions | gap: an operation runs only through the whole app | gap: nothing records what an operation wrote; 9 routes use the service-role client (`lib/db/admin.ts:4`) | seen: `curl` on the dev server with a cookie copied by hand |
+| journey — a session as a persona | gap: no e2e suite | gap: mail goes through the live provider (Fences ⚠ 1) | gap: a human starts the server and logs in |
 
 ## Parallel agents
 
@@ -40,14 +61,16 @@ exist only on one of them. Omit when there is one way to run it.>
 
 ## Tools already in place
 
-Every handle an agent could already call **before toolsmith built anything**, with its category
-(launch · ingress · runtime · state · egress · eyes · lab). A tool that climbs several ways gets one
-row per verb. A handle toolsmith builds is not added here: its card moves to Delivered handles.
+Every handle an agent could already call **before toolsmith built anything** — test suites
+included — with its category for the diagram (launch · ingress · runtime · state · egress · eyes ·
+lab) and its level. A tool that climbs several ways gets one row per verb. A handle toolsmith
+builds is not added here: its card moves to Delivered handles.
 
-| Tool | Category | Verb | Way | Point(s) | Usage |
-|---|---|---|---|---|---|
-| <effect ledger> | egress | check | witness | B5, B6 | `bun run assay:check run.log --require <op>` |
-| <stdin console> | runtime | steer, see | reach in | B3 | type a Ruby line in the game's terminal |
+| Tool | Category | Verb | Way | Level | Point(s) | Usage |
+|---|---|---|---|---|---|---|
+| unit suite | lab | check | bring out | unit | B4 | `bun test --filter checkout` |
+| SQL tests | lab | check | bring out | unit | B5 | `supabase test db` |
+| Storybook | lab | see | bring out | piece | B4 | `bun run storybook` |
 
 ## Capabilities
 
@@ -60,12 +83,15 @@ capability needs is not proposed.
 
 | # | Capability — the agent can… | Today | Evidence |
 |---|---|---|---|
-| C1 | run the loop unattended: launch an isolated copy, reach a state, see it, check it | a human starts the server and reads the screen | no launch script; `README.md:14` "open localhost:3000" |
-| C2 | reach any state as any persona, at any time | ad-hoc seeds; login typed by the human | B9 `db/seeds.rb` personas, no session mint; 35 `Time.now` reads (B8) |
-| C3 | check what left the app | mail goes through the live provider | B6 `lib/mail.ts:26` |
+| C1 | see every state of a screen, and know the page still renders it, without launching | a human logs in and clicks to the state; the stories drift | piece row of the grid; 24 of 50 commits change screens |
+| C2 | know what an operation wrote, and fail when it differs from what it should | nothing records it; a wrong write is found in production | operation × witness; 15 of 50 commits change writes; 9 service-role routes |
+| C3 | reach any state as any persona, at any time | ad-hoc seeds; login typed by the human | journey × reach in; `db/seeds.sql` personas, no session mint; 35 `new Date()` reads (B8) |
 
 **Today** says what happens instead: a human step, an ad-hoc script, or nothing. Each capability
-is delivered by one or more milestones, or listed under the roadmap's Deferred with why.
+is delivered by one or more milestones, or listed under the roadmap's Deferred with why. Their
+cells differ because this project's task mix does: on a project whose commits are mostly
+journeys, C1 would be the launch-and-login loop. Capabilities that all sit in one cell need a
+sentence saying why the other cells do not matter here.
 
 ## Delivered handles
 
@@ -79,9 +105,11 @@ until the first build.
 The map's main output. Group by way; finish what the project half-has before inventing. If no
 external tool fits, say so in one line ("no tool fits: considered Storybook, motu — Vue 2").
 **Card heading grammar** — the review page reads it, so keep it exact:
-`### \`<name>\` — <category>[ (+ <category>…)] · <B-class> <name> · <verbs> · <way> · cost <S|M|L>`
-(categories: launch, ingress, runtime, state, egress, eyes, lab). Group headings without that
-shape (`### Reach in`) are allowed and ignored.
+`### \`<name>\` — <category>[ (+ <category>…)] · <B-class> <name> · <verbs> · <way> at <level> · cost <S|M|L>`
+(categories: launch, ingress, runtime, state, egress, eyes, lab; ways: reach in, bring out,
+witness; levels: unit, piece, operation, journey — the cell the card fills). A card that only
+launches or isolates has no cell of its own: write `loop` for its way and level. Group headings
+without that shape (`### Reach in`) are allowed and ignored.
 
 **Scripts under a primitive** go in its card as a table the review page reads:
 
@@ -126,37 +154,67 @@ One card per handle — the usage block is mandatory, and it is what makes it a 
 agent never calls it (an untracked file, a default, a lint rule, a CI step), it is not a card —
 it is a Fence or Needs line of the handle it serves, or one of the Fences to set first.
 
-### `dev-login` — ingress · B9 Identity · steer · reach in · cost S
+### `states` — lab · B4 Internal seams · see, check · bring out at piece · cost M
+**Status:** accepted (2026-11-18, M1)
+**Finishes:** the 12 Storybook stories (`src/**/*.stories.tsx`)
+
+```sh
+$ bun run states list checkout
+checkout/empty         http://127.0.0.1:6006/?path=/story/checkout--empty
+checkout/three-items   http://127.0.0.1:6006/?path=/story/checkout--three-items
+$ bun run states check checkout
+2 states · 2 render in the placed page as declared · 0 drift
+```
+
+**Is:** a CLI over the existing Storybook: lists each story as an address, and a tie to the live
+app — mounts the page route with each story's args and fails when the page no longer renders it.
+**Gives the agent:** every state of a screen in one command, no login, and a lab that cannot drift.
+**Not a script because:** it runs the app's code outside the live app, in a lab.
+**Considered:** motu *(by the skill's author)* — fits (React 18, Vite, screens sharing a store),
+but twelve stories already exist; finishing them costs less. Revisit if screens keep sharing state.
+**Origin:** map — 24 of 50 commits change screens.
+**Fence:** fixtures from `tests/fixtures/`, typed against the app's types; no network.
+**Parallel:** port derived from `--env`; no shared state.
+**Permission:** allow.
+
+### `writes` — state (+ egress) · B5 State stores · see, check · witness at operation · cost M
 **Status:** proposed
-**Finishes:** the seeded personas in `db/seeds.rb` (or **New**)
+**Finishes:** **New**
+
+```sh
+$ app-dev run writes POST /api/orders --as member --fixture order-3-items
+POST /api/orders as member: wrote orders(1) order_items(3) · called reserve_stock() · rls on
+declared: orders, order_items · undeclared: none
+```
+
+**Is:** statement logging on the local Postgres, attributed by request id, and `.agent/writes.json`
+declaring what each route may write; exit 1 on an undeclared write. The declaration's diff is
+what the human reviews.
+**Gives the agent:** what one operation wrote, read and bypassed, and a check that fails when that changes.
+**Not a script because:** out-of-band by nature — an effect ledger.
+**Origin:** map — 15 of 50 commits change what an operation writes; 9 routes bypass RLS.
+**Needs:** `app-dev run`; the request id set on the connection (`set_config('app.request_id', …)`).
+**Fence:** refuses a non-loopback database URL; records table names and counts, never values.
+**Parallel:** per-env database (`envs up`).
+**Permission:** allow.
+
+### `dev-login` — ingress · B9 Identity · steer · reach in at journey · cost S
+**Status:** proposed
+**Finishes:** the seeded personas in `db/seeds.sql` (or **New**)
 
 ```sh
 $ bin/dev-login --as stranger
-{"user":"stranger","cookie":"_app_session=…","expires":"2026-11-18T10:00:00Z"}
+{"user":"stranger","cookie":"sb-access-token=…","expires":"2026-11-18T10:00:00Z"}
 ```
 
 **Is:** a new CLI, `bin/dev-login`, over the auth provider's local admin API — not app code.
 **Gives the agent:** any persona's session in one command, no password typed.
-**Not a script because:** it must work before any eval primitive exists in the process (it mints the session the browser starts with).
+**Not a script because:** it must cross the real auth boundary to be faithful.
 **Origin:** map (or `task "<…>"`, `want "<…>"` — and `Seen in:` the tasks that needed it).
-**Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.rb`. (A Needs line may name another card: `Needs: dev-up`.)
-**Fence:** refuses unless `RAILS_ENV=development` and the server binds `127.0.0.1`.
-**Parallel:** `--env` (default: the worktree's) selects the server; sessions are per env.
+**Needs:** two seeded personas (`stranger`, `admin`) in `db/seeds.sql`. (A Needs line may name another card: `Needs: envs up`.)
+**Fence:** refuses unless the auth URL is loopback.
+**Parallel:** `--env` (default: the worktree's) selects the stack; sessions are per env.
 **Permission:** allow (read-only against the agent's own env).
-
-### `remote eval` — runtime (+ ingress) · B3 Runtime · steer, see · reach in · cost M
-**Status:** accepted (2026-11-18, M1)
-**Finishes:** **New** (remote debug already possible: `debug` gem in the Gemfile)
-
-```sh
-$ printf 'dev-token\nUser.count\n' | nc 127.0.0.1 7778
-rubyvm-eval/1 token?
-OK
-=> 1342
-```
-
-**Gives the agent:** live state of the running server without pausing it.
-**Fence:** development only, loopback, token required.
 
 Unranked unless a task or the human's priorities were given: <priorities, if any>.
 
@@ -165,14 +223,14 @@ Unranked unless a task or the human's priorities were given: <priorities, if any
 Cards kept but not planned, out of the candidates so they never look like open work. Same card
 grammar, with **Status:** `deferred` and two more lines:
 
-### `mail last` — egress · B6 Egress · see · witness · cost S
+### `profile` — runtime · B3 Runtime · see · reach in at operation · cost M
 **Status:** deferred
-**Deferred because:** the mail driver still falls back to live (Fences to set first, ⚠ 1).
-**Revisit when:** the preview driver fails closed.
+**Deferred because:** no commit in the task mix is about speed.
+**Revisit when:** a performance task arrives.
 
 ```sh
-$ app-dev run mail last --to stranger@example.test
-{"subject":"Your magic link","link":"http://127.0.0.1:3000/auth/…"}
+$ app-dev run profile GET /dashboard --as admin
+1 240 ms · 38 queries · slowest: dashboard_stats() 910 ms
 ```
 
 ## Roadmap
@@ -181,14 +239,14 @@ $ app-dev run mail last --to stranger@example.test
 
 | Foundation | Used by | Unlocks | Cost |
 |---|---|---|---|
-| `remote eval` (the primitive) | scripts `clock`, `state`, `shot`, `press` | runtime + ingress, and every script after | M |
-| per-run environment (`envs up`) | `dev-login`, `remote eval`, `shot` | parallel agents; no writes in the human's tree | S |
+| `app-dev run` (the primitive — state lives in Postgres) | `writes`, scripts `clock`, `state`, `shot` | every script after | S |
+| per-run environment (`envs up`) | `writes`, `dev-login`, `shot` | parallel agents; no writes in the human's tree | S |
 
 ```mermaid
 flowchart LR
-  envs[envs up] --> eval[remote eval]
+  envs[envs up] --> run[app-dev run]
   envs --> login[dev-login]
-  eval --> clock[[clock]] & state[[state]] & shot[[shot]]
+  run --> writes[writes] & clock[[clock]] & shot[[shot]]
 ```
 
 **Milestones are cut by capability.** Each milestone delivers one capability (or a deeper step
@@ -210,21 +268,29 @@ Every milestone has the same lines, one per line; the review page reads them:
   to end; if it did not, say so — `tested — focused tests pass; live demo deferred: <why>` — and the
   page shows it as not demoed.
 
-### M1 — walking skeleton · keystone
-**Capability:** C1 — run the loop unattended.
+### M1 — every state of a screen · keystone
+**Capability:** C1 — see every state of a screen without launching.
 **Status:** accepted (2026-11-18)
-**Builds:** per-run environment, `remote eval`, scripts `state`, `shot`.
+**Builds:** `states`.
 **Depends on:** none.
-**Demo:** `envs up a1 && app-eval --env a1 run state && app-eval --env a1 run shot home`
-**Expect:** `state` prints the seeded counts as JSON; `shot` writes `shots/home.png` showing the dashboard — no human step.
-**Why first:** every later card is a script on these two foundations.
+**Demo:** `bun run states list checkout && bun run states check checkout`
+**Expect:** two addresses printed; `check` reports 2 states rendered as declared, 0 drift — and fails when a story's args no longer match the page.
+**Why first:** the most frequent task class (24 of 50 commits), and it needs no launch, no login.
 
-### M2 — reach any state
-**Capability:** C2 — reach any state as any persona, at any time.
+### M2 — what an operation wrote
+**Capability:** C2 — know what an operation wrote, and fail when it differs.
 **Status:** proposed
-**Builds:** `dev-login`, scripts `clock`, `press`.
-**Depends on:** M1 — `remote eval` runs the `clock` script.
-**Demo:** `bin/dev-login --as stranger && app-eval run clock +47h && app-eval run shot reminders`
+**Builds:** per-run environment, `app-dev run`, `writes`.
+**Depends on:** none.
+**Demo:** `envs up a1 && app-dev --env a1 run writes POST /api/orders --as member --fixture order-3-items`
+**Expect:** `wrote orders(1) order_items(3)`, `undeclared: none`, exit 0; removing `order_items` from the declaration makes it exit 1.
+
+### M3 — reach any state
+**Capability:** C3 — reach any state as any persona, at any time.
+**Status:** proposed
+**Builds:** `dev-login`, scripts `clock`, `shot`.
+**Depends on:** M2 — `envs up` and `app-dev run`.
+**Demo:** `bin/dev-login --as stranger && app-dev run clock +47h && app-dev run shot reminders`
 **Expect:** `shots/reminders.png` shows the 48-hour reminder banner for the stranger.
 
 ### Deferred
@@ -232,8 +298,7 @@ Every milestone has the same lines, one per line; the review page reads them:
 One line per deferred capability, milestone or card, by name, with why; the cards themselves are
 under Deferred handles.
 
-- C3 — check what left the app: waits for the mail fence (`mail last`).
-- `mail last` — waits for the mail fence.
+- `profile` — no commit in the task mix is about speed.
 
 ## Transferable patterns
 
@@ -269,7 +334,7 @@ consequences, and the fence that makes the handles above safe to use.
 
 ## Diagram
 
-The app in the middle, the six categories around it, one node per handle: **solid** = exists
+The app in the middle, the six categories around it and the Lab — the app brought out — framing them, one node per handle: **solid** = exists
 (in place before, or delivered), **amber** = half-built (a card that *Finishes* something),
 **dashed** = missing (a card marked New). Deferred cards are left out of the diagram. One node per
 handle, not per row: a tool listed once per verb is one node, and a tool a card *Finishes* is
@@ -282,27 +347,25 @@ flowchart LR
   classDef half fill:#fbeec8,stroke:#a07a10;
   classDef missing fill:#ffffff,stroke:#777,stroke-dasharray:4 3;
   subgraph launch[Launch & loop]
-    run[psdk-run]:::missing
+    envs[envs up]:::missing
   end
   subgraph ingress[Ingress]
     login[dev-login]:::half
   end
   subgraph runtime[Runtime]
-    console[stdin console]:::exists
-    eval[remote eval]:::missing
+    run[app-dev run]:::missing
   end
   subgraph state[State]
-    clock[clock]:::missing
+    writes[writes]:::missing
   end
   subgraph egress[Egress]
-    inbox[mail last]:::missing
   end
   subgraph eyes[Eyes & logs]
-    logs[Logger]:::exists
     shot[shot]:::missing
   end
-  subgraph lab[Lab — around the runtime]
-    xvfb[Xvfb display]:::missing
+  subgraph lab[Lab — the app brought out]
+    unit[unit suite]:::exists
+    states[states]:::half
   end
   launch --- app
   ingress --- app

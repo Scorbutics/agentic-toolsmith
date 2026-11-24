@@ -12,7 +12,7 @@
 | 1 | **Build** | Can I build / typecheck / lint, how long, and can my build tree exist without writing into the human's? |
 | 2 | **Launch** | Can I start it myself, headless, isolated (ports, data dir, working dir)? How do I know the *state I need* is ready? Is there a lab where it need not launch at all? |
 | 3a | **Observe** | Can I read its logs, errors, and — if it has a screen — **see** it, at the scale the human sees? Structured or scraped? |
-| 3b | **Effects** | Can I see what it *touched* — rows read and written, HTTP calls, mails, files, messages — per operation, and compare with what it should touch? |
+| 3b | **Effects** | Can I see what it *touched* — rows read and written, procedures called, access control bypassed, HTTP calls, mails, files, messages — per operation, and compare with what it should touch? |
 | 4 | **Reach** | Can I get to the exact state the task is about — behind login, on map 42, on day 3 of a trial, first-time/cold? |
 | 5 | **Act** | Can I drive input there — click, call, command, enqueue, key press — safely (on the right thread)? |
 | 6 | **Assert** | Can I check the outcome programmatically — pass/fail, a comparison between variants, or a measurement? |
@@ -21,6 +21,11 @@
 
 Every rung gets a **status**, a **cost** (wall seconds, steps, or "needs a human") and
 **evidence** (the command run and what it printed — never "should work").
+
+The ladder probes the **live** way at the task's level. Before climbing it, look at the task's row
+of the evidence grid (grid.md): when a lab cell gives the verdict without a launch, or a witness cell
+is what the task actually needs proven, probe those cells too — a fully green ladder over a task
+that changed what an operation writes, with no witness, has not checked the task.
 
 Statuses:
 - `ok` — works, cheaply.

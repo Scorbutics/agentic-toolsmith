@@ -20,8 +20,9 @@ $ python3 <skill>/scripts/review_page.py map.md -o review.html
 review.html: 9 cards, 13 tools in place, 3 questions
 ```
 
-One self-contained HTML file (no server, no network): the app with its handles by category, the
-Lab drawn around the runtime, every card with its usage, the questions, the tools in place. The
+One self-contained HTML file (no server, no network): the evidence grid with each proposed card in
+its cell, the app with its handles by category (the Lab framing them), every card with its usage, the
+questions, the tools in place. The
 human marks each item right / wrong / unsure, types notes and answers, and copies a Markdown
 feedback block back to you.
 

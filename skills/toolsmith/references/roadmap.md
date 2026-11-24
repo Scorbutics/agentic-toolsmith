@@ -13,12 +13,18 @@ Capabilities) — and the handles are the means. After proposing cards, run one 
    that needs it. Record only **real** dependencies — "B needs A's primitive", "B's demo logs in
    with A's handle". Tracks that do not need each other stay independent, whatever their numbers.
 3. **Rank.** Rank the capabilities first — human-only steps they remove, how often the project's
-   typical tasks need them — then, within each, the foundations and handles by what they unlock
+   typical tasks need them (the task mix, not the shape's habit) — then, within each, the foundations and handles by what they unlock
    against their cost. The ones that unlock the most are **keystones**.
 4. **Cut into milestones, by capability.** Each milestone delivers one capability, or a deeper
    step of one, and names it on its **Capability:** line; two capabilities that need nothing from
-   each other are two independent tracks. **M1 is the walking skeleton**: the capability to run an
-   unattended loop — launch, reach a state, see it, check it. Each milestone ends on a **demo the
+   each other are two independent tracks. **M1 is the walking skeleton of the most frequent kind
+   of task** (the map's **Task mix:** line): the shortest unattended loop in which the agent changes
+   that kind of code and gets a verdict that can fail. Where most commits change screens, that may
+   be a piece lab with no launch at all; where most change what operations write, a witness loop on
+   one operation; launching the whole app and logging in is M1 only when journeys dominate the mix,
+   or nothing smaller can give the verdict. Its demo may still need a launch or a local stack — the
+   capability is what the demo *proves*. Write **Why first:** with the share of the mix it serves.
+   Each milestone ends on a **demo the
    agent can run end to end** that proves the capability, not just that its handles run, and an **Expect** line: what the agent observes when
    the demo works, concrete enough to fail. Later milestones add reach and depth. Each milestone
    states **Depends on:** — the milestones it really needs, or `none`. Cards in no milestone move

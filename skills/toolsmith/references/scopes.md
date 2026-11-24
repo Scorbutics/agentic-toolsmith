@@ -17,7 +17,11 @@ only what this run surveyed, and say it is partial.
    change reaches the running app (ladder.md, step 0).
 2. **List the loop this task needs**: reach the state it is about, act there, see the result,
    check it, reset, repeat. Each step that today needs a human, a guess or minutes of setup is a
-   gap.
+   gap. Place the task on the evidence grid (grid.md): **which level** it changes, and for that
+   row, which way gives the verdict cheapest — a piece lab may show every state of the screen
+   without a launch; an operation witness may prove what the fix wrote. Reaching the live app is
+   one of three ways, not the default. If the task writes or sends anything, its loop needs a
+   witness cell whatever else it uses.
 3. **Generalise before proposing.** For each gap, the card answers for *the class of task*, not
    this one: not "seed an order in state X for this bug" but "`seed <scenario>` and a scenario
    library". If the only thing that would help is specific to this one task, it is inline work

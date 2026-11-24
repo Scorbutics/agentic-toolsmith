@@ -185,7 +185,7 @@ class Milestones(unittest.TestCase):
 """))
         self.assertEqual(m['cards'][0]['life'], 'proposed')
         self.assertEqual(m['roadmap']['deferred'], [])
-        self.assertEqual([x for x in rp.lint(m) if 'Capabilities' not in x], [])
+        self.assertEqual([x for x in rp.lint(m) if not re.search('Capabilities|Evidence grid|Task mix', x)], [])
 
 
 class AfterTheSnapshot(unittest.TestCase):
@@ -229,10 +229,15 @@ class Template(unittest.TestCase):
     def test_template_renders_clean(self):
         m = rp.parse((ROOT / 'skills/toolsmith/references/map-template.md').read_text())
         self.assertEqual({c['name']: c['life'] for c in m['cards']},
-                         {'dev-login': 'proposed', 'remote eval': 'accepted', 'mail last': 'deferred'})
+                         {'states': 'accepted', 'writes': 'proposed', 'dev-login': 'proposed', 'profile': 'deferred'})
         self.assertEqual(rp.lint(m), [])
         self.assertEqual(len(m['patterns']), 1)
-        self.assertEqual({c['id']: c['state'] for c in m['capabilities']}, {'C1': 'accepted', 'C2': 'planned', 'C3': 'deferred'})
+        self.assertEqual({c['id']: c['state'] for c in m['capabilities']}, {'C1': 'accepted', 'C2': 'planned', 'C3': 'planned'})
+        self.assertEqual({c['name']: c['cell'] for c in m['cards']},
+                         {'states': ('bring', 'piece'), 'writes': ('witness', 'operation'),
+                          'dev-login': ('reach', 'journey'), 'profile': ('reach', 'operation')})
+        self.assertEqual(set(m['grid']), set(rp.GRID_LEVELS))
+        self.assertTrue(m['task_mix'].startswith('50 commits — 24 piece'))
 
 
 def nodes(page):
@@ -400,3 +405,68 @@ class Capabilities(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+GRID = """## Evidence grid
+
+| Level | Bring out — lab | Witness — effects | Reach in — live |
+|---|---|---|---|
+| unit — functions | checked: `bun test` | n/a: pure functions | n/a: nothing to reach |
+| piece — screens | gap: no lab | gap: no record of calls | seen: `shot` |
+| operation — routes | gap: | declared: `ledger check` | seen: `curl` |
+| journey — a session | gap: no e2e | | gap: human login |
+"""
+
+
+def gridmap(grid=GRID, candidates='', mix='**Task mix:** 50 commits — 30 piece.\n'):
+    head, _, rest = mapdoc(candidates=candidates, capabilities='| # | Capability — the agent can… | Today | Evidence |\n|---|---|---|---|\n| C1 | x | y | z |\n',
+                           roadmap='### M1 — x\n**Capability:** C1\n**Builds:** `lab`.\n**Depends on:** none.\n**Demo:** `x`\n**Expect:** y\n').partition('## Capabilities')
+    return head + mix + '\n' + grid + '\n## Capabilities' + rest
+
+
+def cellcard(name, cell):
+    return (f'### `{name}` — lab · B4 Seams · see · {cell} · cost S\n**Status:** proposed\n\n```sh\n$ {name}\nok\n```\n\n')
+
+
+class EvidenceGrid(unittest.TestCase):
+    def test_grid_and_task_mix_read(self):
+        m = rp.parse(gridmap())
+        self.assertEqual(m['task_mix'], '50 commits — 30 piece.')
+        self.assertEqual(rp.grade(m['grid']['operation']['witness']), 'declared')
+        self.assertEqual(m['grid']['piece']['label'], 'piece — screens')
+
+    def test_card_cell_from_heading(self):
+        m = rp.parse(gridmap(candidates=cellcard('lab', 'bring out at piece') + cellcard('ledger', 'witness at operation')
+                             + cellcard('envs', 'loop')))
+        self.assertEqual([c['cell'] for c in m['cards']], [('bring', 'piece'), ('witness', 'operation'), None])
+
+    def test_cards_drawn_in_their_cell(self):
+        m = rp.parse(gridmap(candidates=cellcard('lab', 'bring out at piece')))
+        g = section(rp.render(m), 'Evidence grid')
+        row = g[g.index('piece — screens'):]
+        row = row[:row.index('</tr>')]
+        self.assertIn('lab', row.split('<td')[1])  # the Bring out column of the piece row
+
+    def test_lint_flags_cells_without_verdict(self):
+        w = rp.lint(rp.parse(gridmap(candidates=cellcard('lab', 'bring out at piece'))))
+        self.assertIn('Evidence grid: no verdict (declared · checked · seen · gap · n/a) in journey × witness', w)
+
+    def test_lint_flags_card_without_cell_but_not_loop_cards(self):
+        m = rp.parse(gridmap(candidates=cellcard('lab', 'bring out') + cellcard('envs', 'loop')))
+        self.assertIn('1 card(s) name no cell (`<way> at <level>`): lab', rp.lint(m))
+
+    def test_lint_flags_missing_grid_and_mix(self):
+        w = rp.lint(rp.parse(gridmap(grid='', mix='')))
+        self.assertTrue(any('no **Evidence grid**' in x for x in w))
+        self.assertTrue(any('no **Task mix:**' in x for x in w))
+
+    def test_old_map_without_grid_still_renders(self):
+        page = rp.render(rp.parse(mapdoc(candidates=card('a', 'proposed'))))
+        self.assertNotIn('<h3>Evidence grid', page)
+        self.assertIn('The app and its handles', page)
+
+    def test_tools_row_gets_a_cell_from_its_level_column(self):
+        m = rp.parse(mapdoc(tools='| `bun test` | lab | check | bring out | unit | B4 | `bun test` |\n').replace(
+            '| Tool | Category | Verb | Way | Point(s) | Usage |\n|---|---|---|---|---|---|',
+            '| Tool | Category | Verb | Way | Level | Point(s) | Usage |\n|---|---|---|---|---|---|---|'))
+        self.assertEqual({t['name']: t['cell'] for t in m['tools']}['bun test'], ('bring', 'unit'))

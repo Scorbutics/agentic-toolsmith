@@ -3,8 +3,9 @@
 
     python3 review_page.py map.md [more-maps.md …] [-o review.html] [--title "…"]
 
-Standard library only. The page shows the app with its handles by category (the Lab drawn around
-the six others), the roadmap grouped by capability — what the agent cannot do today — with its open cards (proposed · accepted · in progress) with each milestone's
+Standard library only. The page shows the evidence grid — what an agent can prove at each level
+(unit, piece, operation, journey) by each way (lab, witness, live), with every proposed card in its
+cell — then the app with its handles by category (the Lab drawn around the six others), the roadmap grouped by capability — what the agent cannot do today — with its open cards (proposed · accepted · in progress) with each milestone's
 dependencies, demo, expected result and verification level, then delivered and deferred handles in
 their own panels — never as proposals — the tools already in place and the grill. Warnings on
 stderr name what the map leaves ambiguous (no Status, no Depends on, delivered but not demoed).
@@ -18,10 +19,14 @@ from pathlib import Path
 CATS = ['launch', 'ingress', 'runtime', 'state', 'egress', 'eyes', 'lab']
 LABELS = {'launch': 'Launch & loop', 'ingress': 'Ingress', 'runtime': 'Runtime', 'state': 'State',
           'egress': 'Egress', 'eyes': 'Eyes & logs', 'lab': 'Lab'}
-HINT = {'launch': 'start · ready · isolate · reset', 'ingress': 'drive it, as someone',
+HINT = {'launch': 'start · ready · reset · environments', 'ingress': 'drive it, as someone',
         'runtime': 'inside the live process', 'state': 'data and time', 'egress': 'what leaves',
-        'eyes': 'screenshots · logs · traces', 'lab': 'the environment around the runtime'}
+        'eyes': 'screenshots · logs · traces', 'lab': 'the app brought out — a piece run outside it'}
 CAT_RX = '|'.join(CATS)
+GRID_LEVELS = ['unit', 'piece', 'operation', 'journey']
+WAYS = ['bring', 'witness', 'reach']
+WAY_LABELS = {'bring': 'Bring out — lab', 'witness': 'Witness — effects', 'reach': 'Reach in — live'}
+GRADES = ('declared', 'checked', 'seen', 'gap', 'n/a')
 
 
 # ---------------------------------------------------------------- parsing
@@ -112,6 +117,35 @@ def level(text):
     return m.group(1) if m else ''
 
 
+def cell_of(way, lvl=''):
+    """(way, level) of the grid from a card's `<way> at <level>`, or from a tools row's Way and Level
+    columns; None when either is missing or the handle is a loop-only one."""
+    t = (way or '').lower()
+    m = re.search(r'\bat\s+(' + '|'.join(GRID_LEVELS) + r')\b', t)
+    lv = m.group(1) if m else next((x for x in GRID_LEVELS if x in (lvl or '').lower()), '')
+    w = 'bring' if re.search(r'bring|\blab\b', t) else 'witness' if 'witness' in t else 'reach' if re.search(r'reach|live', t) else ''
+    return (w, lv) if w and lv else None
+
+
+def grade(text):
+    t = re.sub(r'[`*_]', '', text or '').strip().lower()
+    return next((g for g in GRADES if t.startswith(g)), '')
+
+
+def parse_grid(text):
+    """The map's Evidence grid table: {level: {way: cell text}} with the level's own words kept."""
+    rows = {}
+    for tb in tables(text):
+        for r in tb:
+            head = col(r, 'level')
+            lv = next((x for x in GRID_LEVELS if re.match(r'^\W*' + x, head.lower())), None)
+            if not lv:
+                continue
+            rows[lv] = {'label': head, 'bring': col(r, 'bring', 'lab'), 'witness': col(r, 'witness', 'effects'),
+                        'reach': col(r, 'reach', 'live')}
+    return rows
+
+
 def parse_cards(text, default):
     cards, cur, in_code = [], None, False
     for line in text.splitlines():
@@ -145,13 +179,13 @@ def parse_cards(text, default):
             ms = re.match(r'^\s*-\s+`([^`]+)`[^—]*—\s*(.*)', line)
             if ms:
                 scripts.append((ms.group(1).split(' ')[0], ms.group(2)))
-        way = next((b for b in bits if re.search(r'reach|bring|witness|lab|live', b.lower())), '')
+        way = next((b for b in bits if re.search(r'reach|bring|witness|lab|live|\bloop\b', b.lower())), '')
         status_line = field(body, 'Status')
         life = lifecycle(status_line)
         verified = field(body, 'Verified')
         out_cards.append({
             'name': re.sub(r'[`*]', '', name).strip(), 'cat': cat, 'also': also,
-            'point': bits[0] if bits else '', 'way': way, 'cost': next((b for b in bits if b.lower().startswith('cost')), ''),
+            'point': bits[0] if bits else '', 'way': way, 'cell': cell_of(way), 'cost': next((b for b in bits if b.lower().startswith('cost')), ''),
             'status': 'half' if fin and not re.match(r'\**new', fin, re.I) else 'missing',
             'life': life or default, 'life_stated': bool(life), 'status_line': status_line,
             'verified': verified, 'level': level(verified),
@@ -258,7 +292,8 @@ def parse(md):
                     if v and v not in t[f]:
                         t[f] = f'{t[f]} · {v}' if t[f] else v
                 continue
-            by_key[key] = {'name': nm, 'key': key, 'cat': cat, 'also': [], 'way': col(r, 'way'), 'usage': col(r, 'usage'), 'status': 'exists'}
+            by_key[key] = {'name': nm, 'key': key, 'cat': cat, 'also': [], 'way': col(r, 'way'), 'usage': col(r, 'usage'), 'status': 'exists',
+                           'cell': cell_of(col(r, 'way'), col(r, 'level'))}
             tools.append(by_key[key])
     par = find(secs, 'parallel agents')
     m = re.search(r'at once today:\s*\**\s*(\d+|[^*\n—]+)', par)
@@ -272,7 +307,8 @@ def parse(md):
     patterns = [[col(r, 'pattern'), col(r, 'does'), col(r, 'evidence'), col(r, 'fits'), col(r, 'does not', 'not when', "doesn't"), col(r, 'here as', 'here')]
                 for rows in tables(find(secs, 'transferable')) for r in rows if col(r, 'pattern')]
     capabilities = parse_capabilities(find(secs, 'capabilities'), roadmap)
-    return {'title': title, 'summary': summary, 'capabilities': capabilities, 'parallel': parallel, 'guards': guards, 'roadmap': roadmap, 'cards': cards, 'tools': tools,
+    return {'title': title, 'summary': summary, 'task_mix': field(md, 'Task mix'), 'grid': parse_grid(find(secs, 'evidence grid')),
+            'capabilities': capabilities, 'parallel': parallel, 'guards': guards, 'roadmap': roadmap, 'cards': cards, 'tools': tools,
             'patterns': patterns, 'grill': bullets(find(secs, 'grill')), 'unknowns': bullets(find(secs, 'unknowns'))}
 
 
@@ -348,6 +384,20 @@ def lint(model):
         orphan = [c['id'] for c in caps if c['state'] == 'no milestone']
         if orphan:
             w.append(f'{", ".join(orphan)}: no milestone delivers it and it is not under Deferred')
+    grid, open_cards = model.get('grid') or {}, [c for c in model['cards'] if c['life'] != 'deferred']
+    if not grid:
+        if caps or ms:
+            w.append('no **Evidence grid** — nothing shows which levels and ways were looked at')
+    else:
+        lost = [f'{lv} × {WAY_LABELS[wy].split(" — ")[0].lower()}' for lv in GRID_LEVELS for wy in WAYS
+                if not grade((grid.get(lv) or {}).get(wy, ''))]
+        if lost:
+            w.append(f'Evidence grid: no verdict (declared · checked · seen · gap · n/a) in {", ".join(lost)}')
+        nocell = [c['name'] for c in open_cards if not c['cell'] and not re.search(r'\bloop\b', c['way'].lower())]
+        if nocell:
+            w.append(f'{len(nocell)} card(s) name no cell (`<way> at <level>`): {", ".join(nocell[:6])}')
+    if not model.get('task_mix') and (caps or ms):
+        w.append('no **Task mix:** line — what comes first rests on the shape\'s habit, not this project')
     for t, m in ms:
         if m['status'] == 'delivered' and m['level'] != 'demoed':
             w.append(f'{t}: delivered but not demoed ({m["level"] or "no Verified line"}) — shown as such')
@@ -380,6 +430,36 @@ def node(h, anchor):
     inner = f'<span class="sym">{SYM[h["status"]]}</span><span class="nm">{esc(h["name"])}</span>{also}{sc}'
     data = f'class="node {h["status"]}" data-tip="{esc(tip)}" data-usage="{esc(h.get("usage", ""))}"'
     return f'<a {data} href="#{anchor}">{inner}</a>' if anchor else f'<span {data} tabindex="0">{inner}</span>'
+
+
+def grid_panel(model, rid, k):
+    grid = model.get('grid') or {}
+    if not grid:
+        return ''
+    chips = {}
+    for i, c in enumerate(model['cards']):
+        if c['life'] != 'deferred' and c['cell']:
+            st = 'exists' if c['life'] == 'delivered' else c['status']
+            chips.setdefault(c['cell'], []).append(f'<a class="node {st}" href="#{rid}-card-{i}" data-tip="{esc(c["name"])} — {esc(c["life"])}">'
+                                                   f'<span class="sym">{SYM[st]}</span><span class="nm">{esc(c["name"])}</span></a>')
+    rows = []
+    for lv in GRID_LEVELS:
+        r = grid.get(lv)
+        if not r:
+            rows.append(f'<tr><th scope="row">{lv}</th>' + '<td class="g-none">no verdict</td>' * 3 + '</tr>')
+            continue
+        tds = ''
+        for wy in WAYS:
+            g = grade(r[wy]) or 'none'
+            ch = chips.get((wy, lv), [])
+            tds += (f'<td class="g-{g.replace("/", "")}">{md(r[wy]) if r[wy] else "no verdict"}'
+                    + (f'<div class="nodes">{"".join(ch)}</div>' if ch else '') + '</td>')
+        rows.append(f'<tr><th scope="row">{md(r["label"])}</th>{tds}</tr>')
+    tm = f'<p><strong>Task mix:</strong> {md(model["task_mix"])}</p>' if model.get('task_mix') else ''
+    return (f'<section class="panel"><h3>Evidence grid</h3><p class="muted">What an agent can prove at each level, by each way — '
+            f'declared · checked · seen · gap · n/a — with each proposed card in the cell it would fill.</p>{tm}'
+            f'<div class="tw"><table class="grid"><thead><tr><th>Level</th>' + ''.join(f'<th>{WAY_LABELS[w]}</th>' for w in WAYS)
+            + f'</tr></thead><tbody>{"".join(rows)}</tbody></table></div>{verdict(k("grid:section"), "Evidence grid")}</section>')
 
 
 def picture(model, rid, name):
@@ -644,6 +724,9 @@ def repo_section(model, rid, multi):
                      f'{table(["Pattern", "Does", "Evidence here", "Fits when", "Does not fit when", "Here as"], model["patterns"])}'
                      f'{verdict(k("patterns:section"), "Transferable patterns")}</section>')
     parts[1:1] = [x for x in (roadmap_panel(model, cards, k), delivered_panel(model, cards), deferred_panel(model, cards, k)) if x]
+    g = grid_panel(model, rid, k)
+    if g:
+        parts.insert(0, g)
     if grill:
         parts.append(f'<section class="panel"><h3>Questions for you ({len(model["grill"])})</h3><p class="muted">Type your answer in the note.</p><ul class="items">{grill}</ul></section>')
     if tools:
@@ -751,6 +834,9 @@ ul.items{list-style:none;margin:0;padding:0}
 button:focus-visible,input:focus-visible,textarea:focus-visible,.node:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .tip{position:fixed;z-index:9;pointer-events:none;background:var(--fg);color:var(--bg);font-size:12.5px;padding:6px 9px;border-radius:6px;max-width:min(460px,calc(100vw - 32px))}
 .tip pre{background:transparent;color:inherit;padding:0;margin:4px 0 0;white-space:pre-wrap;max-height:200px;overflow:hidden}
+.grid td{min-width:150px}.grid td.g-declared{background:var(--oks)}.grid td.g-checked{background:#eaf5ea}
+.grid td.g-seen{background:var(--halfs)}.grid td.g-gap,.grid td.g-none{background:var(--bads)}.grid td.g-na{color:var(--fg3)}
+.grid .nodes{margin-top:6px}
 .big{font-size:22px}.tw{overflow-x:auto}table{border-collapse:collapse;min-width:640px;font-size:13.5px;width:100%}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--fg3);font-size:12px;text-transform:uppercase;letter-spacing:.05em} td.gap{color:var(--bad);font-weight:600} th[scope=row] a{color:var(--fg);font-weight:600}
 .copy{font:600 14px system-ui,sans-serif;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
 @media (max-width:760px){.ms-head{grid-template-columns:1fr}.row{grid-template-columns:1fr}.item{grid-template-columns:1fr}.verdict{justify-content:flex-start;max-width:none}}

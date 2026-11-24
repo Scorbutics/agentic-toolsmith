@@ -40,21 +40,38 @@ delivery, telemetry, configuration — and at each inspection point, what an age
 steer, stub, freeze or check** there today. Candidate handles come first; safety only as the few fences those handles need. You get a diagram and a table of where tooling could apply, grilled with
 you, before any tool is proposed. Later runs read the map instead of rediscovering it.
 
-## Three ways up
+## The evidence grid — four levels × three ways
 
-| | How | Best for |
-|---|---|---|
-| **Reach in** — the live app | Handles into the running app: dev login, eval console, warp, deep links | Runtime, timing, integration, "only on device X" |
-| **Bring out** — the lab | Rebuild a piece of the app in isolation so every declared state has its own address — no backend, no login | UI composition, screens with many states |
-| **Witness** — the effects | Record what the app touched — DB statements, outbound HTTP, mail, files, messages — and compare it to what was declared | Anything that writes, sends or calls |
+The question behind every map: **at each level of this app, what can an agent prove, and how?**
 
-Most agents verify what the screen shows and never what the code touched. The skill makes the
-third column a rung of its own.
+| | **Bring out** — a lab | **Witness** — the effects | **Reach in** — the live app |
+|---|---|---|---|
+| **unit** — a function, a query | unit tests, rolled-back SQL tests | the rows a unit wrote, asserted | — |
+| **piece** — a screen, a scene, a model | a component or region lab, a scene harness | the calls a piece makes | a screenshot of it in the running app |
+| **operation** — a request, a job, a webhook | one operation driven alone, on a local stack | what one operation wrote, called, bypassed | call it, as a persona |
+| **journey** — the whole app, as someone | e2e with the outside world replaced | what a whole session touched | launch, log in, reach the state |
 
-Handles are shown in seven categories — launch & loop, ingress, runtime, state, egress, eyes & logs, and the lab around the runtime —
-one picture of the app with what exists and what is missing. Every handle is also judged on two properties, whichever way up: **loop** (fast, isolated,
-resettable) and **fence** (dev-only, fails closed). Together that is a classifier for any app's
-agent harness: each handle gets a coordinate — **boundary × verb × way** — and a quality bar.
+Agents fill one cell — the whole app, reached live — and call the rest covered because a unit suite
+and an e2e suite exist. The **piece** row (between those two suites) and the **witness** column (what
+the code touched, not what the screen shows) are where maps go blank. So every cell gets a verdict,
+graded by whether its evidence can fail against something written down — `seen` · `checked` ·
+`declared` — or `gap` / `n/a` with why. **A gap is not a proposal**: it becomes a card only when the
+project needs it, and what the project needs is read from its own history — the **task mix**, the
+last commits sorted by level — which also decides the first milestone. A screen-heavy project may
+start with a lab that needs no launch; a backend-heavy one with a witness on one operation;
+launching the app and logging in comes first only where whole-app journeys dominate.
+
+The strong form of any cell is a **declared boundary**: declare what a piece can be or what an
+operation may touch, run each declared state in isolation, witness the run, fail on the difference,
+review the declaration's diff, and tie it back to the live app. Toolsmith proposes it as a pattern
+built on the project's own seams, or with whichever tool fits.
+
+Every handle is also judged on two properties: **loop** (fast, parallel-safe, resettable —
+environments, containers and displays live here, not in the lab) and **fence** (dev-only, fails
+closed). Each handle gets a coordinate — **cell (level × way) · boundary · verb** — and a quality
+bar. On the review page, the grid comes first, with every proposed card drawn in its cell; the
+app's handles are then drawn by where they attach (launch, ingress, runtime, state, egress, eyes,
+and the lab framing them).
 
 ## Install — one command
 
@@ -77,15 +94,20 @@ Then, in any project, start your agent and type `/toolsmith map`.
 git clone https://github.com/Scorbutics/agentic-toolsmith && cd agentic-toolsmith
 ./evals/run.sh --only vue-realworld          # one scenario, sonnet, with the skill and without
 ./evals/run.sh --model sonnet --model haiku  # every scenario, two models
+./evals/run.sh --judge                       # and where the proposals fall on the evidence grid
 ```
 
-Five public repositories, one per shape — a Rails monolith (CodeTriage), a Go service (miniflux), a
-Vue SPA (vue-realworld), a dbt pipeline (jaffle-shop), a Godot game (tps-demo) — pinned to a commit.
+Six public repositories, one per shape — a Rails monolith (CodeTriage), a Go service (miniflux), a
+Vue SPA (vue-realworld), a dbt pipeline (jaffle-shop), a Godot game (tps-demo), a Next.js + Supabase +
+Stripe starter (subscription-payments) — pinned to a commit.
 Each runs the Claude Code CLI headless on the same task **with the skill and without it**, read-only,
 and scores both outputs on the scenario's expected behaviours (did it pick the right primitive for
 where the state lives? a mock API for the SPA? DuckDB as the lab for dbt?), the runnable usage
 examples, the roadmap, and whether cited `file:line` references resolve. Results land in
-`eval-runs/<timestamp>/results.md`.
+`eval-runs/<timestamp>/results.md`. With `--judge`, a judge model then classifies every proposal by
+level and way (`distribution.md`): how many grid cells the proposals reach, the share of the busiest
+cell, M1's cell, and any of the author's tools proposed where the scenario says they do not fit —
+what keyword scores cannot see.
 
 **Latest results** ([docs/evals.md](docs/evals.md)): with the skill, **57/60** expected behaviours versus
 **40/60** without, a roadmap in 10/10 runs versus 0/10, about 9 runnable usage examples per map versus
@@ -125,15 +147,15 @@ Research and practice:
   question at a time, look in the codebase before asking.
 - **The Mythical Man-Month** — Fred Brooks (1975): the surgical team and its toolsmith.
 
-Two tools by the same author, each the strong form of one "way up". The skill does not require
-them: it recommends a tool — these, Storybook, Mailpit, OpenTelemetry or a few lines of project
+Two tools by the same author, each a declared boundary in one cell of the grid — the same pattern
+the skill proposes on any stack. The skill does not require them: it recommends a tool — these, Storybook, Mailpit, OpenTelemetry or a few lines of project
 code — only when the app's map shows it fits, with the alternative and the cost, and it always
 discloses these two as the author's ([tools.md](skills/toolsmith/references/tools.md)):
 
-- **[motu](https://github.com/Scorbutics/motu)** — *the lab.* Declare a screen region's state and
+- **[motu](https://github.com/Scorbutics/motu)** — *piece × bring out (and the calls a piece makes).* Declare a screen region's state and
   owners; the lagoon renders every declared state at its own URL, with no backend and no login,
   and checks keep the lab and the page in agreement.
-- **[assay](https://github.com/Scorbutics/assay)** — *the witness.* An effect ledger: what each
+- **[assay](https://github.com/Scorbutics/assay)** — *operation × witness.* An effect ledger: what each
   backend operation actually touches (tables, procedures, outbound hosts, access-control bypass),
   and a gate that fails when it differs from what was declared.
 
@@ -142,7 +164,8 @@ discloses these two as the author's ([tools.md](skills/toolsmith/references/tool
 ```
 skills/toolsmith/
   SKILL.md                      the process: trace → survey → verify boundary → probe → grill → rank → build → prove
-  references/map.md             map mode: 13 boundary classes × 5 verbs (see, steer, stub, freeze, check)
+  references/grid.md            the evidence grid: levels × ways, grading a cell, the declared boundary, loop and fence
+  references/map.md             map mode: task mix, 13 boundary classes × 5 verbs (see, steer, stub, freeze, check), the grid
   references/map-template.md    the map, with its diagram
   references/shapes.md          what each rung means per project shape
   references/handles.md         handles by rung: reach in, lab, witness, assert, launch/reset
@@ -153,6 +176,7 @@ skills/toolsmith/
   references/review.md          the review loop: present, answer every remark, revise, accept, implement
   scripts/review_page.py        map.md → one self-contained HTML review page (stdlib only)
 tests/test_review_page.py       regression tests for the review page: python3 -m unittest discover -s tests
+evals/run.py, evals/judge.py    evals with and without the skill; the grid distribution of the proposals
 docs/trials.md                  dry runs on four project shapes, and what each changed
 ```
 

@@ -53,16 +53,24 @@ Reach, Act, Assert and Reset in one command, touching nothing shared.
 
 ### Lab — every declared state at its own address
 The opposite of reaching into the live app: bring a piece of the app *out* and make each of its
-states addressable — no backend, no session, no login. Strongest form: a region/state renderer
-driven by a declaration of the region's state and backend asks, so the lab cannot invent a
-state the app cannot be in (e.g. motu's lagoon: every declared state of a region at its own
-URL, flows that drive it, checks that the declaration and the page still agree). Weaker forms:
-component labs (Storybook, Ladle, Histoire), a scene harness for a game, a screen-per-fixture
-route. The fastest Reach + Observe for UI; requirements:
-- fixtures come from the app (typed against its real types), never invented to make a frame render;
-- something checks the lab against the live app (an integration check, a placed-vs-rendered
-  test) — a lab that drifts lies;
-- each state's URL is printable by a command, so the agent can enumerate them.
+states addressable — no backend, no session, no login. A lab exists at **every level** of the grid
+(grid.md), and the unit and e2e suites already fill two of them — which is why the level between
+is the one nobody proposes:
+
+| Level | The lab | Tie to the live app |
+|---|---|---|
+| unit | the unit suite; a SQL transaction scenario (below) | the same code runs in the app |
+| piece | a component lab (Storybook, Ladle, Histoire), a region/state renderer driven by a declaration of the region's state and backend asks (motu's lagoon), a scene or battle harness, a dbt model on a local engine | a check that the placed page still renders what the lab declares; a model's output against a reference |
+| operation | one operation driven alone against a local stack, with a fixture request and a persona (a route handler called directly, a job run now on a fixture, `dbt build --select model`) | the same handler and the same policies as the live path |
+| journey | an e2e suite on a local stack, with the outside world replaced by mocks or recordings | contract tests or recordings for every mock |
+
+The strongest form at any level is a **declared boundary** (grid.md): the lab renders or drives only
+what a declaration says the piece can be, so it cannot invent a state the app cannot be in, and a
+gate keeps the declaration and the app in agreement. Weaker forms are fine where states are few.
+Every lab:
+- takes fixtures from the app (typed against its real types), never invented to make a frame render;
+- has a tie to the live app — a lab that drifts lies;
+- prints each state's address by a command, so the agent can enumerate them.
 
 ### Boot-time script hook / crash replay
 A flag that loads an arbitrary script at startup without editing the app (`--util=<file>`,
@@ -261,6 +269,19 @@ gate diffs against the declaration; the declaration diff is the review surface).
 **safety map** for step 1b: the tables an operation writes tell you which other operations a
 change affects. Know its limits and say them: a ledger checks categories of effect, not values.
 
+### Witness at each level
+The ledger is the operation row. The other rows have their own witness, and the journey row is the
+one maps leave blank:
+- **unit** — assert on the rows or files the unit wrote, in its own test (a transaction scenario
+  that selects what it inserted before rolling back);
+- **piece** — the calls a piece makes, recorded and compared: a mock server's request log, the
+  declared calls of a region lab (`expectCalls`), "this screen issues three reads and no write";
+- **operation** — the effect ledger above, or statement logging scoped to one request id;
+- **journey** — what a whole persona session touched, in the run's own environment: the mail
+  caught, the jobs enqueued, rows changed per table (a before/after count or an audit trigger), the
+  outbound hosts reached. `envs effects a1` printing that summary turns "it looked right" into
+  "it looked right and wrote only what it should".
+
 ### Cheaper witnesses, by channel
 - **Database**: statement logging on the local DB (`log_statement`, query logs), per-run
   schemas, an audit trigger on the tables the task touches.
@@ -291,7 +312,8 @@ The ones the survey must ask about on any web app or service:
   types`, `prisma generate`, `rails db:migrate` + schema dump); "schema drifted from migrations" is
   a Build-rung failure. Category: launch & loop.
 - **Database snapshot and branching** — a template-database clone, a Supabase/Neon branch, a
-  scoped `pg_dump` of one tenant: the cheapest Reset and isolation level 2. Category: lab (+ state).
+  scoped `pg_dump` of one tenant: the cheapest Reset and isolation level 2. Category: launch (+ state)
+  — it is a loop property, not a lab.
 - **Session and token minting** — a JWT or session for a role or persona, so access policies (RLS,
   authorization) are exercised as that role. Category: ingress.
 - **Inbound webhooks** — replay saved payloads with valid signatures (`stripe trigger`, a

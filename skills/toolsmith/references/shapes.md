@@ -14,6 +14,7 @@
 - Embedded / hardware / device firmware
 - Legacy / heavyweight stack (JSP, AngularJS, app servers, mainframe-adjacent)
 - Cross-cutting concerns (check on every shape)
+- Levels by shape
 
 Most projects are several shapes at once (a game is also a native library; a SaaS is a web app
 + a worker + a database). Probe each shape's rungs. The table says what each rung *usually
@@ -141,3 +142,29 @@ Games, cont.:
 - **Secrets**: can the agent run without production secrets? Which dev secrets exist?
 - **Agent-tool constraints**: things the agent's own harness refuses (typing passwords, some
   domains, GUI-only actions) — a handle has to route around them, not fight them.
+
+## Levels by shape
+
+The four rows of the evidence grid (grid.md), in each shape's own words. Use these words in the
+map; keep the four rows. The **piece** row is the one agents skip — and the **witness** column at
+each level is the one they leave blank.
+
+| Shape | unit | piece | operation | journey |
+|---|---|---|---|---|
+| Web app with accounts | function, query, SQL function | component, screen region | request, server action, RPC, job, webhook | a session as a persona, across screens |
+| API / backend, workers | function | handler or module with its ports faked | one request or job, on a local stack | a scenario across requests, jobs and services |
+| Game / real-time | function, system | scene, battle, entity in a harness | one command or input, a save and load | a playthrough or a recorded input run |
+| Embedded runtime / scripting host | script function | scene or screen in the runtime's desktop build | one call across the host boundary | the packaged app on the device |
+| Mobile / desktop app | function, view model | screen or view, in a preview or harness | one intent, IPC call or API call | a session on the emulator or device |
+| CLI / library / SDK | function | module, subcommand | one invocation on a fixture | the real consumer using it |
+| Dev / agent tooling | function | one rule or pass on a fixture | one command on a fixture project | the tool on its real consumer |
+| Data / ML / batch | macro, SQL unit test | model, transform | one model or step built (`--select`) | the DAG or the pipeline run |
+| Infrastructure / IaC | policy, module test | module | `plan` / `diff` of one stack | the environment brought up locally |
+| Embedded / firmware | function on the host | driver on the simulator | one command over the serial console | the board running its program |
+| Legacy / heavyweight | function, procedure | one page or module with a partial launch | one request or procedure call | a session through the app server |
+
+Witness at each level, typically: **unit** — the rows or files a unit wrote, asserted in its test;
+**piece** — the calls a piece makes (requests recorded by a mock, declared calls in a lab);
+**operation** — what one operation wrote, called and bypassed (a ledger, statement logging, a
+recording proxy); **journey** — what a whole run touched: the mail caught, the jobs enqueued, the
+rows changed in the run's own environment, the hosts reached.

@@ -85,7 +85,7 @@ At each point, ask what an agent could do there:
   (an effect ledger's gate, a lab-vs-page integration check, "a stranger gets nothing" for
   access policies). Seeing is not checking: a check can fail.
 
-Per point, also note the two properties every handle is judged on (categories.md):
+Per point, also note the two properties every handle is judged on (grid.md):
 **loop** — can it be reset, isolated per run/worktree, repeated fast? — and **fence** — is it
 dev-only, does it fail closed?
 
@@ -103,6 +103,14 @@ is possible for an agent is a `human-only` point; say who holds it.
    a desktop app, a daemon): a live eval, at the lowest layer with a per-frame or per-request hook
    every host goes through (it may be a library function the host calls, not a loop the layer owns). That is where the generic primitive goes (principles.md). Everything after is written against it: scripts under it, the
    capabilities those scripts need as Needs lines, dedicated cards only with an exemption.
+0b. **Read the task mix.** What kind of change does this project actually get? Sort the last ~50
+   non-merge commits (`git log --no-merges -50 --name-only --format='%h %s'`) by the **level** they
+   change (grid.md — unit, piece, operation, journey; a commit touching several counts for the
+   largest) and, where it shows, by whether they write or send. Write one line in the map's header:
+   `**Task mix:** 50 commits — 21 piece (screens), 16 operation (routes, SQL functions), 9 unit, 4
+   journey; 18 of them change what an operation writes`. Fewer than ~20 commits, a squashed history,
+   or a vendored import: say so and fall back on the agent files and open issues. The mix decides
+   which capability comes first (step 4) and what M1 proves (roadmap.md) — not the shape's habit.
 1. **Locate.** For each class, find the points in the code — grep for the crossing itself
    (`fetch(`, `http.`, `smtp`, `Date.now`, `new Date`, `getenv`, `STDIN`, `Thread.new`,
    `rand`, `cron`, `listen(`, route registrations, FFI declarations…), plus configs and agent
@@ -114,7 +122,14 @@ is possible for an agent is a `human-only` point; say who holds it.
    on the five criteria of principles.md, "What makes a good handle"), a human-only path, possible-but-missing, or
    impossible. Note the way: reach in · bring out · witness. A **tool** often climbs several
    ways — list it as `tool → verb → way` rows (an effect ledger that also replays calls and
-   clones the database is witness + bring out + loop), never one label per tool.
+   clones the database is witness + bring out + loop), never one label per tool. **The existing
+   test suites are tools here too**: the unit suite, an e2e suite, SQL tests, a component lab —
+   each sits in a cell; say which, and whether CI runs it.
+2b. **Fill the evidence grid** (grid.md): for each of the twelve cells, a verdict — `declared:`,
+   `checked:` or `seen:` with the command that fills it, `gap:` with what a task loses for it, or
+   `n/a:` with why. Grade a lab with no tie to the live app as `seen` at most. Look hardest at the
+   **piece** row (between the unit and e2e suites) and the **witness** column (what the code
+   touched): they are the cells agents leave blank because the neighbouring ones look filled.
 3. **Mark the fences.** Flag the points an agent's probes or handles could trigger with real
    consequences: live keys or production URLs a local launch would use, a production default
    target, a prod-copy database, user data a run would write, scripts that contradict the agent
@@ -124,11 +139,14 @@ is possible for an agent is a `human-only` point; say who holds it.
    them in one "Noticed in passing" line at the end, or leave them out — **unless the point is, or
    should become, a handle**: an always-on debug port is a half-built remote-debug handle, and its
    exposure goes in that card's Fence line, not in passing.
-4. **Name the capabilities** — before any card. From the inventory, the two to five things the
-   agent cannot do today on this project and most needs: "run the loop unattended", "reach any
-   state as any persona", "check what left the app". Phrase each as what the agent can do, never
-   as a tool; give each its evidence (points, tasks, human steps in the agent files) and what
-   happens today instead. They are the map's direction: the cards are proposed to deliver them,
+4. **Name the capabilities** — before any card. From the grid's gaps, weighted by the task mix,
+   the two to five things the agent cannot do today on this project and most needs: "see every
+   state of a screen without launching", "know what an operation wrote, and fail when it differs",
+   "reach any state as any persona". Phrase each as what the agent can do, never as a tool; give
+   each its evidence (the cell and its gap, the share of the task mix that lands there, tasks,
+   human steps in the agent files) and what happens today instead. Before writing them, look at
+   their cells: if every capability sits in one row or one column, say why the others do not
+   matter here, or you are repeating the shape's habit rather than reading this project. They are the map's direction: the cards are proposed to deliver them,
    and the roadmap is cut along them.
 5. **Grill the map** — see below.
 6. **Write it** with [map-template.md](map-template.md), including the diagram, then render the
@@ -139,7 +157,7 @@ is possible for an agent is a `human-only` point; say who holds it.
    exact command (or call, or URL) and a few lines of what it prints. A handle you cannot write a
    usage example for is not designed yet. For a runtime-shaped app, the candidates include remote
    debug and remote eval into the live process (handles.md, "Runtime-shaped apps"). Each card
-   names its **category** (launch · ingress · runtime · state · egress · eyes · lab — categories.md), its point, verb, way and rough cost.
+   names its **cell** (`<way> at <level>` — grid.md), its category for the diagram (launch · ingress · runtime · state · egress · eyes · lab), its point, verb and rough cost.
 8. **Compile the roadmap** (roadmap.md): foundations shared by several cards, the
    dependency order, keystones, and milestones cut by capability — M1 the walking skeleton — each
    naming the capability it delivers and ending on a demo that proves it. Re-read the cards after
@@ -167,6 +185,8 @@ found:
 - "These points have no agent verb at all: [list]. Which of them do your tasks hit most?"
 - "This internal seam [X] looks like where a lab could cut the app: true?"
 - "I could not tell whether [point] is live in dev or stubbed. Which?"
+- "Most of your recent commits change [level]; I made M1 the loop for that. Is that the work you
+  want agents doing, or is it about to change?"
 
 Stop when every class has points or a "none found", and every unknown has an answer or an owner.
 

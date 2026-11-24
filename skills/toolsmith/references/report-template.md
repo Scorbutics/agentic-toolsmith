@@ -5,6 +5,13 @@
 **Variants probed:** <e.g. phone + desktop viewport, or raylib + sfml> · **Loops:** <inner / outer, if a tool>
 **Safety boundary (verified):** <live keys, prod-copy data, user data; strictest policy layer>
 **Permissions granted:** read-only · rolled-back · local write · inject · external
+**Level:** <unit · piece · operation · journey, in the shape's words> · **Writes or sends:** <yes: what / no>
+
+## The task's row of the evidence grid
+
+| Bring out — lab | Witness — effects | Reach in — live |
+|---|---|---|
+| `checked:` / `gap:` / `n/a:` … | | |
 
 ## Ladder
 
@@ -31,10 +38,10 @@ forwards cleaned up.
 
 ## Gaps, ranked
 
-For each proposed handle, say which way: live · lab · witness.
+For each proposed handle, say its cell: `<way> at <level>`.
 
-| Rank | Rung | Gap | Frequency × cost | Proposed handle (live / lab / witness) | Build cost |
-|------|------|-----|------------------|----------------------------------------|------------|
+| Rank | Rung or cell | Gap | Frequency × cost | Proposed handle (cell) | Build cost |
+|------|--------------|-----|------------------|------------------------|------------|
 
 ## Decisions (from the grill)
 - <question> → <answer>, by <who>
