@@ -77,7 +77,7 @@ python3 <skill>/scripts/review_page.py a/map.md b/map.md -o review.html # severa
   [principles.md](references/principles.md)
 - **The evidence grid: four levels × three ways.** Unit, piece, operation, journey — by bring out
   (a lab), witness (the effects), reach in (the live app). Every cell gets a verdict graded
-  `seen` · `checked` · `declared`, or `gap` / `n/a` with why; a gap becomes a card only when a
+  `observed` · `asserted` · `gated`, or `gap` / `n/a` with why; a gap becomes a card only when a
   capability needs it. The unit and e2e suites fill two cells, not "the lab"; the piece row and the
   witness column are where maps go blank. Every handle is also judged on loop (fast,
   parallel-safe, resettable — environments live here) and fence (dev-only, fails closed).

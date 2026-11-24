@@ -54,8 +54,8 @@ The question behind every map: **at each level of this app, what can an agent pr
 Agents fill one cell — the whole app, reached live — and call the rest covered because a unit suite
 and an e2e suite exist. The **piece** row (between those two suites) and the **witness** column (what
 the code touched, not what the screen shows) are where maps go blank. So every cell gets a verdict,
-graded by whether its evidence can fail against something written down — `seen` · `checked` ·
-`declared` — or `gap` / `n/a` with why. **A gap is not a proposal**: it becomes a card only when the
+graded by whether its evidence can fail against something written down — `observed` · `asserted` ·
+`gated` — or `gap` / `n/a` with why. **A gap is not a proposal**: it becomes a card only when the
 project needs it, and what the project needs is read from its own history — the **task mix**, the
 last commits sorted by level — which also decides the first milestone. A screen-heavy project may
 start with a lab that needs no launch; a backend-heavy one with a witness on one operation;

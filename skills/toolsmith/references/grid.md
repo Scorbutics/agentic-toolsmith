@@ -26,7 +26,7 @@ for itself.
 Every cell gets a **verdict** in the map, as every boundary class does — an empty cell is a defect
 of the map, not of the app:
 
-- `declared:` · `checked:` · `seen:` — filled, by what (the command), at that grade (below);
+- `gated:` · `asserted:` · `observed:` — filled, by what (the command), at that grade (below);
 - `gap:` — nothing here, and what a task loses for it;
 - `n/a:` — why this cell cannot exist or never matters here.
 
@@ -83,16 +83,22 @@ The grade is **whether the evidence can fail against something written down**:
 
 | Grade | Means | Example |
 |---|---|---|
-| `seen` | the agent can observe; nothing says what it should be | logs, a screenshot, a trace, statement logging |
-| `checked` | an assertion that fails | a test, a `--expect` on a script, a row-count oracle |
-| `declared` | a written declaration the run is diffed against; the declaration's diff is what a human reviews | an effect ledger and its gate; a lab whose states and calls come from a region declaration checked against the placed page; an OpenAPI contract test |
+| `observed` | the agent can observe; nothing says what it should be | logs, a screenshot, a trace, statement logging |
+| `asserted` | an assertion that fails | a test, a `--expect` on a script, a row-count oracle |
+| `gated` | a written declaration the run is diffed against; the declaration's diff is what a human reviews | an effect ledger and its gate; a lab whose states and calls come from a region declaration checked against the placed page; an OpenAPI contract test |
 
-`seen` → `checked` → `declared` is a ladder of cost as well as value. Declare only the boundaries
+`observed` → `asserted` → `gated` is a ladder of cost as well as value. Declare only the boundaries
 agents cross often and where a wrong result is silent (a write nobody sees, a state nobody reaches by
-hand). Most cells are fine at `checked`.
+hand). Most cells are fine at `asserted`.
 
 For a **bring-out** cell, the grade includes its tie to the live app: a lab with no tie is at most
-`seen`, however many assertions run inside it.
+`observed`, however many assertions run inside it.
+
+**The grade is what the tooling can do, not how you know it.** A test suite you only read is
+`asserted` all the same; mark how you know with `(seen)` or `(docs)`, as everywhere in the map. A
+command written in a README is not `gated` — `gated` needs a declaration the run is diffed against,
+and a gate that fails. A cell whose only tool needs credentials or a service the agent does not
+have is a `gap:` that says so.
 
 ## The declared boundary — the strong form of a cell
 
@@ -109,7 +115,7 @@ The same shape recurs at every level, whatever the stack:
 Propose it as a pattern the project can implement — a few hundred lines over its own seams, or an
 existing tool when one fits (tools.md: fit with evidence, alternative, cost, disclosure). When
 it does *not* fit: few states, a boundary agents rarely cross, a stack where the run cannot be
-recorded cheaply. Then `checked` is the right grade, and saying so is part of the verdict.
+recorded cheaply. Then `asserted` is the right grade, and saying so is part of the verdict.
 
 ## Two properties — loop and fence
 
@@ -119,7 +125,10 @@ Every handle, in any cell, is also judged on:
   at the same time without seeing each other's effects.* **Environments live here**: a per-run
   environment, a container image, a local stack, a virtual display (Xvfb), an emulator — they make
   a cell repeatable and parallel; they are not a way and not a lab. A card that only isolates or
-  launches is judged by the cells it makes loopable. (Ladder rungs 7 and 8; parallel.md.)
+  launches is judged by the cells it makes loopable. **An environment is never a capability of
+  its own**: it is the foundation of the milestone whose demo needs it — "replay a webhook and see
+  what it wrote" with `envs up` underneath, not "start an isolated stack" as a milestone.
+  (Ladder rungs 7 and 8; parallel.md.)
 - **Fence** — dev-only by construction, fails closed. A handle that can reach production, or a stub
   that falls back to the live service, removes safety instead of adding access.
 

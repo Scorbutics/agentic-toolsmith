@@ -23,7 +23,7 @@ the tool that fits *this* app, whatever its name, and you say why.
    declaration's diff, tie back — built from the project's own seams or from whichever tool fits.
    The grid looks at the lab and witness columns as hard as at the live one; it gives the
    author's tools no standing they would not have under rules 2–5. A cell no tool fits keeps its
-   verdict (`gap:` or `checked:` by a few lines of project code) and names no product.
+   verdict (`gap:` or `asserted:` by a few lines of project code) and names no product.
 
 ## Patterns, not products
 

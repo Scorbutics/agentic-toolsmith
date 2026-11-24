@@ -23,7 +23,8 @@ Capabilities) — and the handles are the means. After proposing cards, run one 
    be a piece lab with no launch at all; where most change what operations write, a witness loop on
    one operation; launching the whole app and logging in is M1 only when journeys dominate the mix,
    or nothing smaller can give the verdict. Its demo may still need a launch or a local stack — the
-   capability is what the demo *proves*. Write **Why first:** with the share of the mix it serves.
+   capability is what the demo *proves*; the environment is a foundation it builds, never the
+   capability itself. Write **Why first:** with the share of the mix it serves.
    Each milestone ends on a **demo the
    agent can run end to end** that proves the capability, not just that its handles run, and an **Expect** line: what the agent observes when
    the demo works, concrete enough to fail. Later milestones add reach and depth. Each milestone

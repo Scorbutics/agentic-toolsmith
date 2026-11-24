@@ -237,7 +237,7 @@ class Template(unittest.TestCase):
                          {'states': ('bring', 'piece'), 'writes': ('witness', 'operation'),
                           'dev-login': ('reach', 'journey'), 'profile': ('reach', 'operation')})
         self.assertEqual(set(m['grid']), set(rp.GRID_LEVELS))
-        self.assertTrue(m['task_mix'].startswith('50 commits — 24 piece'))
+        self.assertTrue(m['task_mix'].startswith('50 commits — 38 behavioural'))
 
 
 def nodes(page):
@@ -411,9 +411,9 @@ GRID = """## Evidence grid
 
 | Level | Bring out — lab | Witness — effects | Reach in — live |
 |---|---|---|---|
-| unit — functions | checked: `bun test` | n/a: pure functions | n/a: nothing to reach |
-| piece — screens | gap: no lab | gap: no record of calls | seen: `shot` |
-| operation — routes | gap: | declared: `ledger check` | seen: `curl` |
+| unit — functions | asserted: `bun test` | n/a: pure functions | n/a: nothing to reach |
+| piece — screens | gap: no lab | gap: no record of calls | observed: `shot` |
+| operation — routes | gap: | gated: `ledger check` | observed: `curl` |
 | journey — a session | gap: no e2e | | gap: human login |
 """
 
@@ -432,7 +432,7 @@ class EvidenceGrid(unittest.TestCase):
     def test_grid_and_task_mix_read(self):
         m = rp.parse(gridmap())
         self.assertEqual(m['task_mix'], '50 commits — 30 piece.')
-        self.assertEqual(rp.grade(m['grid']['operation']['witness']), 'declared')
+        self.assertEqual(rp.grade(m['grid']['operation']['witness']), 'gated')
         self.assertEqual(m['grid']['piece']['label'], 'piece — screens')
 
     def test_card_cell_from_heading(self):
@@ -449,7 +449,7 @@ class EvidenceGrid(unittest.TestCase):
 
     def test_lint_flags_cells_without_verdict(self):
         w = rp.lint(rp.parse(gridmap(candidates=cellcard('lab', 'bring out at piece'))))
-        self.assertIn('Evidence grid: no verdict (declared · checked · seen · gap · n/a) in journey × witness', w)
+        self.assertIn('Evidence grid: no verdict (gated · asserted · observed · gap · n/a) in journey × witness', w)
 
     def test_lint_flags_card_without_cell_but_not_loop_cards(self):
         m = rp.parse(gridmap(candidates=cellcard('lab', 'bring out') + cellcard('envs', 'loop')))

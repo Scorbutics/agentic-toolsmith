@@ -108,8 +108,11 @@ is possible for an agent is a `human-only` point; say who holds it.
    change (grid.md — unit, piece, operation, journey; a commit touching several counts for the
    largest) and, where it shows, by whether they write or send. Write one line in the map's header:
    `**Task mix:** 50 commits — 21 piece (screens), 16 operation (routes, SQL functions), 9 unit, 4
-   journey; 18 of them change what an operation writes`. Fewer than ~20 commits, a squashed history,
-   or a vendored import: say so and fall back on the agent files and open issues. The mix decides
+   journey; 18 of them change what an operation writes`. Count apart the commits that change no
+   behaviour — dependency bumps, docs, CI, formatting — as `no level`: they say how the project is
+   maintained, not where agents need evidence (a stream of bumps is still a signal: "did the bump
+   break anything?" is a capability). Fewer than ~15 behavioural commits, a squashed history, or a
+   vendored import: say the mix is weak evidence and lean on the agent files and open issues. The mix decides
    which capability comes first (step 4) and what M1 proves (roadmap.md) — not the shape's habit.
 1. **Locate.** For each class, find the points in the code — grep for the crossing itself
    (`fetch(`, `http.`, `smtp`, `Date.now`, `new Date`, `getenv`, `STDIN`, `Thread.new`,
@@ -125,9 +128,9 @@ is possible for an agent is a `human-only` point; say who holds it.
    clones the database is witness + bring out + loop), never one label per tool. **The existing
    test suites are tools here too**: the unit suite, an e2e suite, SQL tests, a component lab —
    each sits in a cell; say which, and whether CI runs it.
-2b. **Fill the evidence grid** (grid.md): for each of the twelve cells, a verdict — `declared:`,
-   `checked:` or `seen:` with the command that fills it, `gap:` with what a task loses for it, or
-   `n/a:` with why. Grade a lab with no tie to the live app as `seen` at most. Look hardest at the
+2b. **Fill the evidence grid** (grid.md): for each of the twelve cells, a verdict — `gated:`,
+   `asserted:` or `observed:` with the command that fills it, `gap:` with what a task loses for it, or
+   `n/a:` with why. Grade a lab with no tie to the live app as `observed` at most. Look hardest at the
    **piece** row (between the unit and e2e suites) and the **witness** column (what the code
    touched): they are the cells agents leave blank because the neighbouring ones look filled.
 3. **Mark the fences.** Flag the points an agent's probes or handles could trigger with real
@@ -144,7 +147,9 @@ is possible for an agent is a `human-only` point; say who holds it.
    state of a screen without launching", "know what an operation wrote, and fail when it differs",
    "reach any state as any persona". Phrase each as what the agent can do, never as a tool; give
    each its evidence (the cell and its gap, the share of the task mix that lands there, tasks,
-   human steps in the agent files) and what happens today instead. Before writing them, look at
+   human steps in the agent files) and what happens today instead. A capability is something the
+   agent can **prove or reach** — it names a cell. Launching, isolating and resetting are the
+   loop under it (grid.md), never a capability of their own. Before writing them, look at
    their cells: if every capability sits in one row or one column, say why the others do not
    matter here, or you are repeating the shape's habit rather than reading this project. They are the map's direction: the cards are proposed to deliver them,
    and the roadmap is cut along them.

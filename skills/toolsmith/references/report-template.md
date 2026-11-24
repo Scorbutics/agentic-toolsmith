@@ -11,7 +11,7 @@
 
 | Bring out — lab | Witness — effects | Reach in — live |
 |---|---|---|
-| `checked:` / `gap:` / `n/a:` … | | |
+| `asserted:` / `gap:` / `n/a:` … | | |
 
 ## Ladder
 

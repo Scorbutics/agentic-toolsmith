@@ -26,7 +26,7 @@ CAT_RX = '|'.join(CATS)
 GRID_LEVELS = ['unit', 'piece', 'operation', 'journey']
 WAYS = ['bring', 'witness', 'reach']
 WAY_LABELS = {'bring': 'Bring out — lab', 'witness': 'Witness — effects', 'reach': 'Reach in — live'}
-GRADES = ('declared', 'checked', 'seen', 'gap', 'n/a')
+GRADES = ('gated', 'asserted', 'observed', 'gap', 'n/a')
 
 
 # ---------------------------------------------------------------- parsing
@@ -392,7 +392,7 @@ def lint(model):
         lost = [f'{lv} × {WAY_LABELS[wy].split(" — ")[0].lower()}' for lv in GRID_LEVELS for wy in WAYS
                 if not grade((grid.get(lv) or {}).get(wy, ''))]
         if lost:
-            w.append(f'Evidence grid: no verdict (declared · checked · seen · gap · n/a) in {", ".join(lost)}')
+            w.append(f'Evidence grid: no verdict (gated · asserted · observed · gap · n/a) in {", ".join(lost)}')
         nocell = [c['name'] for c in open_cards if not c['cell'] and not re.search(r'\bloop\b', c['way'].lower())]
         if nocell:
             w.append(f'{len(nocell)} card(s) name no cell (`<way> at <level>`): {", ".join(nocell[:6])}')
@@ -457,7 +457,7 @@ def grid_panel(model, rid, k):
         rows.append(f'<tr><th scope="row">{md(r["label"])}</th>{tds}</tr>')
     tm = f'<p><strong>Task mix:</strong> {md(model["task_mix"])}</p>' if model.get('task_mix') else ''
     return (f'<section class="panel"><h3>Evidence grid</h3><p class="muted">What an agent can prove at each level, by each way — '
-            f'declared · checked · seen · gap · n/a — with each proposed card in the cell it would fill.</p>{tm}'
+            f'gated · asserted · observed · gap · n/a — with each proposed card in the cell it would fill.</p>{tm}'
             f'<div class="tw"><table class="grid"><thead><tr><th>Level</th>' + ''.join(f'<th>{WAY_LABELS[w]}</th>' for w in WAYS)
             + f'</tr></thead><tbody>{"".join(rows)}</tbody></table></div>{verdict(k("grid:section"), "Evidence grid")}</section>')
 

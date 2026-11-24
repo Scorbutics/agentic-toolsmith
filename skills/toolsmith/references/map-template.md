@@ -24,10 +24,11 @@
 
 **Shape(s):** <…> · **Repos covered:** <…> · **Mapped by:** <agent>, grilled with <who>
 
-**Task mix:** 50 commits — 24 piece (screens), 14 operation (routes, SQL functions), 8 unit, 4 journey; 15 change what an operation writes.
+**Task mix:** 50 commits — 38 behavioural: 18 piece (screens), 12 operation (routes, SQL functions), 6 unit, 2 journey; 12 no level (dependency bumps, docs, CI); 11 change what an operation writes.
 
-<One line: the last ~50 non-merge commits by the level they change (map.md, step 0b), and how many
-change what an operation writes or sends. It decides what comes first.>
+<One line: the last ~50 non-merge commits by the level they change (map.md, step 0b), the ones that
+change no behaviour counted apart, and how many change what an operation writes or sends. It
+decides what comes first.>
 
 **Variants:** <the ways this app runs that support different handles — e.g. the shipped runtime vs
 a local build of it, two render backends, debug vs release; one line each, and which handles
@@ -38,16 +39,16 @@ exist only on one of them. Omit when there is one way to run it.>
 ## Evidence grid
 
 What an agent can prove at each level, by each way (grid.md). Rows in the shape's words
-(shapes.md, "Levels by shape"); every cell starts with its verdict — `declared:` · `checked:` ·
-`seen:` (filled, with the command) · `gap:` (what a task loses) · `n/a:` (why). A lab with no tie
-to the live app is `seen` at most. The review page draws this table with each proposed card in its
+(shapes.md, "Levels by shape"); every cell starts with its verdict — `gated:` · `asserted:` ·
+`observed:` (filled, with the command) · `gap:` (what a task loses) · `n/a:` (why). A lab with no tie
+to the live app is `observed` at most. The review page draws this table with each proposed card in its
 cell. A gap is not a proposal: it gets a card only when a capability needs it.
 
 | Level | Bring out — lab | Witness — effects | Reach in — live |
 |---|---|---|---|
-| unit — functions, SQL functions | checked: `bun test` (412 tests, 38 s, in CI); `supabase test db` (rolled-back SQL tests) | checked: the SQL tests select the rows they inserted | n/a: nothing to reach below a piece |
-| piece — screens and regions | seen: 12 Storybook stories, nothing ties them to the page (`.storybook/main.ts:3`) | gap: no record of the calls a screen makes | gap: a screenshot needs a human login |
-| operation — routes, server actions, SQL functions | gap: an operation runs only through the whole app | gap: nothing records what an operation wrote; 9 routes use the service-role client (`lib/db/admin.ts:4`) | seen: `curl` on the dev server with a cookie copied by hand |
+| unit — functions, SQL functions | asserted: `bun test` (412 tests, 38 s, in CI); `supabase test db` (rolled-back SQL tests) | asserted: the SQL tests select the rows they inserted | n/a: nothing to reach below a piece |
+| piece — screens and regions | observed: 12 Storybook stories, nothing ties them to the page (`.storybook/main.ts:3`) | gap: no record of the calls a screen makes | gap: a screenshot needs a human login |
+| operation — routes, server actions, SQL functions | gap: an operation runs only through the whole app | gap: nothing records what an operation wrote; 9 routes use the service-role client (`lib/db/admin.ts:4`) | observed: `curl` on the dev server with a cookie copied by hand |
 | journey — a session as a persona | gap: no e2e suite | gap: mail goes through the live provider (Fences ⚠ 1) | gap: a human starts the server and logs in |
 
 ## Parallel agents
@@ -83,15 +84,16 @@ capability needs is not proposed.
 
 | # | Capability — the agent can… | Today | Evidence |
 |---|---|---|---|
-| C1 | see every state of a screen, and know the page still renders it, without launching | a human logs in and clicks to the state; the stories drift | piece row of the grid; 24 of 50 commits change screens |
-| C2 | know what an operation wrote, and fail when it differs from what it should | nothing records it; a wrong write is found in production | operation × witness; 15 of 50 commits change writes; 9 service-role routes |
+| C1 | see every state of a screen, and know the page still renders it, without launching | a human logs in and clicks to the state; the stories drift | piece row of the grid; 18 of 38 behavioural commits change screens |
+| C2 | know what an operation wrote, and fail when it differs from what it should | nothing records it; a wrong write is found in production | operation × witness; 11 of 38 behavioural commits change writes; 9 service-role routes |
 | C3 | reach any state as any persona, at any time | ad-hoc seeds; login typed by the human | journey × reach in; `db/seeds.sql` personas, no session mint; 35 `new Date()` reads (B8) |
 
 **Today** says what happens instead: a human step, an ad-hoc script, or nothing. Each capability
 is delivered by one or more milestones, or listed under the roadmap's Deferred with why. Their
 cells differ because this project's task mix does: on a project whose commits are mostly
 journeys, C1 would be the launch-and-login loop. Capabilities that all sit in one cell need a
-sentence saying why the other cells do not matter here.
+sentence saying why the other cells do not matter here. Launching, isolating and resetting are
+never a capability: `envs up` is the foundation M2 builds, not a milestone of its own.
 
 ## Delivered handles
 
@@ -172,7 +174,7 @@ app — mounts the page route with each story's args and fails when the page no 
 **Not a script because:** it runs the app's code outside the live app, in a lab.
 **Considered:** motu *(by the skill's author)* — fits (React 18, Vite, screens sharing a store),
 but twelve stories already exist; finishing them costs less. Revisit if screens keep sharing state.
-**Origin:** map — 24 of 50 commits change screens.
+**Origin:** map — 18 of 38 behavioural commits change screens.
 **Fence:** fixtures from `tests/fixtures/`, typed against the app's types; no network.
 **Parallel:** port derived from `--env`; no shared state.
 **Permission:** allow.
@@ -192,7 +194,7 @@ declaring what each route may write; exit 1 on an undeclared write. The declarat
 what the human reviews.
 **Gives the agent:** what one operation wrote, read and bypassed, and a check that fails when that changes.
 **Not a script because:** out-of-band by nature — an effect ledger.
-**Origin:** map — 15 of 50 commits change what an operation writes; 9 routes bypass RLS.
+**Origin:** map — 11 of 38 behavioural commits change what an operation writes; 9 routes bypass RLS.
 **Needs:** `app-dev run`; the request id set on the connection (`set_config('app.request_id', …)`).
 **Fence:** refuses a non-loopback database URL; records table names and counts, never values.
 **Parallel:** per-env database (`envs up`).
@@ -275,7 +277,7 @@ Every milestone has the same lines, one per line; the review page reads them:
 **Depends on:** none.
 **Demo:** `bun run states list checkout && bun run states check checkout`
 **Expect:** two addresses printed; `check` reports 2 states rendered as declared, 0 drift — and fails when a story's args no longer match the page.
-**Why first:** the most frequent task class (24 of 50 commits), and it needs no launch, no login.
+**Why first:** the most frequent task class (18 of 38 behavioural commits), and it needs no launch, no login.
 
 ### M2 — what an operation wrote
 **Capability:** C2 — know what an operation wrote, and fail when it differs.
