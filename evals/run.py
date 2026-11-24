@@ -5,6 +5,7 @@
     ./evals/run.sh --only lobsters --model opus      # one scenario, one model
     ./evals/run.sh --no-baseline --model sonnet --model haiku
     ./evals/run.sh --judge                           # also: where the proposals fall on the evidence grid
+    ./evals/run.sh --runs 3 --skill /tmp/old/skills/toolsmith   # three runs per cell, another version of the skill
 
 For each scenario: clone the repository at a pinned commit (cached), then run the Claude Code CLI
 headless twice on the same prompt — once with the skill installed in the project, once without —
@@ -24,11 +25,21 @@ HERE = Path(__file__).resolve().parent
 SKILL = HERE.parent / 'skills' / 'toolsmith'
 CACHE = Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'toolsmith-evals' / 'repos'
 
-TASK = ("Map this project's tooling for coding agents: what an agent can and cannot do from the command line "
-        "against the running project (launch it, log in, reach a state, act, see the result, check it, reset), "
-        "and propose the tools to build, as a roadmap. Read-only: do not install, build, launch, use the network, "
-        "query a database or modify the project. Write the result as Markdown to {out}.")
-WITH_SKILL = "Use the toolsmith skill in map scope (/toolsmith map). Nobody is available to answer questions: write them with your recommended answers. " + TASK
+READ_ONLY = ("Read-only: do not install, build, launch, use the network, query a database or modify the project. "
+             "Write the result as Markdown to {out}.")
+# `neutral` names no way of working; `ladder` is the prompt of the 2026-11-17 and early 2026-11-24 runs. It lists
+# the reach-in steps (launch, log in, reach a state…) and so pushes every arm toward the live app — kept only to
+# reproduce those numbers.
+PROMPTS = {
+    'neutral': ("Map this project's tooling for coding agents: what an agent working on this project can and cannot do "
+                "today, from the command line, to understand it, change it and verify its own changes, and propose the "
+                "tools to build, as a roadmap. " + READ_ONLY),
+    'ladder': ("Map this project's tooling for coding agents: what an agent can and cannot do from the command line "
+               "against the running project (launch it, log in, reach a state, act, see the result, check it, reset), "
+               "and propose the tools to build, as a roadmap. " + READ_ONLY),
+}
+SKILL_PREFIX = ("Use the toolsmith skill in map scope (/toolsmith map). Nobody is available to answer questions: "
+                "write them with your recommended answers. ")
 TOOLS = ['Read', 'Grep', 'Glob', 'Skill', 'Bash(ls:*)', 'Bash(git log:*)', 'Bash(git status:*)', 'Bash(git ls-files:*)',
          'Bash(python3:*)', 'Bash(wc:*)', 'Bash(head:*)', 'Bash(find:*)']
 
@@ -50,13 +61,13 @@ def checkout(sc):
     return src
 
 
-def run_agent(repo, out, prompt, model, with_skill, timeout):
+def run_agent(repo, out, prompt, model, with_skill, timeout, skill=SKILL):
     skills_dir = repo / '.claude' / 'skills'
     if skills_dir.exists():
         shutil.rmtree(repo / '.claude')
     if with_skill:
         skills_dir.mkdir(parents=True)
-        shutil.copytree(SKILL, skills_dir / 'toolsmith')
+        shutil.copytree(skill, skills_dir / 'toolsmith', ignore=shutil.ignore_patterns('__pycache__'))
         excl = repo / '.git' / 'info' / 'exclude'
         if '.claude/' not in excl.read_text():
             excl.write_text(excl.read_text() + '\n.claude/\n')
@@ -111,7 +122,14 @@ def main():
     ap.add_argument('--timeout', type=int, default=1500, help='seconds per agent run (default 1500)')
     ap.add_argument('--out', help='output directory (default: eval-runs/<timestamp>)')
     ap.add_argument('--judge', action='store_true', help='then judge the grid distribution (evals/judge.py)')
+    ap.add_argument('--prompt', choices=sorted(PROMPTS), default='neutral',
+                    help='task wording (default neutral; ladder reproduces the runs before 2026-11-25)')
+    ap.add_argument('--runs', type=int, default=1, help='runs per scenario × model × arm (default 1); >1 writes r1, r2…')
+    ap.add_argument('--skill', type=Path, default=SKILL, help='the skill directory to test (default: this checkout\'s)')
     a = ap.parse_args()
+    if not (a.skill / 'SKILL.md').is_file():
+        sys.exit(f'evals: no SKILL.md in {a.skill}')
+    task = PROMPTS[a.prompt]
     if not shutil.which('claude'):
         sys.exit('evals: the `claude` CLI is required (and logged in)')
     scenarios = [json.loads(p.read_text()) for p in sorted((HERE / 'scenarios').glob('*.json'))]
@@ -120,30 +138,34 @@ def main():
     models = a.model or ['sonnet']
     out_root = Path(a.out or HERE.parent / 'eval-runs' / time.strftime('%Y%m%d-%H%M%S'))
     arms = [('skill', True)] + ([] if a.no_baseline else [('baseline', False)])
+    out_root.mkdir(parents=True, exist_ok=True)
+    (out_root / 'run.json').write_text(json.dumps({'prompt': a.prompt, 'task': task, 'skill': str(a.skill.resolve()),
+                                                   'runs': a.runs, 'models': models}, indent=1))
     results = []
     for sc in scenarios:
         print(f'{sc["name"]} — {sc["shape"]}', flush=True)
         repo = checkout(sc)
         for model in models:
             for arm, with_skill in arms:
-                out = out_root / sc['name'] / model / arm / 'map.md'
-                print(f'  {model:8} {arm:8} running…', flush=True)
-                meta = run_agent(repo, out, WITH_SKILL if with_skill else TASK, model, with_skill, a.timeout)
-                text = out.read_text(errors='ignore') if out.exists() else ''
-                if not text and len(meta.get('result') or '') > 2000:  # wrote nothing, but answered in full
-                    text = meta['result']; out.write_text(text)
-                s = score(sc, text, repo) if text else {'expected': '0/%d' % len(sc['expected']), 'expected_ratio': 0,
-                                                        'missed': ['no output written'], 'usage_examples': 0,
-                                                        'roadmap': False, 'evidence': '0/0', 'chars': 0}
-                s.update({'scenario': sc['name'], 'model': model, 'arm': arm, 'seconds': meta.get('seconds'),
-                          'cost_usd': meta.get('total_cost_usd')})
-                results.append(s)
-                print(f'  {model:8} {arm:8} expected {s["expected"]}  usage examples {s["usage_examples"]}  '
-                      f'roadmap {"yes" if s["roadmap"] else "no"}  evidence {s["evidence"]}  {s["seconds"]}s', flush=True)
-    out_root.mkdir(parents=True, exist_ok=True)
+                for i in range(1, a.runs + 1):
+                    out = out_root / sc['name'] / model / arm / (f'r{i}' if a.runs > 1 else '') / 'map.md'
+                    print(f'  {model:8} {arm:8} r{i} running…', flush=True)
+                    meta = run_agent(repo, out, (SKILL_PREFIX + task) if with_skill else task, model, with_skill,
+                                     a.timeout, a.skill)
+                    text = out.read_text(errors='ignore') if out.exists() else ''
+                    if not text and len(meta.get('result') or '') > 2000:  # wrote nothing, but answered in full
+                        text = meta['result']; out.write_text(text)
+                    s = score(sc, text, repo) if text else {'expected': '0/%d' % len(sc['expected']), 'expected_ratio': 0,
+                                                            'missed': ['no output written'], 'usage_examples': 0,
+                                                            'roadmap': False, 'evidence': '0/0', 'chars': 0}
+                    s.update({'scenario': sc['name'], 'model': model, 'arm': arm, 'run': i, 'prompt': a.prompt,
+                              'seconds': meta.get('seconds'), 'cost_usd': meta.get('total_cost_usd')})
+                    results.append(s)
+                    print(f'  {model:8} {arm:8} r{i} expected {s["expected"]}  usage examples {s["usage_examples"]}  '
+                          f'roadmap {"yes" if s["roadmap"] else "no"}  evidence {s["evidence"]}  {s["seconds"]}s', flush=True)
     (out_root / 'results.json').write_text(json.dumps(results, indent=1))
-    lines = ['| Scenario | Model | Arm | Expected | Usage examples | Roadmap | Evidence | Time |', '|---|---|---|---|---|---|---|---|']
-    lines += [f'| {r["scenario"]} | {r["model"]} | {r["arm"]} | {r["expected"]} | {r["usage_examples"]} | '
+    lines = ['| Scenario | Model | Arm | Run | Expected | Usage examples | Roadmap | Evidence | Time |', '|---|---|---|---|---|---|---|---|---|']
+    lines += [f'| {r["scenario"]} | {r["model"]} | {r["arm"]} | {r["run"]} | {r["expected"]} | {r["usage_examples"]} | '
               f'{"yes" if r["roadmap"] else "no"} | {r["evidence"]} | {r["seconds"]}s |' for r in results]
     (out_root / 'results.md').write_text('\n'.join(lines) + '\n')
     print('\n' + '\n'.join(lines) + f'\n\nresults: {out_root}')
