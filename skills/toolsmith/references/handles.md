@@ -63,7 +63,7 @@ is the one nobody proposes:
 | unit | the unit suite; a SQL transaction scenario (below) | the same code runs in the app |
 | piece | a component lab (Storybook, Ladle, Histoire), a region/state renderer driven by a declaration of the region's state and backend asks (motu's lagoon), a scene or battle harness, a dbt model on a local engine | a check that the placed page still renders what the lab declares; a model's output against a reference |
 | operation | one operation driven alone against a local stack, with a fixture request and a persona (a route handler called directly, a job run now on a fixture, `dbt build --select model`) | the same handler and the same policies as the live path |
-| journey | the whole flow on a local stack, the outside world replaced: an e2e suite with mocked providers; a backend's chain of functions run in order with stub payment and mail; a CLI's full command sequence on a sample consumer project; a pipeline's full DAG on fixture rows | contract tests or recordings for every mock |
+| journey | an e2e suite on a local stack, with the outside world replaced by mocks or recordings | contract tests or recordings for every mock |
 
 The strongest form at any level is a **declared boundary** (grid.md): the lab renders or drives only
 what a declaration says the piece can be, so it cannot invent a state the app cannot be in, and a
@@ -299,15 +299,8 @@ The ledger is the operation row. The other rows have their own witness, and the 
 one maps leave blank:
 - **unit** — assert on the rows or files the unit wrote, in its own test (a transaction scenario
   that selects what it inserted before rolling back);
-- **piece** — what one piece wrote, sent or called, recorded and compared — the cell maps miss most:
-  - a screen or component: the calls it makes, from a mock server's request log or a region lab's
-    declared calls (`expectCalls`) — "this screen issues three reads and no write";
-  - a handler, job or phase with its ports faked: what it handed the fake store, mailer or payment
-    client — "the renewal phase wrote one invoice and sent no mail";
-  - a CLI pass or a generator: run it on a fixture project and diff the tree — every file it
-    created, changed or deleted, including the hand-written ones it should never touch;
-  - a middleware: the sessions, cookies and log lines one request leaves behind;
-  - a scene or system: the signals it emitted and the state it saved;
+- **piece** — the calls a piece makes, recorded and compared: a mock server's request log, the
+  declared calls of a region lab (`expectCalls`), "this screen issues three reads and no write";
 - **operation** — the effect ledger above, or statement logging scoped to one request id;
 - **journey** — what a whole persona session touched, in the run's own environment: the mail
   caught, the jobs enqueued, rows changed per table (a before/after count or an audit trigger), the

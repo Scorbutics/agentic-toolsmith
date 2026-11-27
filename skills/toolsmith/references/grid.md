@@ -41,13 +41,7 @@ however large the suite (handles.md, "Harnesses").
 |---|---|---|
 | `→ propose` | a map that left this cell empty would miss something real here | "Would a reviewer mark this map wrong for proposing nothing here?" |
 | `→ leave` | a card here would be wasted or wrong — the cell cannot exist, is covered well enough, or would not repay its cost | "Would a reviewer push back on a card here?" |
-| `→ either` | the evidence points neither way — say which evidence, both sides | "Can I name what argues for a card here, and what argues against?" |
-
-**`→ either` is not the safe default.** Maps hedge: where an owner says a cell matters, a map most
-often answers `either`, not `leave`. So `either` needs its reason on both sides ("one fix in the mix
-lands here, but the piece harness already reaches it"). When a task in this project would fail
-silently, or need a human, at this cell — and nothing else on the map covers it — the decision is
-`→ propose`. "No card needed" without that reason is not a decision.
+| `→ either` | neither | — |
 
 Decide from this project's evidence, never the shape's habit: the task mix (map.md, step 0b), what
 a task in the agent files keeps doing by hand, the rules agents trip on, what the verdict says a task
