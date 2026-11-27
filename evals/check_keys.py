@@ -48,6 +48,11 @@ def check(key_path, sc):
             errors.append(f'{h}: no such commit')
         elif git(repo, 'merge-base', '--is-ancestor', h, pin).returncode:
             errors.append(f'{h}: not an ancestor of the pinned commit {pin[:7]}')
+    head = text.split('## Evidence', 1)[0]
+    for lv in ('unit', 'piece', 'operation', 'journey'):
+        for w in ('bring out', 'witness', 'reach in'):
+            if f'`{lv} × {w}`' not in head:
+                errors.append(f'{lv} × {w}: no row in the key')
     per_cell, severe = Counter(), Counter()
     for line in evidence.splitlines():
         cols = [c.strip() for c in line.strip().strip('|').split('|')]

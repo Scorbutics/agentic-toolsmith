@@ -66,7 +66,10 @@ class Keys(unittest.TestCase):
         self.tmp.cleanup()
 
     def test_empty_template_is_not_a_key(self):
-        (judge.KEYS / 'x.md').write_text((ROOT / 'evals/answer-keys/miniflux.md').read_text())
+        cells = [f'{lv} × {w}' for lv in judge.LEVELS for w in judge.WAYS] + ['loop']
+        (judge.KEYS / 'x.md').write_text('**Filled by:** <name> · <date>\n**M1 accepted:** <cells>\n\n'
+                                          '| Cell | Expect | Why |\n|---|---|---|\n'
+                                          + ''.join(f'| `{c}` |  |  |\n' for c in cells))
         self.assertIsNone(judge.read_key('x'))
 
     def test_filled_key_scores_hits_false_positives_and_m1(self):
@@ -77,6 +80,14 @@ class Keys(unittest.TestCase):
         self.assertEqual(key['m1'], ['piece × bring out', 'operation × witness'])
         k = judge.metrics(J, {}, key)['key']
         self.assertEqual((k['hit'], k['want'], k['false'], k['avoid'], k['m1_ok']), (1, 2, 1, 1, True))
+
+    def test_m1_line_written_by_hand(self):
+        (judge.KEYS / 'x.md').write_text(KEY.replace('`piece × bring out`, `operation × witness`', 'piece x any, but I am not sure'))
+        key = judge.read_key('x')
+        self.assertEqual(key['m1'], ['piece × any'])
+        self.assertTrue(judge.metrics(J, {}, key)['key']['m1_ok'])  # J's M1 is piece × bring out
+        j = dict(J, m1={'way': 'witness', 'level': 'operation'})
+        self.assertFalse(judge.metrics(j, {}, key)['key']['m1_ok'])
 
     def test_private_key_found_through_its_scenario_dir(self):
         d = Path(self.tmp.name) / 'private'

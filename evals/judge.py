@@ -118,10 +118,33 @@ def read_key(name):
         if m and m.group(2):
             cells[m.group(1).strip().lower()] = m.group(2).lower()
     m1 = re.search(r'\*\*M1 accepted:\*\*\s*(.*)', text)
-    m1 = [x.strip().strip('`').lower() for x in re.split(r',|;', m1.group(1))] if m1 and m1.group(1).strip() and '<' not in m1.group(1) else []
+    m1 = [m1_cell(x) for x in re.split(r',|;', m1.group(1))] if m1 and m1.group(1).strip() and '<' not in m1.group(1) else []
     by = re.search(r'\*\*Filled by:\*\*\s*(.*)', text)
     by = by.group(1).strip() if by and '<' not in by.group(1) else ''
     return {'cells': cells, 'm1': [x for x in m1 if x], 'by': by} if (cells or m1) else None
+
+
+def m1_cell(text):
+    """One entry of an **M1 accepted:** line: `piece × bring out`, `piece x any`, `any × witness`, `loop`, `any`
+    — anything else (a comment such as "but I am not sure") is dropped."""
+    t = re.sub(r'\s+x\s+', ' × ', text.strip().strip('`').lower())
+    if t in ('any', 'loop'):
+        return t
+    m = re.fullmatch(r'(unit|piece|operation|journey|any) × (bring out|witness|reach in|any)', t)
+    return t if m else ''
+
+
+def m1_matches(m1, accepted):
+    if not m1:
+        return False
+    for a in accepted:
+        if a == 'any' or a == m1:
+            return True
+        if ' × ' in a and ' × ' in m1:
+            (al, aw), (ml, mw) = a.split(' × '), m1.split(' × ')
+            if al in ('any', ml) and aw in ('any', mw):
+                return True
+    return False
 
 
 def against_key(reached, m1, key):
@@ -131,7 +154,7 @@ def against_key(reached, m1, key):
     avoid = [c for c, e in key['cells'].items() if e == 'leave']
     return {'hit': sum(c in reached for c in want), 'want': len(want),
             'false': sum(c in reached for c in avoid), 'avoid': len(avoid),
-            'm1_ok': (None if not key['m1'] else ('any' in key['m1'] or m1 in key['m1']))}
+            'm1_ok': (None if not key['m1'] else m1_matches(m1, key['m1']))}
 
 
 # ---------------------------------------------------------------- metrics
