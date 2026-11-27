@@ -1,5 +1,39 @@
 # Eval results
 
+## Each cell decided — v4 (2026-11-27)
+
+v4 has the map end each grid cell with a decision — `→ propose` · `→ leave` · `→ either`, with why —
+binds the cards to it, and makes a missing seam an explicit decision. Same ten scenarios, prompt and
+judge; 60 maps, judged twice (M1 the same in 58/60, cells Jaccard 0.91). 54 of 60 maps decided
+every cell. Judge outputs: `evals/results/2026-11-27-v4/`. Designed proposals only, loop rows counted:
+
+| Keys | Arm | Proposals/map (designed) | Recall | Precision |
+|---|---|---|---|---|
+| owner (4 projects, 102 expected cells) | no skill | 12.2 (55 %) | 37 % | 57 % |
+| | before the grid | 7.4 (97 %) | 45 % | 58 % |
+| | v2 | 5.9 (94 %) | 42 % | 65 % |
+| | v3 | 6.3 (92 %) | 40 % | 60 % |
+| | **v4** | 6.3 (93 %) | **46 %** | **64 %** |
+| bug-grounded (6 repos, 198) | no skill | 12.3 (53 %) | 44 % | 100 % |
+| | before the grid | 10.8 (96 %) | 59 % | 99 % |
+| | v2 | 7.5 (94 %) | 52 % | 100 % |
+| | v3 | 7.7 (89 %) | 56 % | 100 % |
+| | **v4** | 7.6 (90 %) | 55 % | 99 % |
+
+- **On the owners' keys, v4 is the best version yet** — the most expected cells with something to run,
+  with the second-best precision, and half the proposals of no skill. The margin over the skill
+  before the grid is small (47 against 46 cells of 102): v4 recovers what v2 and v3 had lost in
+  recall while keeping the grid's precision, rather than jumping ahead.
+- **On the bug-grounded keys it stays below the skill before the grid** (55 % against 59 %).
+- **The maps' own decisions against the owners'** — where an owner wrote `propose`, the map decided
+  propose in 40 of 75 cells, `either` in 29, `leave` in 6; where an owner wrote `leave`, the map left
+  it in 41 of 62 and proposed it in 8. Agents respect a leave; they **hedge** on a propose.
+- **Where they miss**: `piece × witness` (missed 9 of 11 — what one piece writes or calls, which the
+  skill's guidance barely illustrates), `journey × bring out` (6 of 6 — an end-to-end run with the
+  outside world replaced), and `operation × witness` on the projects whose owner wanted it, while
+  proposing it on one whose owner said leave.
+- **Cost**: M1 is loop-only in 9/60 maps (v3 6/60, v2 4/60) — still far from 38/60 without the skill.
+
 ## Correction: count what the agent can call (2026-11-27)
 
 The sections below counted a cell as reached when **any** proposal landed in it — a tool's name in a

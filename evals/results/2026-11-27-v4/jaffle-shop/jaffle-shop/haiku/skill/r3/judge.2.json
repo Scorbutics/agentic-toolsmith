@@ -1,0 +1,49 @@
+{
+ "proposals": [
+  {
+   "name": "dbt-lab",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "build-ledger",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "cloud-run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "macro-check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "lab target",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "dbt-lab",
+  "way": "bring out",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

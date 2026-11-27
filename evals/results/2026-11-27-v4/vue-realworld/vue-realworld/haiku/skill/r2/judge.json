@@ -1,0 +1,42 @@
+{
+ "proposals": [
+  {
+   "name": "agent",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "states",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "persona",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "sent",
+   "kind": "card",
+   "way": "witness",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "states",
+  "way": "reach in",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}
