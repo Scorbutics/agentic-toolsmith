@@ -1,0 +1,28 @@
+{
+ "proposals": [
+  {
+   "name": "fixture",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "test-all",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "fixture",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

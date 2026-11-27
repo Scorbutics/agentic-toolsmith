@@ -1,0 +1,74 @@
+[
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 8,
+  "roadmap": true,
+  "evidence": "44/47",
+  "chars": 23112,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 160,
+  "cost_usd": 0.6062957
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 8,
+  "roadmap": true,
+  "evidence": "59/62",
+  "chars": 23739,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 123,
+  "cost_usd": 0.4523132
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 6,
+  "roadmap": true,
+  "evidence": "56/56",
+  "chars": 29308,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 257,
+  "cost_usd": 0.16130801
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 4,
+  "roadmap": true,
+  "evidence": "77/77",
+  "chars": 27512,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 205,
+  "cost_usd": 0.18543473000000002
+ }
+]

@@ -23,7 +23,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from run import CACHE, checkout  # noqa: E402  (same cache, same pinned checkout)
 
-CELL = re.compile(r'`((?:unit|piece|operation|journey) × (?:bring out|witness|reach in)|loop)`')
+CELL = re.compile(r'`?((?:unit|piece|operation|journey) × (?:bring out|witness|reach in)|loop)`?')
 HASH = re.compile(r'(?<![0-9a-f/])([0-9a-f]{7,40})(?![0-9a-f])')
 SEVERE = re.compile(r'data loss|security|lost|money|wrong numbers|silently|crash|corrupt|sent wrongly|wrong data|destroy|deleted|wrong clean verdict|passed .* clean', re.I)
 

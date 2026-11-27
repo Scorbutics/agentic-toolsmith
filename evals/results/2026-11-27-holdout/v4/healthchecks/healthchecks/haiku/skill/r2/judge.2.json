@@ -1,0 +1,77 @@
+{
+ "proposals": [
+  {
+   "name": "agent",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "state check",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "mail last",
+   "kind": "script",
+   "way": "witness",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "mailbox",
+   "kind": "card",
+   "way": "witness",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "effects",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "per-env DB",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "shot",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "clock",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "dev-login",
+  "way": "reach in",
+  "level": "journey"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

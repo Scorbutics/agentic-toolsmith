@@ -1,0 +1,10 @@
+{
+ "prompt": "neutral",
+ "task": "Map this project's tooling for coding agents: what an agent working on this project can and cannot do today, from the command line, to understand it, change it and verify its own changes, and propose the tools to build, as a roadmap. Read-only: do not install, build, launch, use the network, query a database or modify the project. Write the result as Markdown to {out}.",
+ "skill": "v4 (git archive of skills/toolsmith)",
+ "runs": 2,
+ "models": [
+  "sonnet",
+  "haiku"
+ ]
+}

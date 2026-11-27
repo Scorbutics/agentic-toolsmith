@@ -1,0 +1,68 @@
+[
+ {
+  "expected": "7/7",
+  "expected_ratio": 1.0,
+  "missed": [],
+  "usage_examples": 9,
+  "roadmap": true,
+  "evidence": "45/45",
+  "chars": 22782,
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 111,
+  "cost_usd": 0.46127300000000004
+ },
+ {
+  "expected": "7/7",
+  "expected_ratio": 1.0,
+  "missed": [],
+  "usage_examples": 12,
+  "roadmap": true,
+  "evidence": "17/19",
+  "chars": 18802,
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 132,
+  "cost_usd": 0.48502010000000007
+ },
+ {
+  "expected": "7/7",
+  "expected_ratio": 1.0,
+  "missed": [],
+  "usage_examples": 8,
+  "roadmap": true,
+  "evidence": "86/86",
+  "chars": 33014,
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 264,
+  "cost_usd": 0.23374573999999998
+ },
+ {
+  "expected": "6/7",
+  "expected_ratio": 0.86,
+  "missed": [
+   "mail caught or previewed locally"
+  ],
+  "usage_examples": 6,
+  "roadmap": true,
+  "evidence": "77/77",
+  "chars": 35558,
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 296,
+  "cost_usd": 0.30057127
+ }
+]

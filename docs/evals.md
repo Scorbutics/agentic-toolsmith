@@ -1,5 +1,38 @@
 # Eval results
 
+## v5 and two hold-out projects (2026-11-27)
+
+v5 makes `either` name its evidence on both sides and adds worked examples of piece-level witness and
+journey-level labs. It was frozen (`fdfe9a8`) **before** two hold-out projects were chosen —
+healthchecks (Django service) and fd (Rust CLI) — whose keys were drafted blind from 28 and 27 fixed
+bugs and sealed until their runs were scored. Two runs per cell, Sonnet and Haiku (40 v5 maps on the
+ten scenarios, 24 on the hold-outs); judge self-agreement on M1 38/40 and 0.93 Jaccard on cells.
+
+Designed proposals only:
+
+| Keys | Arm | Recall | Precision |
+|---|---|---|---|
+| owner (4) | no skill | 37 % | 57 % |
+| | v4 | 46 % | 64 % |
+| | v5 | 46 % | 63 % |
+| bug-grounded (6) | no skill | 44 % | 100 % |
+| | v4 | 55 % | 99 % |
+| | v5 | 56 % | 100 % |
+| **hold-out (2)** | no skill | 33 % (20/60) | 95 % |
+| | v4 | 37 % (22/60) | 100 % |
+| | v5 | 35 % (21/60) | 95 % |
+
+- **v5 changed nothing measurable.** Maps hedged as much (36 % `either` where the owner wrote
+  `propose`, 39 % with v4), and some of the hedging moved to `leave` (8 % → 14 %) — the opposite of
+  the intent. Fewer maps decided every cell (30/40 against 54/60). More prose rules have stopped
+  moving the agents' decisions.
+- **On the hold-outs the skill's margin shrinks**: 37 % against 33 % without the skill, where it was
+  46 % against 37 % on the keys the rules were tuned against. Part of the earlier gain was tuning, and
+  eight maps per arm is too few to tell the rest from noise. Precision stays at least as high, with
+  half the proposals and nearly all of them designed (86–93 % against 37–47 %).
+- **M1 in an accepted cell**: 0/8 without the skill, 0/8 with v4, 1/8 with v5 — no version puts the
+  first milestone where the bugs were, here either.
+
 ## Each cell decided — v4 (2026-11-27)
 
 v4 has the map end each grid cell with a decision — `→ propose` · `→ leave` · `→ either`, with why —
