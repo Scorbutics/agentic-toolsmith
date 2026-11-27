@@ -25,7 +25,12 @@ from run import CACHE, checkout  # noqa: E402  (same cache, same pinned checkout
 
 CELL = re.compile(r'`((?:unit|piece|operation|journey) × (?:bring out|witness|reach in)|loop)`')
 HASH = re.compile(r'(?<![0-9a-f/])([0-9a-f]{7,40})(?![0-9a-f])')
-SEVERE = re.compile(r'data loss|security|lost|money|wrong numbers|silently|crash|corrupt|sent wrongly|wrong data', re.I)
+SEVERE = re.compile(r'data loss|security|lost|money|wrong numbers|silently|crash|corrupt|sent wrongly|wrong data|destroy|deleted|wrong clean verdict|passed .* clean', re.I)
+
+
+def cells(line):
+    """A Markdown table row's cells; an escaped pipe (\\|) inside a cell is not a separator."""
+    return [c.strip() for c in re.split(r'(?<!\\)\|', line.strip().strip('|'))]
 
 
 def git(repo, *args):
@@ -55,7 +60,7 @@ def check(key_path, sc):
                 errors.append(f'{lv} × {w}: no row in the key')
     per_cell, severe = Counter(), Counter()
     for line in evidence.splitlines():
-        cols = [c.strip() for c in line.strip().strip('|').split('|')]
+        cols = cells(line)
         if len(cols) >= 4 and HASH.search(cols[0]):
             m = CELL.search(cols[2])
             if m:
@@ -64,7 +69,7 @@ def check(key_path, sc):
             else:
                 notes.append(f'{cols[0]}: evidence row names no cell')
     for line in text.split('## Evidence', 1)[0].splitlines():
-        cols = [c.strip() for c in line.strip().strip('|').split('|')]
+        cols = cells(line)
         m = CELL.fullmatch(cols[0]) if cols else None
         if not m or len(cols) < 3:
             continue
