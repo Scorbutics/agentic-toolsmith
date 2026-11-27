@@ -1,5 +1,26 @@
 # Eval results
 
+## Correction: count what the agent can call (2026-11-27)
+
+The sections below counted a cell as reached when **any** proposal landed in it — a tool's name in a
+list as much as a designed handle. Maps without the skill propose about 70 % more items, and about
+half of those are names with no command, usage or design; maps with the skill design over 90 % of
+theirs. Counted that way, "the skill does no better than no skill" was a property of the metric.
+`judge.py` now leads with **recall and precision from designed proposals only**. Across all ten keys
+(240 judged maps):
+
+| Arm | Proposals per map | Designed | Recall, designed only | Precision |
+|---|---|---|---|---|
+| no skill | 12.3 | 54 % | 33 % | 85 % |
+| before the grid | 9.4 | 97 % | 46 % | 84 % |
+| v2 | 6.9 | 94 % | 44 % | 90 % |
+| v3 | 7.2 | 91 % | 46 % | 88 % |
+
+(Loop rows left out here; `judge.py`'s report counts them and reads a few points higher.) With about
+half the proposals, the skill reaches more of the expected cells with something an agent can run, at
+equal or better precision. What stays true below: no version of the skill yet reaches more expected
+cells than the old skill did — targeting the right cells is the open work.
+
 ## Harnesses as handles — v3 (2026-11-27)
 
 v3 makes a harness that renders a unit or piece testable a handle (a fake store, a one-phase runner,
@@ -24,7 +45,7 @@ below no skill on most (miniflux unit 0/6 against 6/6; the private backend piece
 
 What it says:
 - **v3 undoes v2's loss on the bug-grounded keys** (108 → 116, level with no skill) — **and does not
-  move the owner keys** (44/102 for both). On the independent measure, no version of the skill has
+  move the owner keys** (44/102 for both; counting any proposal — see the correction above). On the independent measure, no version of the skill has
   yet reached more expected cells than no skill.
 - **The bug keys lean toward bring out by construction** ("cheapest cell"), so any change toward
   harnesses reads well on them. The owner keys are the check, and they did not move.
@@ -101,7 +122,7 @@ By expected cell, all models pooled (maps that reach it / maps whose key expects
 | `loop` | 35/36 | 33/36 | 36/36 |
 
 What it says:
-- **Against where bugs were caught, the skill — either version — does no better than no skill**, and
+- **Against where bugs were caught, the skill — either version — does no better than no skill** (counting any proposal, named or designed — see the correction above), and
   Haiku with the grid does worse. The grid did not move the skill toward the bugs.
 - **The skill misses the cheapest cells — unit and piece tests.** Most past bugs in these
   repositories would have been caught by a test at the unit or piece level; maps without the skill

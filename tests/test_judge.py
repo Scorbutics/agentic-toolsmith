@@ -80,6 +80,11 @@ class Keys(unittest.TestCase):
         self.assertEqual(key['m1'], ['piece × bring out', 'operation × witness'])
         k = judge.metrics(J, {}, key)['key']
         self.assertEqual((k['hit'], k['want'], k['false'], k['avoid'], k['m1_ok']), (1, 2, 1, 1, True))
+        # only designed proposals count for the headline score: J marks none as designed
+        kd = judge.metrics(J, {}, key)['key_designed']
+        self.assertEqual((kd['hit'], kd['false']), (0, 0))
+        jd = dict(J, proposals=[dict(p, designed=True) if p['name'] == 'stories' else p for p in J['proposals']])
+        self.assertEqual(judge.metrics(jd, {}, key)['key_designed']['hit'], 1)
 
     def test_m1_line_written_by_hand(self):
         (judge.KEYS / 'x.md').write_text(KEY.replace('`piece × bring out`, `operation × witness`', 'piece x any, but I am not sure'))

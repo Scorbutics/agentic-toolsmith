@@ -1,0 +1,10311 @@
+[
+ {
+  "label": "v3",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 1,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.6666666666666666,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "v3",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 0,
+  "loop_only": 0,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 3,
+  "designed": 3
+ },
+ {
+  "label": "v3",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v3",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 2,
+  "loop_only": 0,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v3",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 1,
+  "loop_only": 2,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.6666666666666666,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 witness",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "v3",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 1,
+  "loop_only": 0,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v3",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 witness",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v3",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 1,
+  "loop_only": 2,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 witness",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "v3",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v3",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 7,
+  "loop_only": 4,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 9
+ },
+ {
+  "label": "v3",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 3,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 witness",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "operation \u00d7 witness",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 2,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 witness",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 6,
+  "designed": 3
+ },
+ {
+  "label": "v3",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 2,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 witness",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 2,
+  "scripts": 7,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v3",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v3",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 2,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v3",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 2,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.75,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 1,
+  "loop_only": 3,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 witness",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 6
+ },
+ {
+  "label": "v3",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 1,
+  "scripts": 8,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v3",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v3",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 9,
+  "scripts": 6,
+  "loop_only": 4,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.45454545454545453,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 15,
+  "designed": 12
+ },
+ {
+  "label": "v3",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v3",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 3,
+  "designed": 3
+ },
+ {
+  "label": "v3",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 7,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 0,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 2
+ },
+ {
+  "label": "v3",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 6,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v3",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 2,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 0,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "v3",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v3",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v3",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v3",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 4,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 witness",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 6,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 6
+ },
+ {
+  "label": "v3",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 7,
+  "scripts": 4,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.4444444444444444,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 6,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 6,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "proposals": 11,
+  "designed": 10
+ },
+ {
+  "label": "v3",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v3",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v3",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.6,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "v3",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 2,
+  "loop_only": 3,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.6,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v3",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 6,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.25,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 9
+ },
+ {
+  "label": "v3",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 7,
+  "scripts": 3,
+  "loop_only": 3,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 7
+ },
+ {
+  "label": "v3",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 6,
+  "scripts": 6,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 reach in",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 11
+ },
+ {
+  "label": "v3",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 2,
+  "loop_only": 0,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 witness",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "journey \u00d7 bring out",
+  "m1": "journey \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "v3",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 0,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v3",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v3",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 witness",
+   "loop",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.6,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v3",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 4,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 7
+ },
+ {
+  "label": "v3",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 15,
+  "scripts": 0,
+  "loop_only": 6,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.2222222222222222,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 15,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 14,
+  "scripts": 0,
+  "loop_only": 7,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 2,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 14,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 16,
+  "scripts": 0,
+  "loop_only": 9,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 witness",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 16,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 2,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 witness",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.75,
+  "busiest": "operation \u00d7 witness",
+  "m1": "unit \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 0,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "journey \u00d7 bring out",
+  "m1": "journey \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 14,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5454545454545454,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 14,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.75,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 12,
+  "scripts": 0,
+  "loop_only": 6,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.6666666666666666,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.6,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 2,
+  "scripts": 5,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 10,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 4,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.4,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 2
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 12,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 2,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 1,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 2,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 1,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 14,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 4,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4444444444444444,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 14,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 4,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "journey \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 13,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.75,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "journey \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 2,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 1,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 1,
+  "scripts": 6,
+  "loop_only": 0,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 15,
+  "scripts": 0,
+  "loop_only": 7,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 15,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 17,
+  "scripts": 0,
+  "loop_only": 12,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.4,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "proposals": 17,
+  "designed": 12
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 16,
+  "scripts": 0,
+  "loop_only": 6,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.3,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 16,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 2,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.6666666666666666,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.7142857142857143,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.625,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 2
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 11,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.8333333333333334,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 2,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "operation \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 3,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 6,
+  "loop_only": 2,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.625,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 19,
+  "scripts": 0,
+  "loop_only": 9,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 4,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.4,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 6,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "proposals": 19,
+  "designed": 13
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 16,
+  "scripts": 0,
+  "loop_only": 9,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "proposals": 16,
+  "designed": 10
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 12,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.7142857142857143,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "proposals": 12,
+  "designed": 10
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 6,
+  "scripts": 3,
+  "loop_only": 2,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 4
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 6,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 11,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 10
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 7,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": true
+  },
+  "proposals": 7,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 6,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 4,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 4,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 2
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 4,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.4,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 12,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 2,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.6666666666666666,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 13,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 10
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 7,
+  "scripts": 4,
+  "loop_only": 3,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 4,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.375,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 7,
+  "loop_only": 3,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 10
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 4,
+  "loop_only": 0,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 7,
+  "scripts": 9,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 16,
+  "designed": 15
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 15,
+  "scripts": 0,
+  "loop_only": 12,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 15,
+  "designed": 2
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 15,
+  "scripts": 0,
+  "loop_only": 9,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.16666666666666666,
+  "busiest": "operation \u00d7 witness",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 15,
+  "designed": 11
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 16,
+  "scripts": 0,
+  "loop_only": 8,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 0,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "journey \u00d7 witness",
+   "loop",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.75,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 16,
+  "designed": 12
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.75,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "journey \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 0,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 2,
+  "scripts": 2,
+  "loop_only": 0,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "journey \u00d7 witness",
+   "operation \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 witness",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 1,
+  "loop_only": 1,
+  "in_cells": 1,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 1,
+  "busiest_cell": 1.0,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 2
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 13,
+  "scripts": 0,
+  "loop_only": 4,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5555555555555556,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.625,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 1,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.25,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "journey \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 8,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 3,
+   "operation": 0,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.4,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "before",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 6,
+  "scripts": 4,
+  "loop_only": 3,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 4
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 8
+ },
+ {
+  "label": "before",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 4
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "before",
+  "scenario": "codetriage",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 8,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 7,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 4
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 7,
+  "busiest_cell": 0.4166666666666667,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 13
+ },
+ {
+  "label": "before",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 7,
+  "scripts": 7,
+  "loop_only": 2,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 14,
+  "designed": 14
+ },
+ {
+  "label": "before",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 8,
+  "loop_only": 2,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.6363636363636364,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 12
+ },
+ {
+  "label": "before",
+  "scenario": "codetriage",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 8,
+  "loop_only": 1,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.4166666666666667,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 5,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 13
+ },
+ {
+  "label": "before",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 3,
+  "scripts": 6,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "before",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 4,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.375,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "before",
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 4,
+  "loop_only": 2,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 2,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "piece \u00d7 witness",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 7,
+  "designed": 7
+ },
+ {
+  "label": "before",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 1,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 1,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "before",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.7,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "journey \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "before",
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 9,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.45454545454545453,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 1,
+   "m1_ok": true
+  },
+  "proposals": 12,
+  "designed": 12
+ },
+ {
+  "label": "before",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 8,
+  "scripts": 4,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.3,
+  "busiest": "unit \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 12
+ },
+ {
+  "label": "before",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 8,
+  "scripts": 5,
+  "loop_only": 2,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 4
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.2727272727272727,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 12
+ },
+ {
+  "label": "before",
+  "scenario": "miniflux",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.5555555555555556,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 10
+ },
+ {
+  "label": "before",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 7,
+  "scripts": 6,
+  "loop_only": 4,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.5555555555555556,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 10
+ },
+ {
+  "label": "before",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.4,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "before",
+  "scenario": "miniflux",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 6,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.45454545454545453,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 11
+ },
+ {
+  "label": "before",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 2,
+  "scripts": 7,
+  "loop_only": 2,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "before",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 4,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 2,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "unit \u00d7 witness",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 10
+ },
+ {
+  "label": "before",
+  "scenario": "subscription-payments",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 5,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "before",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 8,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5454545454545454,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 12
+ },
+ {
+  "label": "before",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 11,
+  "loop_only": 2,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.4666666666666667,
+  "busiest": "unit \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 17,
+  "designed": 16
+ },
+ {
+  "label": "before",
+  "scenario": "subscription-payments",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 7,
+  "loop_only": 1,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 4
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 reach in"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.3,
+  "busiest": "unit \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "before",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 6,
+  "scripts": 3,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.75,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 8
+ },
+ {
+  "label": "before",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 4,
+  "loop_only": 2,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.75,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 10
+ },
+ {
+  "label": "before",
+  "scenario": "tps-demo",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 8,
+  "scripts": 5,
+  "loop_only": 4,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 2,
+   "piece": 0,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "unit \u00d7 bring out",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.7777777777777778,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 13
+ },
+ {
+  "label": "before",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 8,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "journey \u00d7 witness",
+   "loop",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.8333333333333334,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 13,
+  "designed": 13
+ },
+ {
+  "label": "before",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 8,
+  "loop_only": 2,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.6,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 12
+ },
+ {
+  "label": "before",
+  "scenario": "tps-demo",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 3
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "journey \u00d7 witness",
+   "loop",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.7,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "before",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 5,
+  "loop_only": 3,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 3,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 9
+ },
+ {
+  "label": "before",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 5,
+  "scripts": 4,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 9
+ },
+ {
+  "label": "before",
+  "scenario": "vue-realworld",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 1,
+  "in_cells": 6,
+  "ways": {
+   "bring out": 1,
+   "witness": 3,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 2,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "piece \u00d7 witness",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 6,
+  "busiest_cell": 0.3,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 9
+ },
+ {
+  "label": "before",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 6,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.5555555555555556,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 11
+ },
+ {
+  "label": "before",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 6,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5555555555555556,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 10
+ },
+ {
+  "label": "before",
+  "scenario": "vue-realworld",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 3,
+  "loop_only": 0,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "journey \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 5,
+   "false": 0,
+   "avoid": 0,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 11,
+  "scripts": 0,
+  "loop_only": 4,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 9,
+  "scripts": 5,
+  "loop_only": 9,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.8,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "proposed"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "proposals": 14,
+  "designed": 9
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 17,
+  "scripts": 0,
+  "loop_only": 10,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "proposed"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 17,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "proposals": 3,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 9,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2857142857142857,
+  "busiest": "operation \u00d7 witness",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "proposed"
+  },
+  "key": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 4,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 9,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.4,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 2
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 11,
+  "scripts": 0,
+  "loop_only": 7,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 8,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 8,
+  "scripts": 0,
+  "loop_only": 4,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "rejected"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "proposals": 8,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 3,
+  "loop_only": 0,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "operation \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.6666666666666666,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 2,
+  "scripts": 2,
+  "loop_only": 0,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "operation \u00d7 bring out",
+   "piece \u00d7 witness",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 11,
+  "scripts": 0,
+  "loop_only": 6,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.8,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "proposals": 11,
+  "designed": 1
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 12,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 2
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "journey \u00d7 witness",
+   "loop",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.5714285714285714,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 12,
+  "designed": 5
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 11,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 11,
+  "designed": 6
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "journey \u00d7 reach in",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 2,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 1,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 5,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.6,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 10
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 2,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 8,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 7
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "baseline",
+  "run": 3,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 3,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.42857142857142855,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 8
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.6666666666666666,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 2,
+  "scripts": 0,
+  "loop_only": 0,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "operation \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 2,
+  "designed": 2
+ },
+ {
+  "label": "v2",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 3,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 0,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 3,
+  "designed": 3
+ },
+ {
+  "label": "before",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 5,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 5
+ },
+ {
+  "label": "before",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "before",
+  "scenario": "assay",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 0,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 0,
+   "journey": 0
+  },
+  "cells": [
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.75,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "proposed"
+  },
+  "key": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "before",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "unit \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "proposed"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 3
+ },
+ {
+  "label": "before",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 3,
+  "scripts": 3,
+  "loop_only": 3,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 bring out",
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "before",
+  "scenario": "assay",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 1,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 3,
+   "witness": 0,
+   "reach in": 0
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "piece \u00d7 bring out",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 6,
+   "false": 0,
+   "avoid": 2,
+   "m1_ok": true
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "before",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "cards": 6,
+  "scripts": 0,
+  "loop_only": 3,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 1,
+   "witness": 1,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "piece \u00d7 bring out",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": true
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "before",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "cards": 4,
+  "scripts": 0,
+  "loop_only": 2,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 0,
+   "witness": 0,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 0,
+   "operation": 1,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.5,
+  "busiest": "journey \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 4,
+  "designed": 4
+ },
+ {
+  "label": "before",
+  "scenario": "motu",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 2,
+  "loop_only": 1,
+  "in_cells": 4,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 3
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 2,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in"
+  ],
+  "cells_reached": 4,
+  "busiest_cell": 0.4,
+  "busiest": "operation \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 3,
+   "false": 1,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 6,
+  "designed": 6
+ },
+ {
+  "label": "before",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "cards": 10,
+  "scripts": 0,
+  "loop_only": 7,
+  "in_cells": 3,
+  "ways": {
+   "bring out": 0,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 1,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 reach in",
+   "piece \u00d7 reach in",
+   "unit \u00d7 witness"
+  ],
+  "cells_reached": 3,
+  "busiest_cell": 0.3333333333333333,
+  "busiest": "piece \u00d7 reach in",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 2,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 2,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 10,
+  "designed": 8
+ },
+ {
+  "label": "before",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "cards": 6,
+  "scripts": 2,
+  "loop_only": 3,
+  "in_cells": 5,
+  "ways": {
+   "bring out": 2,
+   "witness": 1,
+   "reach in": 2
+  },
+  "levels": {
+   "unit": 1,
+   "piece": 1,
+   "operation": 3,
+   "journey": 0
+  },
+  "cells": [
+   "loop",
+   "operation \u00d7 bring out",
+   "operation \u00d7 reach in",
+   "operation \u00d7 witness",
+   "piece \u00d7 reach in",
+   "unit \u00d7 bring out"
+  ],
+  "cells_reached": 5,
+  "busiest_cell": 0.2,
+  "busiest": "unit \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "proposed",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 3,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 3,
+   "want": 3,
+   "false": 2,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 8,
+  "designed": 8
+ },
+ {
+  "label": "before",
+  "scenario": "motu",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "cards": 4,
+  "scripts": 1,
+  "loop_only": 1,
+  "in_cells": 2,
+  "ways": {
+   "bring out": 1,
+   "witness": 0,
+   "reach in": 1
+  },
+  "levels": {
+   "unit": 0,
+   "piece": 1,
+   "operation": 0,
+   "journey": 1
+  },
+  "cells": [
+   "journey \u00d7 reach in",
+   "loop",
+   "piece \u00d7 bring out"
+  ],
+  "cells_reached": 2,
+  "busiest_cell": 0.75,
+  "busiest": "piece \u00d7 bring out",
+  "m1": "loop",
+  "author_misfit": [],
+  "author": {
+   "motu": "absent",
+   "assay": "absent"
+  },
+  "key": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "key_designed": {
+   "hit": 1,
+   "want": 3,
+   "false": 0,
+   "avoid": 4,
+   "m1_ok": false
+  },
+  "proposals": 5,
+  "designed": 5
+ }
+]

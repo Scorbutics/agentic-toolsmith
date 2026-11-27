@@ -181,6 +181,10 @@ def metrics(j, sc, key):
         'author_misfit': [t for t in ('motu', 'assay') if (at.get(t) or '').startswith('proposed') and t not in fit],
         'author': {t: at.get(t, 'absent') for t in ('motu', 'assay')},
         'key': against_key(reached, m1, key),
+        # the same score from DESIGNED proposals only (a command or usage the agent could run): a list of
+        # tool names reaches cells without giving the agent anything to call
+        'key_designed': against_key({c for p in props if p.get('designed') for c in [cell(p)] if c}, m1, key),
+        'proposals': len(props), 'designed': sum(bool(p.get('designed')) for p in props),
     }
 
 
@@ -337,17 +341,22 @@ def key_table(rows):
     groups = defaultdict(list)
     for r in keyed:
         groups[(r['label'], r['arm'], r['model'])].append(r)
-    out = ['| Run | Arm | Model | Maps scored | Expected cells reached | Cells to leave, proposed anyway | M1 in an accepted cell |',
-           '|---|---|---|---|---|---|---|']
+    out = ['| Run | Arm | Model | Maps | Proposals per map (designed) | **Recall, designed** | **Precision, designed** | '
+           'Recall, all proposals | Precision, all | M1 in an accepted cell |', '|---|---|---|---|---|---|---|---|---|---|']
+    pct_ = lambda n, d: f'{100 * n / d:.0f}% ({n}/{d})' if d else '—'
     for (label, arm, mdl), rs in sorted(groups.items()):
-        k = [r['key'] for r in rs]
+        k, kd = [r['key'] for r in rs], [r['key_designed'] for r in rs if r.get('key_designed')]
+        hit, want, false = (sum(x[f] for x in k) for f in ('hit', 'want', 'false'))
+        dhit, dwant, dfalse = (sum(x[f] for x in kd) for f in ('hit', 'want', 'false'))
         m1 = [x['m1_ok'] for x in k if x['m1_ok'] is not None]
-        out.append(f'| {label} | {arm} | {mdl} | {len(rs)} | {sum(x["hit"] for x in k)}/{sum(x["want"] for x in k)} | '
-                   f'{sum(x["false"] for x in k)}/{sum(x["avoid"] for x in k)} | {sum(m1)}/{len(m1)} |' if m1 else
-                   f'| {label} | {arm} | {mdl} | {len(rs)} | {sum(x["hit"] for x in k)}/{sum(x["want"] for x in k)} | '
-                   f'{sum(x["false"] for x in k)}/{sum(x["avoid"] for x in k)} | — |')
+        props, designed = sum(r.get('proposals', 0) for r in rs), sum(r.get('designed', 0) for r in rs)
+        out.append(f'| {label} | {arm} | {mdl} | {len(rs)} | {props / len(rs):.1f} ({pct(designed, props)}) | '
+                   f'{pct_(dhit, dwant)} | {pct_(dhit, dhit + dfalse)} | {pct_(hit, want)} | {pct_(hit, hit + false)} | '
+                   + (f'{sum(m1)}/{len(m1)} |' if m1 else '— |'))
     keys = sorted({r['scenario'] for r in keyed})
-    return '\n'.join(out) + f'\n\nKeys used: {", ".join(keys)}.'
+    return ('\n'.join(out) + f'\n\nKeys used: {", ".join(keys)}. **Recall** = expected (`propose`) cells the map reaches; '
+            '**precision** = those hits ÷ (hits + `leave` cells it reaches anyway). **Designed** counts only proposals with a '
+            'command or usage the agent could run — the headline, since a named tool gives the agent nothing to call.')
 
 
 def stability_table(rows):
