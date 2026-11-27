@@ -68,9 +68,11 @@ def env_for(task):
         venv = CACHE / 'venvs' / 'healthchecks'
         if not (venv / 'bin' / 'python').exists():
             sh([sys.executable, '-m', 'venv', str(venv)])
-            req = sh(['git', '-C', str(repo_cache(task)), 'show', f"{task['fix']}:requirements.txt"]).stdout
-            (venv / 'requirements.txt').write_text(req)
-            r = sh([str(venv / 'bin' / 'pip'), 'install', '-q', '-r', str(venv / 'requirements.txt')], timeout=1800)
+            for f in ('requirements.txt', 'requirements-dev.txt'):  # the tests need the dev requirements too
+                req = sh(['git', '-C', str(repo_cache(task)), 'show', f"{task['fix']}:{f}"]).stdout
+                (venv / f).write_text(req.replace('-r requirements.txt', ''))
+            r = sh([str(venv / 'bin' / 'pip'), 'install', '-q', '-r', str(venv / 'requirements.txt'),
+                    '-r', str(venv / 'requirements-dev.txt')], timeout=1800)
             if r.returncode:
                 sys.exit(f'venv for healthchecks failed:\n{r.stderr[-2000:]}')
         env['TOOLSMITH_EVAL_VENV'] = str(venv)
