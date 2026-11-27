@@ -1,5 +1,38 @@
 # Eval results
 
+## Against owner-filled answer keys (2026-11-27)
+
+Four projects whose owner filled the key — motu and assay (public; assay's key merges the owner's
+sketch with a blind bug-grounded draft), and two private projects (a Next.js + Supabase app and its
+Supabase backend, scored in their own repositories). Neutral prompt, Sonnet and Haiku, three runs
+each, for the skill before the grid, the grid (v2), and no skill: 72 maps, each judged twice (M1 the
+same in 63/72). Judge outputs for motu and assay: `evals/results/2026-11-27-owned/`.
+
+| Arm | Model | Expected cells reached | Cells to leave, proposed anyway | M1 in an accepted cell | M1 loop-only |
+|---|---|---|---|---|---|
+| no skill | sonnet | 20/48 | 17/48 | 3/12 | 10/12 |
+| no skill | haiku | 23/48 | 14/48 | 5/12 | 8/12 |
+| before the grid | sonnet | 25/48 | 13/48 | 4/12 | 7/12 |
+| before the grid | haiku | 20/48 | 13/48 | 5/12 | 6/12 |
+| grid (v2) | sonnet | 19/48 | 14/48 | 6/12 | 2/12 |
+| grid (v2) | haiku | 20/48 | 12/48 | 6/12 | 1/12 |
+
+What holds across both kinds of key:
+- **No arm reaches more of the expected cells** — 19 to 25 of 48 everywhere, within noise. The grid
+  did not make maps match what the owner (or the bug history) asks for.
+- **M1 off the environment holds again**: loop-only in 3/24 grid maps, 13/24 before, 18/24 without
+  the skill. M1 in an accepted cell is slightly better with the grid (12/24 against 9/24 before,
+  8/24 without) — within noise at this size.
+- **The test gap repeats on the owners' keys**: where the owner expects a piece-level lab or harness,
+  maps without the skill propose it and maps with it mostly do not (assay `piece × bring out`: grid
+  2/6, no skill 6/6; the private backend `piece × bring out`: grid 0/6, no skill 5/6).
+- **Where the skill aims, it lands**: operation-level reach in on the private backend (grid 5/6, no
+  skill 2/6), operation-level bring out on assay (grid 6/6, before 2/6, no skill 3/6).
+- **Most "leave" violations are one key against every arm**: on the private app, every map in every
+  arm proposes `loop` (18/18) where the owner wrote `leave`, and the grid proposes
+  `journey × reach in` 5/6 there. When all arms disagree with a key, the key is the first suspect —
+  the repository has no per-agent environment and no unattended login.
+
 ## Against bug-grounded answer keys (2026-11-25)
 
 The same 108 judged maps, scored against six answer keys drafted from each repository's fixed bugs

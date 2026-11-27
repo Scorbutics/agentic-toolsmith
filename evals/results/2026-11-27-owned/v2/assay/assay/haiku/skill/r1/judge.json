@@ -1,0 +1,42 @@
+{
+ "proposals": [
+  {
+   "name": "fixture-consumer",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "CI bun test step + root test script",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "per-worktree stack naming",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "fixture-journey",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "fixture-consumer",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

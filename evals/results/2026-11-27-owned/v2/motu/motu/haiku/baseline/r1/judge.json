@@ -1,0 +1,91 @@
+{
+ "proposals": [
+  {
+   "name": "Region access, stages 2\u20134",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Constraint loop (outer loop and provenance rule)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Dependency bootstrap verb",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Explicit host-absent verdict",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Skill and agent mirror check",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Exit-code audit",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Model support for cross-island triggers",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Import-graph walk for rsc-boundary and removal-check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Headless fresh-look artifact",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Offline-capable lagoon checks",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Java in the loop",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "Region access, stages 2\u20134",
+  "way": "reach in",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

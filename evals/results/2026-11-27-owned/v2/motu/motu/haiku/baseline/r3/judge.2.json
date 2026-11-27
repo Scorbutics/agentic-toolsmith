@@ -1,0 +1,91 @@
+{
+ "proposals": [
+  {
+   "name": "motu doctor",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Map uncaught errors to exit 2",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Propagate exit 2 through --all sweeps",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "Machine-readable exit reasons",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "motu bootstrap --browser",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Hermetic stand-in for the ocean host",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "MCP server over the CLI",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": false
+  },
+  {
+   "name": "Fix the two cold-start defects",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "region-access dev bridge on the real page",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": false
+  },
+  {
+   "name": "diff --against <url>",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "region-access production read-only",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "motu doctor",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

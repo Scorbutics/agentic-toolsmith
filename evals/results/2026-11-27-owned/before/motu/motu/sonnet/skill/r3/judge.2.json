@@ -1,0 +1,49 @@
+{
+ "proposals": [
+  {
+   "name": "agent-up",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "lagoon-env",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "shots",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "verify-changed",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "hostapp-env",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "agent-up",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

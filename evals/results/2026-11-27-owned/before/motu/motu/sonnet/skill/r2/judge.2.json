@@ -1,0 +1,70 @@
+{
+ "proposals": [
+  {
+   "name": "motu-doctor",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "gate",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "test-changed",
+   "kind": "script",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "envs",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "host-seed",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "host-shot",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "egress-ledger",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "coverage-corpus-stub",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "motu-doctor",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "proposed",
+  "assay": "absent"
+ },
+ "v": 2
+}

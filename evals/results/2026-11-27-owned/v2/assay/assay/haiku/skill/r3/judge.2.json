@@ -1,0 +1,70 @@
+{
+ "proposals": [
+  {
+   "name": "test",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "check",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "selfcheck",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "fixture-consumer",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": false
+  },
+  {
+   "name": "seam-runtimes",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "intercept",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "mark",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "outer-loop",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "test",
+  "way": "bring out",
+  "level": "unit"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "proposed"
+ },
+ "v": 2
+}

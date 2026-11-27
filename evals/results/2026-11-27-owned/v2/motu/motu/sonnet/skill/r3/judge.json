@@ -1,0 +1,35 @@
+{
+ "proposals": [
+  {
+   "name": "fw-test",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "doctor",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "corpus",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "fw-test",
+  "way": "bring out",
+  "level": "unit"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

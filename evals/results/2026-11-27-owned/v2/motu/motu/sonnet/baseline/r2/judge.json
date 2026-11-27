@@ -1,0 +1,84 @@
+{
+ "proposals": [
+  {
+   "name": "scripts/verify.mjs / pnpm verify",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "motu doctor (and --version)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": ".claude/settings.json allowlist",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "motu lagoon look",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "scripts/affected.mjs",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "Evidence for demo-app",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": false
+  },
+  {
+   "name": "Lint/format baseline (pnpm lint)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "motu help --json",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "MOTU_OFFLINE=1 offline mode",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "bench/agent-cold-start CI smoke",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": ".claude/settings.json allowlist",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "proposed",
+  "assay": "absent"
+ },
+ "v": 2
+}
