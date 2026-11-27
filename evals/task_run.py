@@ -366,6 +366,8 @@ def main():
     if a.command == 'report':
         return report(a.dir or a.out)
     tasks = load(a.only)
+    if not tasks:
+        sys.exit(f'no task matched (looked in {", ".join(map(str, TASK_DIRS))}) — nothing checked, nothing run')
     if a.command == 'validate':
         sys.exit(0 if validate(tasks, a.out) else 1)
     if not shutil.which('claude'):
