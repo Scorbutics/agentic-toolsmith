@@ -1,0 +1,56 @@
+{
+ "proposals": [
+  {
+   "name": "test",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "fakehost",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "corpus-record",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "golden",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "effects",
+   "kind": "card",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "release-check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "test",
+  "way": "bring out",
+  "level": "unit"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

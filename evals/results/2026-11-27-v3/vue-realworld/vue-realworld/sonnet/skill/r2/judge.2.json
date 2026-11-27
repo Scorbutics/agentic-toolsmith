@@ -1,0 +1,77 @@
+{
+ "proposals": [
+  {
+   "name": "app run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "text",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "login",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "calls",
+   "kind": "script",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "api-stub",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "e2e",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "per-env ports (--env)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "pre-tool hook denying edits to src/services/api.ts",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "e2e",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

@@ -1,0 +1,56 @@
+{
+ "proposals": [
+  {
+   "name": "agent-run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "states",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "writes",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "test-event",
+   "kind": "script",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "ping",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "seed-customer",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "states",
+  "way": "bring out",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

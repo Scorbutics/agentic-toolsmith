@@ -1,0 +1,35 @@
+{
+ "proposals": [
+  {
+   "name": "host-session",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "host-writes",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "env-ports",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "host-session",
+  "way": "reach in",
+  "level": "journey"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

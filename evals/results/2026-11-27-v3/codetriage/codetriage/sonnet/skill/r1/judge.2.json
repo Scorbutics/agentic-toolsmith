@@ -1,0 +1,42 @@
+{
+ "proposals": [
+  {
+   "name": "bin/agent-env",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "ledger",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "script",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "agent-env guard hook (CLAUDE.md rule)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "bin/agent-env",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

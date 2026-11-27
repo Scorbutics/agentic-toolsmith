@@ -1,0 +1,98 @@
+{
+ "proposals": [
+  {
+   "name": "envs",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "agent run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "seed",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "api-key",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "session",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "tables",
+   "kind": "script",
+   "way": "witness",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "clock",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "call",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "page",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "sink",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "itest",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "call",
+  "way": "witness",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

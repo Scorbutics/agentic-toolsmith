@@ -1,0 +1,42 @@
+{
+ "proposals": [
+  {
+   "name": "verify",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "agent-run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "sent",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "verify",
+  "way": "bring out",
+  "level": "unit"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

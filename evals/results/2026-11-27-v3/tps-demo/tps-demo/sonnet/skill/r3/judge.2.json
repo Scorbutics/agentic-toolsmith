@@ -1,0 +1,91 @@
+{
+ "proposals": [
+  {
+   "name": "gd",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "gd run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "call",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "seed",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "press",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "tree",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "until",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "gd shot",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "gd check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "gd net",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "gd",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

@@ -1,0 +1,49 @@
+{
+ "proposals": [
+  {
+   "name": "effects",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "scheduled",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "F1 fences for agent runs",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "per-worktree isolation (DATABASE_URL, REDIS_URL, PORT)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "effects",
+  "way": "witness",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

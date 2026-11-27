@@ -1,0 +1,63 @@
+{
+ "proposals": [
+  {
+   "name": "envs",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "mf",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "seed",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "feedstub",
+   "kind": "script",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "refresh",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "writes",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "page",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "envs",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

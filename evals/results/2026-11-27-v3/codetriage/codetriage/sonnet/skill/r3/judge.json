@@ -1,0 +1,91 @@
+{
+ "proposals": [
+  {
+   "name": "bin/agent",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "doctor",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "test",
+   "kind": "script",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "clock",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "effects",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "fixture-repo",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "mails",
+   "kind": "script",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "per-env database name suffix and port",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "pre-tool hook denying schedule:*, db:seed, db:reset without fence",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "bin/agent (doctor, test)",
+  "way": "loop",
+  "level": "none"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

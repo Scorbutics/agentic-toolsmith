@@ -1,0 +1,84 @@
+{
+ "proposals": [
+  {
+   "name": "app run",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "text",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "login",
+   "kind": "script",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "calls",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "api-stub",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "e2e",
+   "kind": "card",
+   "way": "bring out",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "per-env ports and output folders (--env)",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "one git worktree per agent",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "pre-tool hook denying edits to src/services/api.ts",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "e2e",
+  "way": "bring out",
+  "level": "journey"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

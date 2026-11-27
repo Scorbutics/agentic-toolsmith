@@ -1,5 +1,42 @@
 # Eval results
 
+## Harnesses as handles — v3 (2026-11-27)
+
+v3 makes a harness that renders a unit or piece testable a handle (a fake store, a one-phase runner,
+a headless scene runner); individual tests stay out. Same ten scenarios, same prompt and judge, three
+runs each on Sonnet and Haiku (60 maps; 240 maps judged twice in all, M1 the same in 208/240).
+Judge outputs: `evals/results/2026-11-27-v3/` (private projects: in their own repositories).
+
+| Keys | Arm | Expected cells reached | Leave cells proposed | M1 accepted | M1 loop-only |
+|---|---|---|---|---|---|
+| owner (4 projects) | no skill | 48/102 | 33/96 | 8/24 | 18/24 |
+| | before the grid | 47/102 | 34/96 | 9/24 | 13/24 |
+| | v2 | 44/102 | 23/96 | 12/24 | 3/24 |
+| | **v3** | 44/102 | 28/96 | 9/24 | 1/24 |
+| bug-grounded (6 repos) | no skill | 116/198 | 0/6 | 5/36 | 20/36 |
+| | before the grid | 119/198 | 1/6 | 3/36 | 23/36 |
+| | v2 | 108/198 | 0/6 | 6/36 | 1/36 |
+| | **v3** | 116/198 | 0/6 | 7/36 | 5/36 |
+
+On the unit and piece bring-out cells the keys expect, v3 recovers much of what v2 lost — jaffle-shop
+unit 2 → 4/6 and piece 3 → 5/6, tps-demo piece 3 → 5/6, subscription-payments unit 2 → 4/6 — but stays
+below no skill on most (miniflux unit 0/6 against 6/6; the private backend piece 1/6 against 5/6).
+
+What it says:
+- **v3 undoes v2's loss on the bug-grounded keys** (108 → 116, level with no skill) — **and does not
+  move the owner keys** (44/102 for both). On the independent measure, no version of the skill has
+  yet reached more expected cells than no skill.
+- **The bug keys lean toward bring out by construction** ("cheapest cell"), so any change toward
+  harnesses reads well on them. The owner keys are the check, and they did not move.
+- **miniflux unit 0/6 is a mismatch the skill gets right**: miniflux has a large unit suite; the key
+  says `propose` because bugs escaped it, which asks for *more tests* — task work the skill rightly
+  does not propose. A key that cannot be met by a handle is a key question.
+- **Costs**: on Sonnet, M1 is loop-only again in 6/30 maps (3/30 with v2); leave cells proposed rise
+  23 → 28 on the owner keys. Both are within or near judge noise.
+- **What has held through every version**: M1 off the environment (v2/v3: 10/120 maps loop-only,
+  against 38/60 without the skill and 36/60 before the grid), and witness at operation level where
+  keys ask for it.
+
 ## Against owner-filled answer keys (2026-11-27)
 
 Four projects whose owner filled the key — motu and assay (public; assay's key merges the owner's

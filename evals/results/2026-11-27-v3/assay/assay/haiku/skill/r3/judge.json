@@ -1,0 +1,42 @@
+{
+ "proposals": [
+  {
+   "name": "tests",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "fixture-consumer",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "drive-fence",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "stack",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "tests",
+  "way": "bring out",
+  "level": "unit"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

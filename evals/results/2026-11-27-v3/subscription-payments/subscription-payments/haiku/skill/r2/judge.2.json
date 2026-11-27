@@ -1,0 +1,42 @@
+{
+ "proposals": [
+  {
+   "name": "replay-webhook",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "states",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "dev-login",
+   "kind": "card",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "envs up",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "states",
+  "way": "bring out",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

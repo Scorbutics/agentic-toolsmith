@@ -1,0 +1,49 @@
+{
+ "proposals": [
+  {
+   "name": "run-env",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "app-agent",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "run",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "session",
+   "kind": "script",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "users",
+   "kind": "script",
+   "way": "reach in",
+   "level": "unit",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "run",
+  "way": "witness",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

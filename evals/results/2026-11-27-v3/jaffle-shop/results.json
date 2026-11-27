@@ -1,0 +1,108 @@
+[
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 4,
+  "roadmap": true,
+  "evidence": "45/45",
+  "chars": 21674,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 102,
+  "cost_usd": 0.413678
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 6,
+  "roadmap": true,
+  "evidence": "34/34",
+  "chars": 22940,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 99,
+  "cost_usd": 0.4131037
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 5,
+  "roadmap": true,
+  "evidence": "41/41",
+  "chars": 23066,
+  "scenario": "jaffle-shop",
+  "model": "sonnet",
+  "arm": "skill",
+  "run": 3,
+  "prompt": "neutral",
+  "seconds": 104,
+  "cost_usd": 0.4303002
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 4,
+  "roadmap": true,
+  "evidence": "103/104",
+  "chars": 26945,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 1,
+  "prompt": "neutral",
+  "seconds": 254,
+  "cost_usd": 0.17529974
+ },
+ {
+  "expected": "5/5",
+  "expected_ratio": 1.0,
+  "missed": [],
+  "usage_examples": 5,
+  "roadmap": true,
+  "evidence": "87/87",
+  "chars": 30713,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 2,
+  "prompt": "neutral",
+  "seconds": 272,
+  "cost_usd": 0.28152425
+ },
+ {
+  "expected": "4/5",
+  "expected_ratio": 0.8,
+  "missed": [
+   "only what changed, deferred to a reference"
+  ],
+  "usage_examples": 5,
+  "roadmap": true,
+  "evidence": "84/84",
+  "chars": 30344,
+  "scenario": "jaffle-shop",
+  "model": "haiku",
+  "arm": "skill",
+  "run": 3,
+  "prompt": "neutral",
+  "seconds": 204,
+  "cost_usd": 0.16947855
+ }
+]

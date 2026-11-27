@@ -1,0 +1,63 @@
+{
+ "proposals": [
+  {
+   "name": "agent-run",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "persona",
+   "kind": "script",
+   "way": "reach in",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "envs",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "writes",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "egress",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "test:operation",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "CI check that each /v1 route appears in the integration test",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "reach any state as any user (envs, agent-run, persona)",
+  "way": "reach in",
+  "level": "journey"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

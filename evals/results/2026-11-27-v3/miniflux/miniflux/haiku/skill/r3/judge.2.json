@@ -1,0 +1,56 @@
+{
+ "proposals": [
+  {
+   "name": "runner",
+   "kind": "card",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "db",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "serve",
+   "kind": "script",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  },
+  {
+   "name": "persona",
+   "kind": "script",
+   "way": "reach in",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "ledger",
+   "kind": "script",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "feed-server",
+   "kind": "script",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "runner",
+  "way": "reach in",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

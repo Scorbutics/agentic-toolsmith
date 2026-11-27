@@ -1,0 +1,56 @@
+{
+ "proposals": [
+  {
+   "name": "check",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "diff",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "blast",
+   "kind": "card",
+   "way": "witness",
+   "level": "journey",
+   "designed": true
+  },
+  {
+   "name": "F1 pinned dbt + dev profile",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "F2 per-target raw schema",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "F3 seeded local warehouse",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "check",
+  "way": "bring out",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

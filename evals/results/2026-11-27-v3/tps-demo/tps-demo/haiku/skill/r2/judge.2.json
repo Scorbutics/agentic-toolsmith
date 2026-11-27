@@ -1,0 +1,70 @@
+{
+ "proposals": [
+  {
+   "name": "run-scene",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "agent",
+   "kind": "card",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "state",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "shot",
+   "kind": "script",
+   "way": "reach in",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "scenes-load",
+   "kind": "card",
+   "way": "bring out",
+   "level": "piece",
+   "designed": true
+  },
+  {
+   "name": "seeded RNG",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "per-run user directory and windowed run",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  },
+  {
+   "name": "debug-only gate",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": false
+  }
+ ],
+ "m1": {
+  "name": "run-scene",
+  "way": "bring out",
+  "level": "piece"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}

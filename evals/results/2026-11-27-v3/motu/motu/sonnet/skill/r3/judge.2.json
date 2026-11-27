@@ -1,0 +1,42 @@
+{
+ "proposals": [
+  {
+   "name": "corpus",
+   "kind": "card",
+   "way": "bring out",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "tree-ledger",
+   "kind": "card",
+   "way": "witness",
+   "level": "operation",
+   "designed": true
+  },
+  {
+   "name": "tests-for",
+   "kind": "card",
+   "way": "bring out",
+   "level": "unit",
+   "designed": true
+  },
+  {
+   "name": "browser-doctor",
+   "kind": "card",
+   "way": "loop",
+   "level": "none",
+   "designed": true
+  }
+ ],
+ "m1": {
+  "name": "a fast verdict on a check change (tests-for + corpus)",
+  "way": "bring out",
+  "level": "operation"
+ },
+ "author_tools": {
+  "motu": "absent",
+  "assay": "absent"
+ },
+ "v": 2
+}
