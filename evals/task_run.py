@@ -120,14 +120,20 @@ def ablate(task, dest):
     """Bare arm of a task whose project already HAS agent tooling: remove it, and commit the removal so the
     session sees a clean tree (no 'deleted: tools/...' in git status). restore() puts it back for the judge."""
     ab = task.get('ablate') or {}
-    for repo, paths in [('.', ab.get('paths', []))] + list((ab.get('submodules') or {}).items()):
+    subs = list((ab.get('submodules') or {}).items())
+    # submodules first, then the project WITH their new pointers: else `git status` shows ' M <submodule>'
+    for repo, paths in subs + [('.', ab.get('paths', []))]:
         d = dest / repo
         for p in paths:
             sh(['git', 'rm', '-r', '-q', '--ignore-unmatch', '--', p], cwd=d)
         for f, text in ((ab.get('agent_files') or {}).get(repo) or {}).items():
             (d / f).write_text(text)
             sh(['git', 'add', '--', f], cwd=d)
+        if repo == '.':
+            sh(['git', 'add', '--', *[r for r, _ in subs]], cwd=d)
         sh(['git', '-c', 'user.name=eval', '-c', 'user.email=eval@localhost', 'commit', '-q', '-m', 'wip'], cwd=d)
+    left = sh(['git', 'status', '--porcelain'], cwd=dest).stdout.strip()
+    assert not left, f'ablation left the tree dirty: {left}'
 
 
 def restore(task, dest):
@@ -136,7 +142,7 @@ def restore(task, dest):
     for repo, paths in [('.', ab.get('paths', []))] + list((ab.get('submodules') or {}).items()):
         d = dest / repo
         for p in paths + list(((ab.get('agent_files') or {}).get(repo) or {})):
-            sh(['git', 'checkout', 'HEAD~1', '--', p], cwd=d)
+            sh(['git', 'checkout', 'HEAD~1', '--', p], cwd=d)  # the commit before the removal
         sh(['git', 'reset', '-q'], cwd=d)
 
 
