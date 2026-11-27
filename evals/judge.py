@@ -127,7 +127,7 @@ def read_key(name):
 def m1_cell(text):
     """One entry of an **M1 accepted:** line: `piece × bring out`, `piece x any`, `any × witness`, `loop`, `any`
     — anything else (a comment such as "but I am not sure") is dropped."""
-    t = re.sub(r'\s+x\s+', ' × ', text.strip().strip('`').lower())
+    t = re.sub(r'\s+x\s+', ' × ', text.strip().strip('`?!. ').lower())
     if t in ('any', 'loop'):
         return t
     m = re.fullmatch(r'(unit|piece|operation|journey|any) × (bring out|witness|reach in|any)', t)

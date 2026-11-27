@@ -85,6 +85,7 @@ class Keys(unittest.TestCase):
         (judge.KEYS / 'x.md').write_text(KEY.replace('`piece × bring out`, `operation × witness`', 'piece x any, but I am not sure'))
         key = judge.read_key('x')
         self.assertEqual(key['m1'], ['piece × any'])
+        self.assertEqual(judge.m1_cell('operation x any ?'), 'operation × any')
         self.assertTrue(judge.metrics(J, {}, key)['key']['m1_ok'])  # J's M1 is piece × bring out
         j = dict(J, m1={'way': 'witness', 'level': 'operation'})
         self.assertFalse(judge.metrics(j, {}, key)['key']['m1_ok'])
