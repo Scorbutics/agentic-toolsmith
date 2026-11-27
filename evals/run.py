@@ -129,6 +129,8 @@ def main():
                     help='task wording (default neutral; ladder reproduces the runs before 2026-11-25)')
     ap.add_argument('--runs', type=int, default=1, help='runs per scenario × model × arm (default 1); >1 writes r1, r2…')
     ap.add_argument('--skill', type=Path, default=SKILL, help='the skill directory to test (default: this checkout\'s)')
+    ap.add_argument('--resume', action='store_true',
+                    help='keep every run in --out that finished (map.md and session.json, no error) and run only the rest')
     ap.add_argument('--private', action='append', type=Path, metavar='DIR',
                     help='a private scenario: DIR holds scenario.json (and answer-key.md), kept in the scenario\'s own '
                          'repository rather than here; repeatable; when given, only these scenarios run')
@@ -156,9 +158,14 @@ def main():
             for arm, with_skill in arms:
                 for i in range(1, a.runs + 1):
                     out = out_root / sc['name'] / model / arm / (f'r{i}' if a.runs > 1 else '') / 'map.md'
-                    print(f'  {model:8} {arm:8} r{i} running…', flush=True)
-                    meta = run_agent(repo, out, (SKILL_PREFIX + task) if with_skill else task, model, with_skill,
-                                     a.timeout, a.skill)
+                    done = out.with_name('session.json')
+                    meta = json.loads(done.read_text()) if a.resume and done.exists() and out.exists() else None
+                    if meta and not meta.get('error') and out.stat().st_size:
+                        print(f'  {model:8} {arm:8} r{i} kept (finished before)', flush=True)
+                    else:
+                        print(f'  {model:8} {arm:8} r{i} running…', flush=True)
+                        meta = run_agent(repo, out, (SKILL_PREFIX + task) if with_skill else task, model, with_skill,
+                                         a.timeout, a.skill)
                     text = out.read_text(errors='ignore') if out.exists() else ''
                     if not text and len(meta.get('result') or '') > 2000:  # wrote nothing, but answered in full
                         text = meta['result']; out.write_text(text)
