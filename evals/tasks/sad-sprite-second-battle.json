@@ -1,14 +1,21 @@
 {
- "name": "sad-battle-placement",
+ "name": "sad-sprite-second-battle",
  "project": "smashanddash",
  "repo": "https://github.com/Scorbutics/smashanddash",
  "kind": "bug",
  "state": "deep",
- "fix": "bce53adaed134a711b88d9c4ecb58121b0a6f24f",
- "hidden": [],
+ "base": "641c3e4421c4631a991170efdcc91eea6444019c",
+ "fix": "0c126b1f63706fae8679d92cd07cbe0c424263e0",
+ "fix_in": {
+  "repo": "external/ska",
+  "commit": "a29b29ae8987cb3127b6f9556e89e50d384e55f6"
+ },
+ "hidden": [
+  "ska_gui/test/src/Image_test.cpp"
+ ],
  "setup": "git submodule update --init --recursive -q && cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo >/dev/null 2>&1 && cmake --build build -j8 2>&1 | tail -1",
- "test": "cmake --build build -j8 >/dev/null 2>&1 || { echo 'build failed'; exit 3; }; id=judge$$; tools/sad-run up $id --seed 7 --fixed-step --env SAD_BATTLE_AUTOPLAY=1 >/dev/null 2>&1; R=$(external/ska/tools/ska-console --run $id --timeout 800 run tools/agent/battle.miniska 25 3 2>&1 | tail -1); tools/sad-run down $id >/dev/null 2>&1; echo \"$R\"; echo \"$R\" | grep -q 'won=true'",
- "judge_note": "Deterministic replay (seed 7, fixed step, both sides played by the battle AI) of a battle against a level-3 Rattata (25) on save1: before the fix the player's Pokemon loses (hp=0, 3999 frames), after it wins (hp=14, 3563 frames), identical over repeated runs.",
+ "test": "cmake -S external/ska -B build-judge -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSKA_BUILD_DEMOS=OFF >/dev/null 2>&1 && cmake --build build-judge -j8 --target ska_gui_test >/dev/null 2>&1 || { echo 'engine test build failed'; exit 3; }; cd external/ska && timeout 300 xvfb-run -a ../../build-judge/bin/ska_gui_test -tc='*keeps the other textures*' 2>&1 | tail -4; exit ${PIPESTATUS[0]}",
+ "judge_note": "The bug the owner hit: after a first battle, the next battle draws the player's Pokemon off its place (off screen). Root cause in the engine (a29b29ae, tangled into game commit 0c126b1): the texture of an image is shared by every texture of its file, so the battle's team slot resizing its image resized the sprites made from the same file. Judged by the fix's own engine test (hidden): before the fix 4 of 6 assertions fail (8 == 15), with it 6/6.",
  "ablate": {
   "paths": [
    "tools/sad-run",
@@ -36,5 +43,5 @@
    }
   }
  },
- "prompt": "Bug: at the start of a battle, fighters are put on blocks where they cannot stand. The companions of a wild Pokemon are placed in a column next to it \u2014 in the water, in the trees, on top of the player's Pokemon \u2014 and the player's Pokemon is placed on the block next to the wild Pokemon even when that block is not free. The physics then pushes them out of the arena and the battle goes wrong: it counts a flight, or the player's Pokemon loses a fight it should win. Seen in the first save (save1) when fighting a wild Rattata.\n\nExpected: every fighter starts on a free block \u2014 the companions on the nearest free blocks around the first wild Pokemon, the player's Pokemon on a free block next to the wild one when that block is free, otherwise next to its trainer."
+ "prompt": "Bug, seen while playing: after a first battle, in the next battle my Pokemon is drawn off its place \u2014 completely off screen \u2014 so it looks out of the battle from its very start. The first battle of a session is fine; it is from the second one on. It looks as if a sprite were reused with the wrong size or offset.\n\nFind the cause and fix it there (not only its symptom in the battle screen), so that nothing drawn earlier changes how a sprite is drawn later."
 }

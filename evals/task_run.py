@@ -109,7 +109,7 @@ def worktree(task, dest):
         sh(['git', '-C', str(src), 'worktree', 'remove', '--force', str(dest)])
         shutil.rmtree(dest, ignore_errors=True)
     dest.parent.mkdir(parents=True, exist_ok=True)
-    r = sh(['git', '-C', str(src), 'worktree', 'add', '--quiet', '--detach', str(dest), f"{task['fix']}^"])
+    r = sh(['git', '-C', str(src), 'worktree', 'add', '--quiet', '--detach', str(dest), task.get('base') or f"{task['fix']}^"])
     if r.returncode:
         sys.exit(r.stderr)
     s = sh(task['setup'], cwd=dest, env=env_for(task), timeout=3600)
@@ -146,21 +146,23 @@ def hidden_tests(task, dest):
     if not task.get('hidden'):
         r = sh(task['test'], cwd=dest, env=env_for(task), timeout=3600)
         return r.returncode == 0, (r.stdout + r.stderr)[-1500:]
-    saved = {f: (dest / f).read_bytes() if (dest / f).exists() else None for f in task['hidden']}
+    sub = task.get('fix_in')  # the fix (and its tests) live in a submodule: {"repo": path, "commit": sha}
+    repo, commit = (dest / sub['repo'], sub['commit']) if sub else (dest, task['fix'])
+    saved = {f: (repo / f).read_bytes() if (repo / f).exists() else None for f in task['hidden']}
     try:
-        sh(['git', 'checkout', task['fix'], '--', *task['hidden']], cwd=dest)
+        sh(['git', 'checkout', commit, '--', *task['hidden']], cwd=repo)
         r = sh(task['test'], cwd=dest, env=env_for(task), timeout=1800)
         return r.returncode == 0, (r.stdout + r.stderr)[-1500:]
     finally:
         for f, b in saved.items():
             if b is None:
-                (dest / f).unlink(missing_ok=True)
+                (repo / f).unlink(missing_ok=True)
             else:
-                (dest / f).write_bytes(b)
+                (repo / f).write_bytes(b)
         # `git checkout <fix> -- files` also staged the hidden tests: unstage them, or the next session
         # would find them in `git status` / `git diff --cached`
-        sh(['git', 'reset', '-q', '--', *task['hidden']], cwd=dest)
-        staged = set(sh(['git', 'diff', '--cached', '--name-only'], cwd=dest).stdout.split())
+        sh(['git', 'reset', '-q', '--', *task['hidden']], cwd=repo)
+        staged = set(sh(['git', 'diff', '--cached', '--name-only'], cwd=repo).stdout.split())
         assert not staged & set(task['hidden']), f'hidden tests left staged: {staged & set(task["hidden"])}'
 
 
@@ -185,8 +187,11 @@ def validate(tasks, root):
         dest = root / 'validate' / t['name']
         worktree(t, dest)
         before, out_b = hidden_tests(t, dest)
-        changed = [f for f in sh(['git', 'show', '--name-only', '--format=', t['fix']], cwd=dest).stdout.split() if f]
-        sh(['git', 'checkout', t['fix'], '--', *changed], cwd=dest)
+        sub = t.get('fix_in')
+        repo, commit = (dest / sub['repo'], sub['commit']) if sub else (dest, t['fix'])
+        changed = [f for f in sh(['git', 'show', '--name-only', '--format=', commit], cwd=repo).stdout.split()
+                   if f and f not in t['hidden']]
+        sh(['git', 'checkout', commit, '--', *changed], cwd=repo)
         after, out_a = hidden_tests(t, dest)
         good = (not before) and after
         ok &= good
