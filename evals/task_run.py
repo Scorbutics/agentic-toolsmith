@@ -85,7 +85,9 @@ def env_for(task):
             sh([sys.executable, '-m', 'venv', str(venv)])
             for f in ('requirements.txt', 'requirements-dev.txt'):  # the tests need the dev requirements too
                 req = sh(['git', '-C', str(repo_cache(task)), 'show', f"{task['fix']}:{f}"]).stdout
-                (venv / f).write_text(req.replace('-r requirements.txt', ''))
+                # mysqlclient needs MySQL build headers; the eval runs on SQLite and PostgreSQL only
+                (venv / f).write_text('\n'.join(l for l in req.replace('-r requirements.txt', '').splitlines()
+                                                 if not l.lower().startswith('mysqlclient')))
             r = sh([str(venv / 'bin' / 'pip'), 'install', '-q', '-r', str(venv / 'requirements.txt'),
                     '-r', str(venv / 'requirements-dev.txt')], timeout=1800)
             if r.returncode:
