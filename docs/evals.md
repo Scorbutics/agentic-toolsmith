@@ -1,5 +1,41 @@
 # Eval results
 
+## Task-based eval — does the tooling let an agent finish real work? (2026-11-27)
+
+`evals/task_run.py`: real fixes and features from a project's history, started at the commit before,
+described as a ticket would (interface named, no hint of the code), judged by the change's own tests,
+hidden until the end. Arms: **bare** (the task alone) and **toolsmith** (one map-scope session per
+project builds and proves M1 at the oldest task's commit; its patch is applied to every task; the skill
+is removed before the task session). Recorded: solved, turns, time, cost, commands reaching state,
+commands calling the tooling.
+
+**Well-specified bugs, verified by the ordinary suite** (six tasks, fd and healthchecks, bare only):
+solved 24/24 in about a minute each, $1.44 in all. Nothing for tooling to do: such tasks are left out of
+what toolsmith claims.
+
+**State-heavy work** (three healthchecks features — report summary over a downtime history, editing a
+Shell integration behind a config switch, Gotify priorities and what is sent — a PostgreSQL-only bug,
+and an fd feature as a control; Sonnet and Haiku, two runs each): bare 17/20, toolsmith 19/20, times
+close task by task. **This run is not evidence about toolsmith**: the worktrees lived under /tmp, where
+`claude -p` does not load a project's CLAUDE.md, so no toolsmith session ever saw the commands its
+tooling build had documented. The harness now keeps worktrees under the home directory and checks, before
+any session, that a codeword in AGENTS.md imported by CLAUDE.md reaches the agent.
+
+**Recheck with the agent file loading** (the two most state-dependent features, one run per model,
+reusing the same tooling builds): 4/4 solved, against 5/8 for bare on the same tasks. Both Sonnet
+sessions called the tooling (`hcdev` to mail a report or post a form, `hcdev-doctor`); the Haiku sessions
+did not — Haiku's tooling build had made handles but written only "run manage.py test" into CLAUDE.md.
+Hence the skill's new step 11: every delivered handle's command must be in the text a session loads at
+startup.
+
+What this does and does not show:
+- agents use the tooling when it is in the agent file, and not when it is not;
+- on healthchecks the effect is small, because the project already gives agents cheap state through its
+  test base class (users, projects, checks created for every test): the bare arm reaches state with
+  `manage.py test` within a dozen tool calls;
+- the case toolsmith is built for — reaching a state costs a login, seeded data and a flow — is not in
+  this set. Running the same eval on such a project is the next measure (`evals/task-eval-on-your-machine.md`).
+
 ## v5 and two hold-out projects (2026-11-27)
 
 v5 makes `either` name its evidence on both sides and adds worked examples of piece-level witness and

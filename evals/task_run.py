@@ -63,8 +63,11 @@ def sh(cmd, cwd=None, timeout=1800, env=None):
                           timeout=timeout, env=env)
 
 
+TASK_DIRS = [HERE / 'tasks']  # --tasks adds more (a private project keeps its tasks in its own repository)
+
+
 def load(name=None):
-    tasks = [json.loads(p.read_text()) for p in sorted((HERE / 'tasks').glob('*.json'))]
+    tasks = [json.loads(p.read_text()) for d in TASK_DIRS for p in sorted(Path(d).glob('*.json'))]
     return [t for t in tasks if not name or t['name'] in name]
 
 
@@ -350,6 +353,8 @@ def main():
     ap.add_argument('command', choices=['validate', 'run', 'report'])
     ap.add_argument('dir', nargs='?', help='report: the run directory')
     ap.add_argument('--only', action='append', help='task name (repeatable)')
+    ap.add_argument('--tasks', action='append', type=Path, default=[], metavar='DIR',
+                    help='another directory of task files, e.g. a private project\'s toolsmith/eval/tasks (repeatable)')
     ap.add_argument('--arm', action='append', choices=['bare', 'toolsmith', 'toolsmith-shared'])
     ap.add_argument('--model', action='append')
     ap.add_argument('--runs', type=int, default=1)
@@ -357,6 +362,7 @@ def main():
     ap.add_argument('--out', type=Path, default=HERE.parent / 'eval-runs' / ('tasks-' + time.strftime('%Y%m%d-%H%M%S')))
     ap.add_argument('--timeout', type=int, nargs=2, default=[2400, 1800], metavar=('TOOLING', 'TASK'))
     a = ap.parse_args()
+    TASK_DIRS.extend(a.tasks)
     if a.command == 'report':
         return report(a.dir or a.out)
     tasks = load(a.only)

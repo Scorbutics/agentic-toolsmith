@@ -54,7 +54,13 @@ Toolsmith progress:
 - [ ] 10. Prove — run each usage example for real; add it to doctor and CI; configure permissions;
       document it in the agent file; check a fresh session with no hint finds and uses it; move the
       card to Delivered with its Verified level (implemented · tested · demoed) — never rounded up
+- [ ] 11. Agent-file check — for every delivered handle, its exact command and usage example are in
+      the text a session loads at startup: CLAUDE.md itself or a file it imports with `@AGENTS.md`,
+      never only behind "see X". Grep for each command; a handle missing there is not delivered
 ```
+
+An agent never runs a handle it was not told about. Measured: tooling whose commands were written only
+in a file the session did not load went unused in every session; once loaded, agents called it.
 
 Steps 1–5 are the map ([map.md](references/map.md), written with
 [map-template.md](references/map-template.md)); 6–10 are the review loop

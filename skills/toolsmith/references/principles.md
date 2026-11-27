@@ -154,7 +154,9 @@ A handle must be:
    dump) rather than its bytes. A default output over a few hundred lines is a bug.
 4. **Fast and deterministic** — seeded, time-controllable, parallel-safe (see parallel.md).
 5. **Discoverable** — documented where the next agent looks first ("How to reach the app"
-   in the agent file), with the exact command.
+   in the agent file), with the exact command — in the text the harness loads at startup (CLAUDE.md,
+   or AGENTS.md imported from it with `@AGENTS.md`), not behind a pointer the agent must follow. A
+   handle built but not written there is never called.
 6. **Honest** — a handle that looked at nothing does not report success.
 7. **Alive** — its usage example runs in the `doctor` script and in CI, so it fails loudly the day
    the app changes under it. A handle nobody runs rots silently (a `--test` flag that parses to
