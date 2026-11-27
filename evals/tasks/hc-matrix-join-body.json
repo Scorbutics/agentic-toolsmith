@@ -1,0 +1,12 @@
+{
+ "project": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "setup": "ln -sfn \"$TOOLSMITH_EVAL_VENV\" .venv && .venv/bin/python manage.py check 2>&1 | tail -2",
+ "name": "hc-matrix-join-body",
+ "fix": "0413d5f615e3669d0a3fb8f9a3b63b5592db7aa0",
+ "hidden": [
+  "hc/integrations/matrix/tests/test_add.py"
+ ],
+ "test": ".venv/bin/python manage.py test hc.integrations.matrix.tests.test_add",
+ "prompt": "Bug: adding a Matrix integration fails against some homeservers. When the user adds a Matrix integration, Healthchecks asks the homeserver to join the room, and that join request is sent with no request body. The Matrix client-server API requires every such request to carry a JSON object as its body, even an empty one, and strict homeservers reject the request. Expected: the join request sends an empty JSON object as its body."
+}

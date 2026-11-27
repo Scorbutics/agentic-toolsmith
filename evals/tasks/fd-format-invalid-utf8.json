@@ -1,0 +1,12 @@
+{
+ "project": "fd",
+ "repo": "https://github.com/sharkdp/fd",
+ "setup": "cargo build --quiet --tests 2>&1 | tail -3",
+ "hidden": [
+  "tests/tests.rs"
+ ],
+ "name": "fd-format-invalid-utf8",
+ "fix": "3dcff9289d37a6b7e259098324dbbd60bf72a3b5",
+ "test": "cargo test --quiet --test tests test_format_invalid_utf8",
+ "prompt": "Bug (unix): filenames that are not valid UTF-8 come out mangled when printed with --format to a pipe or file: the invalid bytes are replaced with U+FFFD, so the output cannot be fed to `xargs -0` or other tools. Plain output (without --format) already writes the raw bytes when not writing to a terminal. Expected: --format output to a non-terminal writes the filename's raw bytes too."
+}

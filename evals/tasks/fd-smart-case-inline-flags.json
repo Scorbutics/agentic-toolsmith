@@ -1,0 +1,12 @@
+{
+ "project": "fd",
+ "repo": "https://github.com/sharkdp/fd",
+ "setup": "cargo build --quiet --tests 2>&1 | tail -3",
+ "hidden": [
+  "tests/tests.rs"
+ ],
+ "name": "fd-smart-case-inline-flags",
+ "fix": "e422fc3027e36145174c0964cc4b24d0363388e9",
+ "test": "cargo test --quiet --test tests test_smart_case_inline_flags_and_patterns",
+ "prompt": "Bug: an inline case-insensitive flag breaks smart case for the other patterns. With files foo-bar, foo-BAR and FOO-BAR, `fd foo --and bar` lists all three (smart case: all lowercase means case-insensitive), but `fd '(?i)foo' --and bar` lists only foo-bar, as if the (?i) made the search case-sensitive. Same with `fd foo --and '(?i)bar'` and `(?i:foo)`. Expected: smart case looks at the literal characters a pattern contains; an inline (?i) must not count as uppercase. --ignore-case and --case-sensitive keep overriding smart case, and a pattern with a real uppercase letter outside the flag (e.g. `(?i)Foo`) is still case-sensitive as before."
+}

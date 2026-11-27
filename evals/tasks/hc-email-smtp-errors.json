@@ -1,0 +1,12 @@
+{
+ "project": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "setup": "ln -sfn \"$TOOLSMITH_EVAL_VENV\" .venv && .venv/bin/python manage.py check 2>&1 | tail -2",
+ "name": "hc-email-smtp-errors",
+ "fix": "69aac3a437890c66eab363a9e871927e9550e3b2",
+ "hidden": [
+  "hc/integrations/email/tests/test_notify.py"
+ ],
+ "test": ".venv/bin/python manage.py test hc.integrations.email.tests.test_notify",
+ "prompt": "Bug: when the SMTP server is unreachable or misbehaves \u2014 the server disconnects, refuses the connection, or rejects the message data \u2014 sending an email notification crashes instead of being recorded as a failed delivery. Expected: the email integration catches these SMTP and connection errors, records the notification's error as exactly \"SMTP connection error\", and logs the exception (with logger.exception) instead of crashing."
+}

@@ -1,0 +1,12 @@
+{
+ "project": "fd",
+ "repo": "https://github.com/sharkdp/fd",
+ "setup": "cargo build --quiet --tests 2>&1 | tail -3",
+ "hidden": [
+  "tests/tests.rs"
+ ],
+ "name": "fd-type-union",
+ "fix": "2c9a0c99d51b76ec0ecc8df6fdb37d11b98dd0d4",
+ "test": "cargo test --quiet --test tests combined_with_symlink",
+ "prompt": "Bug: combining --type executable (or --type empty) with another --type drops results. The documentation says repeated --type values combine as a union, but `fd --type executable --type symlink` only lists executables: symlinks that are not executable are filtered out, and `--type empty --type symlink` loses symlinks the same way. Expected: each modifier applies only to what it describes (executable to regular files, empty to files and directories), and the other requested types are still listed."
+}

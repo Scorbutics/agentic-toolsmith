@@ -1,0 +1,12 @@
+{
+ "project": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "setup": "ln -sfn \"$TOOLSMITH_EVAL_VENV\" .venv && .venv/bin/python manage.py check 2>&1 | tail -2",
+ "name": "hc-telegram-no-recipient",
+ "fix": "cb5c9764ee483dd30864c0869cc0cbe12d3dfad8",
+ "hidden": [
+  "hc/integrations/telegram/tests/test_add.py"
+ ],
+ "test": ".venv/bin/python manage.py test hc.integrations.telegram.tests.test_add",
+ "prompt": "Bug: the 'Add Telegram' page reads the recipient (chat) data from the querystring. A GET renders the form; a POST creates the integration. A POST with no recipient data in the querystring still creates a Telegram integration, whose stored value is the string \"null\" \u2014 which breaks every piece of code that expects the integration's value to be a serialized JSON object. Expected: such a POST is rejected with HTTP 400 and creates nothing."
+}
