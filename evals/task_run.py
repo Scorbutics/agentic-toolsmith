@@ -32,6 +32,9 @@ HERE = Path(__file__).resolve().parent
 SKILL = HERE.parent / 'skills' / 'toolsmith'
 CACHE = Path(os.environ.get('XDG_CACHE_HOME', Path.home() / '.cache')) / 'toolsmith-evals'
 TOOLS = ['Read', 'Edit', 'Write', 'Glob', 'Grep', 'Bash', 'Skill']
+# Worktrees live under the home directory: `claude -p` does not load a project's CLAUDE.md under /tmp, and
+# a session that never reads the agent file cannot use the tooling it describes (measured: 2026-11-27).
+WORK = CACHE / 'work'
 
 TASK_PREFIX = ("You are working in this repository. Fix the bug below. Verify your fix the way you see fit before "
                "you finish; do not ask questions — nobody will answer.\n\n")
@@ -130,6 +133,21 @@ def hidden_tests(task, dest):
         assert not staged & set(task['hidden']), f'hidden tests left staged: {staged & set(task["hidden"])}'
 
 
+def preflight(model):
+    """Fail before any session if a worktree's CLAUDE.md would not reach the agent."""
+    d = WORK / 'preflight'
+    shutil.rmtree(d, ignore_errors=True)
+    d.mkdir(parents=True)
+    sh(['git', 'init', '-q'], cwd=d)
+    (d / 'CLAUDE.md').write_text('@AGENTS.md\n')  # the import the skill writes
+    (d / 'AGENTS.md').write_text('The project codeword is HERON-17.\n')
+    r = sh(['claude', '-p', "Without using any tool: what is this project's codeword? Reply with it or 'unknown'.",
+            '--model', model, '--output-format', 'json'], cwd=d, timeout=300)
+    shutil.rmtree(d, ignore_errors=True)
+    if 'HERON-17' not in r.stdout:
+        sys.exit(f'preflight: a session in {WORK} does not see CLAUDE.md (and its @AGENTS.md import); not running')
+
+
 def validate(tasks, root):
     ok = True
     for t in tasks:
@@ -194,7 +212,7 @@ def project_tooling(project, model, i, root, skill, timeout):
     when = lambda t: int(sh(['git', '-C', str(src), 'log', '-1', '--format=%ct', f"{t['fix']}^"]).stdout.strip() or 0)
     t0 = min(tasks, key=when)
     out.mkdir(parents=True, exist_ok=True)
-    dest = root / 'work' / f'tooling-{project}-{model}-r{i}'
+    dest = WORK / f'tooling-{project}-{model}-r{i}'
     worktree(t0, dest)
     mine = dest / '.claude' / 'skills' / 'toolsmith'
     mine.parent.mkdir(parents=True, exist_ok=True)
@@ -215,7 +233,7 @@ def run_one(t, arm, model, i, root, skill, timeouts):
     tag = f"{t['name']}/{model}/{arm}/r{i}"
     out = root / tag
     out.mkdir(parents=True, exist_ok=True)
-    dest = root / 'work' / tag.replace('/', '-')
+    dest = WORK / tag.replace('/', '-')
     worktree(t, dest)
     rec = {'task': t['name'], 'project': t['project'], 'arm': arm, 'model': model, 'run': i}
     tool_files = []
@@ -346,6 +364,7 @@ def main():
         sys.exit(0 if validate(tasks, a.out) else 1)
     if not shutil.which('claude'):
         sys.exit('the `claude` CLI is required (and logged in)')
+    preflight((a.model or ['sonnet'])[0])
     for t in tasks:
         for model in a.model or ['sonnet']:
             for arm in a.arm or ['bare', 'toolsmith']:
