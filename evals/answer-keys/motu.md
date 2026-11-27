@@ -15,9 +15,9 @@ what actually goes wrong?" — answer from the bugs and the friction you remembe
 | Cell | Expect (`propose` · `leave` · `either`) | Why — what you know of the project |
 |---|---|---|
 | `unit × bring out` | leave | Already covered it's basically running the unit tests |
-| `unit × witness` | propose | I don't see anything except assertions |
+| `unit × witness` | either | I don't see anything except assertions |
 | `unit × reach in` | leave | That category probably does not make sense no? |
-| `piece × bring out` | propose | I don't think we use Motu for Motu itself enough but it's there |
+| `piece × bring out` | either | I don't think we use Motu for Motu itself enough but it's there |
 | `piece × witness` | either | partly covered by Motu but not a lot? |
 | `piece × reach in` | propose | we might lack such a system |
 | `operation × bring out` | propose | I don't think we have anything here |
