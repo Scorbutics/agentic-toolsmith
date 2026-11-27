@@ -1,0 +1,14 @@
+{
+ "project": "fd",
+ "repo": "https://github.com/sharkdp/fd",
+ "setup": "cargo build --quiet --tests 2>&1 | tail -3",
+ "hidden": [
+  "tests/tests.rs"
+ ],
+ "name": "fd-feat-and-patterns",
+ "kind": "feature",
+ "state": "none",
+ "fix": "7e26925933c6600ab1eddabeb33d1b2bf00c9bf2",
+ "test": "cargo test --quiet --test tests and_",
+ "prompt": "Feature: add an `--and <pattern>` option to search for entries that match several patterns at once. It can be given multiple times: an entry is listed only if it matches the main pattern AND every --and pattern.\n\n- The --and patterns follow the same rules as the main pattern: regex by default, glob with --glob, literal with --fixed-strings, the same case-sensitivity (smart case, --ignore-case, --case-sensitive) and --full-path behaviour, and they combine with filters such as --type.\n- Smart case is decided for each pattern on its own: `fd baz --and quux` matches 'Baz-Quux2' as well as 'baz-quux'.\n- An empty --and pattern matches everything; a value starting with a dash (`--and -`) is a pattern, not an option.\n- An invalid --and pattern is an error (non-zero exit), like an invalid main pattern.\n- Example: `fd foo --and c` lists entries whose name contains both 'foo' and 'c'."
+}

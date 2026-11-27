@@ -1,0 +1,15 @@
+{
+ "project": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "setup": "ln -sfn \"$TOOLSMITH_EVAL_VENV\" .venv && .venv/bin/python manage.py check 2>&1 | tail -2",
+ "name": "hc-feat-edit-shell",
+ "kind": "feature",
+ "state": "heavy",
+ "fix": "b932fc404aa2868c6be46e90e803d9b35f460cc0",
+ "hidden": [
+  "hc/integrations/shell/tests/test_edit.py",
+  "hc/integrations/webhook/tests/test_edit.py"
+ ],
+ "test": "SHELL_ENABLED=True .venv/bin/python manage.py test hc.integrations.shell.tests.test_edit hc.integrations.webhook.tests.test_edit",
+ "prompt": "Feature: let users edit an existing Shell Command integration, the way some other integration types can already be edited. Today a Shell integration can only be created or deleted.\n\n- The integrations list shows an edit control for Shell integrations, leading to /integrations/<channel code>/edit/.\n- That page shows the same form as creation, titled \"Shell Command Settings\", pre-filled with the current commands for 'up' and 'down' events.\n- Saving updates the existing integration (it does not create a new one, and does not change which checks it is assigned to) and redirects to the project's integrations list.\n- It requires read-write access to the project: a read-only team member gets 403."
+}

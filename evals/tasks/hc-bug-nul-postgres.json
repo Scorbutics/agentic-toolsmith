@@ -1,0 +1,14 @@
+{
+ "project": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "setup": "pg_ctlcluster 16 main start 2>/dev/null; ln -sfn \"$TOOLSMITH_EVAL_VENV\" .venv && .venv/bin/python manage.py check 2>&1 | tail -2",
+ "name": "hc-bug-nul-postgres",
+ "kind": "bug",
+ "state": "environment",
+ "fix": "ac59dec93c5179cdff471894704f360d6ee5e02a",
+ "hidden": [
+  "hc/api/tests/test_list_checks.py"
+ ],
+ "test": "DB=postgres DB_HOST=127.0.0.1 DB_USER=postgres .venv/bin/python manage.py test hc.api.tests.test_list_checks",
+ "prompt": "Bug report from production: the \"List Checks\" API call sometimes returns HTTP 500 Internal Server Error. It happens when a client sends a NUL character in a query parameter, e.g. `GET /api/v3/checks/?tag=%00` or `?slug=foo%00`. We cannot reproduce it on a laptop with the default setup, but production runs PostgreSQL (a PostgreSQL server is available on this machine at 127.0.0.1:5432, user `postgres`, no password). Expected: such requests get a 400 response with an error, never a 500."
+}

@@ -43,6 +43,18 @@ TOOLING_PROMPT = ("Use the toolsmith skill in task scope: /toolsmith task \"{tas
                   "the bug: another agent will do the task with what you build.")
 
 
+PROJECT_TOOLING_PROMPT = ("Use the toolsmith skill in map scope: /toolsmith map\n\n"
+    "Agents will next implement features and fix bugs in this project, one task at a time. Nobody is available to "
+    "answer: write your questions with your recommended answers and take them as answered. Treat the first milestone "
+    "(M1) of your roadmap as accepted by the human: build its handles now, prove each one by running its usage "
+    "example, and document them where the next agent looks first (the agent file's \"How to reach the app\" section). "
+    "Build durable tooling only; do not change the application's behaviour.")
+# commands that reach or set up application state, rather than read or edit code
+REACH = re.compile(r'manage\.py (shell|runserver|createsuperuser|loaddata|migrate|dumpdata|sendreports|sendalerts)|'
+                   r'curl\b[^|]*(localhost|127\.0\.0\.1)|\bpsql\b|\bsqlite3\b|django\.setup\(|DJANGO_SETTINGS_MODULE|'
+                   r'objects\.create|\bmkdir -p .*fixture|\btouch\b|\bln -s')
+
+
 def sh(cmd, cwd=None, timeout=1800, env=None):
     return subprocess.run(cmd, cwd=cwd, shell=isinstance(cmd, str), text=True, capture_output=True,
                           timeout=timeout, env=env)
@@ -65,7 +77,10 @@ def env_for(task):
     """Shared, prepared dependencies outside the worktree (a Python venv), exported to setup commands."""
     env = dict(os.environ)
     if task['project'] == 'healthchecks':
-        venv = CACHE / 'venvs' / 'healthchecks'
+        reqs = ''.join(sh(['git', '-C', str(repo_cache(task)), 'show', f"{task['fix']}:{f}"]).stdout
+                       for f in ('requirements.txt', 'requirements-dev.txt'))
+        import hashlib  # one venv per set of requirements: the tasks span commits with different pins
+        venv = CACHE / 'venvs' / ('healthchecks-' + hashlib.sha1(reqs.encode()).hexdigest()[:10])
         if not (venv / 'bin' / 'python').exists():
             sh([sys.executable, '-m', 'venv', str(venv)])
             for f in ('requirements.txt', 'requirements-dev.txt'):  # the tests need the dev requirements too
@@ -165,6 +180,35 @@ def created_by(dest, base_files):
     return sorted({l[3:].strip() for l in st if l[:2] in ('??', 'A ')} - base_files)
 
 
+def project_tooling(project, model, i, root, skill, timeout):
+    """Build the project's tooling once — map scope, M1 built and proven — at the OLDEST task's starting commit,
+    so it can never see a later fix. Saved as a patch that run_one applies to each task's worktree."""
+    out = root / 'tooling' / project / model / f'r{i}'
+    patch = out / 'tooling.patch'
+    if patch.exists():
+        return json.loads((out / 'record.json').read_text()), patch
+    tasks = [t for t in load() if t['project'] == project]
+    src = repo_cache(tasks[0])
+    when = lambda t: int(sh(['git', '-C', str(src), 'log', '-1', '--format=%ct', f"{t['fix']}^"]).stdout.strip() or 0)
+    t0 = min(tasks, key=when)
+    out.mkdir(parents=True, exist_ok=True)
+    dest = root / 'work' / f'tooling-{project}-{model}-r{i}'
+    worktree(t0, dest)
+    mine = dest / '.claude' / 'skills' / 'toolsmith'
+    mine.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(skill, mine, ignore=shutil.ignore_patterns('__pycache__'))
+    res, _ = agent(PROJECT_TOOLING_PROMPT, dest, model, timeout, out / 'tooling.jsonl')
+    shutil.rmtree(mine, ignore_errors=True)
+    sh(['git', 'add', '-A', '--', '.', ':!.venv', ':!target', ':!*.sqlite', ':!.claude/skills/toolsmith'], cwd=dest)
+    patch.write_text(sh(['git', 'diff', '--cached', '--binary', 'HEAD'], cwd=dest).stdout)
+    rec = {'project': project, 'model': model, 'run': i, 'built_at': f"{t0['fix']}^",
+           'files': sh(['git', 'diff', '--cached', '--name-only', 'HEAD'], cwd=dest).stdout.split(),
+           **{k: res.get(k) for k in ('total_cost_usd', 'num_turns', 'seconds', 'is_error')}}
+    (out / 'record.json').write_text(json.dumps(rec, indent=1))
+    sh(['git', '-C', str(src), 'worktree', 'remove', '--force', str(dest)])
+    return rec, patch
+
+
 def run_one(t, arm, model, i, root, skill, timeouts):
     tag = f"{t['name']}/{model}/{arm}/r{i}"
     out = root / tag
@@ -173,6 +217,17 @@ def run_one(t, arm, model, i, root, skill, timeouts):
     worktree(t, dest)
     rec = {'task': t['name'], 'project': t['project'], 'arm': arm, 'model': model, 'run': i}
     tool_files = []
+    if arm == 'toolsmith-shared':
+        trec, patch = project_tooling(t['project'], model, i, root, skill, timeouts[0])
+        ap = sh(['git', 'apply', '--3way', '--whitespace=nowarn', str(patch)], cwd=dest) if patch.read_text().strip() else None
+        rec['tooling'] = {'shared': True, 'total_cost_usd': trec.get('total_cost_usd'), 'num_turns': trec.get('num_turns')}
+        rec['tooling_applied'] = bool(ap is None or ap.returncode == 0)
+        if ap is not None and ap.returncode:
+            rec['tooling_apply_error'] = ap.stderr[-800:]
+        sh(['git', 'reset', '-q'], cwd=dest)  # applied changes as plain edits, nothing staged for the task session
+        tool_files = trec.get('files', [])
+        rec['tooling_files'] = tool_files
+        rec['contaminated'], _ = hidden_tests(t, dest)
     if arm == 'toolsmith':
         mine = dest / '.claude' / 'skills' / 'toolsmith'
         mine.parent.mkdir(parents=True, exist_ok=True)
@@ -189,6 +244,9 @@ def run_one(t, arm, model, i, root, skill, timeouts):
     rec['task_session'] = {k: res.get(k) for k in ('total_cost_usd', 'num_turns', 'seconds', 'is_error')}
     names = {Path(f).stem for f in tool_files if Path(f).stem not in ('README', 'index', 'mod', '__init__')}
     rec['used_tooling'] = sorted({n for n in names for c in bash if re.search(r'\b' + re.escape(n) + r'\b', c)})
+    rec['commands'] = len(bash)
+    rec['reach_commands'] = sum(bool(REACH.search(c)) for c in bash)
+    rec['tooling_commands'] = sum(any(re.search(r'\b' + re.escape(n) + r'\b', c) for n in names) for c in bash)
     rec['success'], rec['test_tail'] = hidden_tests(t, dest)
     (out / 'task.diff').write_text(sh(['git', 'diff', 'HEAD'], cwd=dest).stdout)
     (out / 'record.json').write_text(json.dumps(rec, indent=1))
@@ -201,17 +259,23 @@ def report(root):
     by = {}
     for r in recs:
         by.setdefault((r['arm'], r['model']), []).append(r)
-    lines = ['| Arm | Model | Runs | Solved | Contaminated (tooling already solved it) | Task session: turns / cost | Tooling: cost | Task session used the tooling |',
-             '|---|---|---|---|---|---|---|---|']
+    lines = ['| Arm | Model | Runs | Solved | Contaminated | Task session: turns · time · cost | Commands (reaching state · via tooling) | Tooling cost | Used the tooling |',
+             '|---|---|---|---|---|---|---|---|---|']
     for (arm, model), rs in sorted(by.items()):
         clean = [r for r in rs if not r.get('contaminated')]
         ts = [r['task_session'] for r in rs]
         cost = lambda xs: sum((x or {}).get('total_cost_usd') or 0 for x in xs)
+        avg = lambda f: sum(f(r) or 0 for r in rs) / len(rs)
+        tooled = arm.startswith('toolsmith')
+        shared = {(r['project'], r['run']): (r.get('tooling') or {}).get('total_cost_usd') or 0 for r in rs} if arm == 'toolsmith-shared' else {}
+        tcost = (f"${sum(shared.values()):.2f} for {len(shared)} project build(s)" if shared
+                 else f"${cost([r.get('tooling') for r in rs]) / len(rs):.2f}/task" if tooled else '—')
         lines.append(f"| {arm} | {model} | {len(rs)} | {sum(r['success'] for r in clean)}/{len(clean)} | "
                      f"{sum(bool(r.get('contaminated')) for r in rs)} | "
-                     f"{sum((x.get('num_turns') or 0) for x in ts) / len(rs):.0f} / ${cost(ts) / len(rs):.2f} | "
-                     + (f"${cost([r.get('tooling') for r in rs]) / len(rs):.2f}" if arm == 'toolsmith' else '—') + ' | '
-                     + (f"{sum(bool(r.get('used_tooling')) for r in rs)}/{len(rs)}" if arm == 'toolsmith' else '—') + ' |')
+                     f"{avg(lambda r: r['task_session'].get('num_turns')):.0f} · {avg(lambda r: r['task_session'].get('seconds')):.0f}s · "
+                     f"${cost(ts) / len(rs):.2f} | {avg(lambda r: r.get('commands')):.0f} ({avg(lambda r: r.get('reach_commands')):.1f} · "
+                     f"{avg(lambda r: r.get('tooling_commands')):.1f}) | {tcost} | "
+                     + (f"{sum(bool(r.get('used_tooling')) for r in rs)}/{len(rs)}" if tooled else '—') + ' |')
     lines += ['', '| Task | ' + ' | '.join(f'{a} · {m}' for a, m in sorted(by)) + ' |', '|---|' + '---|' * len(by)]
     for name in sorted({r['task'] for r in recs}):
         cells = []
@@ -229,7 +293,7 @@ def main():
     ap.add_argument('command', choices=['validate', 'run', 'report'])
     ap.add_argument('dir', nargs='?', help='report: the run directory')
     ap.add_argument('--only', action='append', help='task name (repeatable)')
-    ap.add_argument('--arm', action='append', choices=['bare', 'toolsmith'])
+    ap.add_argument('--arm', action='append', choices=['bare', 'toolsmith', 'toolsmith-shared'])
     ap.add_argument('--model', action='append')
     ap.add_argument('--runs', type=int, default=1)
     ap.add_argument('--skill', type=Path, default=SKILL)

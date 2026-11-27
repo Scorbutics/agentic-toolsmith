@@ -1,0 +1,14 @@
+{
+ "project": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "setup": "ln -sfn \"$TOOLSMITH_EVAL_VENV\" .venv && .venv/bin/python manage.py check 2>&1 | tail -2",
+ "name": "hc-feat-report-summary",
+ "kind": "feature",
+ "state": "heavy",
+ "fix": "29c759d1b7f500c0c0f357e54d9912017f5c46f8",
+ "hidden": [
+  "hc/accounts/tests/test_profile_model.py"
+ ],
+ "test": ".venv/bin/python manage.py test hc.accounts.tests.test_profile_model",
+ "prompt": "Feature: add a one-line summary at the top of the monthly, weekly and daily report emails, in both the HTML and the plain-text versions, so a reader sees at a glance how the period went.\n\nCopy (the period is shown in the user's timezone):\n- monthly: \"In December, 1 check had 1 downtime event.\"\n- weekly: \"Last week (January 6 to January 12), 1 check had 1 downtime event.\"\n- daily: \"Yesterday (January 12), 1 check had 1 downtime event.\"\n- the counts pluralise as usual (\"2 checks had 3 downtime events\").\n- in the HTML version the two counts are bold: \"In December, <strong>1 check</strong> had <strong>1 downtime event</strong>.\"\n- when nothing went down in the period: \"In December, no checks had downtimes. Nice!\" (with the same period wording for weekly and daily).\n\nCheck that it reads right in real reports, for checks with and without downtime in the period."
+}

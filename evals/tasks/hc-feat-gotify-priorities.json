@@ -1,0 +1,15 @@
+{
+ "project": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "setup": "ln -sfn \"$TOOLSMITH_EVAL_VENV\" .venv && .venv/bin/python manage.py check 2>&1 | tail -2",
+ "name": "hc-feat-gotify-priorities",
+ "kind": "feature",
+ "state": "heavy",
+ "fix": "7ed59c4d3e079e0bcbede143b99b32b7bd0fab5b",
+ "hidden": [
+  "hc/integrations/gotify/tests/test_add.py",
+  "hc/integrations/gotify/tests/test_notify.py"
+ ],
+ "test": ".venv/bin/python manage.py test hc.integrations.gotify",
+ "prompt": "Feature: let a Gotify integration choose the message priority separately for 'down' and 'up' notifications, or turn either off.\n\n- The add-Gotify form gets two required fields, `priority` (for down events) and `priority_up` (for up events), each a choice of 0, 2, 5 or 9, both defaulting to 5. A form posted without either field is rejected with HTTP 400.\n- They are stored with the integration (as `priority` and `priority_up`). Integrations created before this change have neither value: they must keep working exactly as today (no priority sent).\n- When notifying, the message sent to Gotify carries `\"priority\": <value>` for the event's status (down uses `priority`, up uses `priority_up`).\n- A priority of 0 means 'do not notify for this status': no request is sent to Gotify for that event.\n\nCheck the form in the UI and what actually gets sent to Gotify."
+}
