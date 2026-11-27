@@ -106,6 +106,11 @@ def hidden_tests(task, dest):
                 (dest / f).unlink(missing_ok=True)
             else:
                 (dest / f).write_bytes(b)
+        # `git checkout <fix> -- files` also staged the hidden tests: unstage them, or the next session
+        # would find them in `git status` / `git diff --cached`
+        sh(['git', 'reset', '-q', '--', *task['hidden']], cwd=dest)
+        staged = set(sh(['git', 'diff', '--cached', '--name-only'], cwd=dest).stdout.split())
+        assert not staged & set(task['hidden']), f'hidden tests left staged: {staged & set(task["hidden"])}'
 
 
 def validate(tasks, root):
@@ -179,14 +184,13 @@ def run_one(t, arm, model, i, root, skill, timeouts):
         rec['tooling'] = {k: res.get(k) for k in ('total_cost_usd', 'num_turns', 'seconds', 'is_error')}
         rec['tooling_files'] = tool_files
         rec['contaminated'], _ = hidden_tests(t, dest)
-        sh(['git', 'diff', '--stat'], cwd=dest)
-        (out / 'tooling.diff').write_text(sh(['git', 'diff'], cwd=dest).stdout)
+        (out / 'tooling.diff').write_text(sh(['git', 'diff', 'HEAD'], cwd=dest).stdout)
     res, bash = agent(TASK_PREFIX + t['prompt'], dest, model, timeouts[1], out / 'task.jsonl')
     rec['task_session'] = {k: res.get(k) for k in ('total_cost_usd', 'num_turns', 'seconds', 'is_error')}
     names = {Path(f).stem for f in tool_files if Path(f).stem not in ('README', 'index', 'mod', '__init__')}
     rec['used_tooling'] = sorted({n for n in names for c in bash if re.search(r'\b' + re.escape(n) + r'\b', c)})
     rec['success'], rec['test_tail'] = hidden_tests(t, dest)
-    (out / 'task.diff').write_text(sh(['git', 'diff'], cwd=dest).stdout)
+    (out / 'task.diff').write_text(sh(['git', 'diff', 'HEAD'], cwd=dest).stdout)
     (out / 'record.json').write_text(json.dumps(rec, indent=1))
     sh(['git', '-C', str(repo_cache(t)), 'worktree', 'remove', '--force', str(dest)])
     return rec
