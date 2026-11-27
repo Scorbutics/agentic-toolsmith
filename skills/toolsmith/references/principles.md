@@ -43,7 +43,18 @@ These are **not handles**, however useful:
   (A guard that already exists and that the agent can run and read back — `rake lint`,
   `bun run typecheck` — passes the usage test: list it under tools in place, usually Launch &
   loop.)
+- individual tests — the test for one bug or one feature is the coding agent's work on that task;
 - documentation, refactors, renames.
+
+**A harness is a handle.** What makes a unit or a piece *testable* — and that an agent then calls,
+task after task — is durable tooling, not a test: a fake or in-memory store behind the port a
+handler already takes, a runner that executes one phase, job or Postgres function with its
+surroundings faked, a headless runner for one scene, a model built on a local engine, a command that
+runs the tests of one piece in seconds (`bun run test:piece process-payment`). Most bugs are cheapest
+to catch at the unit and piece levels (grid.md); an agent that cannot reach those levels without
+writing the scaffolding first will not reach them at all. Propose the harness — the tests written
+with it come with each task. **An existing suite that nothing runs** (no script, no CI) is a harness
+half-built: its card wires it into `doctor` and CI — the Alive criterion below.
 
 Where they go instead:
 - needed to make a handle safe → that handle's **Fence** line ("gate the existing `/dev/login_as`
@@ -107,7 +118,7 @@ A **dedicated** handle is justified only where the generic primitive cannot reac
 - before the primitive exists in the process (boot flags, launch, a per-run directory);
 - out-of-band by nature (an effect ledger, a mail catcher, a GPU capture);
 - it must not run inside the app (a profiler sampling it from outside);
-- it runs the app's code *outside* the live app, in a lab (a component lab, a scenario harness, a
+- it runs the app's code *outside* the live app, in a lab or a harness (a component lab, a fake store, a scenario harness, a
   headless scene runner);
 - it must cross the **real auth boundary** to be faithful — driving the app as a persona through
   HTTP, sessions and access policies, not as a superuser script that bypasses them;

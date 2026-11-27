@@ -79,7 +79,8 @@ python3 <skill>/scripts/review_page.py a/map.md b/map.md -o review.html # severa
   (a lab), witness (the effects), reach in (the live app). Every cell gets a verdict graded
   `observed` · `asserted` · `gated`, or `gap` / `n/a` with why; a gap becomes a card only when a
   capability needs it. The unit and e2e suites fill two cells, not "the lab"; the piece row and the
-  witness column are where maps go blank. Every handle is also judged on loop (fast,
+  witness column are where maps go blank. A **harness** that makes a unit or piece testable is a
+  handle (a fake store, a one-phase runner, a headless scene runner); individual tests are not. Every handle is also judged on loop (fast,
   parallel-safe, resettable — environments live here) and fence (dev-only, fails closed).
   [grid.md](references/grid.md)
 - **Tooling, not a security audit.** Safety only as the few fences an agent's own runs need; app

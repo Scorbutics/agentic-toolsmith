@@ -30,6 +30,11 @@ of the map, not of the app:
 - `gap:` — nothing here, and what a task loses for it;
 - `n/a:` — why this cell cannot exist or never matters here.
 
+**The unit and piece rows of the bring-out column are filled by harnesses**, not by tests:
+"`asserted:` by `go test`" is the verdict only where the suite *can reach* the code that changes —
+a handler that calls the real database directly, with no fake behind it, is a `gap:` at piece level
+however large the suite (handles.md, "Harnesses").
+
 **A gap is not a proposal.** A cell earns a card only when a capability needs it — the task mix
 (map.md, step 0b) or a task that hit it. "gap — no task in the mix lands here" is an honest
 verdict and the end of it. No way is worth more than another: a map whose cards all fall in

@@ -229,12 +229,12 @@ class Template(unittest.TestCase):
     def test_template_renders_clean(self):
         m = rp.parse((ROOT / 'skills/toolsmith/references/map-template.md').read_text())
         self.assertEqual({c['name']: c['life'] for c in m['cards']},
-                         {'states': 'accepted', 'writes': 'proposed', 'dev-login': 'proposed', 'profile': 'deferred'})
+                         {'states': 'accepted', 'writes': 'proposed', 'test:piece': 'proposed', 'dev-login': 'proposed', 'profile': 'deferred'})
         self.assertEqual(rp.lint(m), [])
         self.assertEqual(len(m['patterns']), 1)
-        self.assertEqual({c['id']: c['state'] for c in m['capabilities']}, {'C1': 'accepted', 'C2': 'planned', 'C3': 'planned'})
+        self.assertEqual({c['id']: c['state'] for c in m['capabilities']}, {'C1': 'accepted', 'C2': 'planned', 'C3': 'planned', 'C4': 'planned'})
         self.assertEqual({c['name']: c['cell'] for c in m['cards']},
-                         {'states': ('bring', 'piece'), 'writes': ('witness', 'operation'),
+                         {'states': ('bring', 'piece'), 'writes': ('witness', 'operation'), 'test:piece': ('bring', 'piece'),
                           'dev-login': ('reach', 'journey'), 'profile': ('reach', 'operation')})
         self.assertEqual(set(m['grid']), set(rp.GRID_LEVELS))
         self.assertTrue(m['task_mix'].startswith('50 commits — 38 behavioural'))

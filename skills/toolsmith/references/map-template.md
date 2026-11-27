@@ -87,6 +87,7 @@ capability needs is not proposed.
 | C1 | see every state of a screen, and know the page still renders it, without launching | a human logs in and clicks to the state; the stories drift | piece row of the grid; 18 of 38 behavioural commits change screens |
 | C2 | know what an operation wrote, and fail when it differs from what it should | nothing records it; a wrong write is found in production | operation × witness; 11 of 38 behavioural commits change writes; 9 service-role routes |
 | C3 | reach any state as any persona, at any time | ad-hoc seeds; login typed by the human | journey × reach in; `db/seeds.sql` personas, no session mint; 35 `new Date()` reads (B8) |
+| C4 | test one server action in a second, with no stack | the 412 unit tests reach no server action: each builds its own client | piece × bring out; `lib/db/server.ts:12`; 12 of 38 behavioural commits change server actions |
 
 **Today** says what happens instead: a human step, an ad-hoc script, or nothing. Each capability
 is delivered by one or more milestones, or listed under the roadmap's Deferred with why. Their
@@ -200,6 +201,25 @@ what the human reviews.
 **Parallel:** per-env database (`envs up`).
 **Permission:** allow.
 
+### `test:piece` — lab · B4 Internal seams · steer, check · bring out at piece · cost M
+**Status:** proposed
+**Finishes:** the unit suite (`bun test`, 412 tests), which reaches no server action
+
+```sh
+$ bun run test:piece orders/create
+orders/create · fake store · 4 tests · 4 pass · 0.8 s
+```
+
+**Is:** an in-memory store behind the `Db` port, and a runner that executes one server action's
+tests against it — a harness, not tests: the tests come with each task.
+**Gives the agent:** a verdict on one server action in a second, with no stack and no login.
+**Not a script because:** it runs the app's code outside the live app, in a harness.
+**Origin:** map — 12 of 38 behavioural commits change server actions; none of them can be tested today.
+**Needs:** server actions take their client as an argument instead of building it (`lib/db/server.ts:12`).
+**Fence:** the fake stays true — a contract test runs the same fixtures through `writes` on the local Postgres and compares the tables written.
+**Parallel:** in-process; nothing shared.
+**Permission:** allow.
+
 ### `dev-login` — ingress · B9 Identity · steer · reach in at journey · cost S
 **Status:** proposed
 **Finishes:** the seeded personas in `db/seeds.sql` (or **New**)
@@ -294,6 +314,14 @@ Every milestone has the same lines, one per line; the review page reads them:
 **Depends on:** M2 — `envs up` and `app-dev run`.
 **Demo:** `bin/dev-login --as stranger && app-dev run clock +47h && app-dev run shot reminders`
 **Expect:** `shots/reminders.png` shows the 48-hour reminder banner for the stranger.
+
+### M4 — test one server action
+**Capability:** C4 — test one server action in a second, with no stack.
+**Status:** proposed
+**Builds:** `test:piece`.
+**Depends on:** M2 — its contract test reuses `writes`.
+**Demo:** `bun run test:piece orders/create`
+**Expect:** 4 tests pass in about a second with no stack running; breaking the insert of `order_items` in the action makes one fail.
 
 ### Deferred
 

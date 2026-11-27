@@ -4,6 +4,7 @@
 - Reach
 - Act / Observe at runtime
 - Assert
+- Harnesses — make a unit or a piece testable
 - Launch / Reset / Cycle
 - Witness — effects
 - Web stack handle families
@@ -236,6 +237,30 @@ also tell you *which layer* a visual bug is in.
   The map asks: *what is the reference here?*
 - **Explain**: for tools that decide (linters, gates, rule engines), `explain <case>` prints
   which input produced the verdict.
+
+## Harnesses — make a unit or a piece testable
+
+The cheapest place to catch most bugs is below the running app: one function, one handler, one
+phase, one scene, one model. A suite of unit tests is only as good as what it can reach — a
+handler that calls the real database directly, a phase that builds its own Stripe client, a scene
+that only runs inside the full game are out of reach, and the bugs in them ship. The handle is the
+**harness** that brings them in reach; the tests are then the coding agent's, task by task.
+
+| Shape | Harness | Usage |
+|---|---|---|
+| Web / API handler | a fake or in-memory store behind the interface the handler already takes; an `httptest`-style runner | `go test ./internal/ui -run Feed` against the fake store, no Postgres |
+| Serverless / Edge Function | a runner for one function or one phase with its clients faked (DB, payment, mail) and a fixture input | `deno task piece process-payment/phase-invoice --fixture renewal` |
+| Postgres function | a transaction runner: fixture, call, assert, rollback | `bun run test:sql -- invoice_totals` |
+| UI component or region | a component or region lab with fixtures typed from the app, plus a mock of the calls it makes | `bun run states check checkout` |
+| Game scene or system | a headless runner for one scene with a seeded RNG and fixed timestep | `godot --headless --script tools/run_scene.gd door.tscn --frames 120` |
+| Data model | the model and its parents built on a local engine from fixture rows | `dbt build -s +orders --target duckdb` |
+| CLI or library pass | one pass or rule on fixture inputs, with golden outputs | `bun test check --fixture undeclared-write` |
+
+Every harness card says which level it opens (unit or piece) and which way (bring out, or witness
+when it records what the piece wrote or called), what it fakes and **how the fake stays true** — the
+fake store is checked against the real one by a contract test, the mock against a recording. A fake
+nobody checks drifts like an unchecked lab. Look first for what the project half-has: test helpers,
+fixtures, an interface the handler already takes, a suite that exists but that no script or CI runs.
 
 ## Launch / Reset / Cycle
 - **Doctor / init script**: one command that verifies the toolchain, starts the stack, waits
