@@ -14,16 +14,16 @@ what actually goes wrong?" — answer from the bugs and the friction you remembe
 
 | Cell | Expect (`propose` · `leave` · `either`) | Why — what you know of the project |
 |---|---|---|
-| `unit × bring out` | propose | Already covered it's basically running the unit tests |
+| `unit × bring out` | leave | Already covered it's basically running the unit tests |
 | `unit × witness` | propose | I don't see anything except assertions |
 | `unit × reach in` | leave | That category probably does not make sense no? |
 | `piece × bring out` | propose | I don't think we use Motu for Motu itself enough but it's there |
 | `piece × witness` | either | partly covered by Motu but not a lot? |
 | `piece × reach in` | propose | we might lack such a system |
 | `operation × bring out` | propose | I don't think we have anything here |
-| `operation × witness` | propose |  |
+| `operation × witness` | leave | I don't see any major value for motu |
 | `operation × reach in` | either | I can't picture any example of what a tool in this category would look like|
 | `journey × bring out` | either | I think this category is generally answered by "Playwright" for web projects but I might be wrong |
-| `journey × witness` | propose | access logging through server console |
+| `journey × witness` | leave | access logging through server console |
 | `journey × reach in` | either |  |
 | `loop` | propose | I don't think we have anything related to the loop in Motu |
