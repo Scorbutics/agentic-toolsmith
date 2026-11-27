@@ -116,8 +116,36 @@ def worktree(task, dest):
     return s.stdout + s.stderr
 
 
+def ablate(task, dest):
+    """Bare arm of a task whose project already HAS agent tooling: remove it, and commit the removal so the
+    session sees a clean tree (no 'deleted: tools/...' in git status). restore() puts it back for the judge."""
+    ab = task.get('ablate') or {}
+    for repo, paths in [('.', ab.get('paths', []))] + list((ab.get('submodules') or {}).items()):
+        d = dest / repo
+        for p in paths:
+            sh(['git', 'rm', '-r', '-q', '--ignore-unmatch', '--', p], cwd=d)
+        for f, text in ((ab.get('agent_files') or {}).get(repo) or {}).items():
+            (d / f).write_text(text)
+            sh(['git', 'add', '--', f], cwd=d)
+        sh(['git', '-c', 'user.name=eval', '-c', 'user.email=eval@localhost', 'commit', '-q', '-m', 'wip'], cwd=d)
+
+
+def restore(task, dest):
+    """Put the removed tooling back (from the commit before the removal), for the judge only."""
+    ab = task.get('ablate') or {}
+    for repo, paths in [('.', ab.get('paths', []))] + list((ab.get('submodules') or {}).items()):
+        d = dest / repo
+        for p in paths + list(((ab.get('agent_files') or {}).get(repo) or {})):
+            sh(['git', 'checkout', 'HEAD~1', '--', p], cwd=d)
+        sh(['git', 'reset', '-q'], cwd=d)
+
+
 def hidden_tests(task, dest):
-    """Run the fix commit's tests against the worktree as it stands, then put the files back as they were."""
+    """Run the fix commit's tests against the worktree as it stands, then put the files back as they were.
+    A task with no hidden test files is judged by its `test` command alone (e.g. a replay in the live game)."""
+    if not task.get('hidden'):
+        r = sh(task['test'], cwd=dest, env=env_for(task), timeout=3600)
+        return r.returncode == 0, (r.stdout + r.stderr)[-1500:]
     saved = {f: (dest / f).read_bytes() if (dest / f).exists() else None for f in task['hidden']}
     try:
         sh(['git', 'checkout', task['fix'], '--', *task['hidden']], cwd=dest)
@@ -263,7 +291,11 @@ def run_one(t, arm, model, i, root, skill, timeouts):
         rec['tooling_files'] = tool_files
         rec['contaminated'], _ = hidden_tests(t, dest)
         (out / 'tooling.diff').write_text(sh(['git', 'diff', 'HEAD'], cwd=dest).stdout)
+    if arm == 'bare' and t.get('ablate'):
+        ablate(t, dest)
     res, bash = agent(TASK_PREFIX + t['prompt'], dest, model, timeouts[1], out / 'task.jsonl')
+    if arm == 'bare' and t.get('ablate'):
+        restore(t, dest)
     rec['task_session'] = {k: res.get(k) for k in ('total_cost_usd', 'num_turns', 'seconds', 'is_error')}
     names = {Path(f).stem for f in tool_files if Path(f).stem not in ('README', 'index', 'mod', '__init__')}
     rec['used_tooling'] = sorted({n for n in names for c in bash if re.search(r'\b' + re.escape(n) + r'\b', c)})
@@ -355,7 +387,7 @@ def main():
     ap.add_argument('--only', action='append', help='task name (repeatable)')
     ap.add_argument('--tasks', action='append', type=Path, default=[], metavar='DIR',
                     help='another directory of task files, e.g. a private project\'s toolsmith/eval/tasks (repeatable)')
-    ap.add_argument('--arm', action='append', choices=['bare', 'toolsmith', 'toolsmith-shared'])
+    ap.add_argument('--arm', action='append', choices=['bare', 'toolsmith', 'toolsmith-shared', 'tooled'])
     ap.add_argument('--model', action='append')
     ap.add_argument('--runs', type=int, default=1)
     ap.add_argument('--skill', type=Path, default=SKILL)
