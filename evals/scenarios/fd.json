@@ -1,0 +1,10 @@
+{
+ "name": "fd",
+ "repo": "https://github.com/sharkdp/fd",
+ "commit": "2e8648f10fe55af6258ab90ab889eb8b96033379",
+ "shape": "Rust command-line tool (a find alternative): argument parsing, a parallel directory walker, filters, output formatting",
+ "holdout": "added after skill v5 was frozen (fdfe9a8); its key was drafted blind and not read until its runs finished",
+ "author_tools_fit": [],
+ "author_tools_borderline": [],
+ "expected": []
+}

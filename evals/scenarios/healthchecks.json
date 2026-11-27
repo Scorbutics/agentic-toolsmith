@@ -1,0 +1,10 @@
+{
+ "name": "healthchecks",
+ "repo": "https://github.com/healthchecks/healthchecks",
+ "commit": "c1039ad23395162c5e2f17d324d8ccdaa60a1d14",
+ "shape": "Django service: cron-job monitoring, a web UI and an API, alert integrations (mail, webhooks, chat), background sendalerts loop",
+ "holdout": "added after skill v5 was frozen (fdfe9a8); its key was drafted blind and not read until its runs finished",
+ "author_tools_fit": [],
+ "author_tools_borderline": [],
+ "expected": []
+}
