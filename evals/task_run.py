@@ -256,8 +256,45 @@ def run_one(t, arm, model, i, root, skill, timeouts):
     return rec
 
 
+def handles(files):
+    """The commands the tooling created — executables under bin/, scripts/ or tools/ — not every file it touched
+    (matching any file name counted `settings` from .claude/settings.json as tooling use)."""
+    out = set()
+    for f in files:
+        parts = Path(f).parts
+        if parts and parts[0] in ('bin', 'scripts', 'tools') and Path(f).name not in ('__init__.py', 'README.md'):
+            out.add(parts[1] if parts[0] == 'tools' and len(parts) > 2 else Path(f).stem)
+    return out
+
+
+def tooling_use(rec, log):
+    """Bash commands in the task session that invoked one of the tooling's commands."""
+    names = handles(rec.get('tooling_files') or [])
+    if not names or not log.exists():
+        return 0, []
+    used, n = set(), 0
+    for line in log.read_text().splitlines():
+        try:
+            ev = json.loads(line)
+        except ValueError:
+            continue
+        for c in (ev.get('message') or {}).get('content') or [] if ev.get('type') == 'assistant' else []:
+            if isinstance(c, dict) and c.get('type') == 'tool_use' and c.get('name') == 'Bash':
+                cmd = c.get('input', {}).get('command', '')
+                hit = {x for x in names if re.search(r'(^|[\s/;&|(])' + re.escape(x) + r'(\.py|\.sh)?\b', cmd)}
+                n += bool(hit); used |= hit
+    return n, sorted(used)
+
+
 def report(root):
-    recs = [json.loads(p.read_text()) for p in sorted(Path(root).glob('**/record.json'))]
+    recs = []
+    for p in sorted(Path(root).glob('**/record.json')):
+        r = json.loads(p.read_text())
+        if 'task' not in r:  # a project tooling build
+            continue
+        if r['arm'].startswith('toolsmith'):
+            r['tooling_commands'], r['used_tooling'] = tooling_use(r, p.with_name('task.jsonl'))
+        recs.append(r)
     by = {}
     for r in recs:
         by.setdefault((r['arm'], r['model']), []).append(r)
