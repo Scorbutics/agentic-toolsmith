@@ -40,9 +40,9 @@ Toolsmith progress:
 - [ ] 2. Survey — the boundaries in scope; existing handles and test suites; agent-file rules; shared resources
 - [ ] 2b. Task mix — sort recent commits by level; it decides what comes first, not the shape's habit
 - [ ] 3. Choose the primitive — where the state lives decides it (principles.md)
-- [ ] 3a. Fill the evidence grid — a verdict in each of the 12 cells (grid.md)
-- [ ] 3b. Name the capabilities — 2–5 things the agent cannot do today, from the grid's gaps weighted
-      by the task mix, with evidence; the roadmap's backbone
+- [ ] 3a. Fill the evidence grid — a verdict and a decision (→ propose · leave · either) in each of the 12 cells (grid.md)
+- [ ] 3b. Name the capabilities — 2–5 things the agent cannot do today, grouping the grid's → propose
+      cells, with evidence; the roadmap's backbone
 - [ ] 4. Cards — each with Status, usage, Is, Not a script because, Origin, Fence, Parallel, Permission
 - [ ] 5. Roadmap — milestones cut by capability (M1 = the loop of the most frequent task), foundations, real
       dependencies, keystones; each milestone with Capability, Depends on, Demo and Expect;
@@ -77,8 +77,8 @@ python3 <skill>/scripts/review_page.py a/map.md b/map.md -o review.html # severa
   [principles.md](references/principles.md)
 - **The evidence grid: four levels × three ways.** Unit, piece, operation, journey — by bring out
   (a lab), witness (the effects), reach in (the live app). Every cell gets a verdict graded
-  `observed` · `asserted` · `gated`, or `gap` / `n/a` with why; a gap becomes a card only when a
-  capability needs it. The unit and e2e suites fill two cells, not "the lab"; the piece row and the
+  `observed` · `asserted` · `gated`, or `gap` / `n/a` with why — then a decision, `→ propose` ·
+  `→ leave` · `→ either`: every propose cell gets a card, no card lands in a leave cell. The unit and e2e suites fill two cells, not "the lab"; the piece row and the
   witness column are where maps go blank. A **harness** that makes a unit or piece testable is a
   handle (a fake store, a one-phase runner, a headless scene runner); individual tests are not. Every handle is also judged on loop (fast,
   parallel-safe, resettable — environments live here) and fence (dev-only, fails closed).

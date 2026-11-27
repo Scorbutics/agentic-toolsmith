@@ -35,11 +35,31 @@ of the map, not of the app:
 a handler that calls the real database directly, with no fake behind it, is a `gap:` at piece level
 however large the suite (handles.md, "Harnesses").
 
-**A gap is not a proposal.** A cell earns a card only when a capability needs it — the task mix
-(map.md, step 0b) or a task that hit it. "gap — no task in the mix lands here" is an honest
-verdict and the end of it. No way is worth more than another: a map whose cards all fall in
-lab and witness cells is as lopsided as one whose cards all fall in journey × reach in. The grid
-is there so that each cell is *looked at*, not so that each is filled.
+**Then decide each cell**, after its verdict, as `→ propose`, `→ leave` or `→ either`, with why:
+
+| Decision | Means | Ask |
+|---|---|---|
+| `→ propose` | a map that left this cell empty would miss something real here | "Would a reviewer mark this map wrong for proposing nothing here?" |
+| `→ leave` | a card here would be wasted or wrong — the cell cannot exist, is covered well enough, or would not repay its cost | "Would a reviewer push back on a card here?" |
+| `→ either` | neither | — |
+
+Decide from this project's evidence, never the shape's habit: the task mix (map.md, step 0b), what
+a task in the agent files keeps doing by hand, the rules agents trip on, what the verdict says a task
+loses. A `gap:` is not automatically `→ propose` — "gap — no task in the mix lands here → either" is
+honest — and `asserted:` is not automatically `→ leave`: a suite that cannot reach the code that
+changes is a gap with a fine-looking verdict.
+
+The decisions bind the rest of the map:
+- every `→ propose` cell gets a card (or a deferred one, with why); a capability is a group of them;
+- no card lands in a `→ leave` cell;
+- **a missing seam is always decided**: a `gap:` in the unit or piece row of the bring-out column
+  whose cause is a seam the code lacks — a handler that builds its own database client, a phase that
+  constructs its own payment client, a scene that only runs inside the full game — is `→ propose` with
+  a harness card (handles.md, "Harnesses"), or `→ leave` with the reason it does not pay here.
+
+No way is worth more than another: a map whose `propose` cells all fall in lab and witness is as
+lopsided as one whose cards all fall in journey × reach in. The grid is there so that each cell is
+*decided*, not so that each is filled.
 
 Each card names its cell: `<way> at <level>` in its heading (map-template.md).
 

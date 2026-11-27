@@ -41,15 +41,17 @@ exist only on one of them. Omit when there is one way to run it.>
 What an agent can prove at each level, by each way (grid.md). Rows in the shape's words
 (shapes.md, "Levels by shape"); every cell starts with its verdict — `gated:` · `asserted:` ·
 `observed:` (filled, with the command) · `gap:` (what a task loses) · `n/a:` (why). A lab with no tie
-to the live app is `observed` at most. The review page draws this table with each proposed card in its
-cell. A gap is not a proposal: it gets a card only when a capability needs it.
+to the live app is `observed` at most. After the verdict, every cell is **decided** — `→ propose` ·
+`→ leave` · `→ either`, with why (grid.md, "Then decide each cell"): each propose cell gets a card or
+a deferral, no card lands in a leave cell. The review page draws this table with each card in its cell
+and flags a decision the cards contradict.
 
 | Level | Bring out — lab | Witness — effects | Reach in — live |
 |---|---|---|---|
-| unit — functions, SQL functions | asserted: `bun test` (412 tests, 38 s, in CI); `supabase test db` (rolled-back SQL tests) | asserted: the SQL tests select the rows they inserted | n/a: nothing to reach below a piece |
-| piece — screens and regions | observed: 12 Storybook stories, nothing ties them to the page (`.storybook/main.ts:3`) | gap: no record of the calls a screen makes | gap: a screenshot needs a human login |
-| operation — routes, server actions, SQL functions | gap: an operation runs only through the whole app | gap: nothing records what an operation wrote; 9 routes use the service-role client (`lib/db/admin.ts:4`) | observed: `curl` on the dev server with a cookie copied by hand |
-| journey — a session as a persona | gap: no e2e suite | gap: mail goes through the live provider (Fences ⚠ 1) | gap: a human starts the server and logs in |
+| unit — functions, SQL functions | asserted: `bun test` (412 tests, 38 s, in CI); `supabase test db` (rolled-back SQL tests) → leave: they reach every function and SQL function that changes | asserted: the SQL tests select the rows they inserted → leave: covered | n/a: nothing to reach below a piece → leave |
+| piece — screens and regions; server actions | observed: 12 Storybook stories, nothing ties them to the page (`.storybook/main.ts:3`); gap: no server action can be tested — each builds its own client (`lib/db/server.ts:12`) → propose: 18 + 12 of 38 behavioural commits land here | gap: no record of the calls a screen makes → either: no task in the mix needed it | gap: a screenshot needs a human login → either: the lab shows the states without one |
+| operation — routes, server actions, SQL functions | gap: an operation runs only through the whole app → either: the piece harness and `writes` cover what the mix changes | gap: nothing records what an operation wrote; 9 routes use the service-role client (`lib/db/admin.ts:4`) → propose: 11 commits change writes, RLS bypassed | observed: `curl` on the dev server with a cookie copied by hand → either |
+| journey — a session as a persona | gap: no e2e suite → either: 2 journey commits in 38 | gap: mail goes through the live provider (Fences ⚠ 1) → either: the fence comes first | gap: a human starts the server and logs in → propose: every bug report starts here |
 
 ## Parallel agents
 

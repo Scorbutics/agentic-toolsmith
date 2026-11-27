@@ -133,6 +133,9 @@ is possible for an agent is a `human-only` point; say who holds it.
    `n/a:` with why. Grade a lab with no tie to the live app as `observed` at most. Look hardest at the
    **piece** row (between the unit and e2e suites) and the **witness** column (what the code
    touched): they are the cells agents leave blank because the neighbouring ones look filled.
+   Then **decide each cell** — `→ propose`, `→ leave` or `→ either`, with why (grid.md, "Then decide
+   each cell"). Every `→ propose` cell gets a card or a deferral; no card lands in a `→ leave` cell; a
+   unit or piece gap caused by a missing seam is decided explicitly, harness or reason.
 3. **Mark the fences.** Flag the points an agent's probes or handles could trigger with real
    consequences: live keys or production URLs a local launch would use, a production default
    target, a prod-copy database, user data a run would write, scripts that contradict the agent
@@ -142,7 +145,7 @@ is possible for an agent is a `human-only` point; say who holds it.
    them in one "Noticed in passing" line at the end, or leave them out — **unless the point is, or
    should become, a handle**: an always-on debug port is a half-built remote-debug handle, and its
    exposure goes in that card's Fence line, not in passing.
-4. **Name the capabilities** — before any card. From the grid's gaps, weighted by the task mix,
+4. **Name the capabilities** — before any card. From the grid's `→ propose` cells,
    the two to five things the agent cannot do today on this project and most needs: "see every
    state of a screen without launching", "know what an operation wrote, and fail when it differs",
    "reach any state as any persona". Phrase each as what the agent can do, never as a tool; give

@@ -132,6 +132,12 @@ def grade(text):
     return next((g for g in GRADES if t.startswith(g)), '')
 
 
+def decision(text):
+    """The decision a grid cell ends with: `→ propose` · `→ leave` · `→ either` (also `->`), or ''."""
+    m = re.search(r'(?:→|->)\s*`?(propose|leave|either)\b', text or '', re.I)
+    return m.group(1).lower() if m else ''
+
+
 def parse_grid(text):
     """The map's Evidence grid table: {level: {way: cell text}} with the level's own words kept."""
     rows = {}
@@ -396,6 +402,25 @@ def lint(model):
         nocell = [c['name'] for c in open_cards if not c['cell'] and not re.search(r'\bloop\b', c['way'].lower())]
         if nocell:
             w.append(f'{len(nocell)} card(s) name no cell (`<way> at <level>`): {", ".join(nocell[:6])}')
+        name = lambda lv, wy: f'{lv} × {WAY_LABELS[wy].split(" — ")[0].lower()}'
+        undecided, unmet, against = [], [], []
+        for lv in GRID_LEVELS:
+            for wy in WAYS:
+                text = (grid.get(lv) or {}).get(wy, '')
+                d = decision(text)
+                if grade(text) and not d:
+                    undecided.append(name(lv, wy))
+                here = [c for c in model['cards'] if c['cell'] == (wy, lv)]
+                if d == 'propose' and not here:
+                    unmet.append(name(lv, wy))
+                if d == 'leave':
+                    against += [f'`{c["name"]}` in {name(lv, wy)}' for c in here if c['life'] != 'deferred']
+        if undecided:
+            w.append(f'Evidence grid: no decision (→ propose · leave · either) in {", ".join(undecided)}')
+        if unmet:
+            w.append(f'Evidence grid: decided propose but no card (or deferred card) in {", ".join(unmet)}')
+        if against:
+            w.append(f'Evidence grid: a card in a cell decided leave — {", ".join(against)}')
     if not model.get('task_mix') and (caps or ms):
         w.append('no **Task mix:** line — what comes first rests on the shape\'s habit, not this project')
     for t, m in ms:
@@ -452,7 +477,9 @@ def grid_panel(model, rid, k):
         for wy in WAYS:
             g = grade(r[wy]) or 'none'
             ch = chips.get((wy, lv), [])
-            tds += (f'<td class="g-{g.replace("/", "")}">{md(r[wy]) if r[wy] else "no verdict"}'
+            d = decision(r[wy])
+            badge = f'<span class="dec dec-{d}">{d}</span>' if d else '<span class="dec dec-none">undecided</span>'
+            tds += (f'<td class="g-{g.replace("/", "")}">{badge}{md(r[wy]) if r[wy] else "no verdict"}'
                     + (f'<div class="nodes">{"".join(ch)}</div>' if ch else '') + '</td>')
         rows.append(f'<tr><th scope="row">{md(r["label"])}</th>{tds}</tr>')
     tm = f'<p><strong>Task mix:</strong> {md(model["task_mix"])}</p>' if model.get('task_mix') else ''
@@ -837,6 +864,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,.node:focus-visi
 .grid td{min-width:150px}.grid td.g-declared{background:var(--oks)}.grid td.g-checked{background:#eaf5ea}
 .grid td.g-seen{background:var(--halfs)}.grid td.g-gap,.grid td.g-none{background:var(--bads)}.grid td.g-na{color:var(--fg3)}
 .grid .nodes{margin-top:6px}
+.dec{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;border-radius:4px;padding:0 5px;margin-right:6px;background:var(--s2);color:var(--fg2)}
+.dec-propose{background:var(--accs);color:var(--acc)}.dec-leave{background:var(--s2);color:var(--fg3)}.dec-none{background:var(--bads);color:var(--bad)}
 .big{font-size:22px}.tw{overflow-x:auto}table{border-collapse:collapse;min-width:640px;font-size:13.5px;width:100%}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--fg3);font-size:12px;text-transform:uppercase;letter-spacing:.05em} td.gap{color:var(--bad);font-weight:600} th[scope=row] a{color:var(--fg);font-weight:600}
 .copy{font:600 14px system-ui,sans-serif;background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
 @media (max-width:760px){.ms-head{grid-template-columns:1fr}.row{grid-template-columns:1fr}.item{grid-template-columns:1fr}.verdict{justify-content:flex-start;max-width:none}}

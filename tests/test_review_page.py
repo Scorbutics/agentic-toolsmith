@@ -460,6 +460,17 @@ class EvidenceGrid(unittest.TestCase):
         self.assertTrue(any('no **Evidence grid**' in x for x in w))
         self.assertTrue(any('no **Task mix:**' in x for x in w))
 
+    def test_decisions_bind_the_cards(self):
+        grid = GRID.replace('asserted: `bun test` |', 'asserted: `bun test` → leave |') \
+                   .replace('gap: no lab |', 'gap: no lab → propose |') \
+                   .replace('gated: `ledger check` |', 'gated: `ledger check` → propose |')
+        m = rp.parse(gridmap(grid=grid, candidates=cellcard('lab', 'bring out at piece') + cellcard('more-tests', 'bring out at unit')))
+        w = rp.lint(m)
+        self.assertIn('Evidence grid: decided propose but no card (or deferred card) in operation × witness', w)
+        self.assertIn('Evidence grid: a card in a cell decided leave — `more-tests` in unit × bring out', w)
+        self.assertTrue(any(x.startswith('Evidence grid: no decision') and 'piece × witness' in x for x in w))
+        self.assertEqual(rp.decision('gap: x -> `either`: y'), 'either')
+
     def test_old_map_without_grid_still_renders(self):
         page = rp.render(rp.parse(mapdoc(candidates=card('a', 'proposed'))))
         self.assertNotIn('<h3>Evidence grid', page)
