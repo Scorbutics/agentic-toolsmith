@@ -128,7 +128,7 @@ Designed proposals only:
 v4 has the map end each grid cell with a decision — `→ propose` · `→ leave` · `→ either`, with why —
 binds the cards to it, and makes a missing seam an explicit decision. Same ten scenarios, prompt and
 judge; 60 maps, judged twice (M1 the same in 58/60, cells Jaccard 0.91). 54 of 60 maps decided
-every cell. Judge outputs: `evals/results/2026-11-27-v4/`. Designed proposals only, loop rows counted:
+every cell. Designed proposals only, loop rows counted:
 
 | Keys | Arm | Proposals/map (designed) | Recall | Precision |
 |---|---|---|---|---|
@@ -183,7 +183,6 @@ cells than the old skill did — targeting the right cells is the open work.
 v3 makes a harness that renders a unit or piece testable a handle (a fake store, a one-phase runner,
 a headless scene runner); individual tests stay out. Same ten scenarios, same prompt and judge, three
 runs each on Sonnet and Haiku (60 maps; 240 maps judged twice in all, M1 the same in 208/240).
-Judge outputs: `evals/results/2026-11-27-v3/` (private projects: in their own repositories).
 
 | Keys | Arm | Expected cells reached | Leave cells proposed | M1 accepted | M1 loop-only |
 |---|---|---|---|---|---|
@@ -221,7 +220,7 @@ Four projects whose owner filled the key — motu and assay (public; assay's key
 sketch with a blind bug-grounded draft), and two private projects (a Next.js + Supabase app and its
 Supabase backend, scored in their own repositories). Neutral prompt, Sonnet and Haiku, three runs
 each, for the skill before the grid, the grid (v2), and no skill: 72 maps, each judged twice (M1 the
-same in 63/72). Judge outputs for motu and assay: `evals/results/2026-11-27-owned/`.
+same in 63/72).
 
 | Arm | Model | Expected cells reached | Cells to leave, proposed anyway | M1 in an accepted cell | M1 loop-only |
 |---|---|---|---|---|---|
@@ -343,7 +342,7 @@ What this pass changes in the 2026-11-24 reading:
 
 Cost: grid $13.15 and old skill $11.11 for 36 runs each, no skill $3.66, judging 108 maps twice ~$4.
 
-Next: the answer keys (evals/answer-keys/) and two human-labelled maps (evals/labels/) — then the
+Next: the answer keys (evals/answer-keys/) and two human-labelled maps (`judge.py --label-sheet`) — then the
 same judge outputs are re-scored against them at no cost.
 
 ## The evidence grid (2026-11-24)

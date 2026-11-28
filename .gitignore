@@ -1,3 +1,5 @@
 eval-runs/
 __pycache__/
 *.pyc
+evals/results/
+evals/labels/
