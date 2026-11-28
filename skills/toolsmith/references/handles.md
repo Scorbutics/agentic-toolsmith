@@ -158,6 +158,11 @@ Each reply is framed: `{id, ok, value, stdout, error, backtrace, ms}`.
 - **Screenshot of a named state**: the handle returns the image path *and* the state it shows
   (route, scene, frame number). A screenshot you cannot attribute is noise. Capture at the
   scale and resolution the human sees.
+- **The state behind the pixels, as text**: for any piece drawn on screen, a query returning what
+  the renderer uses — position, size, offset, scale, crop, opacity, layer, whether it was drawn this
+  frame — for a named entity or the nearest one. A screenshot says *that* a sprite is off screen; the
+  query says its offset is -4000. A debug overlay, an inspector or a debug window that only *draws*
+  these values is half of this handle: expose the same data to the console or the script runner.
 - Sources by shape:
   - **web**: headless browser — Playwright `page.screenshot()`, after the state is queryable;
   - **game / native renderer**: read the framebuffer the game draws into — the engine's

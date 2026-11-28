@@ -188,3 +188,12 @@ under state or egress, whichever it mostly records; its *way* is witness either 
 the only way to verify — a headless browser, the engine's framebuffer readback, the emulator, the
 desktop app's debugging protocol — at the scale the human sees. A screenshot handle returns the
 image *and* the state it shows.
+
+**Eyes return text, not only pixels.** A picture shows *that* something is wrong; the numbers behind
+it — a sprite's size, offset, scale, crop, whether it is drawn — show *why*. A debug overlay drawn on
+the screen is for a human: an agent needs the same fields from a query (`console eval
+'Debug.sprite(entity)'` → `w=10 h=8 offset=(0,-4000) drawn=true`). Measured on a real bug: the agent
+could reach the failing state with the project's handles, but the one invalid value was shown only in
+an on-screen debug window, and it took a person reproducing the bug and sending a screenshot. Every
+overlay, inspector or debug window the project has is a half-built eyes handle: its card makes the
+data queryable as text.

@@ -151,7 +151,9 @@ A handle must be:
 3. **Sized for an agent** — the agent reads every byte it prints. Summary first; `--json` with
    only the fields that matter; `--tail N` / `--grep` / `--since` on anything log-like; pages, not
    dumps; a diff rather than the whole state; a path to the big artifact (screenshot, trace,
-   dump) rather than its bytes. A default output over a few hundred lines is a bug.
+   dump) rather than its bytes. A default output over a few hundred lines is a bug. State the agent
+   needs to read comes back as **text**, never only drawn on a screen: a value visible only in an
+   overlay or a debug window has to be photographed and read back by a person.
 4. **Fast and deterministic** — seeded, time-controllable, parallel-safe (see parallel.md).
 5. **Discoverable** — documented where the next agent looks first ("How to reach the app"
    in the agent file), with the exact command — in the text the harness loads at startup (CLAUDE.md,
