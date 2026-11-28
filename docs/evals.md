@@ -20,12 +20,12 @@ replayed deterministically (seed, fixed step, both sides played by the battle AI
 | with the owner's diagnosis ("as if a sprite were reused") | tooled | 2/2 | 21, 17 · 148 s, 48 s · $0.43, $0.32 | 0 | 0 |
 | | bare | 1/2 | 39, 33 · 135 s, 109 s · $0.70, $0.61 | — | 0 |
 | symptom only (what the player saw) | tooled | 0/2 | 60 min (limit) · 37 min, gave up | 84 · 44 | 0 |
-| | bare | 0/2 | 60 min (limit) · pending | — | 13 · pending |
+| | bare | 0/2 | 60 min (limit) · 60 min (limit) | — | 13 · 25 |
 
 - **With the diagnosis, nobody runs the game**: the cause is found by reading code; the tooled arm, with
   its agent docs, did it in about half the turns and cost.
 - **With the symptom only, the tooled agent reaches the failing state with the tooling** (84 and 44
-  commands) — and the bare agent rebuilds that by hand (13 raw launches under its own Xvfb, and edits to
+  commands) — and the bare agent rebuilds that by hand (13 and 25 raw launches under its own Xvfb, and edits to
   the repository's save files). **Neither finds the cause in an hour.**
 - **Why, from how the bug was really found**: the owner's Opus session first asked for a debug view of
   a sprite's drawing state (sizes, scale, crop, offset — commit `641c3e4`); the owner reproduced the bug
