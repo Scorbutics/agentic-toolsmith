@@ -251,7 +251,7 @@ def project_tooling(project, model, i, root, skill, timeout):
         return json.loads((out / 'record.json').read_text()), patch
     tasks = [t for t in load() if t['project'] == project]
     src = repo_cache(tasks[0])
-    when = lambda t: int(sh(['git', '-C', str(src), 'log', '-1', '--format=%ct', f"{t['fix']}^"]).stdout.strip() or 0)
+    when = lambda t: int(sh(['git', '-C', str(src), 'log', '-1', '--format=%ct', t.get('base') or f"{t['fix']}^"]).stdout.strip() or 0)
     t0 = min(tasks, key=when)
     out.mkdir(parents=True, exist_ok=True)
     dest = WORK / f'tooling-{project}-{model}-r{i}'
@@ -263,7 +263,7 @@ def project_tooling(project, model, i, root, skill, timeout):
     shutil.rmtree(mine, ignore_errors=True)
     sh(['git', 'add', '-A', '--', '.', ':!.venv', ':!target', ':!*.sqlite', ':!.claude/skills/toolsmith'], cwd=dest)
     patch.write_text(sh(['git', 'diff', '--cached', '--binary', 'HEAD'], cwd=dest).stdout)
-    rec = {'project': project, 'model': model, 'run': i, 'built_at': f"{t0['fix']}^",
+    rec = {'project': project, 'model': model, 'run': i, 'built_at': t0.get('base') or f"{t0['fix']}^",
            'files': sh(['git', 'diff', '--cached', '--name-only', 'HEAD'], cwd=dest).stdout.split(),
            **{k: res.get(k) for k in ('total_cost_usd', 'num_turns', 'seconds', 'is_error')}}
     (out / 'record.json').write_text(json.dumps(rec, indent=1))
