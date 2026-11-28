@@ -1,5 +1,47 @@
 # Eval results
 
+## A deep game bug, with and without the tooling — SmashAndDash (2026-11-28)
+
+The case toolsmith is for: a bug the owner hit in play — **from the second battle of a session on, the
+player's Pokemon is drawn off screen**. Root cause in the engine (`a29b29ae`, tangled into game
+`0c126b1`): an image's texture was shared by every texture of its file, so the battle's team slot,
+resizing its image, resized the sprites made from the same file. Task: game `641c3e4`, the engine just
+before the fix. Judge: the fix's own engine test, hidden — 4 of 6 assertions fail before (8 == 15), 6/6
+with the fix; any root-cause fix passes, a workaround in the battle screen does not (the owner: the only
+fix is a texture lifecycle of its own in `Image.cpp`). Arms on the same commit: **tooled** — the
+repository as it is (`sad-run`, `ska-console`, battle and party scripts, the "How to reach" section);
+**bare** — that tooling removed (committed away, restored only for the judge). Sonnet 5.5, two runs each.
+
+The game builds and runs in a cloud container (SDL 3.4 from source, Xvfb): ready in 5–8 s, battles
+replayed deterministically (seed, fixed step, both sides played by the battle AI).
+
+| Report given to the agent | Arm | Solved | Turns / time / cost | Tooling commands | Raw game launches |
+|---|---|---|---|---|---|
+| with the owner's diagnosis ("as if a sprite were reused") | tooled | 2/2 | 21, 17 · 148 s, 48 s · $0.43, $0.32 | 0 | 0 |
+| | bare | 1/2 | 39, 33 · 135 s, 109 s · $0.70, $0.61 | — | 0 |
+| symptom only (what the player saw) | tooled | 0/2 | 60 min (limit) · 37 min, gave up | 84 · 44 | 0 |
+| | bare | 0/2 | 60 min (limit) · pending | — | 13 · pending |
+
+- **With the diagnosis, nobody runs the game**: the cause is found by reading code; the tooled arm, with
+  its agent docs, did it in about half the turns and cost.
+- **With the symptom only, the tooled agent reaches the failing state with the tooling** (84 and 44
+  commands) — and the bare agent rebuilds that by hand (13 raw launches under its own Xvfb, and edits to
+  the repository's save files). **Neither finds the cause in an hour.**
+- **Why, from how the bug was really found**: the owner's Opus session first asked for a debug view of
+  a sprite's drawing state (sizes, scale, crop, offset — commit `641c3e4`); the owner reproduced the bug
+  and sent a screenshot; the invalid integer in that view led to the engine in minutes. The view
+  **draws** its values on screen; no script can read them. The agents could reach the second battle but
+  could not see the one number that mattered. → the skill's rule **eyes return text, not only pixels**.
+- **Checked once**: a tooling build with that rule (Sonnet, at the task's base) made a real text handle —
+  `fighters.miniska`: every fighter's team, hit points, position, action, status — but not the drawing
+  state (size, offset, scale, drawn) behind the existing debug window. That would not have exposed this
+  bug, so the task was not run again on it. One build; and the rule was written from this very bug, so
+  only a different deep bug can test it fairly.
+- **Judge lessons, caught before any agent ran**: a replayed battle's outcome first looked like a judge
+  for another fix (`bce53ad`), but the win came from later gameplay changes — the fix commit itself still
+  lost, frame for frame; a group battle's 'flight' did not move either. Rendering bugs do not change a
+  battle played by the AI: they need a judge on what is drawn, or the fix's own test.
+
 ## Task-based eval — does the tooling let an agent finish real work? (2026-11-27)
 
 `evals/task_run.py`: real fixes and features from a project's history, started at the commit before,
