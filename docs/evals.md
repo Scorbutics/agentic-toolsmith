@@ -37,6 +37,18 @@ replayed deterministically (seed, fixed step, both sides played by the battle AI
   state (size, offset, scale, drawn) behind the existing debug window. That would not have exposed this
   bug, so the task was not run again on it. One build; and the rule was written from this very bug, so
   only a different deep bug can test it fairly.
+- **Checked again, in task scope, given the symptom** (Sonnet, 5 min, $0.63, 28 turns; did not fix the
+  bug — the hidden test still fails): it built `Battle.fighters()` + `tools/battle-watch` — per battle,
+  the camera rectangle and each fighter's world position marked `on-screen`/`OFF-SCREEN`, plus a shot,
+  battle after battle; documented in `AGENTS.md`, added to `tools/doctor`. A real, well-delivered text
+  handle — and again **not the drawing state**: it reads `PositionComponent`, while the bug is a reused
+  texture that shifts where the sprite is *drawn*, so it would very likely say `on-screen` while the
+  Pokemon is drawn off screen (inferred from the cause; the bug did not show in our replay — two battles
+  with seed 7 are both drawn correctly, and so is the handle's reply). The session read no reference
+  file: the rule lives in `references/grid.md` and `handles.md`, and task scope went from `SKILL.md`
+  straight to the code. Not run on the task. What would change it is a line in `SKILL.md` itself
+  ("any debug overlay or window near the symptom: make its values queryable") — written from this bug,
+  so a pass after that would prove little.
 - **Judge lessons, caught before any agent ran**: a replayed battle's outcome first looked like a judge
   for another fix (`bce53ad`), but the win came from later gameplay changes — the fix commit itself still
   lost, frame for frame; a group battle's 'flight' did not move either. Rendering bugs do not change a
